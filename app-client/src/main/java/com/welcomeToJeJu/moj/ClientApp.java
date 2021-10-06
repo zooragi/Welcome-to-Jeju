@@ -3,24 +3,22 @@ package com.welcomeToJeJu.moj;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.welcomeToJeJu.context.ApplicationContextListener;
 import com.welcomeToJeJu.context.UserContextListener;
 import com.welcomeToJeJu.menu.Menu;
+import com.welcomeToJeJu.menu.MenuFilter;
 import com.welcomeToJeJu.menu.MenuGroup;
+import com.welcomeToJeJu.moj.dao.impl.NetThemeDao;
+import com.welcomeToJeJu.moj.dao.impl.NetUserDao;
 import com.welcomeToJeJu.moj.domain.Report;
 import com.welcomeToJeJu.moj.domain.ReportTheme;
 import com.welcomeToJeJu.moj.domain.ReportUser;
 import com.welcomeToJeJu.moj.domain.Theme;
 import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.moj.handler.AllThemeListHandler;
 import com.welcomeToJeJu.moj.handler.AuthDisplayLoginUserHandler;
 import com.welcomeToJeJu.moj.handler.AuthLoginHandler;
 import com.welcomeToJeJu.moj.handler.AuthLogoutHandler;
 import com.welcomeToJeJu.moj.handler.Command;
 import com.welcomeToJeJu.moj.handler.CommandRequest;
-import com.welcomeToJeJu.moj.handler.LikedThemeAddHandler;
-import com.welcomeToJeJu.moj.handler.LikedThemeDeleteHandler;
-import com.welcomeToJeJu.moj.handler.LikedThemeListHandler;
 import com.welcomeToJeJu.moj.handler.LikedUserAddHandler;
 import com.welcomeToJeJu.moj.handler.LikedUserDeleteHandler;
 import com.welcomeToJeJu.moj.handler.LikedUserListHandler;
@@ -32,46 +30,27 @@ import com.welcomeToJeJu.moj.handler.MyThemeUpdateHandler;
 import com.welcomeToJeJu.moj.handler.PlaceAddHandler;
 import com.welcomeToJeJu.moj.handler.PlaceDeleteHandler;
 import com.welcomeToJeJu.moj.handler.PlaceListHandler;
-import com.welcomeToJeJu.moj.handler.RealTimeRankHandler;
-import com.welcomeToJeJu.moj.handler.ReportAddThemeHandler;
-import com.welcomeToJeJu.moj.handler.ReportAddUserHandler;
-import com.welcomeToJeJu.moj.handler.ReportMyListHandler;
-import com.welcomeToJeJu.moj.handler.ReportThemeProcessingHandler;
-import com.welcomeToJeJu.moj.handler.ReportUserProcessingHandler;
-import com.welcomeToJeJu.moj.handler.SearchHashtagHandler;
-import com.welcomeToJeJu.moj.handler.SearchThemeHandler;
-import com.welcomeToJeJu.moj.handler.SearchUserHandler;
 import com.welcomeToJeJu.moj.handler.UserAddHandler;
 import com.welcomeToJeJu.moj.handler.UserDeleteHandler;
 import com.welcomeToJeJu.moj.handler.UserDetailHandler;
-import com.welcomeToJeJu.moj.handler.UserEditHandler;
 import com.welcomeToJeJu.moj.handler.UserListHandler;
-import com.welcomeToJeJu.moj.handler.UserRankHandler;
-import com.welcomeToJeJu.moj.handler.UserUnregisterHandler;
 import com.welcomeToJeJu.moj.handler.UserUpdateHandler;
-import com.welcomeToJeJu.moj.listener.FileListener;
 import com.welcomeToJeJu.moj.listener.LoginListener;
+import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
-public class App {
+public class ClientApp {
+
+  RequestAgent requestAgent;
+
   List<User> userList = new ArrayList<>();
   public static List<Report> reportList = new ArrayList<>();
   List<ReportTheme> reportThemeList = new ArrayList<>();
   List<ReportUser> reportUserList = new ArrayList<>();
   HashMap<String, Command> commandMap = new HashMap<>();
   List<Theme> themeList = new ArrayList<>();
-
-  List<ApplicationContextListener> listeners = new ArrayList<>();
   List<UserContextListener> userListeners = new ArrayList<>();
 
-
-  public void addApplicationContextListener(ApplicationContextListener listener) {
-    this.listeners.add(listener);
-  }
-
-  public void removeApplicationContextListener(ApplicationContextListener listener) {
-    this.listeners.remove(listener);
-  }
 
   public void addUserContextListener(UserContextListener userListener) {
     this.userListeners.add(userListener);
@@ -108,104 +87,90 @@ public class App {
 
   }
 
-  public App() {
-    commandMap.put("/auth/login", new AuthLoginHandler(userList, userListeners));
+  public ClientApp() throws Exception {
+
+    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    NetThemeDao themeDao = new NetThemeDao(requestAgent);
+    NetUserDao userDao = new NetUserDao(requestAgent);
+
+    commandMap.put("/auth/login", new AuthLoginHandler(requestAgent,userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
-    commandMap.put("/auth/displayLoginUer", new AuthDisplayLoginUserHandler());
-    commandMap.put("/theme/all", new AllThemeListHandler(userList));
-    commandMap.put("/auth/unregistered", new UserUnregisterHandler(userList));
-    commandMap.put("/auth/edit", new UserEditHandler());
+    commandMap.put("/auth/displayLoginUser", new AuthDisplayLoginUserHandler());
+    //    commandMap.put("/theme/all", new AllThemeListHandler(userList));
+    //    commandMap.put("/auth/unregistered", new UserUnregisterHandler(userList));
+    //    commandMap.put("/auth/edit", new UserEditHandler());
 
-    // 회원 탈퇴 메뉴 추가
+    commandMap.put("/user/add", new UserAddHandler(requestAgent));
+    commandMap.put("/user/delete", new UserDeleteHandler(requestAgent));
+    commandMap.put("/user/detail", new UserDetailHandler(requestAgent));
+    commandMap.put("/user/list", new UserListHandler(requestAgent));
+    commandMap.put("/user/update", new UserUpdateHandler(requestAgent));
 
-    commandMap.put("/user/add", new UserAddHandler(userList));
-    commandMap.put("/user/delete", new UserDeleteHandler(userList));
-    commandMap.put("/user/detail", new UserDetailHandler(userList));
-    commandMap.put("/user/list", new UserListHandler(userList));
-    commandMap.put("/user/update", new UserUpdateHandler(userList));
+    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao,userDao));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(requestAgent));
+    commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
+    commandMap.put("/myTheme/detail", new MyThemeDetailHandler(requestAgent));
+    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(requestAgent));
 
-    commandMap.put("/myTheme/add", new MyThemeAddHandler(userList,themeList));
-    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(userList));
-    commandMap.put("/myTheme/list", new MyThemeListHandler(userList));
-    commandMap.put("/myTheme/detail", new MyThemeDetailHandler(userList));
-    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(userList));
+    //    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(userList));
+    //    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(userList));
+    //    commandMap.put("/likedTheme/list", new LikedThemeListHandler());
 
-    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(userList));
-    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(userList));
-    commandMap.put("/likedTheme/list", new LikedThemeListHandler());
-
-    commandMap.put("/place/add", new PlaceAddHandler());
-    commandMap.put("/place/delete", new PlaceDeleteHandler());
-    commandMap.put("/place/list", new PlaceListHandler());
+    commandMap.put("/place/add", new PlaceAddHandler(themeDao));
+    commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao));
+    commandMap.put("/place/list", new PlaceListHandler(themeDao));
 
 
-    commandMap.put("/search/searchTheme", new SearchThemeHandler(userList, themeList));
-    commandMap.put("/search/searchUser", new SearchUserHandler(userList));
-    commandMap.put("/search/searchHashtag", new SearchHashtagHandler(userList, themeList));
+    //    commandMap.put("/search/searchTheme", new SearchThemeHandler(userList, themeList));
+    //    commandMap.put("/search/searchUser", new SearchUserHandler(userList));
+    //    commandMap.put("/search/searchHashtag", new SearchHashtagHandler(userList, themeList));
 
-    commandMap.put("/likedUser/add", new LikedUserAddHandler(userList));
-    commandMap.put("/likedUser/list", new LikedUserListHandler(userList));
-    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler());
+    commandMap.put("/likedUser/add", new LikedUserAddHandler(requestAgent));
+    commandMap.put("/likedUser/list", new LikedUserListHandler(requestAgent));
+    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(requestAgent));
 
-    commandMap.put("/rank/themeRank", new RealTimeRankHandler(userList));
-    commandMap.put("/rank/userRank", new UserRankHandler(userList));
+    //    commandMap.put("/rank/themeRank", new RealTimeRankHandler(userList));
+    //    commandMap.put("/rank/userRank", new UserRankHandler(userList));
 
-    commandMap.put("/report/theme", new ReportAddThemeHandler(userList,reportThemeList));
-    commandMap.put("/report/user", new ReportAddUserHandler(userList,reportUserList));
-    commandMap.put("/report/list", new ReportMyListHandler(reportList));
-    commandMap.put("/report/themeProcess", new ReportThemeProcessingHandler(userList,reportThemeList));
-    commandMap.put("/report/userProcess", new ReportUserProcessingHandler(userList,reportUserList));
+    //    commandMap.put("/report/theme", new ReportAddThemeHandler(userList,reportThemeList));
+    //    commandMap.put("/report/user", new ReportAddUserHandler(userList,reportUserList));
+    //    commandMap.put("/report/list", new ReportMyListHandler(reportList));
+    //    commandMap.put("/report/themeProcess", new ReportThemeProcessingHandler(userList,reportThemeList));
+    //    commandMap.put("/report/userProcess", new ReportUserProcessingHandler(userList,reportUserList));
   }
 
-  public static void main(String[] args) {
-    App app = new App();
-    app.addApplicationContextListener(new FileListener());
-    app.addUserContextListener(new LoginListener());
-    app.service();
+  MenuFilter menuFilter = menu ->
+  (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0 ;
+
+
+  public static void main(String[] args) throws Exception {
+    ClientApp clientApp = new ClientApp();
+    clientApp.addUserContextListener(new LoginListener());
+    clientApp.service();
+    Prompt.close();
+
 
   }
 
-  private void notifyOnApplicationStarted() {
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("userList", userList);
-    params.put("reportThemeList", reportThemeList);
-    params.put("reportUserList", reportUserList);
 
-    for (ApplicationContextListener listener : listeners) {
-      listener.contextInitialized(params);
-    }
-  }
-
-  private void notifyOnApplicationEnded() {
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("userList", userList);
-    params.put("reportThemeList", reportThemeList);
-    params.put("reportUserList", reportUserList);
-
-    for (ApplicationContextListener listener : listeners) {
-      listener.contextDestroyed(params);
-    }
-  }
-
-  void service() {
-    notifyOnApplicationStarted();
-    reportList.addAll(reportThemeList);
-    reportList.addAll(reportUserList);
-
+  void service() throws Exception{
 
     createMenu().execute();
+
+    requestAgent.request("quit", null);
+
     Prompt.close();
-    notifyOnApplicationEnded();
   }
 
 
   Menu createMenu() {
-    MenuGroup mg = new MenuGroup("메인 메뉴");
+    MenuGroup mg = new MenuGroup("메인");
+    mg.setMenuFilter(menuFilter);
     mg.setPrevMenuTitle("종료");
 
     mg.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mg.add(new MenuItem("회원 가입하기", Menu.ACCESS_LOGOUT, "/user/add"));
-    mg.add(new MenuItem("내 정보", Menu.ACCESS_GENERAL, "/auth/displayLoginUer"));
+    mg.add(new MenuItem("내 정보", Menu.ACCESS_GENERAL, "/auth/displayLoginUser"));
     //    mg.add(new MenuItem(""))
     mg.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL, "/auth/logout"));
     mg.add(new MenuItem("전체 테마 보기", "/theme/all"));
@@ -226,6 +191,7 @@ public class App {
 
   private Menu createUserMenu(MenuGroup mg) {
     MenuGroup user = new MenuGroup("회원관리",Menu.ACCESS_ADMIN);
+    user.setMenuFilter(menuFilter);
     user.add(new MenuItem("회원 목록보기", Menu.ACCESS_ADMIN, "/user/list"));
     user.add(new MenuItem("회원 상세보기", Menu.ACCESS_ADMIN, "/user/detail"));
     user.add(new MenuItem("회원 수정하기", Menu.ACCESS_ADMIN, "/user/update"));
@@ -237,7 +203,7 @@ public class App {
 
   private void createMyMapMenu(MenuGroup mg) {
     MenuGroup myMap = new MenuGroup("나의 테마", Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL);
-
+    myMap.setMenuFilter(menuFilter);
     myMap.add(new MenuItem("테마 만들기", "/myTheme/add"));
     myMap.add(new MenuItem("테마 목록보기", "/myTheme/list"));
     myMap.add(new MenuItem("테마 상세보기", "/myTheme/detail"));
@@ -259,7 +225,7 @@ public class App {
 
   private void createSearchMenu(MenuGroup mg) {
     MenuGroup search = new MenuGroup("검색하기");
-
+    search.setMenuFilter(menuFilter);
 
     search.add(new MenuItem("테마 검색하기", "/search/searchTheme"));
     // 장소 이쁘게 출력하기 수정필요
@@ -272,7 +238,7 @@ public class App {
 
   private void createLikedThemeMenu(MenuGroup mg) {
     MenuGroup like = new MenuGroup("좋아하는 테마", Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL);
-
+    like.setMenuFilter(menuFilter);
     like.add(new MenuItem("좋아요 등록하기", "/likedTheme/add"));
     like.add(new MenuItem("좋아요 목록보기", "/likedTheme/list"));
     like.add(new MenuItem("좋아요 삭제하기", "/likedTheme/delete"));
@@ -282,7 +248,7 @@ public class App {
 
   private void createRankMenu(MenuGroup mg) {
     MenuGroup rank = new MenuGroup("순위보기");
-
+    rank.setMenuFilter(menuFilter);
     rank.add(new MenuItem("테마 순위보기", "/rank/themeRank")); // 전체 테마 검색 기준 조횟수 증가
     rank.add(new MenuItem("유저 순위보기", "/rank/userRank")); // 유저 검색 기준 조횟수 증가
 
@@ -291,6 +257,7 @@ public class App {
 
   private void createLikedUserMenu(MenuGroup mg) {
     MenuGroup follow = new MenuGroup("좋아하는 유저", Menu.ACCESS_GENERAL);
+    follow.setMenuFilter(menuFilter);
     follow.add(new MenuItem("좋아하는 유저 등록하기", "/likedUser/add"));
     follow.add(new MenuItem("좋아하는 유저 목록보기", "/likedUser/list"));
     follow.add(new MenuItem("좋아하는 유저 삭제하기", "/likedUser/delete"));
@@ -300,6 +267,7 @@ public class App {
 
   private void createReportMenu(MenuGroup mg) {
     MenuGroup report = new MenuGroup("신고하기", Menu.ACCESS_GENERAL);
+    report.setMenuFilter(menuFilter);
     report.add(new MenuItem("테마 신고", "/report/theme"));
     report.add(new MenuItem("유저 신고", "/report/user"));
     report.add(new MenuItem("나의 신고 목록", "/report/list"));
