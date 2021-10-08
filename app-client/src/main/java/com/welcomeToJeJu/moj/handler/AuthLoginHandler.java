@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import com.welcomeToJeJu.context.UserContextListener;
 import com.welcomeToJeJu.menu.Menu;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
 public class AuthLoginHandler implements Command{
 
-  RequestAgent requestAgent;
+  UserDao userDao;
 
   static User loginUser;
   static int userAccessLevel = Menu.ACCESS_LOGOUT;
@@ -25,8 +25,8 @@ public class AuthLoginHandler implements Command{
     return userAccessLevel;
   }
 
-  public AuthLoginHandler(RequestAgent requestAgent, List<UserContextListener> userListeners) {
-    this.requestAgent = requestAgent;
+  public AuthLoginHandler(UserDao userDao, List<UserContextListener> userListeners) {
+    this.userDao = userDao;
     this.userListeners = userListeners;
   }
 
@@ -46,17 +46,13 @@ public class AuthLoginHandler implements Command{
       return;
     }
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("email", email);
-    params.put("password", password);
+    User user = userDao.findByEmailPassword(email, password);
 
-    requestAgent.request("user.selectOneByEmailPassword", params);
-    if(requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      user = requestAgent.getObject(User.class);
+    if(user == null) {
+      System.out.println("이메일과 암호가 일치하는 회원 없음!");
+    } else {
       loginUser = user;
       userAccessLevel = Menu.ACCESS_GENERAL;
-    } else {
-      System.out.println("이메일과 암호가 일치하는 회원 없음!");
       return;
     }
     notifyOnLogin();

@@ -2,13 +2,12 @@ package com.welcomeToJeJu.moj.handler;
 
 import java.util.List;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeDeleteHandler extends AbstractMyMapHandler{
 
-  public MyThemeDeleteHandler(List<User> userList) {
-    super(userList);
+  public MyThemeDeleteHandler(List<Theme> themeList) {
+    super(themeList);
   }
 
   public void execute(CommandRequest request) {
@@ -33,8 +32,7 @@ public class MyThemeDeleteHandler extends AbstractMyMapHandler{
       return;
     }
 
-    AuthLoginHandler.getLoginUser().getThemeList().remove(theme);
-
+    themeList.remove(theme);
     System.out.println("테마 삭제 완료!");
   }
 

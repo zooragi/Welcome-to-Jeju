@@ -83,9 +83,9 @@ public class NetThemeDao implements ThemeDao {
   }
 
   @Override
-  public void delete(int no) throws Exception {
+  public void delete(String title) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    params.put("title", title);
 
     requestAgent.request("theme.delete", params);
 

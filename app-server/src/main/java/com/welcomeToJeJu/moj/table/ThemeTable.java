@@ -30,6 +30,7 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
       case "theme.update" : update(request, response); break;
       case "theme.delete" : delete(request, response); break;
       case "theme.place.insert" : placeInsert(request, response); break;
+      //      case "theme.place.selectOne" : placeSelectOne(request, response); break;
       case "theme.place.delete" : placeDelete(request, response); break;
       default :
         response.setStatus(Response.FAIL);

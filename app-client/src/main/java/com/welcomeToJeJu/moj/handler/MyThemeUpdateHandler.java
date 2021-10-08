@@ -2,30 +2,38 @@ package com.welcomeToJeJu.moj.handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.welcomeToJeJu.moj.dao.ThemeDao;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
 
-  public MyThemeUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  ThemeDao themeDao;
+  UserDao userDao;
+  public MyThemeUpdateHandler(ThemeDao themeDao, UserDao userDao) {
+    this.themeDao = themeDao;
+    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[테마 수정하기]");
-
-    Theme theme = (Theme) request.getAttribute("searchedTheme");
     int categoryNum;
 
-    if (theme == null) {
+    String themeName = (String) request.getAttribute("themeTitle");
+
+    Theme theme = themeDao.selectOneByTitle(themeName);
+
+    if(theme ==null) {
       System.out.println("등록된 테마 없음!");
-      return;
     }
 
     String newTitle = Prompt.inputString("테마 제목 > ");
+    if(newTitle.length() == 0) {
+      System.out.println("수정할 테마 제목 입력!");
+      return;
+    }
     List<String> categories = new ArrayList<>();
     categories.add("식당");
     categories.add("카페");
@@ -68,17 +76,16 @@ public class MyThemeUpdateHandler implements Command {
       return;
     }
 
-    theme.setTitle(newTitle);
-    theme.setHashtags(hashtagList);
-    theme.setCategory(categories.get(categoryNum-1));
-    theme.setPublic(isPublic);
+    Theme temp = new Theme();
 
-    requestAgent.request("theme.update", theme);
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("테마 수정 완료!");
-    } else {
-      System.out.println("테마 수정 불가!");
-    }
+
+    temp.setTitle(newTitle);
+    temp.setHashtags(hashtagList);
+    temp.setCategory(categories.get(categoryNum-1));
+    temp.setPublic(isPublic);
+
+    themeDao.update(temp);
+    userDao.themeUpdate(temp);
 
 
   }

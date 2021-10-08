@@ -1,14 +1,15 @@
 package com.welcomeToJeJu.moj.handler;
 
-import java.util.HashMap;
-import com.welcomeToJeJu.request.RequestAgent;
+import com.welcomeToJeJu.moj.dao.UserDao;
+import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
 public class UserDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
-  public UserDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  UserDao userDao;
+
+  public UserDeleteHandler(UserDao userDao) {
+    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -17,12 +18,9 @@ public class UserDeleteHandler implements Command {
 
     int no = Prompt.inputInt("번호 > ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    User user = userDao.findByNo(no);
 
-    requestAgent.request("user.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if(user == null) {
       System.out.println("등록된 회원 없음!");
       return;
     }
@@ -33,12 +31,8 @@ public class UserDeleteHandler implements Command {
       return;
     }
 
-    requestAgent.request("user.delete", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("회원 삭제 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    userDao.delete(user.getNo());
+
     System.out.println("회원 삭제 완료!");
   }
 }

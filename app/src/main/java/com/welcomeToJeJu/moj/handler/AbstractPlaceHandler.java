@@ -1,13 +1,19 @@
 package com.welcomeToJeJu.moj.handler;
 
+import java.util.List;
 import com.welcomeToJeJu.moj.domain.Theme;
 
 public abstract class AbstractPlaceHandler implements Command{
-  public Theme findByTitle(String themeTitle) {
-    for (Theme list : AuthLoginHandler.getLoginUser().getThemeList()) {
-      if (list.getTitle().equals(themeTitle)) {
-        return list;
-      }
+
+  List<Theme> themeList;
+  public AbstractPlaceHandler(List<Theme> themeList) {
+    this.themeList = themeList;
+  }
+
+  protected Theme findByTitle(String title) {
+    for (Theme theme : themeList) {
+      if (theme.getTitle().equals(title))
+        return theme;
     }
     return null;
   }

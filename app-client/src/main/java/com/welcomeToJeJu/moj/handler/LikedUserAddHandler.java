@@ -1,16 +1,17 @@
 package com.welcomeToJeJu.moj.handler;
 
 import java.util.HashMap;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
 public class LikedUserAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  UserDao userDao;
 
-  public LikedUserAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public LikedUserAddHandler(UserDao userDao) {
+    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {

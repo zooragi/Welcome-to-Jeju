@@ -12,8 +12,8 @@ import com.welcomeToJeJu.util.Prompt;
 public class MyThemeDetailHandler extends AbstractMyMapHandler {
   Map<String, Map<String, String>> controlMenu = new HashMap<>();
 
-  public MyThemeDetailHandler(List<User> userList) {
-    super(userList);
+  public MyThemeDetailHandler(List<Theme> themeList) {
+    super(themeList);
     addPlaceDetailMapValue();
     addThemeDetailMapValue();
     controlMenu.put("이전 메뉴",null);
@@ -57,15 +57,17 @@ public class MyThemeDetailHandler extends AbstractMyMapHandler {
   }
 
   private void showThemeList() {
-    for (Theme theme : AuthLoginHandler.getLoginUser().getThemeList()) {
-      System.out.printf("<%d>\n", theme.getNo());
-      System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory(), theme.getTitle());
-      System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());
-      System.out.printf("%s테마\n", theme.isPublic() ? "공개" : "비공개");
-      if (theme.isPublic()) {
-        System.out.printf("조회수 > %d\n", theme.getViewCount());
+    for (Theme theme : themeList) {
+      if(theme.getThemeOwnerName().equals(AuthLoginHandler.getLoginUser().getNickName())) {
+        System.out.printf("<%d>\n", theme.getNo());
+        System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory(), theme.getTitle());
+        System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());
+        System.out.printf("%s테마\n", theme.isPublic() ? "공개" : "비공개");
+        if (theme.isPublic()) {
+          System.out.printf("조회수 > %d\n", theme.getViewCount());
+        }
+        System.out.println();
       }
-      System.out.println();
     }
   }
 

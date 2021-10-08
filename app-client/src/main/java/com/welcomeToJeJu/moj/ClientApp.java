@@ -100,17 +100,17 @@ public class ClientApp {
     //    commandMap.put("/auth/unregistered", new UserUnregisterHandler(userList));
     //    commandMap.put("/auth/edit", new UserEditHandler());
 
-    commandMap.put("/user/add", new UserAddHandler(requestAgent));
-    commandMap.put("/user/delete", new UserDeleteHandler(requestAgent));
-    commandMap.put("/user/detail", new UserDetailHandler(requestAgent));
-    commandMap.put("/user/list", new UserListHandler(requestAgent));
-    commandMap.put("/user/update", new UserUpdateHandler(requestAgent));
+    commandMap.put("/user/add", new UserAddHandler(userDao));
+    commandMap.put("/user/delete", new UserDeleteHandler(userDao));
+    commandMap.put("/user/detail", new UserDetailHandler(userDao));
+    commandMap.put("/user/list", new UserListHandler(userDao));
+    commandMap.put("/user/update", new UserUpdateHandler(userDao));
 
     commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao,userDao));
-    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(requestAgent));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao,userDao));
     commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
     commandMap.put("/myTheme/detail", new MyThemeDetailHandler(requestAgent));
-    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(requestAgent));
+    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, userDao));
 
     //    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(userList));
     //    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(userList));

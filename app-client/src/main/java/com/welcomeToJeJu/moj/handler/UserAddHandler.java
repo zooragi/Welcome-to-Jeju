@@ -1,17 +1,17 @@
 package com.welcomeToJeJu.moj.handler;
 
 import java.sql.Date;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
 public class UserAddHandler implements Command {
 
-  static int userNo = 0;
-  RequestAgent requestAgent;
+  int userNo = 3;
+  UserDao userDao;
 
-  public UserAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public UserAddHandler(UserDao userDao) {
+    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -38,13 +38,7 @@ public class UserAddHandler implements Command {
     user.setRegisteredDate(new Date(System.currentTimeMillis()));
     user.setNo(++userNo);
 
-    requestAgent.request("user.insert", user);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("회원 가입 완료");
-    } else {
-      System.out.println("회원 등록 실패!");
-    }
+    userDao.insert(user);
   }
 
 }

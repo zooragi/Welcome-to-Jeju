@@ -1,15 +1,17 @@
 package com.welcomeToJeJu.moj.handler;
 
-import java.util.HashMap;
+import com.welcomeToJeJu.moj.dao.ThemeDao;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
-  public MyThemeDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  ThemeDao themeDao;
+  UserDao userDao;
+  public MyThemeDeleteHandler(ThemeDao themeDao, UserDao userDao) {
+    this.themeDao = themeDao;
+    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -21,13 +23,11 @@ public class MyThemeDeleteHandler implements Command {
       return;
     }
 
-    requestAgent.request("theme.selectOneByTitle", title);
-    if(requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("등록된 테마 없음!");
-      return;
-    }
+    Theme theme = themeDao.selectOneByTitle(title);
 
-    Theme theme = requestAgent.getObject(Theme.class);
+    if(theme ==null) {
+      System.out.println("등록된 테마 없음!");
+    }
 
     String input = Prompt.inputString("삭제하기(y/N) > ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -35,15 +35,8 @@ public class MyThemeDeleteHandler implements Command {
       return;
     }
 
-    HashMap<String, String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(theme.getNo()));
-    params.put("title", theme.getTitle());
-    requestAgent.request("theme.delete", params);
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("테마 삭제 완료!");
-    } else {
-      System.out.println("테마 삭제 불가!");
-    }
+    themeDao.delete(theme.getTitle());
+    userDao.themeDelete(theme);
   }
 
 }

@@ -1,16 +1,15 @@
 package com.welcomeToJeJu.moj.handler;
 
-import java.util.HashMap;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
 public class UserDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  UserDao userDao;
 
-  public UserDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public UserDetailHandler(UserDao userDao) {
+    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -19,17 +18,12 @@ public class UserDetailHandler implements Command {
 
     int no = Prompt.inputInt("번호 > ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    User user = userDao.findByNo(no);
 
-    requestAgent.request("user.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (user == null) {
       System.out.println("등록된 회원 없음!");
       return;
     }
-
-    User user = requestAgent.getObject(User.class);
 
     System.out.printf("이메일: %s\n", user.getEmail());
     System.out.printf("닉네임: %s\n", user.getNickName());

@@ -1,21 +1,22 @@
 package com.welcomeToJeJu.moj.handler;
 
 import java.util.Collection;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.request.RequestAgent;
 
 public class UserListHandler implements Command {
 
-  RequestAgent requestAgent;
+  UserDao userDao;
 
-  public UserListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public UserListHandler(UserDao userDao) {
+    this.userDao = userDao;
   }
+
+
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[회원 목록 보기]");
 
-    requestAgent.request("user.selectList", null);
-    Collection<User> userList = requestAgent.getObjects(User.class);
+    Collection<User> userList = userDao.findAll();
 
     for (User user : userList) {
       System.out.printf("회원 번호 > %s\n", user.getNo());

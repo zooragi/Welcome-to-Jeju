@@ -15,13 +15,17 @@ public class Theme implements Comparable<Theme>{
   private String category; 
   private int reportedCount = 0;
 
+  private List<String> likedThemeUsers = new ArrayList<>();
+
+
 
 
   @Override
   public String toString() {
-    return "Theme [no=" + no + ", title=" + title + ", themeOwnerName=" + themeOwnerName + ", viewCount=" + viewCount
-        + ", isPublic=" + isPublic + ", isShare=" + isShare + ", placeList=" + placeList + ", hashtags=" + hashtags
-        + ", category=" + category + ", reportedCount=" + reportedCount + "]";
+    return "Theme [no=" + no + ", title=" + title + ", themeOwnerName=" + themeOwnerName
+        + ", viewCount=" + viewCount + ", isPublic=" + isPublic + ", isShare=" + isShare
+        + ", placeList=" + placeList + ", hashtags=" + hashtags + ", category=" + category
+        + ", reportedCount=" + reportedCount + ", likedThemeUsers=" + likedThemeUsers + "]";
   }
 
   public int getReportedCount() {
@@ -107,6 +111,14 @@ public class Theme implements Comparable<Theme>{
 
   public void setNo(int no) {
     this.no = no;
+  }
+
+  public List<String> getLikedThemeUsers() {
+    return likedThemeUsers;
+  }
+
+  public void setLikedThemeUsers(List<String> likedThemeUsers) {
+    this.likedThemeUsers = likedThemeUsers;
   }
 
 }

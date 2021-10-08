@@ -2,22 +2,19 @@ package com.welcomeToJeJu.moj.handler;
 
 import java.util.List;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
 
 public abstract class AbstactLikedThemeHandler implements Command {
 
-  List<User> userList;
-
-  public AbstactLikedThemeHandler(List<User> userList) {
-    this.userList = userList;
+  //  List<User> userList;
+  List<Theme> themeList;
+  public AbstactLikedThemeHandler(List<Theme> themeList) {
+    this.themeList = themeList;
   }
 
   protected Theme findByTitle(String title) {
-    for (User user : userList) {
-      for (Theme theme : user.getThemeList()) {
-        if (theme.getTitle().equals(title)) {
-          return theme;
-        }
+    for (Theme theme : themeList) {
+      if (theme.getTitle().equals(title)) {
+        return theme;
       }
     }
     return null;

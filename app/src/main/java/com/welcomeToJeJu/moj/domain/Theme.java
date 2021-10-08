@@ -15,7 +15,7 @@ public class Theme implements Comparable<Theme>{
   private String category; 
   private int reportedCount = 0;
 
-
+  List<String> likedThemeUsers = new ArrayList<>();
 
   @Override
   public String toString() {

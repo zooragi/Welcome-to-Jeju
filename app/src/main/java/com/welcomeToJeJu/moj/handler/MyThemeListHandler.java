@@ -1,22 +1,31 @@
 package com.welcomeToJeJu.moj.handler;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
 
 public class MyThemeListHandler extends AbstractMyMapHandler {
 
-  public MyThemeListHandler(List<User> userList) {
-    super(userList);
+  public MyThemeListHandler(List<Theme> themeList) {
+    super(themeList);
   }
 
   public void execute(CommandRequest request) {
     System.out.println("[테마 목록보기]");
-    if (AuthLoginHandler.getLoginUser().getThemeList().size() == 0) {
+
+    List<Theme> loginUserTheme = new ArrayList<>();
+    for( Theme theme : themeList) {
+      if(theme.getThemeOwnerName().equals(AuthLoginHandler.getLoginUser().getNickName())) {
+        loginUserTheme.add(theme);
+      }
+    }
+
+    if (loginUserTheme.size() == 0) {
       System.out.println("등록된 테마 없음!");
       return;
     }
-    for (Theme theme : AuthLoginHandler.getLoginUser().getThemeList()) {
+
+    for (Theme theme : loginUserTheme) {
       System.out.printf("<%d>\n", theme.getNo());
       System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory(), theme.getTitle());
       System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());

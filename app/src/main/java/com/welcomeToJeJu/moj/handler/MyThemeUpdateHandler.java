@@ -3,13 +3,12 @@ package com.welcomeToJeJu.moj.handler;
 import java.util.ArrayList;
 import java.util.List;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeUpdateHandler extends AbstractMyMapHandler {
 
-  public MyThemeUpdateHandler(List<User> userList) {
-    super(userList);
+  public MyThemeUpdateHandler(List<Theme> themeList) {
+    super(themeList);
   }
 
   public void execute(CommandRequest request) {

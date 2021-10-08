@@ -30,6 +30,8 @@ public class UserTable extends JsonDataTable<User> implements DataProcessor{
       case "user.likedUser.list" : likedUserList(request, response); break;
       case "user.likedUser.delete" : likedUserDelete(request, response); break;
       case "user.theme.insert" : themeInsert(request, response); break;
+      case "user.theme.delete" : themeDelete(request, response); break;
+      case "user.theme.update" : themeUpdate(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -37,6 +39,31 @@ public class UserTable extends JsonDataTable<User> implements DataProcessor{
   }
 
 
+
+
+  private void themeUpdate(Request request, Response response) {
+    Theme theme = request.getObject(Theme.class);
+    User user = findByName(theme.getThemeOwnerName());
+    int index = indexOf(user.getNo());
+    if(index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("등록된 유저 없음!");
+      return;
+    }
+
+    user.getThemeList().set(index, theme);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void themeDelete(Request request, Response response) {
+    Theme theme = request.getObject(Theme.class);
+    User user = findByName(theme.getThemeOwnerName());
+    int index = indexOfTitle(user,theme.getTitle());
+    user.getThemeList().remove(index);
+
+    response.setStatus(Response.SUCCESS);
+
+  }
 
   private void themeInsert(Request request, Response response) {
     Theme theme = request.getObject(Theme.class);
@@ -129,13 +156,7 @@ public class UserTable extends JsonDataTable<User> implements DataProcessor{
   private void selectOneByName(Request request, Response response) throws Exception {
     String name = request.getParameter("nickname");
     System.out.println("-----> " + name);
-    User user = null;
-    for (User u : list) {
-      if (u.getNickName().equals(name)) {
-        user = u;
-        break;
-      }
-    }
+    User user = findByName(name);
     if (user != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(user);
@@ -217,6 +238,16 @@ public class UserTable extends JsonDataTable<User> implements DataProcessor{
   private int indexOf(int userNo) {
     for(int i = 0; i < list.size(); i++) {
       if(list.get(i).getNo() == userNo) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  @SuppressWarnings("unlikely-arg-type")
+  private int indexOfTitle(User user, String themeName) {
+    for(int i = 0; i < list.size(); i++) {
+      if(user.getThemeList().get(i).equals(themeName)) {
         return i;
       }
     }

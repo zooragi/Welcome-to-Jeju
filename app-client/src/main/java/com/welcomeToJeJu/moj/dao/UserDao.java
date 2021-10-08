@@ -12,4 +12,7 @@ public interface UserDao {
   void delete(int no) throws Exception;
   List<User> findByKeyword(String keyword) throws Exception;
   void themeInsert(Theme theme) throws Exception;
+  void themeDelete(Theme theme) throws Exception;
+  void themeUpdate(Theme theme) throws Exception;
+  User findByEmailPassword (String email, String password) throws Exception;
 }   

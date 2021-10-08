@@ -36,9 +36,9 @@ public class PlaceDeleteHandler implements Command {
     }
 
     Place place = null;
-    for (Place list : theme.getPlaceList()) {
-      if (list.getStoreName().equals(storeName)) {
-        place = list;
+    for (Place p : theme.getPlaceList()) {
+      if (p.getStoreName().equals(storeName)) {
+        place = p;
         break;
       }
     }

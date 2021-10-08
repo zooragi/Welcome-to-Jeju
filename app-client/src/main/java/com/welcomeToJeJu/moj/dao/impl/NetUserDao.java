@@ -22,7 +22,7 @@ public class NetUserDao implements UserDao {
   @Override
   public void insert(User user) throws Exception {
     requestAgent.request("user.insert", user);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       throw new Exception("유저 데이터 저장 실패!");
     }
   }
@@ -93,6 +93,39 @@ public class NetUserDao implements UserDao {
       throw new Exception("테마 등록 실패!");
     }
 
+  }
+
+  @Override
+  public void themeDelete(Theme theme) throws Exception {
+    requestAgent.request("user.theme.delete", theme);
+
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      throw new Exception("테마 삭제 실패!");
+    }
+
+  }
+
+  @Override
+  public void themeUpdate(Theme theme) throws Exception {
+    requestAgent.request("user.theme.update", theme);
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      throw new Exception("테마 삭제 실패!");
+    }
+
+  }
+
+  @Override
+  public User findByEmailPassword(String email, String password) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("email", email);
+    params.put("password", password);
+
+    requestAgent.request("user.selectOneByEmailPassword", params);
+
+    if(!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      return null;
+    }
+    return requestAgent.getObject(User.class);
   }
 }
 

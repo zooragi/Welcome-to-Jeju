@@ -14,9 +14,7 @@ public class User implements Comparable<User> {
   private int reportedCount = 0;
   private int warningCount = 0;
 
-  private List<User> likedUsers = new ArrayList<>(); //팔로우
-  private List<Theme> themeList = new ArrayList<>();
-  private List<Theme> likedThemes = new ArrayList<>(); // 북마크
+  private List<String> likedUsers = new ArrayList<>(); //팔로우
 
 
 
@@ -26,7 +24,7 @@ public class User implements Comparable<User> {
     return "User [no=" + no + ", email=" + email + ", password=" + password + ", nickName="
         + nickName + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", reportedCount=" + reportedCount + ", warningCount=" + warningCount + ", likedUsers="
-        + likedUsers + ", themeList=" + themeList + ", likedThemes=" + likedThemes + "]";
+        + likedUsers + "]";
   }
 
 
@@ -38,9 +36,6 @@ public class User implements Comparable<User> {
   public void setReportedCount(int reportedCount) {
     this.reportedCount = reportedCount;
   }
-
-
-
 
 
   public int getNo() {
@@ -108,37 +103,6 @@ public class User implements Comparable<User> {
     this.viewCount = viewCount;
   }
 
-  public List<User> getLikedUsers() {
-    return likedUsers;
-  }
-
-
-  public void setLikedUsers(List<User> likedUsers) {
-    this.likedUsers = likedUsers;
-  }
-
-
-  public List<Theme> getThemeList() {
-    return themeList;
-  }
-
-
-
-  public void setThemeList(List<Theme> themeList) {
-    this.themeList = themeList;
-  }
-
-
-  public List<Theme> getLikedThemes() {
-    return likedThemes;
-  }
-
-
-  public void setLikedThemes(List<Theme> likedThemes) {
-    this.likedThemes = likedThemes;
-  }
-
-
   @Override
   public int compareTo(User user) {
     return user.viewCount - this.viewCount;
@@ -152,6 +116,16 @@ public class User implements Comparable<User> {
 
   public void setWarningCount(int warningCount) {
     this.warningCount = warningCount;
+  }
+
+
+  public List<String> getLikedUsers() {
+    return likedUsers;
+  }
+
+
+  public void setLikedUsers(List<String> likedUsers) {
+    this.likedUsers = likedUsers;
   }
 
 }

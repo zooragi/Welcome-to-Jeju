@@ -2,13 +2,12 @@ package com.welcomeToJeJu.moj.handler;
 
 import java.util.List;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
 public class LikedThemeDeleteHandler extends AbstactLikedThemeHandler {
 
-  public LikedThemeDeleteHandler(List<User> userList) {
-    super(userList);
+  public LikedThemeDeleteHandler(List<Theme> themeList) {
+    super(themeList);
   }
 
   @Override

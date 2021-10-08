@@ -1,29 +1,24 @@
 package com.welcomeToJeJu.moj.handler;
 
-import java.util.HashMap;
+import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.request.RequestAgent;
 import com.welcomeToJeJu.util.Prompt;
 
 public class UserUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  UserDao userDao;
 
-  public UserUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public UserUpdateHandler(UserDao userDao) {
+    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[회원 정보 수정하기]");
     int no = Prompt.inputInt("번호 > ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    User user = userDao.findByNo(no);
 
-    requestAgent.request("user.selectOne", params);
-    User user = requestAgent.getObject(User.class);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (user == null) {
       System.out.println("등록된 회원 없음!");
       return;
     }
@@ -48,13 +43,7 @@ public class UserUpdateHandler implements Command {
       return;
     }
 
-    requestAgent.request("user.update", temp);
-
-    if(requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println("회원 수정 완료!");
-    } else {
-      System.out.println("회원 수정 실패!");
-    }
+    userDao.update(temp);
   }
 
 }

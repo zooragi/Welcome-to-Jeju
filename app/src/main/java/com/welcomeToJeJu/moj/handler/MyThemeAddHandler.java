@@ -3,30 +3,19 @@ package com.welcomeToJeJu.moj.handler;
 import java.util.ArrayList;
 import java.util.List;
 import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeAddHandler extends AbstractMyMapHandler {
 
-  List<Theme> themeList;
-  public MyThemeAddHandler(List<User> userList, List<Theme> themeList) {
-    super(userList);
-    this.themeList = themeList;
+  public MyThemeAddHandler(List<Theme> themeList) {
+    super(themeList);
   }
 
   public void execute(CommandRequest request) {
     Theme theme = new Theme();
     System.out.println("[나의 테마 등록하기]");
 
-
-
-    if(AuthLoginHandler.getLoginUser().getThemeList().size() == 0) {
-      theme.setNo(1);
-    } else {
-      int themeNo = AuthLoginHandler.getLoginUser().
-          getThemeList().get(AuthLoginHandler.getLoginUser().getThemeList().size()-1).getNo();
-      theme.setNo(++themeNo);
-    }
+    theme.setNo(Prompt.inputInt("번호 > "));
 
     theme.setTitle(Prompt.inputString("테마 이름(취소 : 엔터) > "));
 
@@ -71,7 +60,6 @@ public class MyThemeAddHandler extends AbstractMyMapHandler {
     }
 
     theme.setThemeOwnerName(AuthLoginHandler.getLoginUser().getNickName());
-    AuthLoginHandler.getLoginUser().getThemeList().add(theme);
     themeList.add(theme);
     System.out.println();
     System.out.println("테마 등록 완료!");
