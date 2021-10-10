@@ -3,7 +3,6 @@ package com.welcomeToJeJu.moj.handler;
 import java.util.ArrayList;
 import java.util.List;
 import com.welcomeToJeJu.moj.dao.ThemeDao;
-import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.Theme;
 import com.welcomeToJeJu.util.Prompt;
 
@@ -11,10 +10,8 @@ public class MyThemeUpdateHandler implements Command {
 
 
   ThemeDao themeDao;
-  UserDao userDao;
-  public MyThemeUpdateHandler(ThemeDao themeDao, UserDao userDao) {
+  public MyThemeUpdateHandler(ThemeDao themeDao) {
     this.themeDao = themeDao;
-    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -23,7 +20,7 @@ public class MyThemeUpdateHandler implements Command {
 
     String themeName = (String) request.getAttribute("themeTitle");
 
-    Theme theme = themeDao.selectOneByTitle(themeName);
+    Theme theme = themeDao.findByTitle(themeName);
 
     if(theme ==null) {
       System.out.println("등록된 테마 없음!");
@@ -85,9 +82,6 @@ public class MyThemeUpdateHandler implements Command {
     temp.setPublic(isPublic);
 
     themeDao.update(temp);
-    userDao.themeUpdate(temp);
-
-
   }
 
 }

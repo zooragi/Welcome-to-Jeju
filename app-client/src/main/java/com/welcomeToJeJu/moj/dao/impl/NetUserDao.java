@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.welcomeToJeJu.moj.dao.UserDao;
-import com.welcomeToJeJu.moj.domain.Theme;
 import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.request.RequestAgent;
 
@@ -23,7 +22,7 @@ public class NetUserDao implements UserDao {
   public void insert(User user) throws Exception {
     requestAgent.request("user.insert", user);
     if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      throw new Exception("유저 데이터 저장 실패!");
+      throw new Exception("회원 데이터 저장 실패!");
     }
   }
 
@@ -86,35 +85,6 @@ public class NetUserDao implements UserDao {
   }
 
   @Override
-  public void themeInsert(Theme theme) throws Exception {
-    requestAgent.request("user.theme.insert", theme);
-
-    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      throw new Exception("테마 등록 실패!");
-    }
-
-  }
-
-  @Override
-  public void themeDelete(Theme theme) throws Exception {
-    requestAgent.request("user.theme.delete", theme);
-
-    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      throw new Exception("테마 삭제 실패!");
-    }
-
-  }
-
-  @Override
-  public void themeUpdate(Theme theme) throws Exception {
-    requestAgent.request("user.theme.update", theme);
-    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      throw new Exception("테마 삭제 실패!");
-    }
-
-  }
-
-  @Override
   public User findByEmailPassword(String email, String password) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("email", email);
@@ -126,6 +96,54 @@ public class NetUserDao implements UserDao {
       return null;
     }
     return requestAgent.getObject(User.class);
+  }
+
+  @Override
+  public User findByName(String name) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("nickname", name);
+
+    requestAgent.request("user.selectOneByName", params);
+    if(!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      return null;
+    }
+    return requestAgent.getObject(User.class);
+  }
+
+  @Override
+  public void userLikedUserInsert(String likedUser, String loginUser) throws Exception {
+    HashMap<String, String> parameter = new HashMap<>();
+    parameter.put("likedUser",likedUser);
+    parameter.put("loginUser",loginUser);
+
+    requestAgent.request("user.likedUser.insert", parameter);
+
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      throw new Exception("좋아하는 유저 등록 실패!");
+    }
+
+  }
+
+  @Override
+  public void userLikedUserDelete(String likedUser, String loginUser) throws Exception {
+    HashMap<String, String> parameter = new HashMap<>();
+    parameter.put("likedUser",likedUser);
+    parameter.put("loginUser",loginUser);
+
+    requestAgent.request("user.likedUser.delete", parameter);
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      throw new Exception("좋아하는 유저 등록 실패!");
+    }
+  }
+
+  @Override
+  public List<String> likedUserFindAll(User loginUser) throws Exception {
+    requestAgent.request("user.likedUser.list", loginUser);
+
+    if(!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      return null;
+    }
+    return new ArrayList<>(requestAgent.getObjects(String.class));
   }
 }
 

@@ -3,26 +3,22 @@ package com.welcomeToJeJu.moj.handler;
 import java.util.ArrayList;
 import java.util.List;
 import com.welcomeToJeJu.moj.dao.ThemeDao;
-import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.Theme;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeAddHandler implements Command {
 
   ThemeDao themeDao;
-  UserDao userDao;
 
-  static int themeNo = 0;
-  public MyThemeAddHandler(ThemeDao themeDao, UserDao userDao) {
+  public MyThemeAddHandler(ThemeDao themeDao) {
     this.themeDao = themeDao;
-    this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
     Theme theme = new Theme();
     System.out.println("[나의 테마 등록하기]");
 
-    theme.setNo(++themeNo);
+    theme.setNo(Prompt.inputInt("번호 > "));
     //        if(AuthLoginHandler.getLoginUser().getThemeList().size() == 0) {
     //          theme.setNo(1);
     //        } else {
@@ -76,8 +72,6 @@ public class MyThemeAddHandler implements Command {
 
     theme.setThemeOwnerName(AuthLoginHandler.getLoginUser().getNickName());
     themeDao.insert(theme);
-    userDao.themeInsert(theme);
-
   }
 
 }

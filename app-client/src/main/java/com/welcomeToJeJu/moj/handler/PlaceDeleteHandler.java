@@ -20,7 +20,7 @@ public class PlaceDeleteHandler implements Command {
 
     String themeName = (String) request.getAttribute("themeTitle");
 
-    Theme theme = themeDao.selectOneByTitle(themeName);
+    Theme theme = themeDao.findByTitle(themeName);
 
     if(theme == null) {
       System.out.println("등록된 테마 없음!");
@@ -56,7 +56,7 @@ public class PlaceDeleteHandler implements Command {
       return;
     }
 
-    themeDao.placeDelete(place);
+    themeDao.placeDelete(theme, place);
   }
   //  }
 }

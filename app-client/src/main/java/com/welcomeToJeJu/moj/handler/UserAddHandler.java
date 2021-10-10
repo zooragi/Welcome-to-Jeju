@@ -7,7 +7,6 @@ import com.welcomeToJeJu.util.Prompt;
 
 public class UserAddHandler implements Command {
 
-  int userNo = 3;
   UserDao userDao;
 
   public UserAddHandler(UserDao userDao) {
@@ -19,7 +18,7 @@ public class UserAddHandler implements Command {
     System.out.println("[회원 가입하기]");
 
     User user = new User();
-
+    user.setNo(Prompt.inputInt("번호 > "));
     String email = Prompt.inputString("이메일 > ");
     if(email.length()==0) {
       System.out.println("회원 가입 취소!");
@@ -36,9 +35,10 @@ public class UserAddHandler implements Command {
 
     user.setPassword(Prompt.inputString("암호 > "));
     user.setRegisteredDate(new Date(System.currentTimeMillis()));
-    user.setNo(++userNo);
 
     userDao.insert(user);
+
+    System.out.println("회원 가입 완료!");
   }
 
 }

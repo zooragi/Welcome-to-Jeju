@@ -93,7 +93,7 @@ public class ClientApp {
     NetThemeDao themeDao = new NetThemeDao(requestAgent);
     NetUserDao userDao = new NetUserDao(requestAgent);
 
-    commandMap.put("/auth/login", new AuthLoginHandler(requestAgent,userListeners));
+    commandMap.put("/auth/login", new AuthLoginHandler(userDao,userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
     commandMap.put("/auth/displayLoginUser", new AuthDisplayLoginUserHandler());
     //    commandMap.put("/theme/all", new AllThemeListHandler(userList));
@@ -106,11 +106,11 @@ public class ClientApp {
     commandMap.put("/user/list", new UserListHandler(userDao));
     commandMap.put("/user/update", new UserUpdateHandler(userDao));
 
-    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao,userDao));
-    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao,userDao));
+    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao));
     commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
     commandMap.put("/myTheme/detail", new MyThemeDetailHandler(requestAgent));
-    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, userDao));
+    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao));
 
     //    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(userList));
     //    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(userList));
@@ -125,9 +125,9 @@ public class ClientApp {
     //    commandMap.put("/search/searchUser", new SearchUserHandler(userList));
     //    commandMap.put("/search/searchHashtag", new SearchHashtagHandler(userList, themeList));
 
-    commandMap.put("/likedUser/add", new LikedUserAddHandler(requestAgent));
-    commandMap.put("/likedUser/list", new LikedUserListHandler(requestAgent));
-    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(requestAgent));
+    commandMap.put("/likedUser/add", new LikedUserAddHandler(userDao));
+    commandMap.put("/likedUser/list", new LikedUserListHandler(userDao));
+    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao));
 
     //    commandMap.put("/rank/themeRank", new RealTimeRankHandler(userList));
     //    commandMap.put("/rank/userRank", new UserRankHandler(userList));

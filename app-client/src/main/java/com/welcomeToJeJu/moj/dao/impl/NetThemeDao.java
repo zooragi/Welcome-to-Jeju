@@ -104,9 +104,8 @@ public class NetThemeDao implements ThemeDao {
   }
 
   @Override
-  public Theme selectOneByTitle(String title) throws Exception {
+  public Theme findByTitle(String title) throws Exception {
     requestAgent.request("theme.selectOneByTitle", title);
-
     if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       return null;
     }
@@ -115,13 +114,41 @@ public class NetThemeDao implements ThemeDao {
   }
 
   @Override
-  public void placeDelete(Place place) throws Exception {
-    requestAgent.request("theme.place.delete", place);
+  public void placeDelete(Theme theme, Place place) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("themeNo", String.valueOf(theme.getNo()));
+    params.put("placeName", place.getStoreName());
+    requestAgent.request("theme.place.delete", params);
     if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       throw new Exception("장소 삭제 실패!");
     }
   }
 
+  @Override
+  public void likedThemeInsert(Theme theme, String userName) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("themeNo", String.valueOf(theme.getNo()));
+    params.put("userName", userName);
 
+    requestAgent.request("theme.likedTheme.insert", params);
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      throw new Exception("좋아요 등록 실패!");
+    }
+
+  }
+
+  @Override
+  public void likedThemeDelete(Theme theme, String userName) throws Exception {
+    HashMap<String, String> params = new HashMap<>();
+    params.put("themeNo", String.valueOf(theme.getNo()));
+    params.put("userName", userName);
+
+    requestAgent.request("theme.likedTheme.delete", params);
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      throw new Exception("좋아요 삭제 실패!");
+    }
+
+
+  }
 }
 

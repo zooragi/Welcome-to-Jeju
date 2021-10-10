@@ -30,19 +30,38 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
       case "theme.update" : update(request, response); break;
       case "theme.delete" : delete(request, response); break;
       case "theme.place.insert" : placeInsert(request, response); break;
-      //      case "theme.place.selectOne" : placeSelectOne(request, response); break;
       case "theme.place.delete" : placeDelete(request, response); break;
+      case "theme.likedTheme.insert" : likedThemeInsert(request, response); break;
+      case "theme.likedTheme.delete" : likedThemeDelete(request, response); break;
       default :
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
 
+  private void likedThemeDelete(Request request, Response response) {
+    int themeNo = Integer.valueOf(request.getParameter("themeNo"));
+    String userName = request.getParameter("userName");
+    Theme theme = findByNo(themeNo);
+    theme.getLikedThemeUsers().remove(userName);
+    response.setStatus(Response.SUCCESS);
+
+  }
+
+  private void likedThemeInsert(Request request, Response response) {
+    int themeNo = Integer.valueOf(request.getParameter("themeNo"));
+    String userName = request.getParameter("userName");
+    Theme theme = findByNo(themeNo);
+    theme.getLikedThemeUsers().add(userName);
+    response.setStatus(Response.SUCCESS);
+
+  }
+
   private void placeDelete(Request request, Response response) {
-    Place place = request.getObject(Place.class);
-    Place deletePlace = placeSelectOne(place.getStoreName());
-    Theme theme = findByTitle(deletePlace.getTheme().getTitle());
-    int index = indexOfPlaceTitle(deletePlace.getTheme().getTitle());
+    int themeNo = Integer.valueOf(request.getParameter("themeNo"));
+    String placeName = request.getParameter("placeName");
+    Theme theme = findByNo(themeNo);
+    int index = indexOfPlace(placeName, theme.getPlaceList());
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("등록된 장소 없음!");
@@ -50,18 +69,6 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
     }
     theme.getPlaceList().remove(index);
     response.setStatus(Response.SUCCESS);
-
-  }
-
-  private Place placeSelectOne(String storeName) {
-    for(Theme theme : list) {
-      for(Place p : theme.getPlaceList()) {
-        if(p.getStoreName().equals(storeName)) {
-          return p;
-        }
-      }
-    }
-    return null;
   }
 
 
@@ -213,14 +220,13 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
   }
 
 
-  private int indexOfPlaceTitle(String title) {
-    for(int i = 0; i < list.size(); i++) {
-      for(int j = 0; j < list.size(); j++) {
-        if(list.get(i).getPlaceList().get(j).getStoreName().equals(title)) {
-          return j;
-        }
+  private int indexOfPlace(String placeName, List<Place> placeList) {
+    for (int i = 0; i < placeList.size(); i++) {
+      if (placeList.get(i).getStoreName().equals(placeName)) {
+        return i;
       }
     }
     return -1;
   }
+
 }

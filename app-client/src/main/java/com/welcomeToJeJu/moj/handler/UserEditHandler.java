@@ -4,24 +4,19 @@ import com.welcomeToJeJu.moj.dao.UserDao;
 import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
-public class UserUpdateHandler implements Command {
+public class UserEditHandler implements Command {
 
   UserDao userDao;
 
-  public UserUpdateHandler(UserDao userDao) {
+  public UserEditHandler(UserDao userDao) {
     this.userDao = userDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[회원 정보 수정하기]");
-    int no = Prompt.inputInt("번호 > ");
 
-    User user = userDao.findByNo(no);
+    System.out.println("[내 정보 수정하기]");
 
-    if (user == null) {
-      System.out.println("등록된 회원 없음!");
-      return;
-    }
+    User user = (User) request.getAttribute("loginUser");
 
     User temp = new User();
     temp.setNo(user.getNo());
@@ -42,6 +37,8 @@ public class UserUpdateHandler implements Command {
     }
 
     userDao.update(temp);
+
+    System.out.println("회원 수정 완료!");
   }
 
 }
