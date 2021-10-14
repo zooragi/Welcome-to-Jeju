@@ -1,7 +1,9 @@
 package com.welcomeToJeJu.moj.handler;
 
+import java.util.Collection;
 import com.welcomeToJeJu.moj.dao.ThemeDao;
 import com.welcomeToJeJu.moj.domain.Theme;
+import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeDeleteHandler implements Command {
@@ -20,9 +22,17 @@ public class MyThemeDeleteHandler implements Command {
       return;
     }
 
-    Theme theme = themeDao.findByTitle(title);
+    User loginUser = AuthLoginHandler.getLoginUser();
+    Collection<Theme> themeList = themeDao.findLoginUserAll(loginUser);
 
-    if(theme ==null) {
+    Theme deleteTheme = null;
+    for(Theme theme : themeList) {
+      if(theme.getTitle().equals(title)) {
+        deleteTheme = theme;
+      }
+    }
+
+    if(deleteTheme ==null) {
       System.out.println("등록된 테마 없음!");
     }
 
@@ -32,7 +42,7 @@ public class MyThemeDeleteHandler implements Command {
       return;
     }
 
-    themeDao.delete(theme.getTitle());
+    themeDao.delete(deleteTheme.getTitle());
   }
 
 }

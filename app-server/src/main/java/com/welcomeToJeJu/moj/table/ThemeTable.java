@@ -23,9 +23,9 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
     switch(request.getCommand()) {
       case "theme.insert" : insert(request, response); break;
       case "theme.selectList" : selectList(request, response); break;
+      case "theme.selectListByTitle" : selectListByTitle(request, response); break;
       case "theme.selectLoginUserList" : selectLoginUserList(request, response); break;
       case "theme.selectOne" : selectOne(request, response); break;
-      case "theme.selectOneByTitle" : selectOneByTitle(request, response); break;
       case "theme.selectListByKeyword": selectListByKeyword(request, response); break;
       case "theme.update" : update(request, response); break;
       case "theme.delete" : delete(request, response); break;
@@ -37,6 +37,18 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
+  }
+
+  private void selectListByTitle(Request request, Response response) {
+    List<Theme> themeList = new ArrayList<>();
+    String themeName = request.getObject(String.class);
+    for ( Theme theme : list) {
+      if(theme.getTitle().equals(themeName) && theme.isPublic()) {
+        themeList.add(theme);
+      }
+    }
+    response.setStatus(Response.SUCCESS);
+    response.setValue(themeList);
   }
 
   private void likedThemeDelete(Request request, Response response) {
@@ -74,7 +86,7 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
 
   private void placeInsert(Request request, Response response) {
     Place place = request.getObject(Place.class);
-    Theme theme = findByTitle(place.getTheme().getTitle());
+    Theme theme = findByNo(place.getTheme().getNo());
     theme.getPlaceList().add(place);
     response.setStatus(Response.SUCCESS);
   }
@@ -169,19 +181,7 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
 
   }
 
-  private void selectOneByTitle(Request request, Response response) throws Exception {
-    String title = request.getObject(String.class);
-    Theme t = findByTitle(title);
 
-    if (t != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(t);
-    } else {
-      response.setStatus(Response.FAIL);
-      response.setValue("등록된 테마 없음!");
-    }
-
-  }
 
   private Theme findByNo(int no) {
     for(Theme t : list) {
@@ -192,14 +192,7 @@ public class ThemeTable extends JsonDataTable<Theme> implements DataProcessor {
     return null;
   }
 
-  private Theme findByTitle(String title) {
-    for(Theme t : list) {
-      if(t.getTitle().equals(title)) {
-        return t;
-      }
-    }
-    return null;
-  }
+
 
   private int indexOf(int themeNo) {
     for(int i = 0; i < list.size(); i++) {

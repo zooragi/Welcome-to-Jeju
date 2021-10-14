@@ -46,16 +46,16 @@ public class AuthLoginHandler implements Command{
       return;
     }
 
-    User user = userDao.findByEmailPassword(email, password);
+    user = userDao.findByEmailPassword(email, password);
 
     if(user == null) {
       System.out.println("이메일과 암호가 일치하는 회원 없음!");
+      return;
     } else {
       loginUser = user;
       userAccessLevel = Menu.ACCESS_GENERAL;
-      return;
+      notifyOnLogin();
     }
-    notifyOnLogin();
 
   }
 

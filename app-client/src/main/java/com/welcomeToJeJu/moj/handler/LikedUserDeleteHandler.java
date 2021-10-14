@@ -23,15 +23,22 @@ public class LikedUserDeleteHandler implements Command {
     }
 
     User likedUser = userDao.findByName(input);
+    String loginUser = AuthLoginHandler.getLoginUser().getNickName();
 
     if(likedUser == null) {
       System.out.println("등록된 유저 없음!");
       return;
     }
 
-    String loginUser = AuthLoginHandler.getLoginUser().getNickName();
+    for(String userName : likedUser.getLikedUsers()) {
+      if(userName.equals(loginUser)) {
+        userDao.userLikedUserDelete(likedUser.getNickName(), loginUser);
+        System.out.println("좋아하는 유저 삭제 완료!");
+        return;
+      }
+    }
 
-    userDao.userLikedUserDelete(likedUser.getNickName(), loginUser);
+    System.out.println("좋아하는 유저 없음!");
   }
 
 

@@ -103,15 +103,6 @@ public class NetThemeDao implements ThemeDao {
     }
   }
 
-  @Override
-  public Theme findByTitle(String title) throws Exception {
-    requestAgent.request("theme.selectOneByTitle", title);
-    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      return null;
-    }
-
-    return requestAgent.getObject(Theme.class);
-  }
 
   @Override
   public void placeDelete(Theme theme, Place place) throws Exception {
@@ -149,6 +140,16 @@ public class NetThemeDao implements ThemeDao {
     }
 
 
+  }
+
+  @Override
+  public List<Theme> findByTitle(String title) throws Exception {
+    requestAgent.request("theme.selectListByTitle", title);
+
+    if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      throw new Exception("테마 검색 실패!");
+    }
+    return new ArrayList<>(requestAgent.getObjects(Theme.class));
   }
 }
 

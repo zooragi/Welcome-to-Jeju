@@ -1,9 +1,11 @@
 package com.welcomeToJeJu.moj.handler;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import com.welcomeToJeJu.moj.dao.ThemeDao;
 import com.welcomeToJeJu.moj.domain.Theme;
+import com.welcomeToJeJu.moj.domain.User;
 import com.welcomeToJeJu.util.Prompt;
 
 public class MyThemeUpdateHandler implements Command {
@@ -18,11 +20,19 @@ public class MyThemeUpdateHandler implements Command {
     System.out.println("[테마 수정하기]");
     int categoryNum;
 
-    String themeName = (String) request.getAttribute("themeTitle");
+    String title = (String) request.getAttribute("themeTitle");
 
-    Theme theme = themeDao.findByTitle(themeName);
+    User loginUser = AuthLoginHandler.getLoginUser();
+    Collection<Theme> themeList = themeDao.findLoginUserAll(loginUser);
 
-    if(theme ==null) {
+    Theme updateTheme = null;
+    for(Theme theme : themeList) {
+      if(theme.getTitle().equals(title)) {
+        updateTheme = theme;
+      }
+    }
+
+    if(updateTheme ==null) {
       System.out.println("등록된 테마 없음!");
     }
 

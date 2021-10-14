@@ -28,7 +28,7 @@ public class LikedThemeListHandler implements Command{
           System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());
           System.out.println();
         } else {
-          System.out.println("등록된 좋아요 없음!");
+          System.out.println("등록된 좋아요 테마 없음!");
           System.out.println();
           return;
         }

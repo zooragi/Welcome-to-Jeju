@@ -1,8 +1,10 @@
 package com.welcomeToJeJu.moj.handler;
 
+import java.util.Collection;
 import com.welcomeToJeJu.moj.dao.ThemeDao;
 import com.welcomeToJeJu.moj.domain.Place;
 import com.welcomeToJeJu.moj.domain.Theme;
+import com.welcomeToJeJu.moj.domain.User;
 
 public class PlaceListHandler implements Command {
 
@@ -17,9 +19,17 @@ public class PlaceListHandler implements Command {
     //    while (true) {
     System.out.println("[장소 목록보기]");
 
-    String themeName = (String) request.getAttribute("themeTitle");
+    String title = (String) request.getAttribute("themeTitle");
 
-    Theme theme = themeDao.findByTitle(themeName);
+    User loginUser = AuthLoginHandler.getLoginUser();
+    Collection<Theme> themeList = themeDao.findLoginUserAll(loginUser);
+
+    Theme theme = null;
+    for(Theme theme1 : themeList) {
+      if(theme1.getTitle().equals(title)) {
+        theme = theme1;
+      }
+    }
 
     if(theme == null) {
       System.out.println("등록된 테마 없음!");

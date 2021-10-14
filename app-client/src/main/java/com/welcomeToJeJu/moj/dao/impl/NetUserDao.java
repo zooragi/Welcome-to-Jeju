@@ -112,11 +112,11 @@ public class NetUserDao implements UserDao {
 
   @Override
   public void userLikedUserInsert(String likedUser, String loginUser) throws Exception {
-    HashMap<String, String> parameter = new HashMap<>();
-    parameter.put("likedUser",likedUser);
-    parameter.put("loginUser",loginUser);
+    HashMap<String, String> params = new HashMap<>();
+    params.put("likedUser",likedUser);
+    params.put("loginUser",loginUser);
 
-    requestAgent.request("user.likedUser.insert", parameter);
+    requestAgent.request("user.likedUser.insert", params);
 
     if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       throw new Exception("좋아하는 유저 등록 실패!");
@@ -126,11 +126,11 @@ public class NetUserDao implements UserDao {
 
   @Override
   public void userLikedUserDelete(String likedUser, String loginUser) throws Exception {
-    HashMap<String, String> parameter = new HashMap<>();
-    parameter.put("likedUser",likedUser);
-    parameter.put("loginUser",loginUser);
+    HashMap<String, String> params = new HashMap<>();
+    params.put("likedUser",likedUser);
+    params.put("loginUser",loginUser);
 
-    requestAgent.request("user.likedUser.delete", parameter);
+    requestAgent.request("user.likedUser.delete", params);
     if (!requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       throw new Exception("좋아하는 유저 등록 실패!");
     }

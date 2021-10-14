@@ -9,7 +9,7 @@ public interface ThemeDao {
   void insert(Theme theme) throws Exception;
   List<Theme> findAll() throws Exception;
   Theme findByNo(int no) throws Exception;
-  Theme findByTitle(String title) throws Exception;
+  List<Theme> findByTitle(String title) throws Exception;
   void update(Theme theme) throws Exception;
   void delete(String title) throws Exception;
   List<Theme> findByKeyword(String keyword) throws Exception;

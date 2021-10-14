@@ -14,11 +14,15 @@ import com.welcomeToJeJu.moj.domain.ReportTheme;
 import com.welcomeToJeJu.moj.domain.ReportUser;
 import com.welcomeToJeJu.moj.domain.Theme;
 import com.welcomeToJeJu.moj.domain.User;
+import com.welcomeToJeJu.moj.handler.AllThemeListHandler;
 import com.welcomeToJeJu.moj.handler.AuthDisplayLoginUserHandler;
 import com.welcomeToJeJu.moj.handler.AuthLoginHandler;
 import com.welcomeToJeJu.moj.handler.AuthLogoutHandler;
 import com.welcomeToJeJu.moj.handler.Command;
 import com.welcomeToJeJu.moj.handler.CommandRequest;
+import com.welcomeToJeJu.moj.handler.LikedThemeAddHandler;
+import com.welcomeToJeJu.moj.handler.LikedThemeDeleteHandler;
+import com.welcomeToJeJu.moj.handler.LikedThemeListHandler;
 import com.welcomeToJeJu.moj.handler.LikedUserAddHandler;
 import com.welcomeToJeJu.moj.handler.LikedUserDeleteHandler;
 import com.welcomeToJeJu.moj.handler.LikedUserListHandler;
@@ -33,7 +37,9 @@ import com.welcomeToJeJu.moj.handler.PlaceListHandler;
 import com.welcomeToJeJu.moj.handler.UserAddHandler;
 import com.welcomeToJeJu.moj.handler.UserDeleteHandler;
 import com.welcomeToJeJu.moj.handler.UserDetailHandler;
+import com.welcomeToJeJu.moj.handler.UserEditHandler;
 import com.welcomeToJeJu.moj.handler.UserListHandler;
+import com.welcomeToJeJu.moj.handler.UserUnregisterHandler;
 import com.welcomeToJeJu.moj.handler.UserUpdateHandler;
 import com.welcomeToJeJu.moj.listener.LoginListener;
 import com.welcomeToJeJu.request.RequestAgent;
@@ -96,9 +102,9 @@ public class ClientApp {
     commandMap.put("/auth/login", new AuthLoginHandler(userDao,userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
     commandMap.put("/auth/displayLoginUser", new AuthDisplayLoginUserHandler());
-    //    commandMap.put("/theme/all", new AllThemeListHandler(userList));
-    //    commandMap.put("/auth/unregistered", new UserUnregisterHandler(userList));
-    //    commandMap.put("/auth/edit", new UserEditHandler());
+    commandMap.put("/theme/all", new AllThemeListHandler(themeDao));
+    commandMap.put("/auth/unregistered", new UserUnregisterHandler(userDao));
+    commandMap.put("/auth/edit", new UserEditHandler(userDao));
 
     commandMap.put("/user/add", new UserAddHandler(userDao));
     commandMap.put("/user/delete", new UserDeleteHandler(userDao));
@@ -112,9 +118,9 @@ public class ClientApp {
     commandMap.put("/myTheme/detail", new MyThemeDetailHandler(requestAgent));
     commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao));
 
-    //    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(userList));
-    //    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(userList));
-    //    commandMap.put("/likedTheme/list", new LikedThemeListHandler());
+    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao));
+    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(themeDao));
+    commandMap.put("/likedTheme/list", new LikedThemeListHandler(themeDao));
 
     commandMap.put("/place/add", new PlaceAddHandler(themeDao));
     commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao));

@@ -1,6 +1,7 @@
 package com.welcomeToJeJu.moj.handler;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import com.welcomeToJeJu.moj.dao.ThemeDao;
 import com.welcomeToJeJu.moj.domain.Theme;
@@ -18,7 +19,16 @@ public class MyThemeAddHandler implements Command {
     Theme theme = new Theme();
     System.out.println("[나의 테마 등록하기]");
 
-    theme.setNo(Prompt.inputInt("번호 > "));
+    Collection<Theme> themeList = themeDao.findAll();
+
+    int no = Prompt.inputInt("번호 > ");
+    for (Theme theme1 : themeList)  {
+      if(theme1.getNo() == no) {
+        System.out.println("중복된 테마 번호!");
+        return;
+      }
+    }
+    theme.setNo(no);
     //        if(AuthLoginHandler.getLoginUser().getThemeList().size() == 0) {
     //          theme.setNo(1);
     //        } else {

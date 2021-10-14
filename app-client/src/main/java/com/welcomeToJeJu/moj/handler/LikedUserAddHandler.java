@@ -28,14 +28,14 @@ public class LikedUserAddHandler implements Command {
       return;
     }
 
-    if(likedUser == AuthLoginHandler.getLoginUser()) {
-      System.out.println("본인은 팔로우 불가!");
+    if(likedUser.getNo() == AuthLoginHandler.getLoginUser().getNo()) {
+      System.out.println("본인은 좋아요 불가!");
       return;
     }
 
     for(String userName : likedUser.getLikedUsers() ) {
       if(AuthLoginHandler.getLoginUser().getNickName().equals(userName)) {
-        System.out.println("이미 팔로우 한 유저!");
+        System.out.println("이미 좋아요 한 유저!");
         return;
       }
     }
@@ -43,6 +43,8 @@ public class LikedUserAddHandler implements Command {
     String loginUser = AuthLoginHandler.getLoginUser().getNickName();
 
     userDao.userLikedUserInsert(likedUser.getNickName(), loginUser);
+
+    System.out.println("좋아하는 유저 등록 완료!");
 
     //    requestAgent.request("user.likedUser.insert", parameter);
     //    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
