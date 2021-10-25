@@ -20,7 +20,7 @@ public class LikedUserListHandler implements Command {
     System.out.println("[유저 좋아요 목록 보기]");
 
     User loginUser = AuthLoginHandler.getLoginUser();
-    Collection<User> likedUserList = userDao.likedUserFindAll(loginUser.getNo());
+    Collection<User> likedUserList = userDao.findAllLikedUser(loginUser.getNo());
 
     if (likedUserList.isEmpty()) {
       System.out.println("🌊 좋아하는 유저 없음!");
@@ -28,8 +28,8 @@ public class LikedUserListHandler implements Command {
     }
 
     int index = 1;
-    for (User u : likedUserList) {
-      System.out.printf("<%d> %s\n", index++, u.getNickName());
+    for (User likedUser : likedUserList) {
+      System.out.printf("<%d> %s\n", index++, likedUser.getNickName());
     }
   }
 

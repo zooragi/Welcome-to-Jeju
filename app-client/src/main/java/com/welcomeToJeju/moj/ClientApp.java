@@ -24,6 +24,7 @@ import com.welcomeToJeju.moj.handler.admin.AdminUserUpdateHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserAddHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserListHandler;
+import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeAddHandler;
 import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
 import com.welcomeToJeju.moj.handler.user.AuthLogoutHandler;
 import com.welcomeToJeju.moj.handler.user.AuthUserInfoHandler;
@@ -115,7 +116,7 @@ public class ClientApp {
     commandMap.put("/auth/login", new AuthLoginHandler(userDao, userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
 
-    //    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao, sqlSession));
+    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao, sqlSession));
     //    commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
     //    commandMap.put("/myTheme/detail", new MyThemeDetailHandler(themeDao));
     //    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, sqlSession));

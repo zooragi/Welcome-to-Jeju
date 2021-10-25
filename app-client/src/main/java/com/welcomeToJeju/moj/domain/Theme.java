@@ -2,7 +2,6 @@ package com.welcomeToJeju.moj.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.welcomeToJeju.moj.handler.Category;
 
 public class Theme implements Comparable<Theme> {
 

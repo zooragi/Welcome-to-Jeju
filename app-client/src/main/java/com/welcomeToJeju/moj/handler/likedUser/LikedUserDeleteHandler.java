@@ -34,7 +34,7 @@ public class LikedUserDeleteHandler implements Command {
       return;
     }
 
-    User user = userDao.findByName(input);
+    User user = userDao.findByNickName(input);
 
     if(user == null) {
       System.out.println("🌊 유저 없음!");
@@ -56,7 +56,7 @@ public class LikedUserDeleteHandler implements Command {
     //      }
     //    }
 
-    userDao.likedUserDelete(user.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    userDao.deleteLikedUser(user.getNo(), AuthLoginHandler.getLoginUser().getNo());
     sqlSession.commit();
 
     System.out.println("🌊 유저 좋아요 취소하기 성공!");

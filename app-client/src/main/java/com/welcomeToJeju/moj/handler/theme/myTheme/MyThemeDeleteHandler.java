@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.handler.theme;
+package com.welcomeToJeju.moj.handler.theme.myTheme;
 
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;

@@ -59,7 +59,7 @@
 	      email=#{email} and password=password(#{password})
   </select>
   
-  <select id="findByName" resultMap="UserMap" parameterType="string">
+  <select id="findByNickName" resultMap="UserMap" parameterType="string">
     select
       user_no,
       email,
@@ -87,12 +87,17 @@
   </select>
    -->
    
-   <insert id="likedUserInsert">
+   <insert id="insertLikedUser">
     insert into jeju_liked_user(user_no,user_no2)
     values(#{loginUserNo},#{likedUserNo})
    </insert>
    
-   <select id="likedUserFindAll" resultMap="UserMap" parameterType="int">
+   <delete id="deleteLikedUser">
+    delete from jeju_liked_user
+    where user_no=#{loginUserNo} and user_no2=#{likedUserNo}
+   </delete>
+   
+   <select id="findAllLikedUser" resultMap="UserMap" parameterType="int">
     select
       u.user_no,
       nickname
@@ -102,10 +107,5 @@
     where
       lu.user_no=#{no}
    </select>
-   
-   <delete id="likedUserDelete">
-    delete from jeju_liked_user
-    where user_no=#{loginUserNo} and user_no2=#{likedUserNo}
-   </delete>
    
 </mapper>

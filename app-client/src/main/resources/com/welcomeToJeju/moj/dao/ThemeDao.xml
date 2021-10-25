@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.welcomeToJeju.moj.dao.ThemeDao">
+  
+  <resultMap type="Theme" id="ThemeMap">
+    <id column="theme_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="public" property="isPublic"/>
+    <result column="share" property="isShare"/>
+    
+    <association property="owner" javaType="User">
+      <id column="owner_no" property="no"/>
+      <result column="onwer_email" property="email"/>
+      <result column="onwer_nickname" property="nickname"/>
+    </association>
+    
+    <association property="category" javaType="Category">
+      <id column="category_no" property="no"/>
+      <result column="category_name" property="name"/>
+    </association>
+
+	  <collection property="hashTags" ofType="String">
+	    <!-- <id column="hashtag_no"/> -->
+	    <result column="hashtag_name"/>
+	  </collection>
+  </resultMap>
+  
+  <resultMap type="Category" id="CategoryMap">
+    <id column="category_no" property="no"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="Theme"
+  useGeneratedKeys="true" keyColumn="theme_no" keyProperty="no">
+    insert into jeju_theme(title,category_no,public,user_no)
+    values(#{title},#{category.no},#{isPublic},#{owner.no})
+  </insert>
+  
+  <select id="findAllCategory" resultMap="CategoryMap">
+    select
+      category_no,
+      name
+    from
+      jeju_theme_category
+  </select>
+  
+  <insert id="insertHashTag">
+    insert into jeju_theme_hashtag(theme_no,name)
+    values(#{themeNo},#{hashTag})
+  </insert>
+  
+  <!-- 
+  <update id="update" parameterType="User">
+    update jeju_user set
+      email=#{email},
+      password=password(#{password}),
+      nickname=#{nickName}
+    where
+      user_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from jeju_user
+    where user_no=#{no}
+  </delete>
+  
+  <select id="findAll" resultMap="UserMap">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      warned_cnt
+    from
+      jeju_user
+    order by
+      user_no desc
+  </select>
+  
+  <select id="findByEmailAndPassword" resultMap="UserMap">
+      select
+        user_no,
+        email,
+        nickname,
+        created_dt,
+        warned_cnt
+      from
+        jeju_user
+      where 
+        email=#{email} and password=password(#{password})
+  </select>
+  
+  <select id="findByName" resultMap="UserMap" parameterType="string">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      warned_cnt
+    from
+      jeju_user
+    where
+      nickname=#{nickName}
+  </select>
+  
+  <select id="findByNo" resultMap="UserMap" parameterType="int">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      warned_cnt
+    from
+      jeju_user
+    where
+      user_no=#{no}
+  </select>
+   
+   <insert id="insertLikedUser">
+    insert into jeju_liked_user(user_no,user_no2)
+    values(#{loginUserNo},#{likedUserNo})
+   </insert>
+   
+   <delete id="deleteLikedUser">
+    delete from jeju_liked_user
+    where user_no=#{loginUserNo} and user_no2=#{likedUserNo}
+   </delete>
+
+   <select id="findAllLikedUser" resultMap="UserMap" parameterType="int">
+    select
+      u.user_no,
+      nickname
+    from
+      jeju_user u
+    inner join jeju_liked_user lu on u.user_no=lu.user_no2
+    where
+      lu.user_no=#{no}
+   </select>
+    -->
+   
+</mapper>

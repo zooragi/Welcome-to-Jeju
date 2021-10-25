@@ -35,7 +35,7 @@ public class LikedUserAddHandler implements Command {
       return;
     }
 
-    User user = userDao.findByName(input);
+    User user = userDao.findByNickName(input);
 
     if(user == null) {
       System.out.println("🌊 유저 없음!");
@@ -48,7 +48,7 @@ public class LikedUserAddHandler implements Command {
     }
 
     User loginUser = AuthLoginHandler.getLoginUser();
-    Collection<User> likedUserList = userDao.likedUserFindAll(loginUser.getNo());
+    Collection<User> likedUserList = userDao.findAllLikedUser(loginUser.getNo());
 
     for (User u : likedUserList) {
       if (user.getNo() == u.getNo()) {
@@ -57,7 +57,7 @@ public class LikedUserAddHandler implements Command {
       }
     }
 
-    userDao.likedUserInsert(user.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    userDao.insertLikedUser(user.getNo(), AuthLoginHandler.getLoginUser().getNo());
     sqlSession.commit();
 
     System.out.println("🌊 유저 좋아요 누르기 성공!");

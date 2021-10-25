@@ -25,7 +25,7 @@ public class AdminUserDetailHandler implements Command {
       return;
     }
 
-    User user = userDao.findByName(nickName);
+    User user = userDao.findByNickName(nickName);
 
     if (user == null) {
       System.out.println("🌊 회원 없음!");
