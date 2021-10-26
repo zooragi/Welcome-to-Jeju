@@ -52,6 +52,23 @@
     values(#{themeNo},#{hashTag})
   </insert>
   
+  <select id="findAll" resultMap="ThemeMap">
+    select
+      t.theme_no,
+      t.title,
+      t.public,
+      t.share,
+      c.category_no,
+      c.name category_name,
+      h.name hashtag_name,
+      u.user_no owner_no,
+      u.nickname owner_nickname
+    from jeju_theme t
+      inner join jeju_user u on t.user_no=u.user_no
+      inner join jeju_theme_category c on t.category_no=c.category_no
+      inner join jeju_theme_hashtag h on t.theme_no=h.theme_no
+  </select>
+  
   <!-- 
   <update id="update" parameterType="User">
     update jeju_user set
@@ -66,19 +83,6 @@
     delete from jeju_user
     where user_no=#{no}
   </delete>
-  
-  <select id="findAll" resultMap="UserMap">
-    select
-      user_no,
-      email,
-      nickname,
-      created_dt,
-      warned_cnt
-    from
-      jeju_user
-    order by
-      user_no desc
-  </select>
   
   <select id="findByEmailAndPassword" resultMap="UserMap">
       select

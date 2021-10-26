@@ -51,7 +51,7 @@ public class MyThemeAddHandler implements Command {
 
     theme.setOwner(AuthLoginHandler.getLoginUser());
 
-    //
+    // 같은 해시 태그를 입력했을 때?
     try {
       themeDao.insert(theme);
       for (String hashTag : theme.getHashTags()) {
