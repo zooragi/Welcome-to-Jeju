@@ -1,20 +1,26 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
-import com.welcomeToJeJu.moj.dao.UserDao;
-import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.util.Prompt;
+import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.User;
+import com.welcomeToJeju.util.Prompt;
 
 public class LikedUserAddHandler implements Command {
 
   UserDao userDao;
+  UserPrompt userPrompt;
+  SqlSession sqlSession;
 
-  public LikedUserAddHandler(UserDao userDao) {
+
+  public LikedUserAddHandler(UserDao userDao,UserPrompt userPrompt, SqlSession sqlSession) {
     this.userDao = userDao;
+    this.userPrompt = userPrompt;
+    this.sqlSession = sqlSession;
   }
 
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[좋아하는 유저 등록하기]");
-    //    while(true) {
+
     String input = Prompt.inputString("좋아요 할 유저의 닉네임(취소 : 엔터) > ");
     if(input.length()==0) {
       System.out.println("좋아요 등록 취소!");
@@ -33,28 +39,14 @@ public class LikedUserAddHandler implements Command {
       return;
     }
 
-    for(String userName : likedUser.getLikedUsers() ) {
-      if(AuthLoginHandler.getLoginUser().getNickName().equals(userName)) {
-        System.out.println("이미 좋아요 한 유저!");
-        return;
-      }
-    }
+    userDao.insertLikedUser(AuthLoginHandler.getLoginUser().getNo(), likedUser.getNo());
 
-    String loginUser = AuthLoginHandler.getLoginUser().getNickName();
-
-    userDao.userLikedUserInsert(likedUser.getNickName(), loginUser);
-
+    sqlSession.commit();
     System.out.println("좋아하는 유저 등록 완료!");
 
-    //    requestAgent.request("user.likedUser.insert", parameter);
-    //    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-    //      System.out.println("팔로우 등록 추가!");
-    //    } else {
-    //      System.out.println("팔로우 등록 불가!");
-    //    }
-    //  }
   }
 
 
 }
+
 

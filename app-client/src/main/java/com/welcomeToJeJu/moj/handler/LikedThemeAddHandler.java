@@ -1,21 +1,22 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
-import java.util.List;
-import com.welcomeToJeJu.moj.dao.ThemeDao;
-import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.util.Prompt;
+import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.util.Prompt;
 
 public class LikedThemeAddHandler implements Command {
 
   ThemeDao themeDao;
+  SqlSession sqlSession;
 
-  public LikedThemeAddHandler(ThemeDao themeDao) {
+  public LikedThemeAddHandler(ThemeDao themeDao, SqlSession sqlSession) {
     this.themeDao = themeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    //    while (true) {
     System.out.println("[좋아요 등록하기]");
 
     String title = Prompt.inputString("테마 이름(취소 : 엔터) > ");
@@ -26,47 +27,38 @@ public class LikedThemeAddHandler implements Command {
       return;
     }
 
-    List<Theme> themeList = themeDao.findByTitle(title);
+    Theme theme = themeDao.findByTitle(title);
 
-    if (themeList.isEmpty()) {
+    if (theme == null) {
       System.out.println("등록된 테마 없음!");
       System.out.println();
       return;
     }
 
-    Theme likedTheme = null;
-
-    for (Theme theme : themeList) {
-      System.out.printf("<%d>\n", theme.getNo());
-      System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory(), theme.getTitle());
-      System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());
-      System.out.println();
-
-      int no = Prompt.inputInt("좋아요 할 테마 번호 > ");
-      System.out.println();
-      if(theme.getNo() == no) {
-        likedTheme = theme;
-      }
-    }
-
-    if (likedTheme.getThemeOwnerName().equals(AuthLoginHandler.getLoginUser().getNickName())) {
+    if (theme.getOwner() == AuthLoginHandler.getLoginUser()) {
       System.out.println("본인의 테마 좋아요 등록 불가!");
       return;
     }
 
-    for(String name : likedTheme.getLikedThemeUsers()) {
-      if(name.equals(AuthLoginHandler.getLoginUser().getNickName())) {
-        System.out.println("이미 등록한 좋아요!");
+    PlaceHandlerHelper.printPlaceInfo(theme);
+
+    while(true) {
+      String input = Prompt.inputString("정말로 등록 하시겠습니까?(y/N) : ");
+      if(input.equalsIgnoreCase("y")) {
+        break;
+      } else if (input.equalsIgnoreCase("n")) {
+        System.out.println("등록 취소");
         return;
+      } else {
+        System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+        continue;
       }
     }
 
-
-    themeDao.likedThemeInsert(likedTheme, AuthLoginHandler.getLoginUser().getNickName());
-
+    themeDao.insertLikedTheme(theme.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    sqlSession.commit();
 
     System.out.println("좋아요 등록 완료!");
-    //    }
   }
 
 

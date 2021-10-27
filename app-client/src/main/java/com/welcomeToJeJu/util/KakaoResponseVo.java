@@ -1,8 +1,5 @@
-package com.welcomeToJeJu.util;
-
-import java.util.HashMap;
-import java.util.List;
+package com.welcomeToJeju.util;
 
 public class KakaoResponseVo {
-    Object[] documents;
+  Object[] documents;
 }

@@ -1,24 +1,26 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import org.apache.ibatis.session.SqlSession;
 import com.google.gson.Gson;
-import com.welcomeToJeJu.moj.dao.ThemeDao;
-import com.welcomeToJeJu.moj.domain.Place;
-import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.util.KakaoMapApi;
-import com.welcomeToJeJu.util.KakaoVo;
-import com.welcomeToJeJu.util.Prompt;
+import com.welcomeToJeju.moj.dao.PlaceDao;
+import com.welcomeToJeju.moj.domain.Comment;
+import com.welcomeToJeju.moj.domain.Photo;
+import com.welcomeToJeju.moj.domain.Place;
+import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.util.KakaoMapApi;
+import com.welcomeToJeju.util.KakaoVo;
+import com.welcomeToJeju.util.Prompt;
 
 public class PlaceAddHandler implements Command {
 
-  ThemeDao themeDao;
+  PlaceDao placeDao;
+  SqlSession sqlSession;
 
-  public PlaceAddHandler(ThemeDao themeDao) {
-    this.themeDao = themeDao;
+  public PlaceAddHandler(PlaceDao placeDao, SqlSession sqlSession) {
+    this.placeDao = placeDao;
+    this.sqlSession = sqlSession;
   }
-
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -27,20 +29,11 @@ public class PlaceAddHandler implements Command {
 
     System.out.println("[장소 등록하기]");
 
-    String title = (String) request.getAttribute("themeTitle");
+    Theme theme = (Theme) request.getAttribute("theme");
 
-    User loginUser = AuthLoginHandler.getLoginUser();
-    Collection<Theme> themeList = themeDao.findLoginUserAll(loginUser);
-
-    Theme theme = null;
-    for(Theme theme1 : themeList) {
-      if(theme1.getTitle().equals(title)) {
-        theme = theme1;
-      }
-    }
-
-    if(theme == null) {
+    if (theme == null) {
       System.out.println("등록된 테마 없음!");
+      System.out.println();
       return;
     }
 
@@ -59,6 +52,10 @@ public class PlaceAddHandler implements Command {
         }
       }
 
+      if(filterPlace.size() == 0) {
+        System.out.println("검색된 장소가 없습니다.");
+        continue;
+      }
       int i = 1;
       for(KakaoVo kakaoVo : filterPlace) {
         System.out.printf("%d. %s, %s, %s, %s\n",i++,kakaoVo.getPlace_name(),
@@ -81,12 +78,39 @@ public class PlaceAddHandler implements Command {
       place.setxCoord(selectedPlace.getX());
       place.setyCoord(selectedPlace.getY());
       place.setTheme(theme/*.getTitle()*/);
+      place.setOwner(AuthLoginHandler.getLoginUser());
+
+      ArrayList<Photo> photos = new ArrayList<>();
+      while(true) {
+        Photo photo = new Photo();
+        String photoName = Prompt.inputString("사진 (종료 : 엔터) > ");
+        if(photoName.length() == 0) break;
+        photo.setFilePath(photoName);
+        photos.add(photo);
+      }
+
+      place.setPhotos(photos);
 
       break;
     }
 
-    place.getComments().add(Prompt.inputString("장소 후기 > "));
+    Comment comment = new Comment();
+    String comment_content = Prompt.inputString("장소 후기 > ");
+    comment.setComment(comment_content);
+    place.getComments().add(comment);
+    placeDao.insert(place);
 
-    themeDao.placeInsert(place);
+    for(Comment cmt : place.getComments()) {
+      placeDao.insertComment(place.getNo(), AuthLoginHandler.getLoginUser().getNo(), 
+          cmt.getComment());
+    }
+
+    for(Photo photo : place.getPhotos()) {
+      placeDao.insertPhoto(place.getNo(),AuthLoginHandler.getLoginUser().getNo(), photo.getFilePath());
+    }
+
+    sqlSession.commit();
+
+    System.out.println("장소 등록 완료!");
   }
 }

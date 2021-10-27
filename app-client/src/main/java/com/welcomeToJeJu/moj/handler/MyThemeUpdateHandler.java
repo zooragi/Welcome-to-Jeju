@@ -1,65 +1,34 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import com.welcomeToJeJu.moj.dao.ThemeDao;
-import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.util.Prompt;
+import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.util.Prompt;
 
 public class MyThemeUpdateHandler implements Command {
 
-
   ThemeDao themeDao;
-  public MyThemeUpdateHandler(ThemeDao themeDao) {
+  SqlSession sqlSession;
+
+  public MyThemeUpdateHandler(ThemeDao themeDao, SqlSession sqlSession) {
     this.themeDao = themeDao;
+    this.sqlSession = sqlSession;
   }
 
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[테마 수정하기]");
-    int categoryNum;
 
-    String title = (String) request.getAttribute("themeTitle");
+    Theme theme = (Theme) request.getAttribute("theme");
 
-    User loginUser = AuthLoginHandler.getLoginUser();
-    Collection<Theme> themeList = themeDao.findLoginUserAll(loginUser);
-
-    Theme updateTheme = null;
-    for(Theme theme : themeList) {
-      if(theme.getTitle().equals(title)) {
-        updateTheme = theme;
-      }
-    }
-
-    if(updateTheme ==null) {
+    if (theme == null) {
       System.out.println("등록된 테마 없음!");
-    }
-
-    String newTitle = Prompt.inputString("테마 제목 > ");
-    if(newTitle.length() == 0) {
-      System.out.println("수정할 테마 제목 입력!");
       return;
     }
-    List<String> categories = new ArrayList<>();
-    categories.add("식당");
-    categories.add("카페");
-    categories.add("관광명소");
-    categories.add("기타");
-    while (true) {
-      int index = 1;
-      for(String category : categories) {
-        System.out.printf("%d. %s ",index++,category);
-      }
-      System.out.println();
-      categoryNum = Prompt.inputInt("카테고리 번호 > ");
-      if(categoryNum > categories.size() || categoryNum < 0) {
-        System.out.println("잘못된 번호!");
-        continue;
-      }
-      System.out.println();
-      break;
-    }
+    int categoryNum = theme.getCategory().getNo();
+
+    String newTitle = Prompt.inputString("테마 제목 > ");
 
     List<String> hashtagList = new ArrayList<>();
 
@@ -83,15 +52,21 @@ public class MyThemeUpdateHandler implements Command {
       return;
     }
 
-    Theme temp = new Theme();
+    theme.setTitle(newTitle);
+    theme.setHashtags(hashtagList);
+    theme.setCategory(new ThemeHandlerHelper(themeDao).promptCategory(categoryNum));
+    theme.setPublic(isPublic);
+
+    themeDao.deleteHashtags(theme.getNo());
+    for(String h : theme.getHashtags()) {
+      themeDao.insertHashtags(theme.getNo(),h);
+    }
+    themeDao.update(theme);
+    sqlSession.commit();
 
 
-    temp.setTitle(newTitle);
-    temp.setHashtags(hashtagList);
-    temp.setCategory(categories.get(categoryNum-1));
-    temp.setPublic(isPublic);
-
-    themeDao.update(temp);
+    System.out.println();
+    System.out.println("테마 수정 완료!");
   }
 
 }

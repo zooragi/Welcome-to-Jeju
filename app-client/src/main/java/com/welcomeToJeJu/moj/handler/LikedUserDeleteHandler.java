@@ -1,45 +1,49 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
-import com.welcomeToJeJu.moj.dao.UserDao;
-import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.util.Prompt;
+import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.User;
+import com.welcomeToJeju.util.Prompt;
 
 public class LikedUserDeleteHandler implements Command {
 
   UserDao userDao;
+  UserPrompt userPrompt;
+  SqlSession sqlSession;
 
-  public LikedUserDeleteHandler(UserDao userDao) {
+  public LikedUserDeleteHandler(UserDao userDao,UserPrompt userPrompt, SqlSession sqlSession) {
     this.userDao = userDao;
+    this.userPrompt = userPrompt;
+    this.sqlSession = sqlSession;
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[좋아하는 유저 삭제하기]");
 
     String input = Prompt.inputString("삭제할 유저의 닉네임 > ");
-    if(input.length()==0) {
+    if (input.length() == 0) {
       System.out.println("좋아요 삭제 취소!");
       return;
     }
 
     User likedUser = userDao.findByName(input);
-    String loginUser = AuthLoginHandler.getLoginUser().getNickName();
 
-    if(likedUser == null) {
+    if (likedUser == null) {
       System.out.println("등록된 유저 없음!");
       return;
     }
 
-    for(String userName : likedUser.getLikedUsers()) {
-      if(userName.equals(loginUser)) {
-        userDao.userLikedUserDelete(likedUser.getNickName(), loginUser);
-        System.out.println("좋아하는 유저 삭제 완료!");
-        return;
-      }
+    if(likedUser.getNo() == AuthLoginHandler.getLoginUser().getNo()) {
+      System.out.println("본인은 삭제 불가!");
+      return;
     }
 
-    System.out.println("좋아하는 유저 없음!");
-  }
+    userDao.deleteLikedUser(AuthLoginHandler.getLoginUser().getNo(), likedUser.getNo());
+    sqlSession.commit();
 
+    System.out.println("좋아하는 유저 삭제 완료!");
+  }
 
 }

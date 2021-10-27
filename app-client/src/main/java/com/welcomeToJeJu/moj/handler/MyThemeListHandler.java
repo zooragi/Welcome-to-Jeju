@@ -1,9 +1,8 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
-import java.util.Collection;
-import com.welcomeToJeJu.moj.dao.ThemeDao;
-import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
+import java.util.ArrayList;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.domain.Theme;
 
 public class MyThemeListHandler implements Command {
 
@@ -13,25 +12,29 @@ public class MyThemeListHandler implements Command {
     this.themeDao = themeDao;
   }
 
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println("[테마 목록보기]");
+  public void execute(CommandRequest request) throws Exception{
+    System.out.println("[내 테마 목록보기]");
+    int i = 1 ;
 
-    User loginUser = AuthLoginHandler.getLoginUser();
-    Collection<Theme> themeList = themeDao.findLoginUserAll(loginUser);
+    ArrayList<Theme> themeList = (ArrayList<Theme>) themeDao.findAll();
 
     if (themeList.size() == 0) {
       System.out.println("등록된 테마 없음!");
       return;
     }
+
     for (Theme theme : themeList) {
-      System.out.printf("<%d>\n", theme.getNo());
-      System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory(), theme.getTitle());
-      System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());
-      System.out.printf("%s테마\n", theme.isPublic() ? "공개" : "비공개");
-      if (theme.isPublic()) {
-        System.out.printf("조회수 > %d\n", theme.getViewCount());
+      if(AuthLoginHandler.getLoginUser().getNo() == theme.getOwner().getNo()) {
+        System.out.printf("<%d>\n", i++);
+        System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory().getName(), theme.getTitle());
+        System.out.printf("해시 태그 > %s\n", theme.getHashtags().toString());
+        System.out.printf("%s테마\n", theme.isPublic() ? "공개" : "비공개");
+        if (theme.isPublic()) {
+          System.out.printf("조회수 > %d\n", theme.getViewCount());
+        }
+        System.out.println();
       }
-      System.out.println();
+
     }
   }
 }

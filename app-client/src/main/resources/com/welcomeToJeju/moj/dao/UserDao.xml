@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.welcomeToJeju.moj.dao.UserDao">
+  
+  <resultMap type="User" id="UserMap">
+    <id column="user_no" property="no"/> 
+    <result column="nickname" property="nickName"/>
+    <result column="email" property="email"/>
+    <result column="password" property="password"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="view_cnt" property="viewCount"/>
+    <result column="reported_cnt" property="reportedCount"/>
+    <result column="warned_cnt" property="warningCount"/>
+    
+  </resultMap>
+
+  
+  <!-- select 문의 실행 결과가 2개 이상일 때는 selectOne() 으로 실행할 수 없다. -->
+  <select id="findAll" resultMap="UserMap">
+select 
+    user_no, 
+    email, 
+    nickname, 
+    created_dt,
+    view_cnt
+from 
+    jeju_user 
+order by
+    user_no asc
+  
+  </select>
+  
+  <select id="findByNo" resultMap = "UserMap" parameterType = "int">
+   
+select 
+  user_no, 
+  email, 
+  nickname, 
+  created_dt 
+from
+  jeju_user where user_no =#{no} 
+            
+            
+  </select>
+  
+  <insert id="insert" parameterType = "user">
+  insert into
+     jeju_user (email, password, nickname)
+  values(#{email},password(#{password}),#{nickName})
+            
+            
+  </insert>
+  
+  <update id="update" parameterType = "user">
+ update jeju_user set
+     email = #{email}, 
+     password = password(#{password}),
+     nickname = #{nickName}
+     view_cnt = #{viewCount}
+where user_no = #{no}
+  
+  </update>
+  
+  
+  <delete id="delete" parameterType = "int">
+delete 
+  from
+  jeju_user 
+where user_no = #{no}
+  
+  </delete>
+  
+  
+  <select id="findByEmailAndPassword" resultMap = "UserMap" >
+select 
+  user_no,
+  email,
+  nickname, 
+  created_dt, 
+  view_cnt
+from jeju_user      
+where 
+  email = #{param1} and password = password(#{param2})
+  
+  </select>
+  
+<select id="findByName" resultMap = "UserMap" parameterType = "string">
+ select 
+    user_no,
+    email, 
+    nickname, 
+    created_dt, 
+    view_cnt
+from        
+    jeju_user 
+where nickname = #{nickName}
+  
+  </select>
+  
+  
+    <insert id="insertLikedUser" parameterType ="int">
+insert into jeju_liked_user(user_no, user_no2) values(#{param1},#{param2})
+  
+  </insert>
+  
+    <delete id="deleteLikedUser" parameterType = "int">
+delete from jeju_liked_user where user_no=#{param1} and user_no2=#{param2}
+  
+  </delete>
+  
+    <select id="findAllLikedUser" resultMap="UserMap" parameterType = "int">
+select 
+      ju.user_no,
+      email,
+      nickname,
+      created_dt
+from 
+      jeju_user ju
+join (select jlu.user_no2 from jeju_user ju natural join jeju_liked_user jlu where user_no= #{no}) jlu
+      on jlu.user_no2 = ju.user_no
+  
+  </select>
+  
+  
+  
+</mapper>
+
+
+

@@ -1,4 +1,4 @@
-package com.welcomeToJeJu.util;
+package com.welcomeToJeju.util;
 
 import java.sql.Date;
 import java.util.Scanner;

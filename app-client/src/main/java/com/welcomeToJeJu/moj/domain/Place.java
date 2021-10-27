@@ -1,4 +1,4 @@
-package com.welcomeToJeJu.moj.domain;
+package com.welcomeToJeju.moj.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +8,33 @@ public class Place {
   private Theme theme;
   private String storeName;
   private String storeAddress;
-  private List<String> photos = new ArrayList<>();
-  private List<String> comments = new ArrayList<>();
-  public String xCoord;
-  public String yCoord;
+  private List<Photo> photos = new ArrayList<>();
+  private List<Comment> comments = new ArrayList<>();
+  private String xCoord;
+  private String yCoord;
+  private User owner;
+
+
+
 
   @Override
   public String toString() {
     return "Place [no=" + no + ", theme=" + theme + ", storeName=" + storeName + ", storeAddress="
         + storeAddress + ", photos=" + photos + ", comments=" + comments + ", xCoord=" + xCoord
-        + ", yCoord=" + yCoord + "]";
+        + ", yCoord=" + yCoord + ", owner=" + owner + "]";
   }
-
+  public List<Photo> getPhotos() {
+    return photos;
+  }
+  public void setPhotos(List<Photo> photos) {
+    this.photos = photos;
+  }
+  public List<Comment> getComments() {
+    return comments;
+  }
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
+  }
   public int getNo() {
     return no;
   }
@@ -44,18 +59,6 @@ public class Place {
   public void setStoreAddress(String storeAddress) {
     this.storeAddress = storeAddress;
   }
-  public List<String> getPhotos() {
-    return photos;
-  }
-  public void setPhotos(List<String> photos) {
-    this.photos = photos;
-  }
-  public List<String> getComments() {
-    return comments;
-  }
-  public void setComments(List<String> comments) {
-    this.comments = comments;
-  }
   public String getxCoord() {
     return xCoord;
   }
@@ -67,6 +70,12 @@ public class Place {
   }
   public void setyCoord(String yCoord) {
     this.yCoord = yCoord;
+  }
+  public User getOwner() {
+    return owner;
+  }
+  public void setOwner(User owner) {
+    this.owner = owner;
   }
 
 

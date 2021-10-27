@@ -1,70 +1,63 @@
-package com.welcomeToJeJu.moj;
+package com.welcomeToJeju.moj;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.welcomeToJeJu.context.UserContextListener;
-import com.welcomeToJeJu.menu.Menu;
-import com.welcomeToJeJu.menu.MenuFilter;
-import com.welcomeToJeJu.menu.MenuGroup;
-import com.welcomeToJeJu.moj.dao.impl.NetThemeDao;
-import com.welcomeToJeJu.moj.dao.impl.NetUserDao;
-import com.welcomeToJeJu.moj.domain.Report;
-import com.welcomeToJeJu.moj.domain.ReportTheme;
-import com.welcomeToJeJu.moj.domain.ReportUser;
-import com.welcomeToJeJu.moj.domain.Theme;
-import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.moj.handler.AllThemeListHandler;
-import com.welcomeToJeJu.moj.handler.AuthDisplayLoginUserHandler;
-import com.welcomeToJeJu.moj.handler.AuthLoginHandler;
-import com.welcomeToJeJu.moj.handler.AuthLogoutHandler;
-import com.welcomeToJeJu.moj.handler.Command;
-import com.welcomeToJeJu.moj.handler.CommandRequest;
-import com.welcomeToJeJu.moj.handler.LikedThemeAddHandler;
-import com.welcomeToJeJu.moj.handler.LikedThemeDeleteHandler;
-import com.welcomeToJeJu.moj.handler.LikedThemeListHandler;
-import com.welcomeToJeJu.moj.handler.LikedUserAddHandler;
-import com.welcomeToJeJu.moj.handler.LikedUserDeleteHandler;
-import com.welcomeToJeJu.moj.handler.LikedUserListHandler;
-import com.welcomeToJeJu.moj.handler.MyThemeAddHandler;
-import com.welcomeToJeJu.moj.handler.MyThemeDeleteHandler;
-import com.welcomeToJeJu.moj.handler.MyThemeDetailHandler;
-import com.welcomeToJeJu.moj.handler.MyThemeListHandler;
-import com.welcomeToJeJu.moj.handler.MyThemeUpdateHandler;
-import com.welcomeToJeJu.moj.handler.PlaceAddHandler;
-import com.welcomeToJeJu.moj.handler.PlaceDeleteHandler;
-import com.welcomeToJeJu.moj.handler.PlaceListHandler;
-import com.welcomeToJeJu.moj.handler.UserAddHandler;
-import com.welcomeToJeJu.moj.handler.UserDeleteHandler;
-import com.welcomeToJeJu.moj.handler.UserDetailHandler;
-import com.welcomeToJeJu.moj.handler.UserEditHandler;
-import com.welcomeToJeJu.moj.handler.UserListHandler;
-import com.welcomeToJeJu.moj.handler.UserUnregisterHandler;
-import com.welcomeToJeJu.moj.handler.UserUpdateHandler;
-import com.welcomeToJeJu.moj.listener.LoginListener;
-import com.welcomeToJeJu.request.RequestAgent;
-import com.welcomeToJeJu.util.Prompt;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.welcomeToJeju.context.UserContextListener;
+import com.welcomeToJeju.menu.Menu;
+import com.welcomeToJeju.menu.MenuFilter;
+import com.welcomeToJeju.menu.MenuGroup;
+import com.welcomeToJeju.moj.dao.PlaceDao;
+import com.welcomeToJeju.moj.dao.ReportDao;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.handler.AdminUserDeleteHandler;
+import com.welcomeToJeju.moj.handler.AdminUserUpdateHandler;
+import com.welcomeToJeju.moj.handler.AllThemeListHandler;
+import com.welcomeToJeju.moj.handler.AuthDisplayLoginUserHandler;
+import com.welcomeToJeju.moj.handler.AuthLoginHandler;
+import com.welcomeToJeju.moj.handler.AuthLogoutHandler;
+import com.welcomeToJeju.moj.handler.Command;
+import com.welcomeToJeju.moj.handler.CommandRequest;
+import com.welcomeToJeju.moj.handler.LikedThemeAddHandler;
+import com.welcomeToJeju.moj.handler.LikedThemeDeleteHandler;
+import com.welcomeToJeju.moj.handler.LikedThemeListHandler;
+import com.welcomeToJeju.moj.handler.LikedUserAddHandler;
+import com.welcomeToJeju.moj.handler.LikedUserDeleteHandler;
+import com.welcomeToJeju.moj.handler.LikedUserListHandler;
+import com.welcomeToJeju.moj.handler.MyThemeAddHandler;
+import com.welcomeToJeju.moj.handler.MyThemeDeleteHandler;
+import com.welcomeToJeju.moj.handler.MyThemeDetailHandler;
+import com.welcomeToJeju.moj.handler.MyThemeListHandler;
+import com.welcomeToJeju.moj.handler.MyThemeUpdateHandler;
+import com.welcomeToJeju.moj.handler.PlaceAddHandler;
+import com.welcomeToJeju.moj.handler.PlaceDeleteHandler;
+import com.welcomeToJeju.moj.handler.PlaceListHandler;
+import com.welcomeToJeju.moj.handler.RealTimeRankHandler;
+import com.welcomeToJeju.moj.handler.ReportAddThemeHandler;
+import com.welcomeToJeju.moj.handler.SearchHashtagHandler;
+import com.welcomeToJeju.moj.handler.SearchThemeHandler;
+import com.welcomeToJeju.moj.handler.SearchUserHandler;
+import com.welcomeToJeju.moj.handler.ThemePrompt;
+import com.welcomeToJeju.moj.handler.UserAddHandler;
+import com.welcomeToJeju.moj.handler.UserDeleteHandler;
+import com.welcomeToJeju.moj.handler.UserDetailHandler;
+import com.welcomeToJeju.moj.handler.UserListHandler;
+import com.welcomeToJeju.moj.handler.UserPrompt;
+import com.welcomeToJeju.moj.handler.UserRankHandler;
+import com.welcomeToJeju.moj.handler.UserUpdateHandler;
+import com.welcomeToJeju.moj.listener.LoginListener;
+import com.welcomeToJeju.util.Prompt;
 
 public class ClientApp {
 
-  RequestAgent requestAgent;
+  SqlSession sqlSession;
 
-  List<User> userList = new ArrayList<>();
-  public static List<Report> reportList = new ArrayList<>();
-  List<ReportTheme> reportThemeList = new ArrayList<>();
-  List<ReportUser> reportUserList = new ArrayList<>();
-  HashMap<String, Command> commandMap = new HashMap<>();
-  List<Theme> themeList = new ArrayList<>();
+  HashMap<String,Command> commandMap = new HashMap<>();
   List<UserContextListener> userListeners = new ArrayList<>();
-
-
-  public void addUserContextListener(UserContextListener userListener) {
-    this.userListeners.add(userListener);
-  }
-
-  public void removeUserContextListener(UserContextListener userListener) {
-    this.userListeners.remove(userListener);
-  }
 
   class MenuItem extends Menu {
     String menuId;
@@ -93,97 +86,89 @@ public class ClientApp {
 
   }
 
-  public ClientApp() throws Exception {
+  public void addUserContextListener(UserContextListener userListener) {
+    this.userListeners.add(userListener);
+  }
 
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
-    NetThemeDao themeDao = new NetThemeDao(requestAgent);
-    NetUserDao userDao = new NetUserDao(requestAgent);
+  public void removeUserContextListener(UserContextListener userListener) {
+    this.userListeners.remove(userListener);
+  }
+
+  public ClientApp() throws Exception{
+
+    //    con = DriverManager.getConnection(
+    //        "jdbc:mysql://localhost:3306/jejudb?user=jeju&password=1111");
+    sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "com/welcomeToJeju/moj/conf/mybatis-config.xml")).openSession();
+
+    UserDao userDao = sqlSession.getMapper(UserDao.class);
+    ThemeDao themeDao = sqlSession.getMapper(ThemeDao.class);
+    PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+    ReportDao reportDao = sqlSession.getMapper(ReportDao.class);
+    UserPrompt userPrompt = new UserPrompt(userDao);
+    ThemePrompt themePrompt = new ThemePrompt(themeDao);
+
+    commandMap.put("/user/add", new UserAddHandler(userDao, sqlSession));
+    commandMap.put("/user/list", new UserListHandler(userDao));
+    commandMap.put("/user/detail", new UserDetailHandler(userDao));
+    commandMap.put("/user/update", new AdminUserUpdateHandler(userDao, sqlSession));
+    commandMap.put("/user/delete", new AdminUserDeleteHandler(userDao, sqlSession));
+
+    commandMap.put("/auth/unregistered", new UserDeleteHandler(userDao, sqlSession));
+    commandMap.put("/auth/edit", new UserUpdateHandler(userDao, sqlSession));
+    commandMap.put("/auth/displayLoginUer", new AuthDisplayLoginUserHandler());
 
     commandMap.put("/auth/login", new AuthLoginHandler(userDao,userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
-    commandMap.put("/auth/displayLoginUser", new AuthDisplayLoginUserHandler());
-    commandMap.put("/theme/all", new AllThemeListHandler(themeDao));
-    commandMap.put("/auth/unregistered", new UserUnregisterHandler(userDao));
-    commandMap.put("/auth/edit", new UserEditHandler(userDao));
 
-    commandMap.put("/user/add", new UserAddHandler(userDao));
-    commandMap.put("/user/delete", new UserDeleteHandler(userDao));
-    commandMap.put("/user/detail", new UserDetailHandler(userDao));
-    commandMap.put("/user/list", new UserListHandler(userDao));
-    commandMap.put("/user/update", new UserUpdateHandler(userDao));
-
-    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao));
-    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao));
+    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao, sqlSession));
     commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
-    commandMap.put("/myTheme/detail", new MyThemeDetailHandler(requestAgent));
-    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao));
+    commandMap.put("/myTheme/detail", new MyThemeDetailHandler(themeDao));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, sqlSession));
+    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, sqlSession));
+    commandMap.put("/theme/all", new AllThemeListHandler(themeDao));
 
-    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao));
-    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(themeDao));
-    commandMap.put("/likedTheme/list", new LikedThemeListHandler(themeDao));
-
-    commandMap.put("/place/add", new PlaceAddHandler(themeDao));
-    commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao));
+    commandMap.put("/place/add", new PlaceAddHandler(placeDao,sqlSession));
+    commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao,placeDao,sqlSession));
     commandMap.put("/place/list", new PlaceListHandler(themeDao));
 
+    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao,sqlSession));
+    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(themeDao,sqlSession));
+    commandMap.put("/likedTheme/list", new LikedThemeListHandler(themeDao,userPrompt));
 
-    //    commandMap.put("/search/searchTheme", new SearchThemeHandler(userList, themeList));
-    //    commandMap.put("/search/searchUser", new SearchUserHandler(userList));
-    //    commandMap.put("/search/searchHashtag", new SearchHashtagHandler(userList, themeList));
-
-    commandMap.put("/likedUser/add", new LikedUserAddHandler(userDao));
+    commandMap.put("/likedUser/add", new LikedUserAddHandler(userDao,userPrompt,sqlSession));
     commandMap.put("/likedUser/list", new LikedUserListHandler(userDao));
-    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao));
+    commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao,userPrompt,sqlSession));
 
-    //    commandMap.put("/rank/themeRank", new RealTimeRankHandler(userList));
-    //    commandMap.put("/rank/userRank", new UserRankHandler(userList));
+    commandMap.put("/report/theme", new ReportAddThemeHandler(reportDao, themeDao,sqlSession));
+    //    commandMap.put("/report/user", new ReportAddUserHandler(reportDao,userPrompt));
+    //    commandMap.put("/report/list", new ReportMyListHandler(reportDao));
+    //    commandMap.put("/report/themeProcess", new ReportThemeProcessingHandler(reportDao,themePrompt,userPrompt));
+    //    commandMap.put("/report/userProcess", new ReportUserProcessingHandler(reportDao,themePrompt,userPrompt));
 
-    //    commandMap.put("/report/theme", new ReportAddThemeHandler(userList,reportThemeList));
-    //    commandMap.put("/report/user", new ReportAddUserHandler(userList,reportUserList));
-    //    commandMap.put("/report/list", new ReportMyListHandler(reportList));
-    //    commandMap.put("/report/themeProcess", new ReportThemeProcessingHandler(userList,reportThemeList));
-    //    commandMap.put("/report/userProcess", new ReportUserProcessingHandler(userList,reportUserList));
-  }
+    commandMap.put("/search/searchTheme", new SearchThemeHandler(themeDao, sqlSession));
+    commandMap.put("/search/searchUser", new SearchUserHandler(userDao,themePrompt, sqlSession));
+    commandMap.put("/search/searchHashtag", new SearchHashtagHandler(themeDao,userPrompt));
 
-  MenuFilter menuFilter = menu ->
-  (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0 ;
-
-
-  public static void main(String[] args) throws Exception {
-    ClientApp clientApp = new ClientApp();
-    clientApp.addUserContextListener(new LoginListener());
-    clientApp.service();
-    Prompt.close();
-
+    commandMap.put("/rank/themeRank", new RealTimeRankHandler(themePrompt));
+    commandMap.put("/rank/userRank", new UserRankHandler(userPrompt));
 
   }
 
-
-  void service() throws Exception{
-
-    createMenu().execute();
-
-    requestAgent.request("quit", null);
-
-    Prompt.close();
-  }
-
+  MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
 
   Menu createMenu() {
-    MenuGroup mg = new MenuGroup("메인");
-    mg.setMenuFilter(menuFilter);
+    MenuGroup mg = new MenuGroup("메인 메뉴");
     mg.setPrevMenuTitle("종료");
-
+    mg.setMenuFilter(menuFilter);
     mg.add(new MenuItem("로그인", Menu.ACCESS_LOGOUT, "/auth/login"));
     mg.add(new MenuItem("회원 가입하기", Menu.ACCESS_LOGOUT, "/user/add"));
-    mg.add(new MenuItem("내 정보", Menu.ACCESS_GENERAL, "/auth/displayLoginUser"));
-    //    mg.add(new MenuItem(""))
+    mg.add(new MenuItem("내 정보", Menu.ACCESS_GENERAL, "/auth/displayLoginUer"));
     mg.add(new MenuItem("로그아웃", Menu.ACCESS_GENERAL, "/auth/logout"));
     mg.add(new MenuItem("전체 테마 보기", "/theme/all"));
 
     createUserMenu(mg);
     createMyMapMenu(mg);
-    //    createPlaceMenu(mg);
     createSearchMenu(mg);
     createLikedThemeMenu(mg);
     createLikedUserMenu(mg);
@@ -213,28 +198,15 @@ public class ClientApp {
     myMap.add(new MenuItem("테마 만들기", "/myTheme/add"));
     myMap.add(new MenuItem("테마 목록보기", "/myTheme/list"));
     myMap.add(new MenuItem("테마 상세보기", "/myTheme/detail"));
-    //    myMap.add(new MenuItem("테마 수정하기", "/myTheme/update"));
-    myMap.add(new MenuItem("테마 삭제하기", "/myTheme/delete"));
 
     mg.add(myMap);
   }
 
-  //  private void createPlaceMenu(MenuGroup mg) {
-  //    MenuGroup savePlaceInTheme = new MenuGroup("테마에 장소 추가", Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL);
-  //
-  //    savePlaceInTheme.add(new MenuItem("장소 등록", "/place/add"));
-  //    savePlaceInTheme.add(new MenuItem("장소 목록", "/place/list"));
-  //    savePlaceInTheme.add(new MenuItem("장소 삭제", "/place/delete"));
-  //
-  //    mg.add(savePlaceInTheme);
-  //  }
-
   private void createSearchMenu(MenuGroup mg) {
     MenuGroup search = new MenuGroup("검색하기");
-    search.setMenuFilter(menuFilter);
 
+    search.setMenuFilter(menuFilter);
     search.add(new MenuItem("테마 검색하기", "/search/searchTheme"));
-    // 장소 이쁘게 출력하기 수정필요
     search.add(new MenuItem("유저 검색하기", "/search/searchUser"));
     search.add(new MenuItem("해시태그 검색하기", "/search/searchHashtag"));
 
@@ -245,6 +217,7 @@ public class ClientApp {
   private void createLikedThemeMenu(MenuGroup mg) {
     MenuGroup like = new MenuGroup("좋아하는 테마", Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL);
     like.setMenuFilter(menuFilter);
+
     like.add(new MenuItem("좋아요 등록하기", "/likedTheme/add"));
     like.add(new MenuItem("좋아요 목록보기", "/likedTheme/list"));
     like.add(new MenuItem("좋아요 삭제하기", "/likedTheme/delete"));
@@ -254,7 +227,9 @@ public class ClientApp {
 
   private void createRankMenu(MenuGroup mg) {
     MenuGroup rank = new MenuGroup("순위보기");
+
     rank.setMenuFilter(menuFilter);
+
     rank.add(new MenuItem("테마 순위보기", "/rank/themeRank")); // 전체 테마 검색 기준 조횟수 증가
     rank.add(new MenuItem("유저 순위보기", "/rank/userRank")); // 유저 검색 기준 조횟수 증가
 
@@ -264,6 +239,7 @@ public class ClientApp {
   private void createLikedUserMenu(MenuGroup mg) {
     MenuGroup follow = new MenuGroup("좋아하는 유저", Menu.ACCESS_GENERAL);
     follow.setMenuFilter(menuFilter);
+
     follow.add(new MenuItem("좋아하는 유저 등록하기", "/likedUser/add"));
     follow.add(new MenuItem("좋아하는 유저 목록보기", "/likedUser/list"));
     follow.add(new MenuItem("좋아하는 유저 삭제하기", "/likedUser/delete"));
@@ -273,7 +249,9 @@ public class ClientApp {
 
   private void createReportMenu(MenuGroup mg) {
     MenuGroup report = new MenuGroup("신고하기", Menu.ACCESS_GENERAL);
+
     report.setMenuFilter(menuFilter);
+
     report.add(new MenuItem("테마 신고", "/report/theme"));
     report.add(new MenuItem("유저 신고", "/report/user"));
     report.add(new MenuItem("나의 신고 목록", "/report/list"));
@@ -282,5 +260,23 @@ public class ClientApp {
     mg.add(report);
   }
 
+  public void service() throws Exception{
+    createMenu().execute();
+
+    //    requestAgent.request("quit", null);
+
+    Prompt.close();
+    sqlSession.close();
+  }
+
+  public static void main(String[] args) throws Exception{
+    System.out.println("[제주옵서예 클라이언트]");
+
+    ClientApp app = new ClientApp(); 
+    app.addUserContextListener(new LoginListener());
+    app.service();
+
+    Prompt.close();
+  }
 
 }

@@ -1,18 +1,23 @@
-package com.welcomeToJeJu.moj.domain;
+package com.welcomeToJeju.moj.domain;
 
 public class ReportUser extends Report{
-  User reportedUser;
+  String reportedUserName;
   int reportedCount;
 
-  public User getReportedUser() {
-    return reportedUser;
-  }
+  @Override
+	public String toString() {
+		return "ReportUser [reportedUserName=" + reportedUserName + ", reportedCount=" + reportedCount + "]";
+	}
 
-  public void setReportedUser(User user) {
-    this.reportedUser = user;
-  }
+	public String getReportedUserName() {
+		return reportedUserName;
+	}
 
-  public int getReportedCount() {
+	public void setReportedUserName(String reportedUserName) {
+		this.reportedUserName = reportedUserName;
+	}
+
+	public int getReportedCount() {
     return reportedCount;
   }
 

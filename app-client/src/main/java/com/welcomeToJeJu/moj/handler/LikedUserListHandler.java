@@ -1,8 +1,8 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
 import java.util.Collection;
-import com.welcomeToJeJu.moj.dao.UserDao;
-import com.welcomeToJeJu.moj.domain.User;
+import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.User;
 
 public class LikedUserListHandler implements Command {
 
@@ -18,16 +18,17 @@ public class LikedUserListHandler implements Command {
 
     User loginUser = AuthLoginHandler.getLoginUser();
 
-    Collection<String> likedUserList = userDao.likedUserFindAll(loginUser);
+    Collection<User> likedUserList = userDao.findAllLikedUser(loginUser.getNo());
     if (likedUserList.isEmpty()) {
       System.out.println("좋아하는 유저 없음!");
       return;
     }
 
     int index = 1;
-    for (String user : likedUserList ) {
-      System.out.printf("<%d> 닉네임 > %s \n", index++, user);
+    for (User user : likedUserList ) {
+      System.out.printf("<%d> 닉네임 > %s \n", index++, user.getNickName());
     }
   }
 
 }
+

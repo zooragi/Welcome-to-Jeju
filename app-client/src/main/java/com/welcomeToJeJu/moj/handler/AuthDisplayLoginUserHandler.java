@@ -1,6 +1,6 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
-import com.welcomeToJeJu.util.Prompt;
+import com.welcomeToJeju.util.Prompt;
 
 public class AuthDisplayLoginUserHandler implements Command{
 

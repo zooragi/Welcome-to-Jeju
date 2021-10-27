@@ -1,4 +1,4 @@
-package com.welcomeToJeJu.request;
+package com.welcomeToJeju.request;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

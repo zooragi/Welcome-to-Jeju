@@ -1,8 +1,8 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
-import com.welcomeToJeJu.moj.dao.UserDao;
-import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.util.Prompt;
+import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.User;
+import com.welcomeToJeju.util.Prompt;
 
 public class UserDetailHandler implements Command {
 
@@ -14,19 +14,41 @@ public class UserDetailHandler implements Command {
 
   public void execute(CommandRequest request) throws Exception {
 
-    System.out.println("[회원 상세보기]"); // 관리자용
+    System.out.println("[회원 상세보기]");
 
-    int no = Prompt.inputInt("번호 > ");
+    String userNickName = Prompt.inputString("회원 닉네임(취소: 엔터) > ");
 
-    User user = userDao.findByNo(no);
-
-    if (user == null) {
-      System.out.println("등록된 회원 없음!");
+    if (userNickName.equals("")) {
+      System.out.println("상세보기 취소!");
       return;
     }
 
-    System.out.printf("이메일: %s\n", user.getEmail());
-    System.out.printf("닉네임: %s\n", user.getNickName());
-    System.out.printf("등록일: %s\n", user.getRegisteredDate());
+    User user = userDao.findByName(userNickName);
+
+    if (user == null) {
+      System.out.println("회원 없음!");
+      return;
+    }
+
+    System.out.printf("이메일 > %s\n", user.getEmail());
+    System.out.printf("닉네임 > %s\n", user.getNickName());
+    System.out.printf("등록일 > %s\n", user.getRegisteredDate());
+    System.out.printf("조회수 > %d\n", user.getViewCount());
+    System.out.println();
+
+    request.setAttribute("user", user);
+    String input = Prompt.inputString("회원 정보 수정(U) / 회원 삭제 하기(D) > ");
+    switch (input) {
+      case "U":
+      case "u":
+        request.getRequestDispatcher("/user/update").forward(request);
+        return;
+      case "D":
+      case "d":
+        request.getRequestDispatcher("/user/delete").forward(request);
+        return;
+      default:
+        System.out.println("명령어가 올바르지 않습니다!");
+    }
   }
 }

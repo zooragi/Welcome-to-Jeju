@@ -1,4 +1,4 @@
-package com.welcomeToJeJu.moj.domain;
+package com.welcomeToJeju.moj.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,26 +6,24 @@ import java.util.List;
 public class Theme implements Comparable<Theme>{
   private int no;
   private String title;
-  private String themeOwnerName;
+  private User owner;
   private int viewCount;
   private boolean isPublic;
   private boolean isShare;
-  private List<Place> placeList = new ArrayList<Place>();
-  private List<String> hashtags = new ArrayList<String>();
-  private String category; 
+  private Category category; 
   private int reportedCount = 0;
 
-  private List<String> likedThemeUsers = new ArrayList<>();
-
+  private List<Place> placeList = new ArrayList<Place>();
+  private List<String> hashtags = new ArrayList<String>();
 
 
 
   @Override
   public String toString() {
-    return "Theme [no=" + no + ", title=" + title + ", themeOwnerName=" + themeOwnerName
-        + ", viewCount=" + viewCount + ", isPublic=" + isPublic + ", isShare=" + isShare
-        + ", placeList=" + placeList + ", hashtags=" + hashtags + ", category=" + category
-        + ", reportedCount=" + reportedCount + ", likedThemeUsers=" + likedThemeUsers + "]";
+    return "Theme [no=" + no + ", title=" + title + ", owner=" + owner + ", viewCount=" + viewCount
+        + ", isPublic=" + isPublic + ", isShare=" + isShare + ", category=" + category
+        + ", reportedCount=" + reportedCount + ", placeList=" + placeList + ", hashtags=" + hashtags
+        + ", ]";
   }
 
   public int getReportedCount() {
@@ -36,11 +34,13 @@ public class Theme implements Comparable<Theme>{
     this.reportedCount = reportedCount;
   }
 
-  public String getCategory() {
+
+
+  public Category getCategory() {
     return category;
   }
 
-  public void setCategory(String category) {
+  public void setCategory(Category category) {
     this.category = category;
   }
 
@@ -92,14 +92,6 @@ public class Theme implements Comparable<Theme>{
     this.isShare = isShare;
   }
 
-  public String getThemeOwnerName() {
-    return themeOwnerName;
-  }
-
-  public void setThemeOwnerName(String themeOwnerName) {
-    this.themeOwnerName = themeOwnerName;
-  }
-
   @Override
   public int compareTo(Theme theme) {
     return theme.viewCount - this.viewCount ;
@@ -113,12 +105,16 @@ public class Theme implements Comparable<Theme>{
     this.no = no;
   }
 
-  public List<String> getLikedThemeUsers() {
-    return likedThemeUsers;
+
+
+  public User getOwner() {
+    return owner;
   }
 
-  public void setLikedThemeUsers(List<String> likedThemeUsers) {
-    this.likedThemeUsers = likedThemeUsers;
+  public void setOwner(User owner) {
+    this.owner = owner;
   }
+
+
 
 }

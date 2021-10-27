@@ -1,4 +1,4 @@
-package com.welcomeToJeJu.context;
+package com.welcomeToJeju.context;
 
 import java.util.Map;
 

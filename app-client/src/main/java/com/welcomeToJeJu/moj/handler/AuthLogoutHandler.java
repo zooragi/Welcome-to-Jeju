@@ -1,9 +1,9 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
 import java.util.HashMap;
 import java.util.List;
-import com.welcomeToJeJu.context.UserContextListener;
-import com.welcomeToJeJu.menu.Menu;
+import com.welcomeToJeju.context.UserContextListener;
+import com.welcomeToJeju.menu.Menu;
 
 public class AuthLogoutHandler implements Command{
 

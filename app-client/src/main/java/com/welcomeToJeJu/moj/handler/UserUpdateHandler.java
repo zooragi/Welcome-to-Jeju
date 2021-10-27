@@ -1,47 +1,40 @@
-package com.welcomeToJeJu.moj.handler;
+package com.welcomeToJeju.moj.handler;
 
-import com.welcomeToJeJu.moj.dao.UserDao;
-import com.welcomeToJeJu.moj.domain.User;
-import com.welcomeToJeJu.util.Prompt;
+import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.User;
+import com.welcomeToJeju.util.Prompt;
 
 public class UserUpdateHandler implements Command {
 
-  UserDao userDao;
+  UserDao userDao; 
+  SqlSession sqlSession;
 
-  public UserUpdateHandler(UserDao userDao) {
+  public UserUpdateHandler(UserDao userDao, SqlSession sqlSession) {
     this.userDao = userDao;
+    this.sqlSession = sqlSession;
   }
 
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[회원 정보 수정하기]");
-    int no = Prompt.inputInt("번호 > ");
 
-    User user = userDao.findByNo(no);
+    System.out.println("[내 정보 수정하기]");
 
-    if (user == null) {
-      System.out.println("등록된 회원 없음!");
-      return;
-    }
+    User user = (User) request.getAttribute("loginUser");
 
     User temp = new User();
-    temp.setNo(user.getNo());
-    temp.setEmail(Prompt.inputString("이메일 > "));
-    temp.setLikedUsers(user.getLikedUsers());
-    temp.setNickName(Prompt.inputString("닉네임 > "));
-    temp.setPassword(Prompt.inputString("암호 > "));
-    temp.setRegisteredDate(user.getRegisteredDate());
-    temp.setReportedCount(user.getReportedCount());
-    temp.setViewCount(user.getViewCount());
-    temp.setWarningCount(user.getWarningCount());
 
+    temp.setEmail(Prompt.inputString("이메일(" + user.getEmail() + ") > "));
+    temp.setPassword(Prompt.inputString("암호 > "));
+    temp.setNickName(Prompt.inputString("닉네임(" + user.getNickName() + ") > "));
 
     String input = Prompt.inputString("수정하기(y/N) > ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("회원 수정 취소!");
+      System.out.println("수정 취소!");
       return;
     }
 
     userDao.update(temp);
+    sqlSession.commit();
+    System.out.println("회원 수정 완료!");
   }
-
 }

@@ -1,8 +1,6 @@
-package com.welcomeToJeJu.moj.domain;
+package com.welcomeToJeju.moj.domain;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 public class User implements Comparable<User> {
   private int no;
@@ -14,28 +12,14 @@ public class User implements Comparable<User> {
   private int reportedCount = 0;
   private int warningCount = 0;
 
-  private List<String> likedUsers = new ArrayList<>(); //팔로우
-
-
-
 
   @Override
   public String toString() {
     return "User [no=" + no + ", email=" + email + ", password=" + password + ", nickName="
         + nickName + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
-        + ", reportedCount=" + reportedCount + ", warningCount=" + warningCount + ", likedUsers="
-        + likedUsers + "]";
+        + ", reportedCount=" + reportedCount + ", warningCount=" + warningCount + ", ]";
   }
 
-
-  public int getReportedCount() {
-    return reportedCount;
-  }
-
-
-  public void setReportedCount(int reportedCount) {
-    this.reportedCount = reportedCount;
-  }
 
 
   public int getNo() {
@@ -43,9 +27,11 @@ public class User implements Comparable<User> {
   }
 
 
+
   public void setNo(int no) {
     this.no = no;
   }
+
 
 
   public String getEmail() {
@@ -77,6 +63,7 @@ public class User implements Comparable<User> {
   }
 
 
+
   public void setNickName(String nickName) {
     this.nickName = nickName;
   }
@@ -86,6 +73,7 @@ public class User implements Comparable<User> {
   public Date getRegisteredDate() {
     return registeredDate;
   }
+
 
 
   public void setRegisteredDate(Date registeredDate) {
@@ -99,14 +87,23 @@ public class User implements Comparable<User> {
   }
 
 
+
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
 
-  @Override
-  public int compareTo(User user) {
-    return user.viewCount - this.viewCount;
+
+
+  public int getReportedCount() {
+    return reportedCount;
   }
+
+
+
+  public void setReportedCount(int reportedCount) {
+    this.reportedCount = reportedCount;
+  }
+
 
 
   public int getWarningCount() {
@@ -114,18 +111,17 @@ public class User implements Comparable<User> {
   }
 
 
+
   public void setWarningCount(int warningCount) {
     this.warningCount = warningCount;
   }
 
 
-  public List<String> getLikedUsers() {
-    return likedUsers;
+  @Override
+  public int compareTo(User user) {
+    return user.viewCount - this.viewCount;
   }
 
 
-  public void setLikedUsers(List<String> likedUsers) {
-    this.likedUsers = likedUsers;
-  }
 
 }

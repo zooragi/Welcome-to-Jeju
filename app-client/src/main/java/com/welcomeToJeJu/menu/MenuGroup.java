@@ -1,9 +1,9 @@
-package com.welcomeToJeJu.menu;
+package com.welcomeToJeju.menu;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.welcomeToJeJu.util.Prompt;
+import com.welcomeToJeju.util.Prompt;
 
 // 역할
 // - 다른 메뉴를 포함하는 컨테이너 역할을 수행한다.
