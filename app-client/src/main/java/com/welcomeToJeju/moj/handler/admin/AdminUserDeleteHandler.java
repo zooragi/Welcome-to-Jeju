@@ -26,14 +26,14 @@ public class AdminUserDeleteHandler implements Command {
     String input = Prompt.inputString("삭제하기(y/N) > ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("🌊 회원 삭제하기 취소!");
+      System.out.println("회원 삭제하기 취소!");
       return;
     }
 
     userDao.delete(user.getNo());
     sqlSession.commit();
 
-    System.out.println("🌊 회원 삭제하기 성공!");
+    System.out.println("회원 삭제하기 성공!");
   }
 
 

@@ -32,14 +32,14 @@ public class UserUpdateHandler implements Command {
     String input = Prompt.inputString("수정하기(y/N) > ");
 
     if (input.equalsIgnoreCase("n") | input.length() == 0) {
-      System.out.println("🌊 내 정보 수정하기 취소!");
+      System.out.println("내 정보 수정하기 취소!");
       return;
     }
 
     userDao.update(temp);
     sqlSession.commit();
 
-    System.out.println("🌊 내 정보 수정하기 성공!");
+    System.out.println("내 정보 수정하기 성공!");
   }
 
 

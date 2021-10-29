@@ -22,7 +22,7 @@ public class MyThemeListHandler implements Command {
     Collection<Theme> themeList = themeDao.findAll();
 
     if (themeList.size() == 0) {
-      System.out.println("🌊 테마 없음!");
+      System.out.println("테마 없음!");
       return;
     }
 
@@ -41,7 +41,6 @@ public class MyThemeListHandler implements Command {
           System.out.println("비공개");
         }
       }
-      System.out.println();
     }
   }
 

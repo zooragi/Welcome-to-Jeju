@@ -1,7 +1,6 @@
 package com.welcomeToJeju.moj.handler.place;
 
 import java.util.ArrayList;
-
 import com.google.gson.Gson;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Place;
@@ -14,12 +13,12 @@ import com.welcomeToJeju.util.Prompt;
 
 public class PlaceAddHandler implements Command {
 
-	ThemeDao themeDao;
-	
+  ThemeDao themeDao;
+
   public PlaceAddHandler(ThemeDao themeDao) {
-  	this.themeDao = themeDao;
+    this.themeDao = themeDao;
   }
-	
+
   @Override
   public void execute(CommandRequest request) throws Exception {
     Gson gson = new Gson();
@@ -51,8 +50,8 @@ public class PlaceAddHandler implements Command {
       }
 
       if(filterPlace.size() == 0) {
-      	System.out.println("검색된 장소가 없습니다.");
-      	continue;
+        System.out.println("검색된 장소가 없습니다.");
+        continue;
       }
       int i = 1;
       for(KakaoVo kakaoVo : filterPlace) {
@@ -82,7 +81,7 @@ public class PlaceAddHandler implements Command {
 
     place.getComments().add(Prompt.inputString("장소 후기 > "));
     themeDao.placeInsert(place);
-    
+
     System.out.println("장소 등록 완료!");
   }
 }

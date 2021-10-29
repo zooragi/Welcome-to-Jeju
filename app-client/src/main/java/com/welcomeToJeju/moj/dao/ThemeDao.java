@@ -12,11 +12,8 @@ public interface ThemeDao {
   //  void delete(int no) throws Exception;
   List<Theme> findAll() throws Exception;
 
-  //  Theme findByTitle(String title) throws Exception;
+  Theme findByTitle(String title) throws Exception;
   //  List<Theme> findByHashTag(String hashTag) throws Exception;
-
-  //  void placeInsert(Place place) throws Exception;
-  //  void placeDelete(Place place) throws Exception;
 
   //  void likedThemeInsert(int themeNo, int userNo) throws Exception;
   //  void likedThemeDelete(int themeNo, int userNo) throws Exception;

@@ -1,35 +1,36 @@
 package com.welcomeToJeju.moj.handler.report;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-
+import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.ReportDao;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.ReportUser;
 import com.welcomeToJeju.moj.domain.User;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
-import com.welcomeToJeju.moj.handler.ThemePrompt;
-import com.welcomeToJeju.moj.handler.UserPrompt;
 import com.welcomeToJeju.util.Prompt;
 
 public class AdminReportUserProcessHandler implements Command {
 
-	ReportDao reportDao;
-	ThemePrompt themePrompt;
-	UserPrompt userPrompt;
-	
-  public AdminReportUserProcessHandler(ReportDao reportDao, ThemePrompt themePrompt,UserPrompt userPrompt) {
-  	this.reportDao  = reportDao;
-  	this.themePrompt = themePrompt;
-  	this.userPrompt = userPrompt;
+  ReportDao reportDao;
+  ThemeDao themeDao;
+  UserDao userDao;
+  SqlSession sqlSession;
+
+  public AdminReportUserProcessHandler(ReportDao reportDao, UserDao userDao, SqlSession sqlSession) {
+    this.reportDao = reportDao;
+    this.userDao = userDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     List<User> countedUserList = new ArrayList<>();
-    List<ReportUser> reportUserList = reportDao.findUserAll();
+    List<ReportUser> reportUserList = reportDao.findAllReportUser();
     User selectedUser;
     int index = 1;
 
@@ -39,8 +40,7 @@ public class AdminReportUserProcessHandler implements Command {
       return;
     }
 
-    countedUserList = userPrompt.setCountedUser();
-    Collections.sort(countedUserList, (a, b) -> b.getReportedCount() - a.getReportedCount());
+    countedUserList = userDao.bringReportedUser();
 
     for (User user : countedUserList) {
       System.out.printf("%d. [%d회] %s \n", index++, user.getReportedCount(), user.getNickName());
@@ -60,13 +60,17 @@ public class AdminReportUserProcessHandler implements Command {
 
       break;
     }
-    
+
     while (true) {
       String isWaring = Prompt.inputString("경고주기 (y/N) > ");
-      
-      
+
+
       if (isWaring.equalsIgnoreCase("y")) {
-        userPrompt.increaseWariningCount(selectedUser);
+        int count = selectedUser.getWarningCount() + 1;
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("userNo", selectedUser.getNo());
+        params.put("warnedCnt", count);
+        userDao.updateWarnedCount(params);
         break;
       } else if (isWaring.equalsIgnoreCase("n")) {
         return;
@@ -75,21 +79,22 @@ public class AdminReportUserProcessHandler implements Command {
         continue;
       }
     }
-    
+    sqlSession.commit();
+
   }
 
   private void showReportedThemeInfo(List<ReportUser> reportUserList, List<User> countedUserList, int selectedNum) {
     int index = 1;
     String selectedReportUserTitle = countedUserList.get(selectedNum - 1).getNickName();
     for (ReportUser report : reportUserList) {
-      if (selectedReportUserTitle.equals(report.getReportedUserName())) {
+      if (selectedReportUserTitle.equals(report.getReportedUser().getNickName())) {
         System.out.printf("(%s)\n", index++);
-        String reportedName = report.getReportedUserName();
+        String reportedName = report.getReportedUser().getNickName();
         System.out.println("신고 당한 유저 : " + reportedName);
         System.out.println("신고 한 유저 : " + report.getWriter().getNickName());
         System.out.println("신고 내용 : " + report.getContent());
         System.out.println("신고 날짜 : " + report.getRegisteredDate());
-        System.out.println("신고 상태 : " + report.getState());
+        System.out.println("신고 상태 : " + report.getStatus().getTitle());
       }
     }
   }

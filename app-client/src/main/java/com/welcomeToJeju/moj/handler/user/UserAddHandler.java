@@ -30,7 +30,7 @@ public class UserAddHandler implements Command {
     userDao.insert(user);
     sqlSession.commit();
 
-    System.out.println("🌊 회원 가입 성공!");
+    System.out.println("회원 가입 성공!");
   }
 
 

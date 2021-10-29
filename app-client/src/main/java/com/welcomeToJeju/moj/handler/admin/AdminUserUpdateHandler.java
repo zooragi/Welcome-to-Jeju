@@ -31,7 +31,7 @@ public class AdminUserUpdateHandler implements Command {
     String input = Prompt.inputString("수정하기(y/N) > ");
 
     if (input.equalsIgnoreCase("n") | input.length() == 0) {
-      System.out.println("🌊 회원 수정하기 취소!");
+      System.out.println("회원 수정하기 취소!");
       return;
     }
 
@@ -42,7 +42,7 @@ public class AdminUserUpdateHandler implements Command {
     userDao.update(user);
     sqlSession.commit();
 
-    System.out.println("🌊 회원 수정하기 성공!");
+    System.out.println("회원 수정하기 성공!");
   }
 
 

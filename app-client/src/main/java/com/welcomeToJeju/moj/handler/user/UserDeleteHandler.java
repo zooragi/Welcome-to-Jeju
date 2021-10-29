@@ -27,7 +27,7 @@ public class UserDeleteHandler implements Command {
     String input = Prompt.inputString("탈퇴하기(y/N) > ");
 
     if (input.equalsIgnoreCase("n") | input.length() == 0) {
-      System.out.println("🌊 탈퇴하기 취소!");
+      System.out.println("탈퇴하기 취소!");
       return;
     }
 
@@ -37,7 +37,7 @@ public class UserDeleteHandler implements Command {
     AuthLoginHandler.loginUser = null;
     AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
 
-    System.out.println("🌊 탈퇴하기 성공!");
+    System.out.println("탈퇴하기 성공!");
   }
 
 

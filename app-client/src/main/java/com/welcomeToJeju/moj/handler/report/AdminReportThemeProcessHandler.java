@@ -1,36 +1,38 @@
 package com.welcomeToJeju.moj.handler.report;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-
+import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.ReportDao;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.ReportTheme;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.domain.User;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
-import com.welcomeToJeju.moj.handler.ThemePrompt;
-import com.welcomeToJeju.moj.handler.UserPrompt;
 import com.welcomeToJeju.util.Prompt;
 
 public class AdminReportThemeProcessHandler implements Command {
 
-	ReportDao reportDao;
-	ThemePrompt themePrompt;
-	UserPrompt userPrompt;
-	
-  public AdminReportThemeProcessHandler(ReportDao reportDao, ThemePrompt themePrompt,UserPrompt userPrompt) {
-  	this.reportDao = reportDao;
-  	this.themePrompt = themePrompt;
-  	this.userPrompt = userPrompt;
+  ReportDao reportDao;
+  ThemeDao themeDao;
+  UserDao userDao;
+  SqlSession sqlSession;
+
+  public AdminReportThemeProcessHandler(ReportDao reportDao, ThemeDao themeDao, UserDao userDao, SqlSession sqlSession) {
+    this.reportDao = reportDao;
+    this.themeDao = themeDao;
+    this.userDao = userDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     List<Theme> countedThemeList = new ArrayList<>();
-    List<ReportTheme> reportThemeList = reportDao.findThemeAll();
+    List<ReportTheme> reportThemeList = reportDao.findAllReportTheme();
     User selectedUser;
     int index = 1;
 
@@ -40,8 +42,7 @@ public class AdminReportThemeProcessHandler implements Command {
       return;
     }
 
-    countedThemeList = themePrompt.setCountedThemes();
-    Collections.sort(countedThemeList, (a,b) -> b.getReportedCount() - a.getReportedCount());
+    countedThemeList = themeDao.bringReportedTheme();
 
     for(Theme theme : countedThemeList) {
       System.out.printf("%d. [%d회] %s \n", index++,theme.getReportedCount(), theme.getTitle());
@@ -56,18 +57,22 @@ public class AdminReportThemeProcessHandler implements Command {
         continue;
       }
 
-      selectedUser = userPrompt.findByNo(countedThemeList.get(selectedNum-1).getThemeOwnerNo()); 
+      selectedUser = userDao.findByNo(countedThemeList.get(selectedNum-1).getOwner().getNo()); 
 
       showReportedThemeInfo(reportThemeList,countedThemeList,selectedNum);
 
       break;
     }
-    
+
     while(true) {
       String isWaring = Prompt.inputString("경고주기 (y/N) > ");
 
       if(isWaring.equalsIgnoreCase("y")) {
-      	userPrompt.increaseWariningCount(selectedUser);
+        int count = selectedUser.getWarningCount() + 1;
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("userNo", selectedUser.getNo());
+        params.put("warnedCnt", count);
+        userDao.updateWarnedCount(params);
         break;
       } else if (isWaring.equalsIgnoreCase("n")) {
         return;
@@ -76,23 +81,25 @@ public class AdminReportThemeProcessHandler implements Command {
         continue;
       }
     }
-    
+    sqlSession.commit();
+
   }
 
   private void showReportedThemeInfo(List<ReportTheme> reportThemeList, List<Theme> countedThemeList, int selectedNum) {
     int index = 1;
     String selectedReportThemeTitle = countedThemeList.get(selectedNum-1).getTitle();
     for (ReportTheme report : reportThemeList) {
-      if(selectedReportThemeTitle.equals(report.getReportedThemeTitle())) {
+      if(selectedReportThemeTitle.equals(report.getReportedTheme().getTitle())) {
         System.out.printf("<%s>\n", index++);
-        String reportedTitle =report.getReportedThemeTitle();
+        String reportedTitle =report.getReportedTheme().getTitle();
         System.out.println("신고 당한 테마 > " + reportedTitle);
         System.out.println("신고 한 유저 > " + report.getWriter().getNickName());
         System.out.println("신고 내용 > " + report.getContent());
         System.out.println("신고 날짜 > " + report.getRegisteredDate());
-        System.out.println("신고 상태 > " + report.getState());
+        System.out.println("신고 상태 > " + report.getStatus().getTitle());
       }
     }
-
   }
+
+
 }

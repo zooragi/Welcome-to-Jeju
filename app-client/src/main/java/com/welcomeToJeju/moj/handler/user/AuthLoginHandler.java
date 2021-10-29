@@ -56,7 +56,7 @@ public class AuthLoginHandler implements Command {
       userAccessLevel = Menu.ACCESS_GENERAL;
       System.out.printf("%s🍊 님 제주 옵서예!", user.getNickName());
     } else {
-      System.out.println("🌊 로그인 실패!");
+      System.out.println("로그인 실패!");
       return;
     }
 

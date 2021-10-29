@@ -13,11 +13,6 @@ public class AuthUserInfoHandler implements Command{
 
     User user = AuthLoginHandler.getLoginUser();
 
-    //    if (user == null) {
-    //      System.out.println("🌊 내 정보 실패!");
-    //      return;
-    //    }
-
     System.out.printf("이메일 > %s\n", user.getEmail());
     System.out.printf("닉네임 > %s\n", user.getNickName());
     System.out.printf("가입일 > %s\n", user.getRegisteredDate());
@@ -39,7 +34,7 @@ public class AuthUserInfoHandler implements Command{
         return;
 
       default :
-        System.out.println("🌊 수정 / 탈퇴 실패!");
+        System.out.println("수정 / 탈퇴 실패!");
     }
   }
 

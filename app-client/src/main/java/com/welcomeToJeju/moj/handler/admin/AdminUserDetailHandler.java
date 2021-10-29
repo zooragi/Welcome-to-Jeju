@@ -21,14 +21,14 @@ public class AdminUserDetailHandler implements Command {
     String nickName = Prompt.inputString("닉네임(취소 : 엔터) > ");
 
     if (nickName.equals("") || nickName.length() == 0) {
-      System.out.println("🌊 회원 상세 보기 취소!");
+      System.out.println("회원 상세 보기 취소!");
       return;
     }
 
     User user = userDao.findByNickName(nickName);
 
     if (user == null) {
-      System.out.println("🌊 회원 없음!");
+      System.out.println("회원 없음!");
       return;
     }
 
@@ -53,7 +53,7 @@ public class AdminUserDetailHandler implements Command {
         return;
 
       default :
-        System.out.println("🌊 수정 / 삭제 실패!");
+        System.out.println("수정 / 삭제 실패!");
     }
   }
 

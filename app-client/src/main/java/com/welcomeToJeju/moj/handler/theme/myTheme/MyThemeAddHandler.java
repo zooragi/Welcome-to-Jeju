@@ -28,7 +28,7 @@ public class MyThemeAddHandler implements Command {
     theme.setTitle(Prompt.inputString("테마 이름(취소 : 엔터) > "));
 
     if (theme.getTitle().equals("") || theme.getTitle().length() == 0) {
-      System.out.println("🌊 나의 테마 만들기 취소!");
+      System.out.println("나의 테마 만들기 취소!");
       return;
     }
 
@@ -58,10 +58,10 @@ public class MyThemeAddHandler implements Command {
         themeDao.insertHashTag(theme.getNo(), hashTag);
       }
       sqlSession.commit();
-      System.out.println("🌊 나의 테마 만들기 성공!");
+      System.out.println("나의 테마 만들기 성공!");
     } catch (Exception e) {
       sqlSession.rollback();
-      System.out.println("🌊 나의 테마 만들기 실패!");
+      System.out.println("나의 테마 만들기 실패!");
     }
   }
 

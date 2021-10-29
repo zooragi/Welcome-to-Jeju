@@ -20,6 +20,11 @@ public class AdminUserListHandler implements Command {
 
     Collection<User> userList = userDao.findAll();
 
+    if (userList.size() == 0) {
+      System.out.println("회원 없음!");
+      return;
+    }
+
     for (User user : userList) {
       System.out.printf("<%d> %s, %s, %s, 🚨 %d\n",
           user.getNo(),
