@@ -19,11 +19,16 @@ import com.welcomeToJeju.moj.handler.CommandRequest;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserAddHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserListHandler;
+import com.welcomeToJeju.moj.handler.rank.ThemeRankHandler;
+import com.welcomeToJeju.moj.handler.rank.UserRankHandler;
 import com.welcomeToJeju.moj.handler.report.AdminReportThemeProcessHandler;
 import com.welcomeToJeju.moj.handler.report.AdminReportUserProcessHandler;
 import com.welcomeToJeju.moj.handler.report.ReportListHandler;
 import com.welcomeToJeju.moj.handler.report.ReportThemeAddHandler;
 import com.welcomeToJeju.moj.handler.report.ReportUserAddHandler;
+import com.welcomeToJeju.moj.handler.search.SearchHashTagHandler;
+import com.welcomeToJeju.moj.handler.search.SearchThemeHandler;
+import com.welcomeToJeju.moj.handler.search.SearchUserHandler;
 import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
 import com.welcomeToJeju.moj.listener.LoginListener;
 import com.welcomeToJeju.request.RequestAgent;
@@ -128,12 +133,12 @@ public class ClientApp {
     commandMap.put("/likedUser/list", new LikedUserListHandler(userDao));
     commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao, sqlSession));
 
-    //    commandMap.put("/search/theme", new SearchThemeHandler(themeDao));
-    //    commandMap.put("/search/user", new SearchUserHandler(userDao, themeDao, sqlSession));
-    //    commandMap.put("/search/hashTag", new SearchHashTagHandler(themeDao, userDao));
+    commandMap.put("/search/theme", new SearchThemeHandler(themeDao, sqlSession));
+    commandMap.put("/search/user", new SearchUserHandler(userDao, themeDao, sqlSession));
+    commandMap.put("/search/hashTag", new SearchHashTagHandler(themeDao, userDao));
 
-    //    commandMap.put("/rank/theme", new ThemeRankHandler(themeDao));
-    //    commandMap.put("/rank/user", new UserRankHandler(userDao));
+    commandMap.put("/rank/theme", new ThemeRankHandler(themeDao));
+    commandMap.put("/rank/user", new UserRankHandler(userDao));
 
     commandMap.put("/report/theme", new ReportThemeAddHandler(reportDao, themeDao, sqlSession));
     commandMap.put("/report/user", new ReportUserAddHandler(reportDao, userDao, sqlSession));
@@ -141,7 +146,7 @@ public class ClientApp {
 
     // 관리자: 신고 관리
     commandMap.put("/admin/reportThemeProcess", new AdminReportThemeProcessHandler(reportDao, themeDao, userDao, sqlSession));
-    commandMap.put("/admin/reportUserProcess", new AdminReportUserProcessHandler(reportDao, userDao, userPrompt, sqlSession));
+    commandMap.put("/admin/reportUserProcess", new AdminReportUserProcessHandler(reportDao, userDao, sqlSession));
 
     // 관리자: 회원 관리
     //    commandMap.put("/admin/userList", new AdminUserListHandler(userDao));

@@ -17,10 +17,10 @@ public class ThemeRankHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[테마 순위 보기]");
 
-    int i = 1;
+    int no = 1;
     for(Theme theme : themeDao.sortThemeByViewCount()) {
-      System.out.printf("%d위 > %s (조회수 : %d)\n", i, theme.getTitle(), theme.getViewCount());
-      i++;
+      System.out.printf("%d위 > %s (조회수 : %d)\n",
+          no++, theme.getTitle(), theme.getViewCount());
     }
   }
 

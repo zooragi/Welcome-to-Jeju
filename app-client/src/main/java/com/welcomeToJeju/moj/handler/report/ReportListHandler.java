@@ -28,7 +28,7 @@ public class ReportListHandler implements Command {
     reportList.addAll(reportUserList);
     reportList.addAll(reportThemeList);
 
-    int index = 1;
+    int no = 1;
     for (Report report : reportList) {
       if (AuthLoginHandler.getLoginUser().getNickName().equals(report.getWriter().getNickName())) {
         String reportType = report.getClass().getName().contains("Theme") ? "테마" : "유저";
@@ -36,7 +36,7 @@ public class ReportListHandler implements Command {
             : ((ReportUser) report).getReportedUser().getNickName();
         if (reportedName == null) continue;
 
-        System.out.printf("<%s>\n", index++);
+        System.out.printf("<%d>\n", no++);
         System.out.printf("[%s] %s\n", reportType, reportedName);
         System.out.println("신고 내용 > " + report.getContent());
         System.out.println("신고 날짜 > " + report.getRegisteredDate());
