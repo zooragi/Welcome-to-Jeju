@@ -4,20 +4,21 @@ import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
-import com.welcomeToJeju.moj.handler.UserPrompt;
 
-public class UserRankHandler implements Command{
-	UserPrompt userPrompt;
-	
-  public UserRankHandler(UserPrompt userPrompt) {
-  	this.userPrompt = userPrompt;
+public class UserRankHandler implements Command {
+  UserDao userDao;
+
+  public UserRankHandler(UserDao userDao) {
+    this.userDao = userDao;
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
+    System.out.println("[유저 순위 보기]");
+
     int i = 1;
-    System.out.println("[유저 랭킹]");
-    for(User user : userPrompt.rank()) {
-      System.out.printf("%d위. %s (조회수 : %d)\n",i,user.getNickName(),user.getViewCount());
+    for(User user : userDao.sortUserByViewCount()) {
+      System.out.printf("%d위 > %s (조회수 : %d)\n", i, user.getNickName(), user.getViewCount());
       i++;
     }
   }
