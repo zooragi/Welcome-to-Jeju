@@ -24,7 +24,7 @@ public class SearchThemeHandler implements Command {
     System.out.println("[테마 검색하기]");
 
     while (true) {
-      String input = Prompt.inputString("테마 이름(취소 : 엔터) > ");
+      String input = Prompt.inputString("테마(취소 : 엔터) > ");
 
       if(input.equals("") || input.length() == 0) {
         System.out.println("테마 검색하기 취소!");

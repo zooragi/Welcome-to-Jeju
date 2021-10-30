@@ -24,7 +24,8 @@ public class LikedThemeListHandler implements Command{
 
     int no = 1;
     for (Theme theme : themeList) {
-      System.out.printf("<%d> '%s' 님의 '%s'", no++, theme.getOwner().getNickName(), theme.getTitle());
+      System.out.printf("<%d> '%s' 님의 '%s' 테마\n",
+          no++, theme.getOwner().getNickName(), theme.getTitle());
     }
   }
 

@@ -21,13 +21,13 @@ public class SearchHashtagHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[해시 태그 검색하기]");
+    System.out.println("[해시태그 검색하기]");
 
     while (true) {
-      String input = Prompt.inputString("해시 태그(취소 : 엔터) > ");
+      String input = Prompt.inputString("해시태그(취소 : 엔터) > ");
 
       if(input.equals("") || input.length() == 0) {
-        System.out.println("해시 태그 검색하기 취소!");
+        System.out.println("해시태그 검색하기 취소!");
         return;
       }
 
@@ -48,7 +48,8 @@ public class SearchHashtagHandler implements Command {
   private void printList(List<Theme> themeList) throws Exception {
     int no = 1;
     for (Theme theme : themeList) {
-      System.out.printf("<%d> '%s' 님의 '%s'\n", no++, theme.getOwner().getNickName(), theme.getTitle());
+      System.out.printf("<%d> '%s' 님의 '%s' 테마\n",
+          no++, theme.getOwner().getNickName(), theme.getTitle());
     }
   }
 

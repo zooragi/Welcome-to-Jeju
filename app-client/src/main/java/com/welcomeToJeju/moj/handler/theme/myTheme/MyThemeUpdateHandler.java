@@ -32,7 +32,7 @@ public class MyThemeUpdateHandler implements Command {
       return;
     }
 
-    String title = Prompt.inputString("테마 이름 > ");
+    String title = Prompt.inputString("테마 제목 > ");
 
     // 카테고리
     Category category = new ThemeHandlerHelper(themeDao).promptCategory();
@@ -40,7 +40,7 @@ public class MyThemeUpdateHandler implements Command {
     // 해시태그
     List<String> hashtagList = new ArrayList<>();
     while (true) {
-      String hashtag = Prompt.inputString("해시 태그(완료: 엔터) > ");
+      String hashtag = Prompt.inputString("해시태그(완료: 엔터) > ");
       if (hashtag.equals("") || hashtag.length() == 0) {
         break;
       }

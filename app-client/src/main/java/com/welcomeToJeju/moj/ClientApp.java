@@ -144,7 +144,7 @@ public class ClientApp {
 
     commandMap.put("/search/theme", new SearchThemeHandler(themeDao, sqlSession));
     commandMap.put("/search/user", new SearchUserHandler(userDao, themeDao, sqlSession));
-    commandMap.put("/search/hashTag", new SearchHashtagHandler(themeDao, userDao));
+    commandMap.put("/search/hashtag", new SearchHashtagHandler(themeDao, userDao));
 
     commandMap.put("/ranking/theme", new ThemeRankingHandler(themeDao));
     commandMap.put("/ranking/user", new UserRankingHandler(userDao));
@@ -230,7 +230,7 @@ public class ClientApp {
 
     search.add(new MenuItem("테마 검색하기", "/search/theme"));
     search.add(new MenuItem("유저 검색하기", "/search/user"));
-    search.add(new MenuItem("해시 태그 검색하기", "/search/hashTag"));
+    search.add(new MenuItem("해시태그 검색하기", "/search/hashtag"));
 
     mg.add(search);
   }

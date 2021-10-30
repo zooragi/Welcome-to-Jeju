@@ -19,8 +19,7 @@ public class ThemeRankingHandler implements Command {
 
     int no = 1;
     for(Theme theme : themeDao.themeRankingByViewCount()) {
-      System.out.printf("%d위 > %s (조회수 : %d)\n",
-          no++, theme.getTitle(), theme.getViewCount());
+      System.out.printf("%d위 > %s (조회수 : %d)\n", no++, theme.getTitle(), theme.getViewCount());
     }
   }
 

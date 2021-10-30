@@ -21,6 +21,8 @@ public class MyThemeDeleteHandler implements Command {
   public void execute(CommandRequest request) throws Exception{
     System.out.println("[나의 테마 삭제하기]");
 
+    Theme theme = (Theme) request.getAttribute("theme");
+
     String input = Prompt.inputString("삭제하기(y/N) > ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -28,14 +30,13 @@ public class MyThemeDeleteHandler implements Command {
       return;
     }
 
-    Theme theme = (Theme) request.getAttribute("theme");
-
     try {
       themeDao.deleteAllLikedTheme(theme.getNo());
       themeDao.deleteHashtag(theme.getNo());
       themeDao.delete(theme.getNo());
       sqlSession.commit();
       System.out.println("나의 테마 삭제하기 성공!");
+
     } catch (Exception e) {
       sqlSession.rollback();
       System.out.println("나의 테마 삭제하기 실패!");

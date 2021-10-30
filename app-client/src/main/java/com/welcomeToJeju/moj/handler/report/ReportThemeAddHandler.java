@@ -31,7 +31,7 @@ public class ReportThemeAddHandler implements Command {
 
     ReportTheme reportTheme = new ReportTheme();
 
-    String themeTitle = Prompt.inputString("테마 이름(취소 : 엔터) > ");
+    String themeTitle = Prompt.inputString("테마(취소 : 엔터) > ");
 
     if (themeTitle.equals("") || themeTitle.length() == 0) {
       System.out.println("테마 신고하기 취소!");

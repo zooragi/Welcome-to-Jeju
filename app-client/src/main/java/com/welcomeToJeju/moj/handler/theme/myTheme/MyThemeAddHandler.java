@@ -25,7 +25,7 @@ public class MyThemeAddHandler implements Command {
 
     Theme theme = new Theme();
 
-    theme.setTitle(Prompt.inputString("테마 이름(취소 : 엔터) > "));
+    theme.setTitle(Prompt.inputString("테마 제목(취소 : 엔터) > "));
 
     if (theme.getTitle().equals("") || theme.getTitle().length() == 0) {
       System.out.println("나의 테마 만들기 취소!");
