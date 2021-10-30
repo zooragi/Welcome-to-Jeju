@@ -29,7 +29,7 @@ public class LikedUserDeleteHandler implements Command {
       return;
     }
 
-    User user = userDao.findByNickName(input);
+    User user = userDao.findByNickname(input);
 
     if(user == null) {
       System.out.println("유저 없음!");

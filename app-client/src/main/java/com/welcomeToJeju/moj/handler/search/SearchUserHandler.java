@@ -35,7 +35,7 @@ public class SearchUserHandler implements Command {
         return;
       }
 
-      User user = userDao.findByName(input);
+      User user = userDao.findByNickname(input);
 
       if(user == null) {
         System.out.println("유저 없음!");
@@ -50,7 +50,7 @@ public class SearchUserHandler implements Command {
       userDao.updateViewCount(params);
       sqlSession.commit();
 
-      System.out.printf("[%s] 검색 결과\n", user.getNickName());
+      System.out.printf("[%s] 검색 결과\n", user.getNickname());
       printList(user);
 
       return;

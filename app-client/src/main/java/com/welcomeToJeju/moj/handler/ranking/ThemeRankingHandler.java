@@ -17,6 +17,7 @@ public class ThemeRankingHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[테마 순위 보기]");
 
+    // 비공개 테마도 나옴
     int no = 1;
     for(Theme theme : themeDao.themeRankingByViewCount()) {
       System.out.printf("%d위 > %s (조회수 : %d)\n", no++, theme.getTitle(), theme.getViewCount());

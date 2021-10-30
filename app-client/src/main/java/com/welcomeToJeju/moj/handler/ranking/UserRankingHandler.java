@@ -17,8 +17,8 @@ public class UserRankingHandler implements Command {
     System.out.println("[유저 순위 보기]");
 
     int no = 1;
-    for(User user : userDao.sortUserByViewCount()) {
-      System.out.printf("%d위 > %s (조회수 : %d)\n", no++, user.getNickName(), user.getViewCount());
+    for(User user : userDao.userRankingByViewCount()) {
+      System.out.printf("%d위 > %s (조회수 : %d)\n", no++, user.getNickname(), user.getViewCount());
     }
   }
 

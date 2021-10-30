@@ -30,10 +30,19 @@ public class AdminUserDeleteHandler implements Command {
       return;
     }
 
-    userDao.delete(user.getNo());
-    sqlSession.commit();
+    try {
+      // 에러
+      userDao.delete(user.getNo());
+      userDao.deleteAllLikedUser(user.getNo());
+      sqlSession.commit();
+      System.out.println("회원 삭제하기 성공!");
 
-    System.out.println("회원 삭제하기 성공!");
+    } catch (Exception e) {
+      System.out.println(e);
+      sqlSession.rollback();
+      System.out.println("회원 삭제하기 실패!");
+    }
+
   }
 
 

@@ -57,7 +57,7 @@
 		</association>
 	</resultMap>
 	
-	<sql id="themeReportSelect">
+	<sql id="selectThemeReport">
     select
       content,
       ju.user_no writer_no,
@@ -98,11 +98,11 @@
   </insert>
   
   <select id="findAllReportTheme" resultMap="ReportThemeMap">
-    <include refid="themeReportSelect"/>
+    <include refid="selectThemeReport"/>
   </select>
 
   <select id="reportThemeFindByUserNo" resultMap="ReportThemeMap" parameterType="int">
-    <include refid="themeReportSelect"/>  
+    <include refid="selectThemeReport"/>  
     where jrt.user_no=#{no}
   </select>
 	

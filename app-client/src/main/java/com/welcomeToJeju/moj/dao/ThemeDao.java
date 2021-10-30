@@ -33,7 +33,7 @@ public interface ThemeDao {
   // 좋아하는 테마
   void insertLikedTheme(int themeNo, int userNo) throws Exception;
   void deleteLikedTheme(int themeNo, int userNo) throws Exception;
-  List<Theme> deleteAllLikedTheme(int userNo) throws Exception;
+  void deleteAllLikedTheme(int userNo) throws Exception;
   List<Theme> findAllLikedTheme(int userNo) throws Exception;
 
 

@@ -54,13 +54,14 @@ public class MyThemeAddHandler implements Command {
     // 같은 해시 태그를 입력했을 때?
     try {
       themeDao.insert(theme);
-      for (String hashTag : theme.getHashtags()) {
-        themeDao.insertHashtag(theme.getNo(), hashTag);
+      for (String hashtag : theme.getHashtags()) {
+        themeDao.insertHashtag(theme.getNo(), hashtag);
       }
       sqlSession.commit();
       System.out.println("나의 테마 만들기 성공!");
 
     } catch (Exception e) {
+      System.out.println(e);
       sqlSession.rollback();
       System.out.println("나의 테마 만들기 실패!");
     }

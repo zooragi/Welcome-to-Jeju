@@ -29,7 +29,7 @@ public class AdminUserListHandler implements Command {
       System.out.printf("<%d> %s, %s, %s, 🚨 %d\n",
           user.getNo(),
           user.getEmail(),
-          user.getNickName(),
+          user.getNickname(),
           user.getRegisteredDate(),
           user.getWarningCount());
     }

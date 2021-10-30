@@ -22,10 +22,11 @@ public class LikedThemeListHandler implements Command{
 
     Collection<Theme> themeList = themeDao.findAllLikedTheme(AuthLoginHandler.getLoginUser().getNo());
 
+    // 닉네임 안 됨
     int no = 1;
     for (Theme theme : themeList) {
       System.out.printf("<%d> '%s' 님의 '%s' 테마\n",
-          no++, theme.getOwner().getNickName(), theme.getTitle());
+          no++, theme.getOwner().getNickname(), theme.getTitle());
     }
   }
 

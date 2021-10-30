@@ -46,6 +46,7 @@ public class SearchThemeHandler implements Command {
       themeDao.updateViewCount(params);
       sqlSession.commit();
 
+      // 안 됨
       System.out.printf("[%s] 검색 결과\n", input);
       PlaceHandlerHelper.printPlaceInfo(theme);
 

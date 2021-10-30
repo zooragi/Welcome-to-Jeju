@@ -16,6 +16,10 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
+import com.welcomeToJeju.moj.handler.admin.AdminUserDeleteHandler;
+import com.welcomeToJeju.moj.handler.admin.AdminUserDetailHandler;
+import com.welcomeToJeju.moj.handler.admin.AdminUserListHandler;
+import com.welcomeToJeju.moj.handler.admin.AdminUserUpdateHandler;
 import com.welcomeToJeju.moj.handler.likedTheme.LikedThemeAddHandler;
 import com.welcomeToJeju.moj.handler.likedTheme.LikedThemeDeleteHandler;
 import com.welcomeToJeju.moj.handler.likedTheme.LikedThemeListHandler;
@@ -24,11 +28,6 @@ import com.welcomeToJeju.moj.handler.likedUser.LikedUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserListHandler;
 import com.welcomeToJeju.moj.handler.ranking.ThemeRankingHandler;
 import com.welcomeToJeju.moj.handler.ranking.UserRankingHandler;
-import com.welcomeToJeju.moj.handler.report.AdminReportThemeProcessHandler;
-import com.welcomeToJeju.moj.handler.report.AdminReportUserProcessHandler;
-import com.welcomeToJeju.moj.handler.report.ReportListHandler;
-import com.welcomeToJeju.moj.handler.report.ReportThemeAddHandler;
-import com.welcomeToJeju.moj.handler.report.ReportUserAddHandler;
 import com.welcomeToJeju.moj.handler.search.SearchHashtagHandler;
 import com.welcomeToJeju.moj.handler.search.SearchThemeHandler;
 import com.welcomeToJeju.moj.handler.search.SearchUserHandler;
@@ -39,6 +38,11 @@ import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeDetailHandler;
 import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeListHandler;
 import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeUpdateHandler;
 import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
+import com.welcomeToJeju.moj.handler.user.AuthLogoutHandler;
+import com.welcomeToJeju.moj.handler.user.AuthUserInfoHandler;
+import com.welcomeToJeju.moj.handler.user.UserAddHandler;
+import com.welcomeToJeju.moj.handler.user.UserDeleteHandler;
+import com.welcomeToJeju.moj.handler.user.UserUpdateHandler;
 import com.welcomeToJeju.moj.listener.LoginListener;
 import com.welcomeToJeju.request.RequestAgent;
 import com.welcomeToJeju.util.Prompt;
@@ -112,13 +116,13 @@ public class ClientApp {
 
     // Command 객체 준비
     // 회원
-    //    commandMap.put("/user/add", new UserAddHandler(userDao, sqlSession));
-    //    commandMap.put("/auth/userinfo", new AuthUserInfoHandler());
-    //    commandMap.put("/user/update", new UserUpdateHandler(userDao, sqlSession));
-    //    commandMap.put("/user/delete", new UserDeleteHandler(userDao, sqlSession));
-    //
-    //    commandMap.put("/auth/login", new AuthLoginHandler(userDao, userListeners));
-    //    commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
+    commandMap.put("/user/add", new UserAddHandler(userDao, sqlSession));
+    commandMap.put("/auth/userinfo", new AuthUserInfoHandler(userDao)); //
+    commandMap.put("/user/update", new UserUpdateHandler(userDao, sqlSession));
+    commandMap.put("/user/delete", new UserDeleteHandler(userDao, sqlSession));
+
+    commandMap.put("/auth/login", new AuthLoginHandler(userDao, userListeners));
+    commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
 
     commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao, sqlSession));
     commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
@@ -149,19 +153,19 @@ public class ClientApp {
     commandMap.put("/ranking/theme", new ThemeRankingHandler(themeDao));
     commandMap.put("/ranking/user", new UserRankingHandler(userDao));
 
-    commandMap.put("/report/theme", new ReportThemeAddHandler(reportDao, themeDao, sqlSession));
-    commandMap.put("/report/user", new ReportUserAddHandler(reportDao, userDao, sqlSession));
-    commandMap.put("/report/list", new ReportListHandler(reportDao));
-
-    // 관리자: 신고 관리
-    commandMap.put("/admin/reportThemeProcess", new AdminReportThemeProcessHandler(reportDao, themeDao, userDao, sqlSession));
-    commandMap.put("/admin/reportUserProcess", new AdminReportUserProcessHandler(reportDao, userDao, sqlSession));
+    //    commandMap.put("/report/theme", new ReportThemeAddHandler(reportDao, themeDao, sqlSession));
+    //    commandMap.put("/report/user", new ReportUserAddHandler(reportDao, userDao, sqlSession));
+    //    commandMap.put("/report/list", new ReportListHandler(reportDao));
+    //
+    //    // 관리자: 신고 관리
+    //    commandMap.put("/admin/reportThemeProcess", new AdminReportThemeProcessHandler(reportDao, themeDao, userDao, sqlSession));
+    //    commandMap.put("/admin/reportUserProcess", new AdminReportUserProcessHandler(reportDao, userDao, sqlSession));
 
     // 관리자: 회원 관리
-    //    commandMap.put("/admin/userList", new AdminUserListHandler(userDao));
-    //    commandMap.put("/admin/userDetail", new AdminUserDetailHandler(userDao));
-    //    commandMap.put("/admin/userUpdate", new AdminUserUpdateHandler(userDao, sqlSession));
-    //    commandMap.put("/admin/userDelete", new AdminUserDeleteHandler(userDao, sqlSession));
+    commandMap.put("/admin/userList", new AdminUserListHandler(userDao));
+    commandMap.put("/admin/userDetail", new AdminUserDetailHandler(userDao));
+    commandMap.put("/admin/userUpdate", new AdminUserUpdateHandler(userDao, sqlSession));
+    commandMap.put("/admin/userDelete", new AdminUserDeleteHandler(userDao, sqlSession));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
@@ -263,6 +267,7 @@ public class ClientApp {
   private Menu createAdminUserMenu(MenuGroup mg) {
     MenuGroup adminUser = new MenuGroup("회원 관리", Menu.ACCESS_ADMIN);
     adminUser.setMenuFilter(menuFilter);
+
     adminUser.add(new MenuItem("회원 목록 보기", "/admin/userList"));
     adminUser.add(new MenuItem("회원 상세 보기", "/admin/userDetail"));
 

@@ -25,9 +25,10 @@ public class UserUpdateHandler implements Command {
 
     User temp = new User();
 
+    temp.setNo(user.getNo());
     temp.setEmail(Prompt.inputString(String.format("이메일(%s) > ", user.getEmail())));
     temp.setPassword(Prompt.inputString("비밀번호 > "));
-    temp.setNickName(Prompt.inputString(String.format("닉네임(%s) > ", user.getNickName())));
+    temp.setNickname(Prompt.inputString(String.format("닉네임(%s) > ", user.getNickname())));
 
     String input = Prompt.inputString("수정하기(y/N) > ");
 

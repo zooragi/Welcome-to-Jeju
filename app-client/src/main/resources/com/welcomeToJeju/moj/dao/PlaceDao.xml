@@ -65,10 +65,33 @@
     where place_no=#{no}
   </delete>
   
+  <select id="findByThemeNo" resultMap="PlaceMap" parameterType="int">
+    select
+      p.place_no,
+      p.theme_no,
+      p.place_name,
+      p.place_address,
+      p.x_coord,
+      p.y_coord,
+      p.user_no owner_no,
+      pp.file_path,
+      pp.place_photo_no,
+      c.comment,
+      c.comment_no
+    from
+      jeju_place p
+      join jeju_place_photo pp on p.place_no=pp.place_no
+      join jeju_place_comment c on p.place_no=c.place_no
+    where
+      theme_no=#{no}
+  </select>
+  
+  <!-- 
   <select id="findAll" resultMap="PlaceMap">
   </select>
   
   <select id="findByThemeNo" resultMap="PlaceMap" parameterType="int">
   </select>
+   -->
   
 </mapper>

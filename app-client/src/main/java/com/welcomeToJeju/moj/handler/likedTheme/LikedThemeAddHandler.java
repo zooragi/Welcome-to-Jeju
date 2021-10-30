@@ -47,7 +47,19 @@ public class LikedThemeAddHandler implements Command {
       return;
     }
 
-    //
+    // 비공개 테마도 등록
+    Collection<Place> placeList = placeDao.findByThemeNo(theme.getNo());
+    int no = 1;
+    for (Place place : placeList) {
+      System.out.printf("<%d>\n", no++);
+      System.out.printf("장소 이름 > %s\n", place.getStoreName());
+      System.out.printf("장소 주소 > %s\n", place.getStoreAddress());
+      System.out.printf("위도 > %s\n", place.getxCoord());
+      System.out.printf("경도 > %s\n", place.getyCoord());
+      System.out.printf("장소 후기> %s\n", place.getComments().toString());
+      System.out.println();
+    }
+
     while(true) {
       String input = Prompt.inputString("정말로 등록 하시겠습니까?(y/N) : ");
       if(input.equalsIgnoreCase("y")) {
@@ -59,18 +71,6 @@ public class LikedThemeAddHandler implements Command {
         System.out.println("잘못된 입력입니다. 다시 입력하세요.");
         continue;
       }
-    }
-
-    Collection<Place> placeList = placeDao.findByThemeNo(theme.getNo());
-    int no = 1;
-    for (Place place : placeList) {
-      System.out.printf("<%d>\n", no++);
-      System.out.printf("장소 이름 > %s\n", place.getStoreName());
-      System.out.printf("장소 주소 > %s\n", place.getStoreAddress());
-      System.out.printf("위도 > %s\n", place.getxCoord());
-      System.out.printf("경도 > %s\n", place.getyCoord());
-      System.out.printf("장소 후기> %s\n", place.getComments().toString());
-      System.out.println();
     }
 
     try {

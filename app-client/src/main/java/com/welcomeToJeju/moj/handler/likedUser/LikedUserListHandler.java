@@ -28,7 +28,7 @@ public class LikedUserListHandler implements Command {
 
     int no = 1;
     for (User user : userList) {
-      System.out.printf("<%d> %s\n", no++, user.getNickName());
+      System.out.printf("<%d> %s\n", no++, user.getNickname());
     }
   }
 

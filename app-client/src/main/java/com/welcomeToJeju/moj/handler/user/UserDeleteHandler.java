@@ -31,13 +31,20 @@ public class UserDeleteHandler implements Command {
       return;
     }
 
-    userDao.delete(user.getNo());
-    sqlSession.commit();
+    try {
+      // 에러
+      userDao.delete(user.getNo());
+      userDao.deleteAllLikedUser(user.getNo());
+      sqlSession.commit();
+      System.out.println("탈퇴하기 성공!");
 
-    AuthLoginHandler.loginUser = null;
-    AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
+      AuthLoginHandler.loginUser = null;
+      AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
 
-    System.out.println("탈퇴하기 성공!");
+    } catch (Exception e) {
+      sqlSession.rollback();
+      System.out.println("탈퇴하기 실패!");
+    }
   }
 
 

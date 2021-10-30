@@ -25,12 +25,20 @@ public class UserAddHandler implements Command {
 
     user.setEmail(Prompt.inputString("이메일 > "));
     user.setPassword(Prompt.inputString("비밀번호 > "));
-    user.setNickName(Prompt.inputString("닉네임 > "));
+    user.setNickname(Prompt.inputString("닉네임 > "));
 
-    userDao.insert(user);
-    sqlSession.commit();
+    try {
+      userDao.insert(user);
+      sqlSession.commit();
+      System.out.println("회원 가입 성공!");
 
-    System.out.println("회원 가입 성공!");
+    } catch (Exception e) {
+      // 중복 체크 안 됨
+      System.out.println(
+          e.getCause().toString().contains("UIX_email") ?
+              "이메일 중복!" : "닉네임 중복!");
+      return;
+    }
   }
 
 

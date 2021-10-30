@@ -7,7 +7,7 @@ public class User implements Comparable<User> {
   private int no;
   private String email;
   private String password;
-  private String nickName;
+  private String nickname;
   private Date registeredDate;
 
   private int viewCount;
@@ -16,8 +16,8 @@ public class User implements Comparable<User> {
 
   @Override
   public String toString() {
-    return "User [no=" + no + ", email=" + email + ", password=" + password + ", nickName="
-        + nickName + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
+    return "User [no=" + no + ", email=" + email + ", password=" + password + ", nickname="
+        + nickname + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", reportedCount=" + reportedCount + ", warningCount=" + warningCount + "]";
   }
 
@@ -45,12 +45,12 @@ public class User implements Comparable<User> {
     this.password = password;
   }
 
-  public String getNickName() {
-    return nickName;
+  public String getNickname() {
+    return nickname;
   }
 
-  public void setNickName(String nickName) {
-    this.nickName = nickName;
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
 
   public Date getRegisteredDate() {
