@@ -27,14 +27,14 @@ public class AllThemeListHandler implements Command {
 
     int no = 1;
     for (Theme theme : themeList) {
-      if (!theme.isPublic()) {
+      if (theme.getIsPublic() == 0) {
         continue;
       }
 
       System.out.printf("<%d>\n", no++);
       System.out.printf("제목 > %s\n", theme.getTitle());
       System.out.printf("카테고리 > %s\n", theme.getCategory().getName());
-      System.out.printf("해시태그 > %s\n", theme.getHashTags().toString());
+      System.out.printf("해시태그 > %s\n", theme.getHashtags().toString());
     }
   }
 

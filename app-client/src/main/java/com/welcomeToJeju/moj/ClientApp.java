@@ -32,6 +32,7 @@ import com.welcomeToJeju.moj.handler.report.ReportUserAddHandler;
 import com.welcomeToJeju.moj.handler.search.SearchHashTagHandler;
 import com.welcomeToJeju.moj.handler.search.SearchThemeHandler;
 import com.welcomeToJeju.moj.handler.search.SearchUserHandler;
+import com.welcomeToJeju.moj.handler.theme.AllThemeListHandler;
 import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeAddHandler;
 import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeDeleteHandler;
 import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeDetailHandler;
@@ -126,7 +127,7 @@ public class ClientApp {
     commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, sqlSession));
 
     // 전체 테마 보기
-    //    commandMap.put("/theme/list", new AllThemeListHandler(themeDao));
+    commandMap.put("/theme/list", new AllThemeListHandler(themeDao));
 
     //    commandMap.put("/place/add", new PlaceAddHandler(themeDao, sqlSession));
     //    commandMap.put("/place/list", new PlaceListHandler(themeDao));
