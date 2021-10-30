@@ -11,8 +11,8 @@ public class Place {
   private String storeName;
   private String storeAddress;
 
-  private List<String> photos = new ArrayList<>();
-  private List<String> comments = new ArrayList<>();
+  private List<Photo> photos = new ArrayList<>();
+  private List<Comment> comments = new ArrayList<>();
 
   private String xCoord;
   private String yCoord;
@@ -20,8 +20,7 @@ public class Place {
   @Override
   public String toString() {
     return "Place [no=" + no + ", owner=" + owner + ", theme=" + theme + ", storeName=" + storeName
-        + ", storeAddress=" + storeAddress + ", photos=" + photos + ", comments=" + comments
-        + ", xCoord=" + xCoord + ", yCoord=" + yCoord + "]";
+        + ", storeAddress=" + storeAddress + ", xCoord=" + xCoord + ", yCoord=" + yCoord + "]";
   }
 
   public int getNo() {
@@ -64,19 +63,19 @@ public class Place {
     this.storeAddress = storeAddress;
   }
 
-  public List<String> getPhotos() {
+  public List<Photo> getPhotos() {
     return photos;
   }
 
-  public void setPhotos(List<String> photos) {
+  public void setPhotos(List<Photo> photos) {
     this.photos = photos;
   }
 
-  public List<String> getComments() {
+  public List<Comment> getComments() {
     return comments;
   }
 
-  public void setComments(List<String> comments) {
+  public void setComments(List<Comment> comments) {
     this.comments = comments;
   }
 

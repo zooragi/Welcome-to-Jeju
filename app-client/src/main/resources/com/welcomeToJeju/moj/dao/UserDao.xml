@@ -59,7 +59,7 @@
 	      email=#{email} and password=password(#{password})
   </select>
   
-  <select id="findByNickName" resultMap="UserMap" parameterType="string">
+  <select id="findByNickName" resultMap="UserMap" parameterType="String">
     select
       user_no,
       email,

@@ -8,7 +8,7 @@ public interface UserDao {
 
   void insert(User user) throws Exception;
   void update(User user) throws Exception;
-  void delete(int No) throws Exception;
+  void delete(int userNo) throws Exception;
   List<User> findAll() throws Exception;
   User findByNickName(String nickName) throws Exception;
 

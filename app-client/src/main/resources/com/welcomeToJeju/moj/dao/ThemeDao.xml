@@ -16,7 +16,7 @@
     <association property="owner" javaType="User">
       <id column="owner_no" property="no"/>
       <result column="onwer_email" property="email"/>
-      <result column="onwer_nickname" property="nickname"/>
+      <result column="onwer_nickname" property="nickName"/>
     </association>
     
     <association property="category" javaType="Category">
@@ -95,7 +95,7 @@
       jeju_theme_category
   </select>
   
-  <select id="findByTitle" resultMap = "ThemeMap" parameterType = "string">
+  <select id="findByTitle" resultMap = "ThemeMap" parameterType = "String">
 	  select
 		  t.theme_no,
 		  t.title,
@@ -130,7 +130,7 @@
 	    user_no=#{no}
   </select>
   
-  <select id="findByHashtag" resultMap = "ThemeMap" parameterType = "string">
+  <select id="findByHashtag" resultMap = "ThemeMap" parameterType = "String">
 	  select
       title,
       user_no owner_no,
