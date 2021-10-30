@@ -1,28 +1,35 @@
 package com.welcomeToJeju.moj.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.welcomeToJeju.moj.domain.Category;
 import com.welcomeToJeju.moj.domain.Theme;
 
 public interface ThemeDao {
 
+  // 테마
   void insert(Theme theme) throws Exception;
-  //  void update(Theme theme) throws Exception;
-  //  void delete(int no) throws Exception;
+  void insertHashtag(int themeNo, String hashTag) throws Exception;
+
+  void update(Theme theme) throws Exception;
+
+  void delete(int themeNo) throws Exception;
+  void deleteHashtag(int themeNo) throws Exception;
+
   List<Theme> findAll() throws Exception;
-
-  Theme findByTitle(String title) throws Exception;
-  //  List<Theme> findByHashTag(String hashTag) throws Exception;
-
-  //  void likedThemeInsert(int themeNo, int userNo) throws Exception;
-  //  void likedThemeDelete(int themeNo, int userNo) throws Exception;
-  //  List<Theme> likedThemeList(int userNo) throws Exception;
-
   List<Category> findAllCategory() throws Exception;
 
-  void insertHashTag(@Param("themeNo") int themeNo, @Param("hashTag") String hashTag) throws Exception;
-  //  void deleteHashTag(int themeNo) throws Exception;
+  Theme findByTitle(String themeTitle) throws Exception;
+  List<Theme> findByUserNo(int userNo) throws Exception;
+  List<Theme> findByHashtag(String hashtag) throws Exception;
+
+  void updateViewCount(int viewCount, int themeNo) throws Exception;
+  void updateReportedCount(int reportedCount, int themeNo) throws Exception;
+
+  // 좋아하는 테마
+  void insertLikedTheme(int themeNo, int userNo) throws Exception;
+  void deleteLikedTheme(int themeNo, int userNo) throws Exception;
+  List<Theme> deleteAllLikedTheme(int userNo) throws Exception;
+  List<Theme> findAllLikedTheme(int userNo) throws Exception;
 
 
 }

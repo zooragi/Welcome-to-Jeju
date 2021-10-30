@@ -9,20 +9,21 @@ public class Theme implements Comparable<Theme> {
   private String title;
   private User owner;
   private Category category;
-  private boolean isPublic;
-  private boolean isShare;
+  private int isPublic;
+  private int isShare;
 
   private int viewCount;
   private int reportedCount;
 
   private List<Place> placeList = new ArrayList<>();
-  private List<String> hashTags = new ArrayList<>();
+  private List<String> hashtags = new ArrayList<>();
 
   @Override
   public String toString() {
-    return "Theme [no=" + no + ", title=" + title + ", owner=" + owner + ", isPublic=" + isPublic
-        + ", isShare=" + isShare + ", viewCount=" + viewCount + ", reportedCount=" + reportedCount
-        + ", placeList=" + placeList + ", hashTags=" + hashTags + "]";
+    return "Theme [no=" + no + ", title=" + title + ", owner=" + owner + ", category=" + category
+        + ", isPublic=" + isPublic + ", isShare=" + isShare + ", viewCount=" + viewCount
+        + ", reportedCount=" + reportedCount + ", placeList=" + placeList + ", hashtags=" + hashtags
+        + "]";
   }
 
   public int getNo() {
@@ -57,19 +58,19 @@ public class Theme implements Comparable<Theme> {
     this.category = category;
   }
 
-  public boolean isPublic() {
+  public int getIsPublic() {
     return isPublic;
   }
 
-  public void setPublic(boolean isPublic) {
+  public void setIsPublic(int isPublic) {
     this.isPublic = isPublic;
   }
 
-  public boolean isShare() {
+  public int getIsShare() {
     return isShare;
   }
 
-  public void setShare(boolean isShare) {
+  public void setIsShare(int isShare) {
     this.isShare = isShare;
   }
 
@@ -97,12 +98,12 @@ public class Theme implements Comparable<Theme> {
     this.placeList = placeList;
   }
 
-  public List<String> getHashTags() {
-    return hashTags;
+  public List<String> getHashtags() {
+    return hashtags;
   }
 
-  public void setHashTags(List<String> hashTags) {
-    this.hashTags = hashTags;
+  public void setHashtags(List<String> hashtags) {
+    this.hashtags = hashtags;
   }
 
   @Override

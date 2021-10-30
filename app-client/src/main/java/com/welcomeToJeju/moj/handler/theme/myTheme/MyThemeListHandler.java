@@ -19,7 +19,7 @@ public class MyThemeListHandler implements Command {
   public void execute(CommandRequest request) throws Exception{
     System.out.println("[나의 테마 목록 보기]");
 
-    Collection<Theme> themeList = themeDao.findAll();
+    Collection<Theme> themeList = themeDao.findByUserNo(AuthLoginHandler.getLoginUser().getNo());
 
     if (themeList.size() == 0) {
       System.out.println("테마 없음!");
@@ -32,9 +32,9 @@ public class MyThemeListHandler implements Command {
         System.out.printf("<%d>\n", no++);
         System.out.printf("제목 > %s\n", theme.getTitle());
         System.out.printf("카테고리 > %s\n", theme.getCategory().getName());
-        System.out.printf("해시태그 > %s\n", theme.getHashTags().toString());
+        System.out.printf("해시태그 > %s\n", theme.getHashtags().toString());
 
-        if (theme.isPublic()) {
+        if (theme.getIsPublic() == 1) {
           System.out.println("공개");
           System.out.printf("조회수 > %s\n", theme.getViewCount());
         } else {

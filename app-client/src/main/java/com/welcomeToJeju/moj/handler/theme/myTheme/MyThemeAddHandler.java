@@ -37,16 +37,16 @@ public class MyThemeAddHandler implements Command {
 
     // 해시태그
     while (true) {
-      String hashTag = Prompt.inputString("해시태그(완료 : 엔터) > ");
-      if (hashTag.equals("") || hashTag.length() == 0) {
+      String hashtag = Prompt.inputString("해시태그(완료 : 엔터) > ");
+      if (hashtag.equals("") || hashtag.length() == 0) {
         break;
       }
-      theme.getHashTags().add(hashTag);
+      theme.getHashtags().add(hashtag);
     }
 
     String isPublic = Prompt.inputString("공개(Y/n) > ");
     if (isPublic.equalsIgnoreCase("y") || isPublic.length() == 0) {
-      theme.setPublic(true);
+      theme.setIsPublic(1);
     }
 
     theme.setOwner(AuthLoginHandler.getLoginUser());
@@ -54,11 +54,12 @@ public class MyThemeAddHandler implements Command {
     // 같은 해시 태그를 입력했을 때?
     try {
       themeDao.insert(theme);
-      for (String hashTag : theme.getHashTags()) {
-        themeDao.insertHashTag(theme.getNo(), hashTag);
+      for (String hashTag : theme.getHashtags()) {
+        themeDao.insertHashtag(theme.getNo(), hashTag);
       }
       sqlSession.commit();
       System.out.println("나의 테마 만들기 성공!");
+
     } catch (Exception e) {
       sqlSession.rollback();
       System.out.println("나의 테마 만들기 실패!");

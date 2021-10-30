@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.domain.User;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
 import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
-import com.welcomeToJeju.request.RequestAgent;
 import com.welcomeToJeju.util.Prompt;
 
 public class MyThemeDetailHandler implements Command {
   Map<String, Map<String, String>> controlMenu = new HashMap<>();
-	ThemeDao themeDao;
-	ArrayList<Theme> myThemeList = new ArrayList<>();
-  
+  ThemeDao themeDao;
+  ArrayList<Theme> myThemeList = new ArrayList<>();
+
   public MyThemeDetailHandler(ThemeDao themeDao) {
     addPlaceDetailMapValue();
     addThemeDetailMapValue();
@@ -28,10 +26,10 @@ public class MyThemeDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     Theme searchedTheme;
-    
-    ArrayList<Theme> themeList = (ArrayList<Theme>) themeDao.findAll();
+
+    ArrayList<Theme> themeList = (ArrayList<Theme>) themeDao.findByUserNo(AuthLoginHandler.getLoginUser().getNo());
     findMyThemeList(themeList);
-    
+
     System.out.println("[테마 상세보기]");
     System.out.println();
 
@@ -39,7 +37,7 @@ public class MyThemeDetailHandler implements Command {
     searchedTheme = chooseTheme(myThemeList);
     if(searchedTheme == null) return;
     User user = AuthLoginHandler.getLoginUser();
-    if (!(user.getNo() == searchedTheme.getThemeOwnerNo()) && user.getEmail().equals("root@test.com")) {
+    if (!(user.getNo() == searchedTheme.getOwner().getNo()) && user.getEmail().equals("root@test.com")) {
       return;
     }
 
@@ -61,27 +59,27 @@ public class MyThemeDetailHandler implements Command {
       showMenuList(detailMenuListOfKeys);
       selectedNum = chooseMenu(detailMenuListOfKeys.size());
       if(selectedNum == 0) return;
-      
+
       request.getRequestDispatcher(detailMenu.get(detailMenuListOfKeys.get(selectedNum-1))).forward(request);
     }
 
   }
 
   private void findMyThemeList(ArrayList<Theme> themeList) {
-  	myThemeList.clear();
-  	for(Theme theme : themeList) {
-  		if(theme.getThemeOwnerNo() == (AuthLoginHandler.getLoginUser().getNo())) {
-  			myThemeList.add(theme);
-  		}
-  	}
-		
-	}
+    myThemeList.clear();
+    for(Theme theme : themeList) {
+      if(theme.getOwner().getNo() == (AuthLoginHandler.getLoginUser().getNo())) {
+        myThemeList.add(theme);
+      }
+    }
 
-	private void showThemeList(ArrayList<Theme> themeList) {
-  	int i = 1;
+  }
+
+  private void showThemeList(ArrayList<Theme> themeList) {
+    int i = 1;
     for (Theme theme : themeList) {
       System.out.printf("<%d>\n", i++);
-      System.out.printf("테마 제목 > [%s] %s\n", theme.getCategory(), theme.getTitle());
+      System.out.printf("테마 제목 > [%s] %s\n", theme.getCategory().getName(), theme.getTitle());
       System.out.println();
     }
   }
@@ -106,7 +104,7 @@ public class MyThemeDetailHandler implements Command {
   }
 
   private void showMenuList(List<String> list) {
-  	int i = 1;
+    int i = 1;
     for (String key : list) {
       System.out.printf("%d. %s\n", i++, key);
     }

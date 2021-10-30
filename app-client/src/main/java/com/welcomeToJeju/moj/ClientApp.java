@@ -29,6 +29,11 @@ import com.welcomeToJeju.moj.handler.report.ReportUserAddHandler;
 import com.welcomeToJeju.moj.handler.search.SearchHashTagHandler;
 import com.welcomeToJeju.moj.handler.search.SearchThemeHandler;
 import com.welcomeToJeju.moj.handler.search.SearchUserHandler;
+import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeAddHandler;
+import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeDeleteHandler;
+import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeDetailHandler;
+import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeListHandler;
+import com.welcomeToJeju.moj.handler.theme.myTheme.MyThemeUpdateHandler;
 import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
 import com.welcomeToJeju.moj.listener.LoginListener;
 import com.welcomeToJeju.request.RequestAgent;
@@ -110,12 +115,12 @@ public class ClientApp {
     //
     //    commandMap.put("/auth/login", new AuthLoginHandler(userDao, userListeners));
     //    commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
-    //
-    //    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao, sqlSession));
-    //    commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
-    //    commandMap.put("/myTheme/detail", new MyThemeDetailHandler(themeDao));
-    //    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, sqlSession));
-    //    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, sqlSession));
+
+    commandMap.put("/myTheme/add", new MyThemeAddHandler(themeDao, sqlSession));
+    commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
+    commandMap.put("/myTheme/detail", new MyThemeDetailHandler(themeDao));
+    commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, sqlSession));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, sqlSession));
 
     // 전체 테마 보기
     //    commandMap.put("/theme/list", new AllThemeListHandler(themeDao));
@@ -246,7 +251,7 @@ public class ClientApp {
     report.add(new MenuItem("신고 목록 보기", "/report/list"));
 
     report.add(new MenuItem("테마 신고 처리하기", Menu.ACCESS_ADMIN, "/admin/reportThemeProcess")); //
-    report.add(new MenuItem("유저 신고 처리하기", Menu.ACCESS_ADMIN, "admin/reportUserProcess"));   //
+    report.add(new MenuItem("유저 신고 처리하기", Menu.ACCESS_ADMIN, "/admin/reportUserProcess"));   //
 
     mg.add(report);
   }

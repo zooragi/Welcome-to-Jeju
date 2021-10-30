@@ -10,6 +10,8 @@
     <result column="title" property="title"/>
     <result column="public" property="isPublic"/>
     <result column="share" property="isShare"/>
+    <result column="view_cnt" property="viewCount"/>
+    <result column="reported_cnt" property="reportedCount"/>
     
     <association property="owner" javaType="User">
       <id column="owner_no" property="no"/>
@@ -22,7 +24,7 @@
       <result column="category_name" property="name"/>
     </association>
 
-	  <collection property="hashTags" ofType="String">
+	  <collection property="hashtags" ofType="String">
 	    <!-- <id column="hashtag_no"/> -->
 	    <result column="hashtag_name"/>
 	  </collection>
@@ -33,13 +35,59 @@
     <result column="name" property="name"/>
   </resultMap>
   
+  <!-- 테마  -->
   <insert id="insert" parameterType="Theme"
-  useGeneratedKeys="true" keyColumn="theme_no" keyProperty="no">
-    insert into jeju_theme(title,category_no,public,user_no)
-    values(#{title},#{category.no},#{isPublic},#{owner.no})
+    useGeneratedKeys="true" keyColumn="theme_no" keyProperty="no">
+    insert into jeju_theme(title,public,share,category_no,user_no) 
+    values(#{title},#{public},#{share},#{category.no},#{owner.no})
   </insert>
   
-  <select id="findAllCategory" resultMap="CategoryMap">
+  <insert id="insertHashtag" >
+    insert into jeju_theme_hashtag(theme_no,name)
+    values(#{param1},#{param2})
+  </insert>
+  
+  <update id="update" parameterType = "Theme">
+    update jeju_theme set
+      title =#{title},
+      public=#{public}, 
+      category_no=#{category.no}, 
+      view_cnt=#{viewCount}
+    where
+      theme_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType = "int">
+    delete from jeju_theme
+    where theme_no=#{no}
+  </delete>
+  
+  <delete id = "deleteHashtag"  parameterType ="int">
+    delete from jeju_theme_hashtag
+    where theme_no=#{no}
+  </delete>
+  
+  <select id="findAll" resultMap="ThemeMap">
+    select 
+	    t.theme_no, 
+	    t.title, 
+	    t.public, 
+	    t.share,
+	    t.view_cnt,
+	    t.category_no,
+	    c.name category_name,
+	    h.name hashtag_name,
+	    t.user_no owner_no,
+	    u.nickname owner_nickname
+	 from jeju_theme t
+	   left join jeju_theme_category c on t.category_no = c.category_no
+	   left join jeju_theme_hashtag h on t.theme_no = h.theme_no
+	   inner join jeju_user u on u.user_no = t.user_no
+	 order by
+	   t.theme_no
+  </select>
+  
+  <select id="findAllCategory" resultMap = "CategoryMap" >
     select
       category_no,
       name
@@ -47,102 +95,101 @@
       jeju_theme_category
   </select>
   
-  <insert id="insertHashTag">
-    insert into jeju_theme_hashtag(theme_no,name)
-    values(#{themeNo},#{hashTag})
-  </insert>
-  
-  <select id="findAll" resultMap="ThemeMap">
-    select
-      t.theme_no,
-      t.title,
-      t.public,
-      t.share,
-      c.category_no,
-      c.name category_name,
-      h.name hashtag_name,
-      u.user_no owner_no,
-      u.nickname owner_nickname
-    from jeju_theme t
-      inner join jeju_user u on t.user_no=u.user_no
-      inner join jeju_theme_category c on t.category_no=c.category_no
-      inner join jeju_theme_hashtag h on t.theme_no=h.theme_no
+  <select id="findByTitle" resultMap = "ThemeMap" parameterType = "string">
+	  select
+		  t.theme_no,
+		  t.title,
+		  t.public,
+		  t.category_no,
+		  c.name,
+		  u.user_no owner_no,
+		  u.nickName owner_name,
+		  h.name hashtag_name
+	  from jeju_theme t
+	    inner join jeju_user u on u.user_no = t.user_no
+	    inner join jeju_theme_category c on t.category_no = c.category_no
+	    left outer join jeju_theme_hashtag h on t.theme_no = h.theme_no
+	  where
+	    title=#{title}
   </select>
   
-  <!-- 
-  <update id="update" parameterType="User">
-    update jeju_user set
-      email=#{email},
-      password=password(#{password}),
-      nickname=#{nickName}
+  <select id="findByUserNo" resultMap="ThemeMap" parameterType="int">
+	  select
+	    t.theme_no,
+	    user_no owner_no,
+	    title,
+	    public,
+	    view_cnt,
+	    reported_cnt,
+	    c.name category_name,
+	    h.name hashtag_name
+	  from jeju_theme t
+	    left outer join jeju_theme_hashtag h on t.theme_no=h.theme_no
+	    join jeju_theme_category c on c.category_no=t.category_no
+	  where
+	    user_no=#{no}
+  </select>
+  
+  <select id="findByHashtag" resultMap = "ThemeMap" parameterType = "string">
+	  select
+		  t.theme_no,
+		  t.title,
+		  t.public,
+		  t.category_no,
+		  c.name,
+		  u.user_no owner_no,
+		  u.nickname owner_name,
+		  h.name hashtag_name
+	  from jeju_theme t
+		  inner join jeju_user u on u.user_no = t.user_no
+		  inner join jeju_theme_category c on t.category_no = c.category_no
+		  left outer join jeju_theme_hashtag h on t.theme_no = h.theme_no
+	  where
+	    h.name=#{hashtag}
+  </select>
+  
+  <update id="updateViewCount">
+	  update jeju_theme set
+	    view_cnt=#{param1}
+	  where
+	    theme_no=#{param2}
+  </update>
+
+  <update id="updateReportedCount" >
+    update jeju_theme set
+      reported_cnt=#{param1}
     where
-      user_no=#{no}
+      theme_no=#{param2}
   </update>
   
-  <delete id="delete" parameterType="int">
-    delete from jeju_user
-    where user_no=#{no}
+  <!-- 좋아하는 테마 -->
+  <insert id="insertLikedTheme" >
+	  Insert into jeju_liked_theme(theme_no,user_no)
+	  values(#{param1},#{param2})
+  </insert>
+  
+  <delete id="deleteLikedTheme" >
+	  delete from jeju_liked_theme
+	  where theme_no=#{param1} and user_no=#{param2}
   </delete>
   
-  <select id="findByEmailAndPassword" resultMap="UserMap">
-      select
-        user_no,
-        email,
-        nickname,
-        created_dt,
-        warned_cnt
-      from
-        jeju_user
-      where 
-        email=#{email} and password=password(#{password})
-  </select>
+  <delete id="deleteAllLikedTheme" parameterType = "int">
+	  delete from jeju_liked_theme
+	  where theme_no=#{param1}
+  </delete>
   
-  <select id="findByName" resultMap="UserMap" parameterType="string">
+  <select id="findAllLikedTheme" resultMap="ThemeMap" parameterType="int">
     select
-      user_no,
-      email,
-      nickname,
-      created_dt,
-      warned_cnt
-    from
-      jeju_user
+	    t.theme_no,
+	    t.title,
+	    t.user_no owner_no,
+	    th.name hashtag_name,
+	    lt.user_no
+    from jeju_theme t
+      left outer join jeju_theme_hashtag th on t.theme_no=th.theme_no
+      left outer join jeju_liked_theme lt on t.theme_no=lt.theme_no
     where
-      nickname=#{nickName}
+      lt.user_no=#{no}
   </select>
-  
-  <select id="findByNo" resultMap="UserMap" parameterType="int">
-    select
-      user_no,
-      email,
-      nickname,
-      created_dt,
-      warned_cnt
-    from
-      jeju_user
-    where
-      user_no=#{no}
-  </select>
-   
-   <insert id="insertLikedUser">
-    insert into jeju_liked_user(user_no,user_no2)
-    values(#{loginUserNo},#{likedUserNo})
-   </insert>
-   
-   <delete id="deleteLikedUser">
-    delete from jeju_liked_user
-    where user_no=#{loginUserNo} and user_no2=#{likedUserNo}
-   </delete>
-
-   <select id="findAllLikedUser" resultMap="UserMap" parameterType="int">
-    select
-      u.user_no,
-      nickname
-    from
-      jeju_user u
-    inner join jeju_liked_user lu on u.user_no=lu.user_no2
-    where
-      lu.user_no=#{no}
-   </select>
-    -->
    
 </mapper>

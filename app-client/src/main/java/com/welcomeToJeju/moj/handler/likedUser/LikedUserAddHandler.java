@@ -1,6 +1,5 @@
 package com.welcomeToJeju.moj.handler.likedUser;
 
-import java.util.Collection;
 import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
@@ -42,21 +41,25 @@ public class LikedUserAddHandler implements Command {
       return;
     }
 
-    User loginUser = AuthLoginHandler.getLoginUser();
-    Collection<User> likedUserList = userDao.findAllLikedUser(loginUser.getNo());
+    //    User loginUser = AuthLoginHandler.getLoginUser();
+    //    Collection<User> likedUserList = userDao.findAllLikedUser(loginUser.getNo());
+    //
+    //    for (User u : likedUserList) {
+    //      if (user.getNo() == u.getNo()) {
+    //        System.out.println("이미 좋아하는 유저!");
+    //        return;
+    //      }
+    //    }
 
-    for (User u : likedUserList) {
-      if (user.getNo() == u.getNo()) {
-        System.out.println("이미 좋아하는 유저!");
-        return;
-      }
+    try {
+      userDao.insertLikedUser(user.getNo(), AuthLoginHandler.getLoginUser().getNo());
+      sqlSession.commit();
+      System.out.println("유저 좋아요 누르기 성공!");
+
+    } catch (Exception e) {
+      System.out.println("이미 좋아하는 유저!");
+      return;
     }
-
-    userDao.insertLikedUser(user.getNo(), AuthLoginHandler.getLoginUser().getNo());
-    sqlSession.commit();
-
-    System.out.println("유저 좋아요 누르기 성공!");
-
   }
 
 
