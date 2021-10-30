@@ -62,7 +62,7 @@ public class SearchUserHandler implements Command {
 
     int no = 1;
     for(Theme theme : themeList) {
-      System.out.printf("<%d> %s\n", theme.getTitle());
+      System.out.printf("<%d> %s\n", no++, theme.getTitle());
     }
   }
 
