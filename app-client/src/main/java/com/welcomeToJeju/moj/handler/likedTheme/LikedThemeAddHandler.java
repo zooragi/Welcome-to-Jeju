@@ -1,48 +1,53 @@
 package com.welcomeToJeju.moj.handler.likedTheme;
 
+import java.util.Collection;
+import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.domain.Place;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
-import com.welcomeToJeju.moj.handler.PlaceHandlerHelper;
 import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
 import com.welcomeToJeju.util.Prompt;
 
 public class LikedThemeAddHandler implements Command {
 
   ThemeDao themeDao;
+  PlaceDao placeDao;
+  SqlSession sqlSession;
 
-  public LikedThemeAddHandler(ThemeDao themeDao) {
+  public LikedThemeAddHandler(ThemeDao themeDao, PlaceDao placeDao, SqlSession sqlSession) {
     this.themeDao = themeDao;
+    this.placeDao = placeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[좋아요 등록하기]");
+    System.out.println("[테마 좋아요 누르기]");
 
-    String title = Prompt.inputString("테마 이름(취소 : 엔터) > ");
+    String title = Prompt.inputString("테마(취소 : 엔터) > ");
 
     if (title.equals("") || title.length() == 0) {
-      System.out.println("좋아요 등록하기 취소!");
+      System.out.println("테마 좋아요 누르기 취소!");
       System.out.println();
       return;
     }
 
-    Theme theme = themeDao.search(title);
+    Theme theme = themeDao.findByTitle(title);
 
     if (theme == null) {
-      System.out.println("등록된 테마 없음!");
-      System.out.println();
+      System.out.println("테마 없음!");
       return;
     }
 
-    if (theme.getThemeOwnerNo() == AuthLoginHandler.getLoginUser().getNo()) {
-      System.out.println("본인의 테마 좋아요 등록 불가!");
+    if (theme.getOwner().getNo() == AuthLoginHandler.getLoginUser().getNo()) {
+      System.out.println("자기의 테마를 목록에 더할 수 없음!");
       return;
     }
 
-    PlaceHandlerHelper.printPlaceInfo(theme);
-
+    //
     while(true) {
       String input = Prompt.inputString("정말로 등록 하시겠습니까?(y/N) : ");
       if(input.equalsIgnoreCase("y")) {
@@ -56,10 +61,27 @@ public class LikedThemeAddHandler implements Command {
       }
     }
 
-    themeDao.likedThemeInsert(theme.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    Collection<Place> placeList = placeDao.findByThemeNo(theme.getNo());
+    int no = 1;
+    for (Place place : placeList) {
+      System.out.printf("<%d>\n", no++);
+      System.out.printf("장소 이름 > %s\n", place.getStoreName());
+      System.out.printf("장소 주소 > %s\n", place.getStoreAddress());
+      System.out.printf("위도 > %s\n", place.getxCoord());
+      System.out.printf("경도 > %s\n", place.getyCoord());
+      System.out.printf("장소 후기> %s\n", place.getComments().toString());
+      System.out.println();
+    }
 
+    try {
+      themeDao.insertLikedTheme(theme.getNo(), AuthLoginHandler.getLoginUser().getNo());
+    } catch (Exception e) {
+      System.out.println("이미 좋아하는 테마!");
+      return;
+    }
 
-    System.out.println("좋아요 등록 완료!");
+    sqlSession.commit();
+    System.out.println("테마 좋아요 누르기 성공!");
   }
 
 

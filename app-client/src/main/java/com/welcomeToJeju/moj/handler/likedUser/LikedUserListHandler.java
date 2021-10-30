@@ -19,17 +19,16 @@ public class LikedUserListHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[유저 좋아요 목록 보기]");
 
-    User loginUser = AuthLoginHandler.getLoginUser();
-    Collection<User> likedUserList = userDao.findAllLikedUser(loginUser.getNo());
+    Collection<User> userList = userDao.findAllLikedUser(AuthLoginHandler.getLoginUser().getNo());
 
-    if (likedUserList.size() == 0) {
+    if (userList.size() == 0) {
       System.out.println("좋아하는 유저 없음!");
       return;
     }
 
     int no = 1;
-    for (User likedUser : likedUserList) {
-      System.out.printf("<%d> %s\n", no++, likedUser.getNickName());
+    for (User user : userList) {
+      System.out.printf("<%d> %s\n", no++, user.getNickName());
     }
   }
 

@@ -16,6 +16,9 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
+import com.welcomeToJeju.moj.handler.likedTheme.LikedThemeAddHandler;
+import com.welcomeToJeju.moj.handler.likedTheme.LikedThemeDeleteHandler;
+import com.welcomeToJeju.moj.handler.likedTheme.LikedThemeListHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserAddHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserListHandler;
@@ -130,9 +133,9 @@ public class ClientApp {
     //    commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao, sqlSession));
     // 장소 상세 보기
 
-    //    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao, sqlSession));
-    //    commandMap.put("/likedTheme/list", new LikedThemeListHandler(themeDao, userPrompt));
-    //    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(themeDao, sqlSession));
+    commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao, placeDao, sqlSession));
+    commandMap.put("/likedTheme/list", new LikedThemeListHandler(themeDao));
+    commandMap.put("/likedTheme/delete", new LikedThemeDeleteHandler(themeDao, sqlSession));
 
     commandMap.put("/likedUser/add", new LikedUserAddHandler(userDao, sqlSession));
     commandMap.put("/likedUser/list", new LikedUserListHandler(userDao));
