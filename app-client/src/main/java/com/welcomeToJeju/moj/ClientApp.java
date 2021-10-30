@@ -29,7 +29,7 @@ import com.welcomeToJeju.moj.handler.report.AdminReportUserProcessHandler;
 import com.welcomeToJeju.moj.handler.report.ReportListHandler;
 import com.welcomeToJeju.moj.handler.report.ReportThemeAddHandler;
 import com.welcomeToJeju.moj.handler.report.ReportUserAddHandler;
-import com.welcomeToJeju.moj.handler.search.SearchHashTagHandler;
+import com.welcomeToJeju.moj.handler.search.SearchHashtagHandler;
 import com.welcomeToJeju.moj.handler.search.SearchThemeHandler;
 import com.welcomeToJeju.moj.handler.search.SearchUserHandler;
 import com.welcomeToJeju.moj.handler.theme.AllThemeListHandler;
@@ -144,7 +144,7 @@ public class ClientApp {
 
     commandMap.put("/search/theme", new SearchThemeHandler(themeDao, sqlSession));
     commandMap.put("/search/user", new SearchUserHandler(userDao, themeDao, sqlSession));
-    commandMap.put("/search/hashTag", new SearchHashTagHandler(themeDao, userDao));
+    commandMap.put("/search/hashTag", new SearchHashtagHandler(themeDao, userDao));
 
     commandMap.put("/ranking/theme", new ThemeRankingHandler(themeDao));
     commandMap.put("/ranking/user", new UserRankingHandler(userDao));

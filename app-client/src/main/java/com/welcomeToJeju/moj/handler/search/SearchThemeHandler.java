@@ -31,23 +31,23 @@ public class SearchThemeHandler implements Command {
         return;
       }
 
-      Theme theme = themeDao.search(input);
+      Theme theme = themeDao.findByTitle(input);
 
       if(theme == null) {
         System.out.println("테마 없음!");
         continue;
       }
 
+      // 조회수 +1
       int viewCount = theme.getViewCount();
       HashMap<String,Object> params = new HashMap<>();
       params.put("themeNo", theme.getNo());
       params.put("viewCnt", viewCount + 1);
       themeDao.updateViewCount(params);
+      sqlSession.commit();
 
       System.out.printf("[%s] 검색 결과\n", input);
       PlaceHandlerHelper.printPlaceInfo(theme);
-
-      sqlSession.commit();  //
 
       return;
     }

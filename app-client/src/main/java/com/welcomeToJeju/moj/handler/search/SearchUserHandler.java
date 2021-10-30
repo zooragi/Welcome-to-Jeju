@@ -42,11 +42,13 @@ public class SearchUserHandler implements Command {
         continue;
       }
 
+      // 조회수 +1
       int viewCount = user.getViewCount();
       HashMap<String,Object> params = new HashMap<>();
       params.put("userNo", user.getNo());
       params.put("viewCnt", viewCount + 1);
       userDao.updateViewCount(params);
+      sqlSession.commit();
 
       System.out.printf("[%s] 검색 결과\n", user.getNickName());
       printList(user);
@@ -60,7 +62,7 @@ public class SearchUserHandler implements Command {
 
     int no = 1;
     for(Theme theme : themeList) {
-      System.out.printf("<%d> %s /n", theme.getTitle());
+      System.out.printf("<%d> %s\n", theme.getTitle());
     }
   }
 

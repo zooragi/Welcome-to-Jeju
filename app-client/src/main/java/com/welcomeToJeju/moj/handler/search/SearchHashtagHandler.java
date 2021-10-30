@@ -9,12 +9,12 @@ import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
 import com.welcomeToJeju.util.Prompt;
 
-public class SearchHashTagHandler implements Command {
+public class SearchHashtagHandler implements Command {
 
   ThemeDao themeDao;
   UserDao userDao;
 
-  public SearchHashTagHandler(ThemeDao themeDao, UserDao userDao) {
+  public SearchHashtagHandler(ThemeDao themeDao, UserDao userDao) {
     this.themeDao = themeDao;
     this.userDao = userDao;
   }
@@ -31,24 +31,24 @@ public class SearchHashTagHandler implements Command {
         return;
       }
 
-      ArrayList<Theme> themeList = (ArrayList<Theme>) themeDao.hashtagSearch(input);
+      ArrayList<Theme> themeList = (ArrayList<Theme>) themeDao.findByHashtag(input);
 
       if (themeList.size() == 0) {
         System.out.println("테마 없음!");
-        continue;   //
+        continue;   //*다시 입력받기
       }
 
-      System.out.printf("[%s] 검색 결과\n", input); //
-      printThemeList(themeList);
+      System.out.printf("[%s] 검색 결과\n", input);
+      printList(themeList);
 
-      return;   //
+      return;
     }
   }
 
-  private void printThemeList(List<Theme> themeList) throws Exception {
+  private void printList(List<Theme> themeList) throws Exception {
     int no = 1;
     for (Theme theme : themeList) {
-      System.out.printf("<%d> '%s' 님의 '%s'", no++, theme.getOwner().getNickName(), theme.getTitle());
+      System.out.printf("<%d> '%s' 님의 '%s'\n", no++, theme.getOwner().getNickName(), theme.getTitle());
     }
   }
 
