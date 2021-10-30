@@ -1,14 +1,14 @@
-package com.welcomeToJeju.moj.handler.rank;
+package com.welcomeToJeju.moj.handler.ranking;
 
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
 
-public class UserRankHandler implements Command {
+public class UserRankingHandler implements Command {
   UserDao userDao;
 
-  public UserRankHandler(UserDao userDao) {
+  public UserRankingHandler(UserDao userDao) {
     this.userDao = userDao;
   }
 

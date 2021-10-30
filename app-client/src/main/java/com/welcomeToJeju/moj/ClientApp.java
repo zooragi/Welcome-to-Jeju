@@ -22,8 +22,8 @@ import com.welcomeToJeju.moj.handler.likedTheme.LikedThemeListHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserAddHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserListHandler;
-import com.welcomeToJeju.moj.handler.rank.ThemeRankHandler;
-import com.welcomeToJeju.moj.handler.rank.UserRankHandler;
+import com.welcomeToJeju.moj.handler.ranking.ThemeRankingHandler;
+import com.welcomeToJeju.moj.handler.ranking.UserRankingHandler;
 import com.welcomeToJeju.moj.handler.report.AdminReportThemeProcessHandler;
 import com.welcomeToJeju.moj.handler.report.AdminReportUserProcessHandler;
 import com.welcomeToJeju.moj.handler.report.ReportListHandler;
@@ -146,8 +146,8 @@ public class ClientApp {
     commandMap.put("/search/user", new SearchUserHandler(userDao, themeDao, sqlSession));
     commandMap.put("/search/hashTag", new SearchHashTagHandler(themeDao, userDao));
 
-    commandMap.put("/rank/theme", new ThemeRankHandler(themeDao));
-    commandMap.put("/rank/user", new UserRankHandler(userDao));
+    commandMap.put("/ranking/theme", new ThemeRankingHandler(themeDao));
+    commandMap.put("/ranking/user", new UserRankingHandler(userDao));
 
     commandMap.put("/report/theme", new ReportThemeAddHandler(reportDao, themeDao, sqlSession));
     commandMap.put("/report/user", new ReportUserAddHandler(reportDao, userDao, sqlSession));
@@ -239,8 +239,8 @@ public class ClientApp {
     MenuGroup rank = new MenuGroup("순위");
     rank.setMenuFilter(menuFilter);
 
-    rank.add(new MenuItem("테마 순위 보기", "/rank/theme"));  // 전체 테마 검색 기준 조회 수 증가
-    rank.add(new MenuItem("유저 순위 보기", "/rank/user"));   // 유저 검색 기준 조회 수 증가
+    rank.add(new MenuItem("테마 순위 보기", "/ranking/theme"));  // 테마 검색 기준 조회 수 증가
+    rank.add(new MenuItem("유저 순위 보기", "/ranking/user"));   // 유저 검색 기준 조회 수 증가
 
     mg.add(rank);
   }

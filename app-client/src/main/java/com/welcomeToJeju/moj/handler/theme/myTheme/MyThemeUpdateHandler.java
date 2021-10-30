@@ -8,7 +8,7 @@ import com.welcomeToJeju.moj.domain.Category;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
-import com.welcomeToJeju.moj.handler.theme.ThemeHelperHandler;
+import com.welcomeToJeju.moj.handler.theme.ThemeHandlerHelper;
 import com.welcomeToJeju.util.Prompt;
 
 public class MyThemeUpdateHandler implements Command {
@@ -35,7 +35,7 @@ public class MyThemeUpdateHandler implements Command {
     String title = Prompt.inputString("테마 이름 > ");
 
     // 카테고리
-    Category category = new ThemeHelperHandler(themeDao).promptCategory();
+    Category category = new ThemeHandlerHelper(themeDao).promptCategory();
 
     // 해시태그
     List<String> hashtagList = new ArrayList<>();

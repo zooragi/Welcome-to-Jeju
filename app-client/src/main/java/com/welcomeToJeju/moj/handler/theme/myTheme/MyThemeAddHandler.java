@@ -5,7 +5,7 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
-import com.welcomeToJeju.moj.handler.theme.ThemeHelperHandler;
+import com.welcomeToJeju.moj.handler.theme.ThemeHandlerHelper;
 import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
 import com.welcomeToJeju.util.Prompt;
 
@@ -33,7 +33,7 @@ public class MyThemeAddHandler implements Command {
     }
 
     // 카테고리
-    theme.setCategory(new ThemeHelperHandler(themeDao).promptCategory());
+    theme.setCategory(new ThemeHandlerHelper(themeDao).promptCategory());
 
     // 해시태그
     while (true) {

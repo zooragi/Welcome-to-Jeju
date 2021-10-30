@@ -1,5 +1,6 @@
 package com.welcomeToJeju.moj.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import com.welcomeToJeju.moj.domain.Category;
 import com.welcomeToJeju.moj.domain.Theme;
@@ -18,12 +19,16 @@ public interface ThemeDao {
   List<Theme> findAll() throws Exception;
   List<Category> findAllCategory() throws Exception;
 
-  Theme findByTitle(String themeTitle) throws Exception;
+  Theme findByTitle(String title) throws Exception;
   List<Theme> findByUserNo(int userNo) throws Exception;
+
   List<Theme> findByHashtag(String hashtag) throws Exception;
 
-  void updateViewCount(int viewCount, int themeNo) throws Exception;
-  void updateReportedCount(int reportedCount, int themeNo) throws Exception;
+  void updateViewCount(HashMap<String,Object> params) throws Exception;
+  void updateReportedCount(HashMap<String,Object> params) throws Exception;
+
+  List<Theme> themeRankingByViewCount() throws Exception;
+  List<Theme> findAllReportedTheme() throws Exception;
 
   // 좋아하는 테마
   void insertLikedTheme(int themeNo, int userNo) throws Exception;

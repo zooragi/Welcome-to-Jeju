@@ -132,35 +132,54 @@
   
   <select id="findByHashtag" resultMap = "ThemeMap" parameterType = "string">
 	  select
-		  t.theme_no,
-		  t.title,
-		  t.public,
-		  t.category_no,
-		  c.name,
-		  u.user_no owner_no,
-		  u.nickname owner_name,
-		  h.name hashtag_name
-	  from jeju_theme t
-		  inner join jeju_user u on u.user_no = t.user_no
-		  inner join jeju_theme_category c on t.category_no = c.category_no
-		  left outer join jeju_theme_hashtag h on t.theme_no = h.theme_no
-	  where
-	    h.name=#{hashtag}
+      title,
+      user_no owner_no,
+      th.name hashtag_name
+    from jeju_theme t
+      join jeju_theme_hashtag th on t.theme_no=th.theme_no
+    where th.name=#{name};
   </select>
   
   <update id="updateViewCount">
-	  update jeju_theme set
-	    view_cnt=#{param1}
-	  where
-	    theme_no=#{param2}
+	  update jeju_theme set 
+      view_cnt=#{viewCnt}
+    where 
+      theme_no=#{themeNo}
   </update>
 
   <update id="updateReportedCount" >
-    update jeju_theme set
-      reported_cnt=#{param1}
-    where
-      theme_no=#{param2}
+    update jeju_theme set 
+      reported_cnt=#{reportedCnt}
+    where 
+      theme_no=#{themeNo}
   </update>
+  
+  <select id="findAllReportedTheme" resultMap="ThemeMap">
+    select
+      t.theme_no,
+      t.title,
+      user_no owner_no,
+      t.reported_cnt,
+      h.name hashtag_name
+    from jeju_theme t
+      left outer join jeju_theme_hashtag h on t.theme_no=h.theme_no
+    where
+      reported_cnt > 0
+    order by
+      reported_cnt desc
+  </select>
+  
+  <select id="themeRankingByViewCount" resultMap="ThemeMap">
+    select
+      t.theme_no,
+      t.title,
+      t.view_cnt,
+      h.name hashtag_name
+    from jeju_theme t
+      left outer join jeju_theme_hashtag h on t.theme_no=h.theme_no
+    order by
+      view_cnt desc
+  </select>
   
   <!-- 좋아하는 테마 -->
   <insert id="insertLikedTheme" >

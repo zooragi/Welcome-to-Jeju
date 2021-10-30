@@ -5,11 +5,11 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Category;
 import com.welcomeToJeju.util.Prompt;
 
-public class ThemeHelperHandler {
+public class ThemeHandlerHelper {
 
   ThemeDao themeDao;
 
-  public ThemeHelperHandler(ThemeDao themeDao) {
+  public ThemeHandlerHelper(ThemeDao themeDao) {
     this.themeDao = themeDao;
   }
 

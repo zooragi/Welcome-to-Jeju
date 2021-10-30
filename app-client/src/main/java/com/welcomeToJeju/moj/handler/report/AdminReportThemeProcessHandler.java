@@ -42,7 +42,7 @@ public class AdminReportThemeProcessHandler implements Command {
       return;
     }
 
-    countedThemeList = themeDao.bringReportedTheme();
+    countedThemeList = themeDao.findAllReportedTheme();
 
     for(Theme theme : countedThemeList) {
       System.out.printf("%d. [%d회] %s \n", index++,theme.getReportedCount(), theme.getTitle());
