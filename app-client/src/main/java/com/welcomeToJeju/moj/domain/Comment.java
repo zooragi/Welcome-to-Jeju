@@ -8,37 +8,33 @@ public class Comment {
   String comment;
 
   @Override
-	public String toString() {
-		return "Comment [no=" + no + ", placeNo=" + placeNo + ", userNo=" + userNo + ", comment=" + comment + "]";
-	}
+  public String toString() {
+    return "Comment [no=" + no + ", placeNo=" + placeNo + ", userNo=" + userNo + ", comment="
+        + comment + "]";
+  }
 
-
-	public int getPlaceNo() {
-		return placeNo;
-	}
-
-
-	public void setPlaceNo(int placeNo) {
-		this.placeNo = placeNo;
-	}
-
-
-	public int getUserNo() {
-		return userNo;
-	}
-
-
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
-	}
-
-
-	public int getNo() {
+  public int getNo() {
     return no;
   }
 
   public void setNo(int no) {
     this.no = no;
+  }
+
+  public int getPlaceNo() {
+    return placeNo;
+  }
+
+  public void setPlaceNo(int placeNo) {
+    this.placeNo = placeNo;
+  }
+
+  public int getUserNo() {
+    return userNo;
+  }
+
+  public void setUserNo(int userNo) {
+    this.userNo = userNo;
   }
 
   public String getComment() {

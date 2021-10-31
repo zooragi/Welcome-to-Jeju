@@ -3,11 +3,9 @@ package com.welcomeToJeju.moj;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
 import com.welcomeToJeju.context.UserContextListener;
 import com.welcomeToJeju.menu.Menu;
 import com.welcomeToJeju.menu.MenuFilter;
@@ -143,9 +141,9 @@ public class ClientApp {
     // 전체 테마 보기
     commandMap.put("/theme/list", new AllThemeListHandler(themeDao));
 
-        commandMap.put("/place/add", new PlaceAddHandler(placeDao, sqlSession));
-        commandMap.put("/place/list", new PlaceListHandler(placeDao));
-        commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao, placeDao, sqlSession));
+    commandMap.put("/place/add", new PlaceAddHandler(placeDao, sqlSession));
+    commandMap.put("/place/list", new PlaceListHandler(placeDao));
+    commandMap.put("/place/delete", new PlaceDeleteHandler(themeDao, placeDao, sqlSession));
     // 장소 상세 보기
 
     commandMap.put("/likedTheme/add", new LikedThemeAddHandler(themeDao, placeDao, sqlSession));
