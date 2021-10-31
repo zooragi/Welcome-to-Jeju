@@ -30,6 +30,8 @@
     
     <collection property="comments" ofType="Comment">
       <id column="comment_no" property="no"/>
+      <result column="place_no" property="placeNo"/>
+      <result column="user_no" property="userNo"/>
       <result column="comment" property="comment"/>
     </collection>
   </resultMap>
@@ -41,13 +43,13 @@
   </insert>
   
   <insert id="insertPhoto" parameterType="Map">
-    insert into jeju_place_photo(place_no,photo_no,user_no)
-    values(#{no},#{filePath},#{userNo})
+    insert into jeju_place_photo(place_no,file_path,user_no)
+    values(#{placeNo},#{filePath},#{userNo})
   </insert>
   
-  <insert id="insertCommnet" parameterType="Map">
-    insert into jeju_place_comment(place_no,commnet_no,user_no)
-    values(#{no},#{comment},#{userNo})
+  <insert id="insertComment" parameterType="Map">
+    insert into jeju_place_comment(place_no,comment,user_no)
+    values(#{placeNo},#{comment},#{userNo})
   </insert>
   
   <delete id="delete" parameterType="int">
