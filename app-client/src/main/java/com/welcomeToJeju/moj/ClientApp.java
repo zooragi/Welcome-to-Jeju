@@ -28,6 +28,11 @@ import com.welcomeToJeju.moj.handler.likedUser.LikedUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.likedUser.LikedUserListHandler;
 import com.welcomeToJeju.moj.handler.ranking.ThemeRankingHandler;
 import com.welcomeToJeju.moj.handler.ranking.UserRankingHandler;
+import com.welcomeToJeju.moj.handler.report.AdminReportThemeProcessHandler;
+import com.welcomeToJeju.moj.handler.report.AdminReportUserProcessHandler;
+import com.welcomeToJeju.moj.handler.report.ReportListHandler;
+import com.welcomeToJeju.moj.handler.report.ReportThemeAddHandler;
+import com.welcomeToJeju.moj.handler.report.ReportUserAddHandler;
 import com.welcomeToJeju.moj.handler.search.SearchHashtagHandler;
 import com.welcomeToJeju.moj.handler.search.SearchThemeHandler;
 import com.welcomeToJeju.moj.handler.search.SearchUserHandler;
@@ -153,13 +158,13 @@ public class ClientApp {
     commandMap.put("/ranking/theme", new ThemeRankingHandler(themeDao));
     commandMap.put("/ranking/user", new UserRankingHandler(userDao));
 
-    //    commandMap.put("/report/theme", new ReportThemeAddHandler(reportDao, themeDao, sqlSession));
-    //    commandMap.put("/report/user", new ReportUserAddHandler(reportDao, userDao, sqlSession));
-    //    commandMap.put("/report/list", new ReportListHandler(reportDao));
-    //
-    //    // 관리자: 신고 관리
-    //    commandMap.put("/admin/reportThemeProcess", new AdminReportThemeProcessHandler(reportDao, themeDao, userDao, sqlSession));
-    //    commandMap.put("/admin/reportUserProcess", new AdminReportUserProcessHandler(reportDao, userDao, sqlSession));
+    commandMap.put("/report/theme", new ReportThemeAddHandler(reportDao, themeDao, sqlSession));
+    commandMap.put("/report/user", new ReportUserAddHandler(reportDao, userDao, sqlSession));
+    commandMap.put("/report/list", new ReportListHandler(reportDao));
+
+    // 관리자: 신고 관리
+    commandMap.put("/admin/reportThemeProcess", new AdminReportThemeProcessHandler(reportDao, themeDao, userDao, sqlSession));
+    commandMap.put("/admin/reportUserProcess", new AdminReportUserProcessHandler(reportDao, userDao, sqlSession));
 
     // 관리자: 회원 관리
     commandMap.put("/admin/userList", new AdminUserListHandler(userDao));
