@@ -15,8 +15,8 @@
     
     <association property="owner" javaType="User">
       <id column="owner_no" property="no"/>
-      <result column="onwer_email" property="email"/>
-      <result column="onwer_nickname" property="nickname"/>
+      <result column="owner_email" property="email"/>
+      <result column="owner_nickname" property="nickname"/>
     </association>
     
     <association property="category" javaType="Category">
@@ -152,15 +152,15 @@
     u.nickname owner_name,
     u.email owner_email,
     h.name hashtag_name
-from        
-    jeju_theme t 
-inner join
-    jeju_user u on u.user_no = t.user_no 
-inner join
-    jeju_theme_category c on t.category_no = c.category_no
-left outer join 
-    jeju_theme_hashtag h on t.theme_no = h.theme_no
-where h.name = #{hashtag}
+		from        
+		    jeju_theme t 
+		inner join
+		    jeju_user u on u.user_no = t.user_no 
+		inner join
+		    jeju_theme_category c on t.category_no = c.category_no
+		left outer join 
+		    jeju_theme_hashtag h on t.theme_no = h.theme_no
+		where h.name = #{hashtag}
   </select>
   
   <update id="updateViewCount">
@@ -215,9 +215,14 @@ where h.name = #{hashtag}
 	  where theme_no=#{param1} and user_no=#{param2}
   </delete>
   
-  <delete id="deleteAllLikedTheme" parameterType = "int">
+  <delete id="deleteAllLikedThemeByThemeNo" parameterType = "int">
 	  delete from jeju_liked_theme
 	  where theme_no=#{param1}
+  </delete>
+  
+  <delete id="deleteAllLikedThemeByUserNo" parameterType = "int">
+	  delete from jeju_liked_theme
+	  where user_no=#{param1}
   </delete>
   
   <select id="findAllLikedTheme" resultMap="ThemeMap" parameterType="int">
@@ -226,12 +231,13 @@ where h.name = #{hashtag}
       t.title,
       t.user_no owner_no,
       th.name hashtag_name,
-      lt.user_no
+      lt.user_no,
+      u.nickname owner_nickname
     from jeju_theme t
       left outer join jeju_theme_hashtag th on t.theme_no=th.theme_no
       left outer join jeju_liked_theme lt on t.theme_no=lt.theme_no
+      inner join jeju_user u on u.user_no = t.user_no
     where
       lt.user_no=#{no}
   </select>
-   
 </mapper>

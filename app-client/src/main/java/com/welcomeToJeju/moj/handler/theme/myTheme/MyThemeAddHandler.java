@@ -43,7 +43,7 @@ public class MyThemeAddHandler implements Command {
       }
       theme.getHashtags().add(hashtag);
     }
-
+    
     String isPublic = Prompt.inputString("공개(Y/n) > ");
     if (isPublic.equalsIgnoreCase("y") || isPublic.length() == 0) {
       theme.setIsPublic(1);

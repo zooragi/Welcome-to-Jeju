@@ -14,10 +14,11 @@ public class AllThemeListHandler implements Command {
     this.themeDao = themeDao;
   }
 
+  // 관리자
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[전체 테마 보기]");
-
+    // 이거 sql 바꿔야됨 where public = 1
     Collection<Theme> themeList = themeDao.findAll();
 
     if (themeList.size() == 0) {

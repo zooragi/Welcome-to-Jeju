@@ -25,9 +25,7 @@ public class AdminUserUpdateHandler implements Command {
 
     String nickname = Prompt.inputString(String.format("닉네임(%s) > ", user.getNickname()));
 
-    int viewCount = Prompt.inputInt(String.format("조회수(%d) > ", user.getViewCount()));
-    int warningCount = Prompt.inputInt(String.format("🚨 경고(%d) > ", user.getWarningCount()));
-
+    // 패스워드 수정 추가하는 코드
     String input = Prompt.inputString("수정하기(y/N) > ");
 
     if (input.equalsIgnoreCase("n") | input.length() == 0) {
@@ -36,9 +34,6 @@ public class AdminUserUpdateHandler implements Command {
     }
 
     user.setNickname(nickname);
-    // 조회수, 경고 변경 안 됨
-    user.setViewCount(viewCount);
-    user.setWarningCount(warningCount);
 
     userDao.update(user);
     sqlSession.commit();

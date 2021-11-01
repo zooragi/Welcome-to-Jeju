@@ -31,7 +31,7 @@ public class MyThemeDeleteHandler implements Command {
     }
 
     try {
-      themeDao.deleteAllLikedTheme(theme.getNo());
+      themeDao.deleteAllLikedThemeByThemeNo(theme.getNo());
       themeDao.deleteHashtag(theme.getNo());
       themeDao.delete(theme.getNo());
       sqlSession.commit();

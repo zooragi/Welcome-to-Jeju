@@ -173,7 +173,7 @@ public class ClientApp {
     commandMap.put("/admin/userList", new AdminUserListHandler(userDao));
     commandMap.put("/admin/userDetail", new AdminUserDetailHandler(userDao));
     commandMap.put("/admin/userUpdate", new AdminUserUpdateHandler(userDao, sqlSession));
-    commandMap.put("/admin/userDelete", new AdminUserDeleteHandler(userDao, sqlSession));
+    commandMap.put("/admin/userDelete", new AdminUserDeleteHandler(userDao, themeDao, sqlSession));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
