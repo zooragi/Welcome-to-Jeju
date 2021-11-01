@@ -21,6 +21,7 @@ public interface ThemeDao {
 
   Theme findByTitle(String title) throws Exception;
   List<Theme> findByUserNo(int userNo) throws Exception;
+  List<Theme> findByKeyword(String keyWord) throws Exception;
 
   List<Theme> findByHashtag(String hashtag) throws Exception;
 

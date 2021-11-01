@@ -154,7 +154,7 @@ public class ClientApp {
     commandMap.put("/likedUser/list", new LikedUserListHandler(userDao));
     commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao, sqlSession));
 
-    commandMap.put("/search/theme", new SearchThemeHandler(themeDao, sqlSession));
+    commandMap.put("/search/theme", new SearchThemeHandler(themeDao, placeDao, sqlSession));
     commandMap.put("/search/user", new SearchUserHandler(userDao, themeDao, sqlSession));
     commandMap.put("/search/hashtag", new SearchHashtagHandler(themeDao, userDao));
 
