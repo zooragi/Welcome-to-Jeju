@@ -87,6 +87,28 @@
 	   t.theme_no
   </select>
   
+  
+<select id="findPublicTheme" resultMap="ThemeMap">
+    select 
+      t.theme_no, 
+      t.title, 
+      t.public, 
+      t.share,
+      t.view_cnt,
+      h.name hashtag_name,
+      t.category_no,
+      c.name category_name,
+      t.user_no owner_no,
+      u.nickname owner_nickname
+   from jeju_theme t
+     left join jeju_theme_hashtag h on t.theme_no = h.theme_no
+     left join jeju_theme_category c on t.category_no = c.category_no
+     inner join jeju_user u on u.user_no = t.user_no
+   where public = 1
+   order by
+     t.theme_no
+</select>
+  
   <select id="findAllCategory" resultMap = "CategoryMap" >
     select
       category_no,

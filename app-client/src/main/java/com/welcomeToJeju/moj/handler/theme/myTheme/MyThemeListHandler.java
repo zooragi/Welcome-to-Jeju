@@ -34,7 +34,6 @@ public class MyThemeListHandler implements Command {
         System.out.printf("카테고리 > %s\n", theme.getCategory().getName());
         System.out.printf("해시태그 > %s\n", theme.getHashtags().toString());
 
-        // 이거 sql 바꿔야됨 where public = 1
         if (theme.getIsPublic() == 1) {
           System.out.println("공개");
           System.out.printf("조회수 > %s\n", theme.getViewCount());
