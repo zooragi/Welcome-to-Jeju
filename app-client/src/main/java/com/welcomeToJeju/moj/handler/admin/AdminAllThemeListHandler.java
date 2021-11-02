@@ -27,13 +27,18 @@ public class AdminAllThemeListHandler implements Command {
 
     int no = 1;
     for (Theme theme : themeList) {
-
       System.out.printf("<%d>\n", no++);
       System.out.printf("제목 > %s\n", theme.getTitle());
-      // 닉네임 안 됨
       System.out.printf("닉네임 > %s\n", theme.getOwner().getNickname());
       System.out.printf("카테고리 > %s\n", theme.getCategory().getName());
       System.out.printf("해시태그 > %s\n", theme.getHashtags().toString());
+
+      if(theme.getIsPublic() == 1) {
+        System.out.println("공개 테마");
+      } else {
+        System.out.println("비공개 테마");
+      }
+
     }
   }
 

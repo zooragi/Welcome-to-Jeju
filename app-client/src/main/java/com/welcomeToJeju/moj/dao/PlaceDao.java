@@ -13,6 +13,9 @@ public interface PlaceDao {
   void delete(int placeNo) throws Exception;
   void deletePhoto(int placeNo) throws Exception;
   void deleteComment(int placeNo) throws Exception;
+  void deletePhotoByThemeNo(int themeNo) throws Exception;
+  void deleteCommentByThemeNo(int themeNo) throws Exception;
+  void deleteByThemeNo(int themeNo) throws Exception;
 
   List<Place> findAll() throws Exception;
   List<Place> findByThemeNo(int themeNo) throws Exception;

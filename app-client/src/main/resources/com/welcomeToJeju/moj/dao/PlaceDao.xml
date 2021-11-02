@@ -67,6 +67,7 @@
     where place_no=#{no}
   </delete>
   
+  
   <select id="findByThemeNo" resultMap="PlaceMap" parameterType="int">
     select
       p.place_no,

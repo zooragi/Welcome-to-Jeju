@@ -136,7 +136,7 @@ public class ClientApp {
     commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
     commandMap.put("/myTheme/detail", new MyThemeDetailHandler(themeDao));
     commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, sqlSession));
-    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, sqlSession));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, placeDao,sqlSession));
 
     // 전체 테마 보기
     commandMap.put("/theme/list", new AllThemeListHandler(themeDao));
