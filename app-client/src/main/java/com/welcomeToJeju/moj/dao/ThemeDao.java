@@ -14,13 +14,16 @@ public interface ThemeDao {
   void update(Theme theme) throws Exception;
 
   void delete(int themeNo) throws Exception;
+  void deletePlaceUserTheme(int themeNo) throws Exception;
   void deleteHashtag(int themeNo) throws Exception;
 
   List<Theme> findAll() throws Exception;
   List<Category> findAllCategory() throws Exception;
+  List<Theme> findPublicTheme() throws Exception;
 
   Theme findByTitle(String title) throws Exception;
   List<Theme> findByUserNo(int userNo) throws Exception;
+  List<Theme> findByKeyword(String keyWord) throws Exception;
 
   List<Theme> findByHashtag(String hashtag) throws Exception;
 

@@ -1,7 +1,9 @@
 package com.welcomeToJeju.moj.handler.user;
 
 import org.apache.ibatis.session.SqlSession;
+
 import com.welcomeToJeju.menu.Menu;
+import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 import com.welcomeToJeju.moj.handler.Command;
@@ -11,10 +13,12 @@ import com.welcomeToJeju.util.Prompt;
 public class UserDeleteHandler implements Command {
 
   UserDao userDao;
+  ThemeDao themeDao;
   SqlSession sqlSession;
 
-  public UserDeleteHandler(UserDao userDao, SqlSession sqlSession) {
+  public UserDeleteHandler(UserDao userDao, ThemeDao themeDao, SqlSession sqlSession) {
     this.userDao = userDao;
+    this.themeDao = themeDao;
     this.sqlSession = sqlSession;
   }
 
@@ -32,9 +36,9 @@ public class UserDeleteHandler implements Command {
     }
 
     try {
-      // 에러
-      userDao.delete(user.getNo());
-      userDao.deleteAllLikedUser(user.getNo());
+    	themeDao.deleteAllLikedThemeByUserNo(user.getNo());
+    	userDao.deleteAllLikedUser(user.getNo());
+      userDao.updateActive(user.getNo());
       sqlSession.commit();
       System.out.println("탈퇴하기 성공!");
 

@@ -1,6 +1,7 @@
 package com.welcomeToJeju.moj.handler.theme.myTheme;
 
 import org.apache.ibatis.session.SqlSession;
+import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.handler.Command;
@@ -11,10 +12,12 @@ public class MyThemeDeleteHandler implements Command {
 
   ThemeDao themeDao;
   SqlSession sqlSession;
+  PlaceDao placeDao;
 
-  public MyThemeDeleteHandler(ThemeDao themeDao, SqlSession sqlSession) {
+  public MyThemeDeleteHandler(ThemeDao themeDao,PlaceDao placeDao, SqlSession sqlSession) {
     this.themeDao = themeDao;
     this.sqlSession = sqlSession;
+    this.placeDao = placeDao;
   }
 
   @Override
@@ -33,11 +36,13 @@ public class MyThemeDeleteHandler implements Command {
     try {
       themeDao.deleteAllLikedThemeByThemeNo(theme.getNo());
       themeDao.deleteHashtag(theme.getNo());
+      themeDao.deletePlaceUserTheme(theme.getNo());
       themeDao.delete(theme.getNo());
       sqlSession.commit();
       System.out.println("나의 테마 삭제하기 성공!");
 
     } catch (Exception e) {
+      System.out.println(e);
       sqlSession.rollback();
       System.out.println("나의 테마 삭제하기 실패!");
     }

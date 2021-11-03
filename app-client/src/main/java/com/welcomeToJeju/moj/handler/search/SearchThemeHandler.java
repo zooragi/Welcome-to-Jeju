@@ -1,8 +1,13 @@
 package com.welcomeToJeju.moj.handler.search;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
+
+import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.domain.Place;
 import com.welcomeToJeju.moj.domain.Theme;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
@@ -12,10 +17,12 @@ import com.welcomeToJeju.util.Prompt;
 public class SearchThemeHandler implements Command {
 
   ThemeDao themeDao;
+  PlaceDao placeDao;
   SqlSession sqlSession;
 
-  public SearchThemeHandler(ThemeDao themeDao, SqlSession sqlSession) {
+  public SearchThemeHandler(ThemeDao themeDao, PlaceDao placeDao, SqlSession sqlSession) {
     this.themeDao = themeDao;
+    this.placeDao = placeDao;
     this.sqlSession = sqlSession;
   }
 
@@ -31,13 +38,20 @@ public class SearchThemeHandler implements Command {
         return;
       }
 
-      Theme theme = themeDao.findByTitle(input);
+      ArrayList<Theme> list = (ArrayList<Theme>) themeDao.findByKeyword(input);
 
-      if(theme == null) {
+      if(list.size() == 0) {
         System.out.println("테마 없음!");
         continue;
       }
 
+      Theme theme = promptSearchedThemeList(list);
+      
+      
+      System.out.printf("[%s] 검색 결과\n", input);
+      
+      PlaceHandlerHelper.printPlaceInfo((ArrayList<Place>) placeDao.findByThemeNo(theme.getNo()));
+      
       // 조회수 +1
       int viewCount = theme.getViewCount();
       HashMap<String,Object> params = new HashMap<>();
@@ -46,13 +60,25 @@ public class SearchThemeHandler implements Command {
       themeDao.updateViewCount(params);
       sqlSession.commit();
 
-      // 안 됨
-      System.out.printf("[%s] 검색 결과\n", input);
-      PlaceHandlerHelper.printPlaceInfo(theme);
-
       return;
     }
   }
-
-
+  
+  private Theme promptSearchedThemeList(ArrayList<Theme> list) {
+  	int i = 1 ;
+  	int selectNo = 0;
+  	for(Theme t : list) {
+  		System.out.printf("%d. %s\n",i ,t.getTitle());
+  	}
+  	while(true) {
+  		selectNo = Prompt.inputInt("번호 입력 : ");
+  		if(selectNo > list.size() || selectNo < 0) {
+  			System.out.println("잘못된 번호, 다시 입력!!");
+  			continue;
+  		}
+  		break;
+  	}
+  	
+  	return list.get(selectNo-1);
+  }
 }

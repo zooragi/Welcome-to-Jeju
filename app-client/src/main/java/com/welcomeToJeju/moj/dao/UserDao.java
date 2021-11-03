@@ -20,6 +20,7 @@ public interface UserDao {
   void updateViewCount(HashMap<String,Object> params) throws Exception;
   void updateReportedCount(HashMap<String,Object> params) throws Exception;
   void updateWarnedCount(HashMap<String,Object> params) throws Exception;
+  void updateActive(int userNo) throws Exception;
 
   List<User> userRankingByViewCount() throws Exception;
   List<User> findAllReportedUser() throws Exception;

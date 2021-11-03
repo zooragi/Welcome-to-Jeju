@@ -127,7 +127,7 @@ public class ClientApp {
     commandMap.put("/user/add", new UserAddHandler(userDao, sqlSession));
     commandMap.put("/auth/userinfo", new AuthUserInfoHandler(userDao)); //
     commandMap.put("/user/update", new UserUpdateHandler(userDao, sqlSession));
-    commandMap.put("/user/delete", new UserDeleteHandler(userDao, sqlSession));
+    commandMap.put("/user/delete", new UserDeleteHandler(userDao, themeDao, sqlSession));
 
     commandMap.put("/auth/login", new AuthLoginHandler(userDao, userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));
@@ -136,7 +136,7 @@ public class ClientApp {
     commandMap.put("/myTheme/list", new MyThemeListHandler(themeDao));
     commandMap.put("/myTheme/detail", new MyThemeDetailHandler(themeDao));
     commandMap.put("/myTheme/update", new MyThemeUpdateHandler(themeDao, sqlSession));
-    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, sqlSession));
+    commandMap.put("/myTheme/delete", new MyThemeDeleteHandler(themeDao, placeDao,sqlSession));
 
     // 전체 테마 보기
     commandMap.put("/theme/list", new AllThemeListHandler(themeDao));
@@ -154,7 +154,7 @@ public class ClientApp {
     commandMap.put("/likedUser/list", new LikedUserListHandler(userDao));
     commandMap.put("/likedUser/delete", new LikedUserDeleteHandler(userDao, sqlSession));
 
-    commandMap.put("/search/theme", new SearchThemeHandler(themeDao, sqlSession));
+    commandMap.put("/search/theme", new SearchThemeHandler(themeDao, placeDao, sqlSession));
     commandMap.put("/search/user", new SearchUserHandler(userDao, themeDao, sqlSession));
     commandMap.put("/search/hashtag", new SearchHashtagHandler(themeDao, userDao));
 
