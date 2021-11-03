@@ -62,6 +62,11 @@
     where theme_no=#{no}
   </delete>
   
+  <delete id="deletePlaceUserTheme" parameterType = "int">
+    delete from jeju_place_user_theme
+    where theme_no=#{no}
+  </delete>
+  
   <delete id = "deleteHashtag"  parameterType ="int">
     delete from jeju_theme_hashtag
     where theme_no=#{no}

@@ -127,7 +127,7 @@ public class ClientApp {
     commandMap.put("/user/add", new UserAddHandler(userDao, sqlSession));
     commandMap.put("/auth/userinfo", new AuthUserInfoHandler(userDao)); //
     commandMap.put("/user/update", new UserUpdateHandler(userDao, sqlSession));
-    commandMap.put("/user/delete", new UserDeleteHandler(userDao, sqlSession));
+    commandMap.put("/user/delete", new UserDeleteHandler(userDao, themeDao, sqlSession));
 
     commandMap.put("/auth/login", new AuthLoginHandler(userDao, userListeners));
     commandMap.put("/auth/logout", new AuthLogoutHandler(userListeners));

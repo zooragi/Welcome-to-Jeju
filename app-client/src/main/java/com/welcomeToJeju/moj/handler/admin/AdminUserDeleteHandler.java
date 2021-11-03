@@ -36,9 +36,9 @@ public class AdminUserDeleteHandler implements Command {
     }
 
     try {
-      // 유저와 엮여있는 것들 다 삭제
     	themeDao.deleteAllLikedThemeByUserNo(user.getNo());
-      userDao.delete(user.getNo());
+    	userDao.deleteAllLikedUser(user.getNo());
+      userDao.updateActive(user.getNo());
       sqlSession.commit();
       System.out.println("회원 삭제하기 성공!");
 

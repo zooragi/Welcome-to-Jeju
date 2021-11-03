@@ -34,11 +34,9 @@ public class MyThemeDeleteHandler implements Command {
     }
 
     try {
-      //      placeDao.deleteCommentByThemeNo(theme.getNo());
-      //      placeDao.deletePhotoByThemeNo(theme.getNo());
-      //      placeDao.deleteByThemeNo(theme.getNo());
       themeDao.deleteAllLikedThemeByThemeNo(theme.getNo());
       themeDao.deleteHashtag(theme.getNo());
+      themeDao.deletePlaceUserTheme(theme.getNo());
       themeDao.delete(theme.getNo());
       sqlSession.commit();
       System.out.println("나의 테마 삭제하기 성공!");

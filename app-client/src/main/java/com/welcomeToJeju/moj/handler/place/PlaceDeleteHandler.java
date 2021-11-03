@@ -1,7 +1,10 @@
 package com.welcomeToJeju.moj.handler.place;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
+
 import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Place;
@@ -46,9 +49,10 @@ public class PlaceDeleteHandler implements Command{
         return;
       }
 
-      placeDao.deleteComment(place.getNo());
-      placeDao.deletePhoto(place.getNo());
-      placeDao.delete(place.getNo());
+      HashMap<String,Object> param = new HashMap<>();
+      param.put("themeNo", theme.getNo());
+      param.put("placeId", place.getId());
+      placeDao.delete(param);
       sqlSession.commit();
       System.out.printf("삭제하기 완료!\n");
       return;

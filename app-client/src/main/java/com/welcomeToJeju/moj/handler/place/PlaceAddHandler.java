@@ -76,12 +76,11 @@ public class PlaceAddHandler implements Command {
       } 
 
       selectedPlace = gson.fromJson(gson.toJson(filterPlace.get(num-1)),KakaoVo.class);
+      place.setId(selectedPlace.getId());
       place.setStoreAddress(selectedPlace.getAddress_name());
       place.setStoreName(selectedPlace.getPlace_name());
       place.setxCoord(selectedPlace.getX());
       place.setyCoord(selectedPlace.getY());
-      place.setTheme(theme);
-      place.setOwner(AuthLoginHandler.getLoginUser());
 
       ArrayList<Photo> photos = new ArrayList<>();
       while(true) {
@@ -100,22 +99,33 @@ public class PlaceAddHandler implements Command {
     String comment_content = Prompt.inputString("장소 후기 > ");
     comment.setComment(comment_content);
     place.getComments().add(comment);
-    placeDao.insert(place);
-
+    
+    Place findPlace = placeDao.findByPlaceId(selectedPlace.getId());
+    if(findPlace == null) {
+    	placeDao.insert(place);
+    }
+    
+    
     HashMap<String,Object> param1 = new HashMap<>();
     HashMap<String,Object> param2 = new HashMap<>();
+    HashMap<String,Object> param3 = new HashMap<>();
+    
+    param3.put("themeNo", theme.getNo());
+    param3.put("placeId", selectedPlace.getId());
+    param3.put("userNo", AuthLoginHandler.getLoginUser().getNo());
+    placeDao.insertPlaceUserTheme(param3);
 
     for(Comment cmt : place.getComments()) {
-      param1.put("placeNo", place.getNo());
-      param1.put("userNo", place.getOwner().getNo());
+      param1.put("placeId", place.getId());
+      param1.put("userNo", AuthLoginHandler.getLoginUser().getNo());
       param1.put("comment", cmt.getComment());
       placeDao.insertComment(param1);
     }
 
 
     for(Photo photo : place.getPhotos()) {
-      param2.put("placeNo", place.getNo());
-      param2.put("userNo", place.getOwner().getNo());
+      param2.put("placeId", place.getId());
+      param2.put("userNo", AuthLoginHandler.getLoginUser().getNo());
       param2.put("filePath", photo.getFilePath());
       placeDao.insertPhoto(param2);
     }

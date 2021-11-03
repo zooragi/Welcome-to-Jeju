@@ -14,6 +14,7 @@ public interface ThemeDao {
   void update(Theme theme) throws Exception;
 
   void delete(int themeNo) throws Exception;
+  void deletePlaceUserTheme(int themeNo) throws Exception;
   void deleteHashtag(int themeNo) throws Exception;
 
   List<Theme> findAll() throws Exception;
