@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.handler.theme.myTheme;
+package com.welcomeToJeju.moj.servlet.theme.myTheme;
 
 import java.util.ArrayList;
 import java.util.Collection;

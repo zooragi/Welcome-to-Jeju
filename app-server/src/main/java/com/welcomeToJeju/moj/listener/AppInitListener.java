@@ -21,9 +21,9 @@ public class AppInitListener implements ServletContextListener {
     try {
       // Mybatis의 SqlSession 객체 준비
       sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-          "com/welcomeToJeju/moj/conf/mybatis-config.xml")).openSession();
+          "com.welcomeToJeju.moj/conf/mybatis-config.xml")).openSession();
 
-      // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
+      // SqlSession 객체를 통해 ThemeDao 구현체를 자동 생성한다.
       ThemeDao themeDao = sqlSession.getMapper(ThemeDao.class);
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
@@ -38,7 +38,6 @@ public class AppInitListener implements ServletContextListener {
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }
-
   }
 
   @Override
@@ -47,4 +46,6 @@ public class AppInitListener implements ServletContextListener {
 
     sqlSession.close();
   }
+
+
 }

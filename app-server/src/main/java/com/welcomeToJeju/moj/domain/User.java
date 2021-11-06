@@ -13,15 +13,24 @@ public class User implements Comparable<User> {
   private int viewCount;
   private int reportedCount;
   private int warningCount;
-
+  private int active;
+  
   @Override
-  public String toString() {
-    return "User [no=" + no + ", email=" + email + ", password=" + password + ", nickname="
-        + nickname + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
-        + ", reportedCount=" + reportedCount + ", warningCount=" + warningCount + "]";
-  }
+	public String toString() {
+		return "User [no=" + no + ", email=" + email + ", password=" + password + ", nickname=" + nickname
+				+ ", registeredDate=" + registeredDate + ", viewCount=" + viewCount + ", reportedCount=" + reportedCount
+				+ ", warningCount=" + warningCount + ", active=" + active + "]";
+	}
 
-  public int getNo() {
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public int getNo() {
     return no;
   }
 
