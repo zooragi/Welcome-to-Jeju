@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.welcomeToJeju.moj.dao.UserDao">
+  
+  <resultMap type="User" id="UserMap">
+    <id column="user_no" property="no"/> 
+    <result column="email" property="email"/>
+    <result column="password" property="password"/>
+    <result column="nickname" property="nickname"/>
+    <result column="created_dt" property="registeredDate"/>
+    <result column="view_cnt" property="viewCount"/>
+    <result column="reported_cnt" property="reportedCount"/>
+    <result column="warned_cnt" property="warningCount"/>
+    <result column="active" property="active"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="User">
+    insert into jeju_user(email,password,nickname)
+    values(#{email},password(#{password}),#{nickname})
+  </insert>
+  
+  <update id="update" parameterType="User">
+    update jeju_user set
+      email=#{email},
+      password=password(#{password}),
+      nickname=#{nickname}
+    where
+      user_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from jeju_user
+    where user_no=#{no}
+  </delete>
+  
+  <select id="findAll" resultMap="UserMap">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      view_cnt,
+      reported_cnt,
+      warned_cnt,
+      active
+    from
+      jeju_user
+    order by
+      user_no desc
+  </select>
+  
+  <select id="findByEmailAndPassword" resultMap="UserMap">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      view_cnt,
+      reported_cnt,
+      warned_cnt,
+      active
+	    from
+	      jeju_user
+	    where 
+	      email=#{email} and password=password(#{password}) and active=1
+  </select>
+  
+  <select id="findByNickname" resultMap="UserMap" parameterType="String">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      view_cnt,
+      reported_cnt,
+      warned_cnt
+    from
+      jeju_user
+    where
+      nickname=#{nickname}
+  </select>
+  
+  <select id="findByNo" resultMap="UserMap" parameterType="int">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      view_cnt,
+      reported_cnt,
+      warned_cnt
+    from
+      jeju_user
+    where
+      user_no=#{no}
+  </select>
+   
+   <insert id="insertLikedUser">
+    insert into jeju_liked_user(user_no,user_no2)
+    values(#{loginUserNo},#{likedUserNo})
+   </insert>
+   
+   <delete id="deleteLikedUser">
+    delete from jeju_liked_user
+    where user_no=#{loginUserNo} and user_no2=#{likedUserNo}
+   </delete>
+   
+   <select id="findAllLikedUser" resultMap="UserMap" parameterType="int">
+    select
+      u.user_no,
+      nickname
+    from
+      jeju_user u
+      inner join jeju_liked_user lu on u.user_no=lu.user_no2
+    where
+      lu.user_no=#{no}
+   </select>
+   
+   <update id="updateViewCount" parameterType="map">
+    update 
+      jeju_user 
+    set 
+      view_cnt=#{viewCnt}
+    where 
+      user_no=#{userNo}
+  </update>
+  
+  <update id="updateReportedCount" parameterType="map">
+    update 
+      jeju_user 
+    set 
+      reported_cnt=#{reportedCnt}
+    where 
+      user_no=#{userNo}
+  </update>
+  
+  <update id="updateWarnedCount" parameterType="map">
+    update 
+      jeju_user
+    set 
+      warned_cnt=#{warnedCnt}
+    where 
+      user_no=#{userNo}
+  </update>
+  
+  <update id="updateActive" parameterType="int">
+    update 
+      jeju_user 
+    set 
+      active=0
+    where 
+      user_no=#{userNo}
+  </update>
+  
+  <select id="userRankingByViewCount" resultMap="UserMap">
+    select
+      user_no,
+      nickname,
+      view_cnt
+    from
+      jeju_user
+    order by view_cnt desc
+  </select>
+  
+  <select id="findAllReportedUser" resultMap="UserMap">
+    select
+      user_no,
+      nickname,
+      reported_cnt      
+    from
+      jeju_user
+    where
+      reported_cnt > 0
+    order by reported_cnt desc
+  </select>
+  
+  <delete id="deleteAllLikedUser" parameterType="int">
+    delete from 
+      jeju_liked_user 
+    where 
+      user_no=#{loginUserNo}
+  </delete>
+   
+</mapper>
