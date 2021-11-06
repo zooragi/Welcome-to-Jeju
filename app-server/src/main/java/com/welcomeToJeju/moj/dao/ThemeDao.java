@@ -18,9 +18,11 @@ public interface ThemeDao {
 
   List<Theme> findAll() throws Exception;
   List<Category> findAllCategory() throws Exception;
+  Category findCategoryByNo(int no) throws Exception;
   List<Theme> findPublicTheme() throws Exception;
 
   Theme findByTitle(String title) throws Exception;
+  Theme findByNo(int no) throws Exception;
   List<Theme> findByUserNo(int userNo) throws Exception;
   List<Theme> findByKeyword(String keyWord) throws Exception;
 

@@ -117,6 +117,16 @@
       jeju_theme_category
   </select>
   
+  <select id="findCategoryByName" resultMap = "CategoryMap"  parameterType = "int">
+    select
+      category_no,
+      name
+    from
+      jeju_theme_category
+    where 
+     no = #{no}
+  </select>
+  
   <select id="findByTitle" resultMap = "ThemeMap" parameterType = "String">
 	  select
 		  t.theme_no,
@@ -133,6 +143,24 @@
 	    left outer join jeju_theme_hashtag h on t.theme_no = h.theme_no
 	  where
 	    title=#{title}
+  </select>
+  
+    <select id="findByNo" resultMap = "ThemeMap" parameterType = "int">
+    select
+      t.theme_no,
+      t.title,
+      t.public,
+      t.category_no,
+      c.name,
+      u.user_no owner_no,
+      u.nickName owner_name,
+      h.name hashtag_name
+    from jeju_theme t
+      inner join jeju_user u on u.user_no = t.user_no
+      inner join jeju_theme_category c on t.category_no = c.category_no
+      left outer join jeju_theme_hashtag h on t.theme_no = h.theme_no
+    where
+      t.theme_no=#{no}
   </select>
   
   <select id="findByUserNo" resultMap="ThemeMap" parameterType="int">
