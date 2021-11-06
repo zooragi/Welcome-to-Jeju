@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.servlet;
+package com.welcomeToJeju.moj.servlet.user;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/loginForm")
-public class AuthLoginFormController extends HttpServlet {
+@WebServlet("/user/addForm")
+public class UserAddFormController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class AuthLoginFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/user/UserLoginForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/user/UserAddForm.jsp").forward(request, response);
   }
 
 }

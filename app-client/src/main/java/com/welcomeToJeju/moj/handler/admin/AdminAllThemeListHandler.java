@@ -14,7 +14,6 @@ public class AdminAllThemeListHandler implements Command {
     this.themeDao = themeDao;
   }
 
-  // 관리자
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[전체 테마 보기]");
@@ -35,6 +34,7 @@ public class AdminAllThemeListHandler implements Command {
 
       if(theme.getIsPublic() == 1) {
         System.out.println("공개 테마");
+        System.out.printf("조회수 > %s\n", theme.getViewCount());
       } else {
         System.out.println("비공개 테마");
       }

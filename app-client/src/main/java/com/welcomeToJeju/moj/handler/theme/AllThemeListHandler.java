@@ -14,11 +14,11 @@ public class AllThemeListHandler implements Command {
     this.themeDao = themeDao;
   }
 
-  // 공개테마만
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[전체 테마 보기]");
-    Collection<Theme> themeList = themeDao.findPublicTheme();
+
+    Collection<Theme> themeList = themeDao.findAllPublicTheme();
 
     if (themeList.size() == 0) {
       System.out.println("테마 없음!");

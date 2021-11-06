@@ -42,7 +42,7 @@ public class AdminUserDetailHandler implements Command {
 
     request.setAttribute("user", user);
 
-    String input = Prompt.inputString("수정하기(U) / 탈퇴하기(D) / 취소(0) > ");
+    String input = Prompt.inputString("수정하기(U) / 삭제하기(D) / 취소(0) > ");
 
     switch (input) {
       case "U" :

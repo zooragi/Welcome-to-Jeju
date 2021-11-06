@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.servlet;
+package com.welcomeToJeju.moj.servlet.theme.myTheme;
 
 import java.io.IOException;
 import java.io.PrintWriter;

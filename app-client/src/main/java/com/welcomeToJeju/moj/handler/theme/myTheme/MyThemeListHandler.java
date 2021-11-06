@@ -33,6 +33,7 @@ public class MyThemeListHandler implements Command {
         System.out.printf("제목 > %s\n", theme.getTitle());
         System.out.printf("카테고리 > %s\n", theme.getCategory().getName());
         System.out.printf("해시태그 > %s\n", theme.getHashtags().toString());
+
         if (theme.getIsPublic() == 1) {
           System.out.println("공개 테마");
           System.out.printf("조회수 > %s\n", theme.getViewCount());

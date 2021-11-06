@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.servlet;
+package com.welcomeToJeju.moj.servlet.user;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;

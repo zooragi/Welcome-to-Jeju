@@ -24,8 +24,8 @@ public class AdminUserUpdateHandler implements Command {
     User user = (User) request.getAttribute("user");
 
     String nickname = Prompt.inputString(String.format("닉네임(%s) > ", user.getNickname()));
+    String password = Prompt.inputString("비밀번호 > ");
 
-    // 패스워드 수정 추가하는 코드
     String input = Prompt.inputString("수정하기(y/N) > ");
 
     if (input.equalsIgnoreCase("n") | input.length() == 0) {
@@ -34,6 +34,7 @@ public class AdminUserUpdateHandler implements Command {
     }
 
     user.setNickname(nickname);
+    user.setPassword(password);
 
     userDao.update(user);
     sqlSession.commit();

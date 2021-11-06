@@ -60,18 +60,18 @@ public class LikedThemeAddHandler implements Command {
       System.out.println();
     }
 
-    while(true) {
-      String input = Prompt.inputString("정말로 등록 하시겠습니까?(y/N) : ");
-      if(input.equalsIgnoreCase("y")) {
-        break;
-      } else if (input.equalsIgnoreCase("n")) {
-        System.out.println("등록 취소");
-        return;
-      } else {
-        System.out.println("잘못된 입력입니다. 다시 입력하세요.");
-        continue;
-      }
-    }
+    //    while(true) {
+    //      String input = Prompt.inputString("정말로 등록 하시겠습니까?(y/N) : ");
+    //      if(input.equalsIgnoreCase("y")) {
+    //        break;
+    //      } else if (input.equalsIgnoreCase("n")) {
+    //        System.out.println("등록 취소");
+    //        return;
+    //      } else {
+    //        System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+    //        continue;
+    //      }
+    //    }
 
     try {
       themeDao.insertLikedTheme(theme.getNo(), AuthLoginHandler.getLoginUser().getNo());

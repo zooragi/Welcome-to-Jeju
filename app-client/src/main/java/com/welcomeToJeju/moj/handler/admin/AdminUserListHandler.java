@@ -24,10 +24,10 @@ public class AdminUserListHandler implements Command {
       System.out.println("회원 없음!");
       return;
     }
-    
-    
+
+
     for (User user : userList) {
-    	String status = user.getActive() == 0 ? "탈퇴" : "회원";
+      String status = user.getActive() == 0 ? "탈퇴" : "회원";
       System.out.printf("<%d> %s, %s, %s, 🚨 %d, %s\n",
           user.getNo(),
           user.getEmail(),

@@ -16,6 +16,7 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.handler.Command;
 import com.welcomeToJeju.moj.handler.CommandRequest;
+import com.welcomeToJeju.moj.handler.admin.AdminAllThemeListHandler;
 import com.welcomeToJeju.moj.handler.admin.AdminUserDeleteHandler;
 import com.welcomeToJeju.moj.handler.admin.AdminUserDetailHandler;
 import com.welcomeToJeju.moj.handler.admin.AdminUserListHandler;
@@ -174,6 +175,9 @@ public class ClientApp {
     commandMap.put("/admin/userDetail", new AdminUserDetailHandler(userDao));
     commandMap.put("/admin/userUpdate", new AdminUserUpdateHandler(userDao, sqlSession));
     commandMap.put("/admin/userDelete", new AdminUserDeleteHandler(userDao, themeDao, sqlSession));
+
+    // 관리자: 테마 관리
+    commandMap.put("/admin/themeList", new AdminAllThemeListHandler(themeDao));
   }
 
   MenuFilter menuFilter = menu -> (menu.getAccessScope() & AuthLoginHandler.getUserAccessLevel()) > 0;
@@ -199,6 +203,7 @@ public class ClientApp {
     createRankMenu(mg);
     createReportMenu(mg);
     createAdminUserMenu(mg);    // 관리자: 회원 관리
+    createAdminThemeMenu(mg);   // 관리자: 테마 관리
 
     return mg;
   }
@@ -282,6 +287,17 @@ public class ClientApp {
     mg.add(adminUser);
 
     return adminUser;
+  }
+
+  private Menu createAdminThemeMenu(MenuGroup mg) {
+    MenuGroup adminTheme = new MenuGroup("테마 관리", Menu.ACCESS_ADMIN);
+    adminTheme.setMenuFilter(menuFilter);
+
+    adminTheme.add(new MenuItem("전체 테마 보기", "/admin/themeList"));
+
+    mg.add(adminTheme);
+
+    return adminTheme;
   }
 
   public void service() throws Exception{

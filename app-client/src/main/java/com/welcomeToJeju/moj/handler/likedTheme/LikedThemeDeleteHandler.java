@@ -31,19 +31,18 @@ public class LikedThemeDeleteHandler implements Command {
 
     Theme theme = themeDao.findByTitle(title);
 
-    //
-    while(true) {
-      String input = Prompt.inputString("정말로 삭제 하시겠습니까?(y/N) : ");
-      if(input.equalsIgnoreCase("y")) {
-        break;
-      } else if (input.equalsIgnoreCase("n")) {
-        System.out.println("삭제 취소");
-        return;
-      } else {
-        System.out.println("잘못된 입력입니다. 다시 입력하세요.");
-        continue;
-      }
-    }
+    //    while(true) {
+    //      String input = Prompt.inputString("정말로 삭제 하시겠습니까?(y/N) : ");
+    //      if(input.equalsIgnoreCase("y")) {
+    //        break;
+    //      } else if (input.equalsIgnoreCase("n")) {
+    //        System.out.println("삭제 취소");
+    //        return;
+    //      } else {
+    //        System.out.println("잘못된 입력입니다. 다시 입력하세요.");
+    //        continue;
+    //      }
+    //    }
 
     themeDao.deleteLikedTheme(theme.getNo(), AuthLoginHandler.getLoginUser().getNo());
     sqlSession.commit();

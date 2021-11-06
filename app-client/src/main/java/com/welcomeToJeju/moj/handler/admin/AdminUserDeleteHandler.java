@@ -1,7 +1,6 @@
 package com.welcomeToJeju.moj.handler.admin;
 
 import org.apache.ibatis.session.SqlSession;
-
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
@@ -20,7 +19,7 @@ public class AdminUserDeleteHandler implements Command {
     this.sqlSession = sqlSession;
     this.themeDao = themeDao;
   }
-  
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -36,18 +35,17 @@ public class AdminUserDeleteHandler implements Command {
     }
 
     try {
-    	themeDao.deleteAllLikedThemeByUserNo(user.getNo());
-    	userDao.deleteAllLikedUser(user.getNo());
+      themeDao.deleteAllLikedThemeByUserNo(user.getNo());
+      userDao.deleteAllLikedUser(user.getNo());
       userDao.updateActive(user.getNo());
       sqlSession.commit();
       System.out.println("회원 삭제하기 성공!");
 
     } catch (Exception e) {
-    	System.out.println(e);
-    	System.out.println("회원 삭제하기 실패!");
+      System.out.println(e);
+      System.out.println("회원 삭제하기 실패!");
       sqlSession.rollback();
     }
-
   }
 
 

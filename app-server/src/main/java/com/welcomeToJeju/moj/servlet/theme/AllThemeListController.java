@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.servlet;
+package com.welcomeToJeju.moj.servlet.theme;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -30,7 +30,7 @@ public class AllThemeListController extends HttpServlet {
   public void service(ServletRequest request, ServletResponse response) 
       throws ServletException, IOException {
     try {
-      Collection<Theme> themeList = themeDao.findPublicTheme();
+      Collection<Theme> themeList = themeDao.findAllPublicTheme();
 
       request.setAttribute("allThemeList", themeList);
 
