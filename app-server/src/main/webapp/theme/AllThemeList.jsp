@@ -18,7 +18,7 @@
 <body>
 <div class = "container">
 <h1>테마 목록 보기</h1>
-<a href='form' class ="btn btn-outline-primary btn-sm" >새 테마 만들기</a><br>
+<a href='myTheme/form' class ="btn btn-outline-primary btn-sm" >새 테마 만들기</a><br>
 <table class = "table table-hover">
 <thead>
   <tr>
@@ -38,20 +38,6 @@
 <td>${theme.hashtags}</td> 
 </tr>
 
-<!-- 
-<script>
-"use strict"
-
-var v1 = ${theme.isPublic};
-function isPublic() { 
-  for(var i = 0; i < ${themeList.size}; i++) {
-    if(v1 = 1) {
-      var ispublic = "공개 테마"
-    }
-  }
-}
-</script>
- -->
 </c:forEach>
 
 </tbody>

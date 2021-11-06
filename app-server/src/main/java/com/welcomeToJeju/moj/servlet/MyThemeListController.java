@@ -13,7 +13,7 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
 
-@WebServlet("/mytheme/list")
+@WebServlet("/theme/myTheme/list")
 public class MyThemeListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
@@ -30,13 +30,14 @@ public class MyThemeListController extends GenericServlet {
   public void service(ServletRequest request, ServletResponse response) 
       throws ServletException, IOException {
 
+    int no = Integer.parseInt(request.getParameter("no"));
 
     try {
-      Collection<Theme> themeList = themeDao.findByUserNo(AuthLoginHandler.getLoginUser().getNo());
+      Collection<Theme> themeList = themeDao.findByUserNo(no);
 
       request.setAttribute("myThemeList", themeList);
 
-      request.getRequestDispatcher("/myTheme/MyThemeList.jsp").forward(request, response);
+      request.getRequestDispatcher("/theme/myTheme/MyThemeList.jsp").forward(request, response);
 
     } catch (Exception e){
       request.setAttribute("error", e);

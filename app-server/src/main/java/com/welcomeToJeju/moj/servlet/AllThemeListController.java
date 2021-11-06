@@ -13,7 +13,7 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
 
-@WebServlet("/allTheme/list")
+@WebServlet("/theme/list")
 public class AllThemeListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
