@@ -26,7 +26,6 @@
     <th>카테고리</th>
     <th>해시태그</th>
     <th>조회수</th>
-    <th>등록일</th>
   </tr>
 </thead>
 <tbody>
@@ -37,23 +36,14 @@
 <td><a href='detail?no=${theme.no}'>${theme.title}</a></td> 
 <td>${theme.category.name}</td> 
 <td>${theme.hashtags}</td> 
-<td>${theme.viewCount}</td>
-<td>${theme.isPublic}</td>
+<c:if test='${theme.isPublic ==1}'>
+<td>${theme.viewCount}</td> 
+</c:if>
+<c:if test = '${theme.isPublic==0}'>
+<td>비공개테마</td>
+</c:if>
 </tr>
 
-
-<script>
-"use strict"
-
-var v1 = ${theme.isPublic};
-function isPublic() { 
-	for(var i = 0; i < ${themeList.size}; i++) {
-		if(v1 = 1) {
-			var ispublic = "공개 테마"
-		}
-	}
-}
-</script>
 </c:forEach>
 
 </tbody>
