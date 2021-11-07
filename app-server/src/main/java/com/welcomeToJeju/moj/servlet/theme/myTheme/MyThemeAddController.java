@@ -25,6 +25,7 @@ public class MyThemeAddController extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
+    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
 
   @Override
