@@ -12,14 +12,16 @@ public interface PlaceDao {
   void insertPlaceUserTheme(HashMap<String,Object> param) throws Exception;
 
   void delete(HashMap<String,Object> param) throws Exception;
-  void deletePhoto(int placeNo) throws Exception;
-  void deleteComment(int placeNo) throws Exception;
+  void deletePhoto(String id) throws Exception;
+  void deleteComment(String id) throws Exception;
+
+  void deleteByThemeNo(int themeNo) throws Exception;
   void deletePhotoByThemeNo(int themeNo) throws Exception;
   void deleteCommentByThemeNo(int themeNo) throws Exception;
-  void deleteByThemeNo(int themeNo) throws Exception;
-  Place findByPlaceId(String id) throws Exception;
 
   List<Place> findAll() throws Exception;
+
+  Place findByPlaceId(String id) throws Exception;
   List<Place> findByThemeNo(int themeNo) throws Exception;
   //  List<Place> findByThemeTitle(String themeTitle) throws Exception;
 

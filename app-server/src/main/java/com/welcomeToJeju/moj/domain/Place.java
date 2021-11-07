@@ -5,9 +5,7 @@ import java.util.List;
 
 public class Place {
 
-  private int no;
-  private User owner;
-  private Theme theme;
+  private String id;
   private String storeName;
   private String storeAddress;
 
@@ -19,32 +17,16 @@ public class Place {
 
   @Override
   public String toString() {
-    return "Place [no=" + no + ", owner=" + owner + ", theme=" + theme + ", storeName=" + storeName
+    return "Place [id=" + id + ", storeName=" + storeName
         + ", storeAddress=" + storeAddress + ", xCoord=" + xCoord + ", yCoord=" + yCoord + "]";
   }
 
-  public int getNo() {
-    return no;
+  public String getId() {
+    return id;
   }
 
-  public void setNo(int no) {
-    this.no = no;
-  }
-
-  public User getOwner() {
-    return owner;
-  }
-
-  public void setOwner(User owner) {
-    this.owner = owner;
-  }
-
-  public Theme getTheme() {
-    return theme;
-  }
-
-  public void setTheme(Theme theme) {
-    this.theme = theme;
+  public void setId(String id) {
+    this.id = id;
   }
 
   public String getStoreName() {

@@ -36,7 +36,7 @@
 <br>
 <a href='../place/add'>장소 등록하기</a> ✏️
 <br>
-<a href='../place/list'>장소 목록 보기</a> 📄
+<a href='../place/list?no=${theme.no}'>장소 목록 보기</a> 📄
 <!-- 
 <form action='PlaceAdd.jsp'>
   <button>장소 등록하기 ✏️</button>
