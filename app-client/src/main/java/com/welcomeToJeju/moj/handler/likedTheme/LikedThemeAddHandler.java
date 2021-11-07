@@ -48,7 +48,7 @@ public class LikedThemeAddHandler implements Command {
     }
 
     // 비공개 테마도 등록
-    Collection<Place> placeList = placeDao.findByThemeNo(theme.getNo());
+    Collection<Place> placeList = placeDao.findAllByThemeNo(theme.getNo());
     int no = 1;
     for (Place place : placeList) {
       System.out.printf("<%d>\n", no++);

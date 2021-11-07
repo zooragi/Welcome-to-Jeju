@@ -31,7 +31,7 @@ public class PlaceListController extends GenericServlet {
     try {
       //      Theme theme = (Theme) request.getAttribute("theme");
       int no = Integer.parseInt(request.getParameter("no"));
-      Collection<Place> placeList = placeDao.findByThemeNo(no);
+      Collection<Place> placeList = placeDao.findAllByThemeNo(no);
 
       request.setAttribute("placeList", placeList);
       request.getRequestDispatcher("/place/PlaceList.jsp").forward(request, response);

@@ -22,7 +22,7 @@ public class PlaceListHandler implements Command {
     System.out.println("[장소 목록보기]");
 
     Theme theme = (Theme) request.getAttribute("theme");
-    ArrayList<Place> list = (ArrayList<Place>) placeDao.findByThemeNo(theme.getNo());
+    ArrayList<Place> list = (ArrayList<Place>) placeDao.findAllByThemeNo(theme.getNo());
     System.out.printf("[%s] 테마 제목 > %s\n", theme.getCategory().getName(), theme.getTitle());
 
     int index = 1;

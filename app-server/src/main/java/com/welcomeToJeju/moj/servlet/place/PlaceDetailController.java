@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.servlet.theme.myTheme;
+package com.welcomeToJeju.moj.servlet.place;
 
 import java.io.IOException;
 import javax.servlet.GenericServlet;
@@ -8,19 +8,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.welcomeToJeju.moj.dao.ThemeDao;
-import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.moj.dao.PlaceDao;
+import com.welcomeToJeju.moj.domain.Place;
 
-@WebServlet("/myTheme/detail")
-public class MyThemeDetailController extends GenericServlet {
+@WebServlet("/place/detail")
+public class PlaceDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-  ThemeDao themeDao;
+  PlaceDao placeDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
+    placeDao = (PlaceDao) 웹애플리케이션공용저장소.getAttribute("placeDao");
   }
 
   @Override
@@ -28,12 +28,11 @@ public class MyThemeDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Theme theme = themeDao.findByNo(no);
-      //      String title = request.getParameter("title");
+      String id = request.getParameter("no");   //id? no?
+      Place place = placeDao.findByPlaceId(id);
 
-      request.setAttribute("theme", theme);
-      request.getRequestDispatcher("/theme/myTheme/MyThemeDetail.jsp").forward(request, response);
+      request.setAttribute("place", place);
+      request.getRequestDispatcher("/place/PlaceDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

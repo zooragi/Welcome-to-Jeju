@@ -2,9 +2,7 @@ package com.welcomeToJeju.moj.handler.search;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.apache.ibatis.session.SqlSession;
-
 import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Place;
@@ -46,12 +44,12 @@ public class SearchThemeHandler implements Command {
       }
 
       Theme theme = promptSearchedThemeList(list);
-      
-      
+
+
       System.out.printf("[%s] 검색 결과\n", input);
-      
-      PlaceHandlerHelper.printPlaceInfo((ArrayList<Place>) placeDao.findByThemeNo(theme.getNo()));
-      
+
+      PlaceHandlerHelper.printPlaceInfo((ArrayList<Place>) placeDao.findAllByThemeNo(theme.getNo()));
+
       // 조회수 +1
       int viewCount = theme.getViewCount();
       HashMap<String,Object> params = new HashMap<>();
@@ -63,22 +61,22 @@ public class SearchThemeHandler implements Command {
       return;
     }
   }
-  
+
   private Theme promptSearchedThemeList(ArrayList<Theme> list) {
-  	int i = 1 ;
-  	int selectNo = 0;
-  	for(Theme t : list) {
-  		System.out.printf("%d. %s\n",i ,t.getTitle());
-  	}
-  	while(true) {
-  		selectNo = Prompt.inputInt("번호 입력 : ");
-  		if(selectNo > list.size() || selectNo < 0) {
-  			System.out.println("잘못된 번호, 다시 입력!!");
-  			continue;
-  		}
-  		break;
-  	}
-  	
-  	return list.get(selectNo-1);
+    int i = 1 ;
+    int selectNo = 0;
+    for(Theme t : list) {
+      System.out.printf("%d. %s\n",i ,t.getTitle());
+    }
+    while(true) {
+      selectNo = Prompt.inputInt("번호 입력 : ");
+      if(selectNo > list.size() || selectNo < 0) {
+        System.out.println("잘못된 번호, 다시 입력!!");
+        continue;
+      }
+      break;
+    }
+
+    return list.get(selectNo-1);
   }
 }

@@ -63,25 +63,7 @@
     where place_id=#{id}
   </delete>
   
-  <select id="findByPlaceId" resultMap="PlaceMap" parameterType="String">
-    select
-      p.place_id,
-      p.place_name,
-      p.place_address,
-      p.x_coord,
-      p.y_coord,
-      pp.file_path,
-      pp.place_photo_no,
-      c.comment,
-      c.comment_no
-    from
-      jeju_place p
-      join jeju_place_photo pp on p.place_id=pp.place_id
-      join jeju_place_comment c on p.place_id=c.place_id
-    where p.place_id=#{id}
-  </select>
-  
-  <select id="findByThemeNo" resultMap="PlaceMap" parameterType="int">
+  <select id="findAllByThemeNo" resultMap="PlaceMap" parameterType="int">
     select
       p.place_id,
       p.place_name,
@@ -103,20 +85,22 @@
     where jput.theme_no=#{no}
   </select>
   
-  <!-- 
-  <select id="findAll" resultMap="PlaceMap">
+  <select id="findByPlaceId" resultMap="PlaceMap" parameterType="String">
     select
       p.place_id,
       p.place_name,
       p.place_address,
       p.x_coord,
-      p.y_coord
+      p.y_coord,
+      pp.file_path,
+      pp.place_photo_no,
+      c.comment,
+      c.comment_no
     from
       jeju_place p
+      join jeju_place_photo pp on p.place_id=pp.place_id
+      join jeju_place_comment c on p.place_id=c.place_id
+    where p.place_id=#{id}
   </select>
-  
-  <select id="findByThemeNo" resultMap="PlaceMap" parameterType="int">
-  </select>
-   -->
   
 </mapper>

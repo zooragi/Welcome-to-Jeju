@@ -2,9 +2,7 @@ package com.welcomeToJeju.moj.handler.place;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.apache.ibatis.session.SqlSession;
-
 import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Place;
@@ -38,7 +36,7 @@ public class PlaceDeleteHandler implements Command{
         System.out.println("등록된 테마 없음!");
         return;
       }
-      ArrayList<Place> list = (ArrayList<Place>) placeDao.findByThemeNo(theme.getNo());
+      ArrayList<Place> list = (ArrayList<Place>) placeDao.findAllByThemeNo(theme.getNo());
 
       Place place = PlaceHandlerHelper.promptPlace(list);
 

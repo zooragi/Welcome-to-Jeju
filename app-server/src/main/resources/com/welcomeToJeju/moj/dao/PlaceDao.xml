@@ -63,7 +63,7 @@
     where place_id=#{id}
   </delete>
   
-  <select id="findByThemeNo" resultMap="PlaceMap" parameterType="int">
+  <select id="findAllByThemeNo" resultMap="PlaceMap" parameterType="int">
     select
       p.place_id,
       p.place_name,
@@ -102,25 +102,5 @@
       join jeju_place_comment c on p.place_id=c.place_id
     where p.place_id=#{id}
   </select>
-  
-  
-  
-  <!-- 
-  select
-      p.place_id,
-      p.place_name,
-      p.place_address,
-      p.x_coord,
-      p.y_coord
-    from
-      jeju_place p
-  
-  
-  <select id="findAll" resultMap="PlaceMap">
-  </select>
-  
-  <select id="findByThemeNo" resultMap="PlaceMap" parameterType="int">
-  </select>
-   -->
   
 </mapper>
