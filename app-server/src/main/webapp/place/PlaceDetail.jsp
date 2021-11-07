@@ -5,47 +5,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>테마 상세 보기</title>
+	<title>장소 상세 보기</title>
 </head>
 
 <body>
 <h1>장소 상세 보기(MVC + EL)</h1>
 
 장소 상세 보기 🔍
-<form action='MyThemeUpdate.jsp'>
-  <label for='f-no'>번호</label>
-  <input id='f-no' type='text' name='no' value='${theme.no}' readonly><br>
+<form action='PlaceUpdate.jsp'>
+  <label for='f-id'>번호</label>
+  <input id='f-id' type='text' name='id' value='${place.id}' readonly><br>
   
-  <label for='f-title'>제목</label>
-  <input id='f-title' type='text' name='title' value='${theme.title}'> 🤍<br>
+  <label for='f-storeName'>이름</label>
+  <input id='f-storeName' type='text' name='storeName' value='${place.storeName}' readonly><br>
   
-  <label for='f-nickname'>닉네임</label>
-  <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 🤍<br>
+  <label for='f-storeAddress'>주소</label>
+  <input id='f-storeAddress' type='text' name='storeAddress' value='${place.storeAddress}' readonly><br>
   
-  <label for='f-category'>카테고리</label>
-  <input id='f-category' type='text' name='category' value='${theme.category.name}'><br>
+  <label for='f-xCoord'>위도</label>
+  <input id='f-xCoord' type='text' name='xCoord' value='${place.xCoord}' readonly><br>
   
-  <label for='f-hashtags'>해시태그</label>
-  <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}'><br>
-
+  <label for='f-yCoord'>경도</label>
+  <input id='f-yCoord' type='text' name='yCoord' value='${place.yCoord}' readonly><br>
+  
+  <label for='f-photos'>사진</label>
+  <input id='f-photos' type='text' name='photos' value='${place.photos}'><br>
+  
+  <label for='f-comments'>댓글</label>
+  <input id='f-comments' type='text' name='comments' value='${place.comments}'><br>
+  
   <button>변경</button>
-  <a href='delete?no=${theme.no}'>[삭제]</a>
-  <a href='list'>[목록]</a><br>
+  <a href='delete?id=${place.id}'>[삭제]</a>
+  <a href='list?no=${theme.no}'>[목록]</a><br>
 </form>
 
-<br>
-<a href='../place/add'>장소 등록하기</a> ✏️
-<br>
-<a href='../place/list?no=${theme.no}'>장소 목록 보기</a> 📄
-<!-- 
-<form action='PlaceAdd.jsp'>
-  <button>장소 등록하기 ✏️</button>
-</form>
-
-<br>
-<form action='PlaceList.jsp'>
-  <button>장소 목록 보기 📄</button>
-</form>
- -->
 </body>
 </html>

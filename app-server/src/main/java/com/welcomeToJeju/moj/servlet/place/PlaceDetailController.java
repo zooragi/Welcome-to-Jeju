@@ -28,7 +28,7 @@ public class PlaceDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      String id = request.getParameter("no");   //id? no?
+      String id = request.getParameter("id");   //id? no?
       Place place = placeDao.findByPlaceId(id);
 
       request.setAttribute("place", place);
