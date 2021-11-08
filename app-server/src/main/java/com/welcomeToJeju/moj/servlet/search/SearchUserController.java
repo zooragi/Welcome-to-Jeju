@@ -13,7 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 
-@WebServlet("/seach/user")
+@WebServlet("/search/user")
 public class SearchUserController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

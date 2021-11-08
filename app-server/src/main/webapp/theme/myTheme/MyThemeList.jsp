@@ -17,8 +17,8 @@
 </head>
 <body>
 <div class = "container">
-<h1>나의 테마 목록 보기</h1>
-<a href='form' class ="btn btn-outline-primary btn-sm" >새 테마 만들기</a><br>
+<h1>${loginUser.nickname}님의 테마 목록 보기</h1>
+<a href='addform' class ="btn btn-outline-primary btn-sm" >새 테마 만들기</a><br>
 <table class = "table table-hover">
 <thead>
   <tr>
@@ -30,9 +30,8 @@
 </thead>
 <tbody>
 
-<c:forEach items="${themeList}" var="theme">
+<c:forEach items="${myThemeList}" var="theme">
 <tr>
-<td>${theme.title}</td> 
 <td><a href='detail?no=${theme.no}'>${theme.title}</a></td> 
 <td>${theme.category.name}</td> 
 <td>${theme.hashtags}</td> 

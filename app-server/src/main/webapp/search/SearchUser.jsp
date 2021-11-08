@@ -28,7 +28,7 @@
 
 <c:forEach items="${userList}" var="user">
 <tr>
-<td><a href='../${user.no}'>${user.nickname}님의 정보 상세보기</a></td> 
+<td><a href='../mytheme/list?no=${user.no}'>${user.nickname}님의 테마 목록</a></td> 
 </tr>
 
 </c:forEach>
