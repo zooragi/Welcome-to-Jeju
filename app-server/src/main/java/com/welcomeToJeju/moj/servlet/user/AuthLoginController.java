@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 
@@ -16,7 +15,6 @@ import com.welcomeToJeju.moj.domain.User;
 public class AuthLoginController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  HttpSession httpSession;
   UserDao userDao;
 
   @Override
@@ -39,8 +37,9 @@ public class AuthLoginController extends HttpServlet {
       if (user == null) {
         throw new Exception("로그인 실패!");
       } else {
-        httpSession = request.getSession(true);
-        httpSession.setAttribute("loginUser", user);
+        request.getSession(true).setAttribute("loginUser", user);
+        //        httpSession = request.getSession(true);
+        //        httpSession.setAttribute("loginUser", user);
 
         request.getRequestDispatcher("/user/AuthLogin.jsp").forward(request, response);
         //        request.getRequestDispatcher("/theme/myTheme/MyThemeList.jsp").forward(request, response);

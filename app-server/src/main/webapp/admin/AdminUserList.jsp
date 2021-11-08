@@ -1,5 +1,4 @@
-<%@page import="java.util.Collection"%>
-<%@page import="com.welcomeToJeju.moj.domain.User"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
@@ -23,25 +22,28 @@
 </tr>
 </thead>
 <tbody>
-<%
-Collection<User> userList = (Collection<User>) request.getAttribute("userList");
 
-if (userList.size() == 0) { %>
-  회원 없음!
-  <%
-}
-for (User user : userList) {
-  String status = user.getActive() == 0 ? "탈퇴" : "회원";
-%>
+<c:forEach items="${userList}" var="user">
+
 <tr>
-<td><%=user.getNo()%></td> 
-<td><a href='detail?no=<%=user.getNo()%>'><%=user.getNickname()%></a></td> 
-<td><%=user.getEmail()%></td> 
-<td><%=user.getRegisteredDate()%></td> 
-<td>🚨<%=user.getWarningCount()%></td> 
-<td><%=status%></td>
+    <td>${user.no}</td>
+    <td><a href='detail?no=${user.no}'>${user.nickname}</a></td>
+    <td>${user.email}</td>
+    <td>${user.registeredDate}</td>
+    <td>${user.warningCount}</td>
+    <td>
+      <c:choose>
+        <c:when test="${user.active eq '1'}">
+          회원
+        </c:when>
+        <c:when test="${user.active eq '0'}">
+          탈퇴
+        </c:when>
+      </c:choose>
+    </td>    
+
 </tr>
-<%} %>
+</c:forEach>
 </tbody>
 </table>
 </body>
