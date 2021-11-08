@@ -52,22 +52,6 @@
       user_no desc
   </select>
   
-  <select id="findByEmailAndPassword" resultMap="UserMap">
-    select
-      user_no,
-      email,
-      nickname,
-      created_dt,
-      view_cnt,
-      reported_cnt,
-      warned_cnt,
-      active
-	    from
-	      jeju_user
-	    where 
-	      email=#{email} and password=password(#{password}) and active=1
-  </select>
-  
   <select id="findByNickname" resultMap="UserMap" parameterType="String">
     select
       user_no,
@@ -97,6 +81,38 @@
     where
       user_no=#{no}
   </select>
+  
+  <select id="findByEmailAndPassword" resultMap="UserMap">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      view_cnt,
+      reported_cnt,
+      warned_cnt,
+      active
+      from
+        jeju_user
+      where 
+        email=#{email} and password=password(#{password}) and active=1
+  </select>
+  
+  <select id="findByKeyword" resultMap = "UserMap" parameterType = "string">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      view_cnt,
+      reported_cnt,
+      warned_cnt,
+      active
+    from
+      jeju_user
+    where
+      nickname like(concat('%',#{keyword},'%'))
+   </select>
    
    <insert id="insertLikedUser">
     insert into jeju_liked_user(user_no,user_no2)

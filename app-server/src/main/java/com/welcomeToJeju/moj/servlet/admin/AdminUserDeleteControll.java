@@ -15,19 +15,18 @@ import com.welcomeToJeju.moj.domain.User;
 
 @WebServlet("/admin/delete")
 public class AdminUserDeleteControll extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
-  UserDao userDao;
-  ThemeDao themeDao;
+
   SqlSession sqlSession;
+  ThemeDao themeDao;
+  UserDao userDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
-
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
-    themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
+    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
 
   @Override 
@@ -35,19 +34,15 @@ public class AdminUserDeleteControll extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
 
+      int no = Integer.parseInt(request.getParameter("no"));
       User user = userDao.findByNo(no);
 
-      if (user == null) {
-        throw new Exception("회원 없음!<br>");
-
-      } 
       themeDao.deleteAllLikedThemeByUserNo(user.getNo());
       userDao.deleteAllLikedUser(user.getNo());
       userDao.updateActive(user.getNo());
       sqlSession.commit();
-      //response.setHeader("Refresh", "1;url=list");
+
       response.sendRedirect("list");
 
     } catch (Exception e) {
@@ -55,5 +50,6 @@ public class AdminUserDeleteControll extends HttpServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
+
 
 }

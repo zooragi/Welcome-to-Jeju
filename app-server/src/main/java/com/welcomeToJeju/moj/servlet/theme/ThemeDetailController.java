@@ -1,19 +1,18 @@
 package com.welcomeToJeju.moj.servlet.theme;
 
 import java.io.IOException;
-import java.util.Collection;
+import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
-@WebServlet("/theme/list")
-public class AllThemeListController extends HttpServlet {
+@WebServlet("/theme/detail")
+public class ThemeDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   ThemeDao themeDao;
@@ -25,20 +24,23 @@ public class AllThemeListController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response) 
+  public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
+
     try {
 
-      Collection<Theme> themeList = themeDao.findAllPublicTheme();
+      int no = Integer.parseInt(request.getParameter("no"));
+      Theme theme = themeDao.findByNo(no);
+      //      String title = request.getParameter("title");
 
-      request.setAttribute("allThemeList", themeList);
-      request.getRequestDispatcher("/theme/AllThemeList.jsp").forward(request, response);
+      request.setAttribute("theme", theme);
+      request.getRequestDispatcher("/theme/ThemeDetail.jsp").forward(request, response);
 
-    } catch (Exception e){
+    } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-
   }
+
+
 }

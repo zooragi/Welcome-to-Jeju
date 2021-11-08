@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
-@WebServlet("/myTheme/detail")
+@WebServlet("/mytheme/detail")
 public class MyThemeDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 

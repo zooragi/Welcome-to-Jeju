@@ -1,7 +1,6 @@
 package com.welcomeToJeju.moj.servlet.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -15,13 +14,12 @@ import com.welcomeToJeju.moj.domain.User;
 
 @WebServlet("/admin/list")
 public class AdminUserListController extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
+
   UserDao userDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
-
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
@@ -31,13 +29,10 @@ public class AdminUserListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      response.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = response.getWriter();
 
       Collection<User> userList = userDao.findAll();
 
       request.setAttribute("userList", userList);
-
       request.getRequestDispatcher("/admin/AdminUserList.jsp").forward(request, response);
 
     } catch (Exception e) {
@@ -45,4 +40,6 @@ public class AdminUserListController extends HttpServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
+
+
 }

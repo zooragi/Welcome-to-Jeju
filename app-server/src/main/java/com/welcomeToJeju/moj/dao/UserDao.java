@@ -17,6 +17,8 @@ public interface UserDao {
 
   User findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
 
+  List<User> findByKeyword(String keyword) throws Exception;
+
   void updateViewCount(HashMap<String,Object> params) throws Exception;
   void updateReportedCount(HashMap<String,Object> params) throws Exception;
   void updateWarnedCount(HashMap<String,Object> params) throws Exception;

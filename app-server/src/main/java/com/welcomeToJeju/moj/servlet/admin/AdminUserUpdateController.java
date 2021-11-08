@@ -14,17 +14,16 @@ import com.welcomeToJeju.moj.domain.User;
 
 @WebServlet("/admin/update")
 public class AdminUserUpdateController extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
-  UserDao userDao;
+
   SqlSession sqlSession;
+  UserDao userDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
-
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
 
   @Override 
@@ -32,23 +31,19 @@ public class AdminUserUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+
       int no = Integer.parseInt(request.getParameter("no"));
       User user = userDao.findByNo(no);
 
-      if (user == null) {
-        throw new Exception("해당 번호의 회원이 없습니다!");
-
-      }
-
-      String password = request.getParameter("password");
       String nickname = request.getParameter("nickname");
+      String password = request.getParameter("password");
 
-      user.setPassword(password);
       user.setNickname(nickname);
+      user.setPassword(password);
 
       userDao.update(user);
       sqlSession.commit();
-      // response.setHeader("Refresh", "1;url=list");
+
       response.sendRedirect("list");
 
     } catch (Exception e) {
@@ -56,4 +51,6 @@ public class AdminUserUpdateController extends HttpServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
+
+
 }

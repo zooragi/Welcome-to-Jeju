@@ -13,14 +13,12 @@ import com.welcomeToJeju.moj.domain.User;
 
 @WebServlet("/admin/detail")
 public class AdminUserDetailController extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
 
   UserDao userDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
-
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
@@ -30,13 +28,9 @@ public class AdminUserDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+
       int no = Integer.parseInt(request.getParameter("no"));
-
       User user = userDao.findByNo(no);
-
-      if (user == null) {
-        throw new Exception("해당 번호의 회원 없음!");
-      }
 
       request.setAttribute("user", user);
       request.getRequestDispatcher("/admin/AdminUserDetail.jsp").forward(request, response);
@@ -46,5 +40,6 @@ public class AdminUserDetailController extends HttpServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
+
 
 }

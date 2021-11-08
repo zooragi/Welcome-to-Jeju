@@ -10,8 +10,8 @@
 </head>
  <body>
 <h1>로그인 성공!</h1>
-<p>'${user.nickname}' 님 환영합니다! 🙋</p>
-<a href='http://localhost:8080/myTheme/list?no=${user.no}'>나의 테마 목록 보기</a>
+<p>'${loginUser.nickname}' 님 환영합니다! 🙋</p>
+<a href='../myTheme/list?no=${loginUser.no}'>나의 테마 목록 보기</a>
 
 </body>
 </html>

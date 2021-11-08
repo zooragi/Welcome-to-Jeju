@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 
-@WebServlet("/theme/myTheme/add")
+@WebServlet("/mytheme/add")
 public class MyThemeAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -25,6 +25,7 @@ public class MyThemeAddController extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
+    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
 
   @Override

@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/addForm")
+@WebServlet("/user/addform")
 public class UserAddFormController extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
 
   @Override 
@@ -18,5 +17,6 @@ public class UserAddFormController extends HttpServlet {
 
     request.getRequestDispatcher("/user/UserAddForm.jsp").forward(request, response);
   }
+
 
 }
