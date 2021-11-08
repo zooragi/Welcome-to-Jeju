@@ -15,7 +15,7 @@ public class AuthLoginFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/user/UserLoginForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/user/AuthLoginForm.jsp").forward(request, response);
   }
 
 

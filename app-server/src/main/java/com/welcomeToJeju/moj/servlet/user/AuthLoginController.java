@@ -42,7 +42,7 @@ public class AuthLoginController extends HttpServlet {
         httpSession = request.getSession(true);
         httpSession.setAttribute("loginUser", user);
 
-        request.getRequestDispatcher("/user/UserLogin.jsp").forward(request, response);
+        request.getRequestDispatcher("/user/AuthLogin.jsp").forward(request, response);
         //        request.getRequestDispatcher("/theme/myTheme/MyThemeList.jsp").forward(request, response);
       }
 
