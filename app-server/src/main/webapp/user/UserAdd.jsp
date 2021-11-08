@@ -11,6 +11,6 @@
  <body>
 <h1>회원등록결과(MVC)</h1>
 <p>회원을 등록했습니다!</p>
-<a href='loginform'>로그인 하러 가기!</a>
+<a href='../auth/loginform'>로그인 하러 가기!</a>
 </body>
 </html>
