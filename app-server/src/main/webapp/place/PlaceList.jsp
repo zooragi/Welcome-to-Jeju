@@ -10,7 +10,6 @@
 </head>
 
 <body>
-<h1>장소 목록 보기(MVC + EL + JSTL)</h1>
 
 장소 목록 보기 📄
 <table border='1'>
@@ -28,7 +27,7 @@
 	<c:forEach items="${placeList}" var="place">
 	<tr>
     <td>${place.id}</td>
-    <td><a href='detail?id=${place.id}'>${place.storeName}</a></td>
+    <td><a href='../place/detail?id=${place.id}'>${place.storeName}</a></td>
     <td>${place.storeAddress}</td>
     <td>${place.xCoord}</td>
     <td>${place.yCoord}</td>
