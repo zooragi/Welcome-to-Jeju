@@ -38,11 +38,7 @@ public class AuthLoginController extends HttpServlet {
         throw new Exception("로그인 실패!");
       } else {
         request.getSession(true).setAttribute("loginUser", user);
-        //        httpSession = request.getSession(true);
-        //        httpSession.setAttribute("loginUser", user);
-
         request.getRequestDispatcher("/user/AuthLogin.jsp").forward(request, response);
-        //        request.getRequestDispatcher("/theme/myTheme/MyThemeList.jsp").forward(request, response);
       }
 
     } catch (Exception e) {
