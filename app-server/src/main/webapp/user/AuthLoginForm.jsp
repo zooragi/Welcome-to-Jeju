@@ -25,7 +25,9 @@ width: 60px;
 <label for='f-password'>암호</label>  
 <input id='f-password' type='password' name='password'><br>
 
-<button>로그인</button><br>
+<button>로그인</button>
+<button><a href='../user/addform'>회원가입</a></button><br>
+
 
 </form>
 </body>
