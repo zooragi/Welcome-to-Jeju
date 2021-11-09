@@ -17,7 +17,6 @@ import com.welcomeToJeju.moj.domain.Comment;
 import com.welcomeToJeju.moj.domain.Photo;
 import com.welcomeToJeju.moj.domain.Place;
 import com.welcomeToJeju.moj.domain.Theme;
-import com.welcomeToJeju.moj.handler.user.AuthLoginHandler;
 import com.welcomeToJeju.util.KakaoMapApi;
 import com.welcomeToJeju.util.KakaoVo;
 import com.welcomeToJeju.util.Prompt;
