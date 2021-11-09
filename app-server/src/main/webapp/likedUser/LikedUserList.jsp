@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>테마 좋아요 목록 보기</title>
+<title>유저 좋아요 목록 보기</title>
 </head>
 
 <body>
