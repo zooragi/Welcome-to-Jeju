@@ -14,7 +14,6 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.Place;
 import com.welcomeToJeju.moj.domain.Theme;
-import com.welcomeToJeju.moj.domain.User;
 
 @WebServlet("/mytheme/detail")
 public class MyThemeDetailController extends HttpServlet {
@@ -40,13 +39,13 @@ public class MyThemeDetailController extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Theme theme = themeDao.findByNo(no);
-      //      Category category = themeDao.findCategoryByNo(no);
-      User user = userDao.findByNo(theme.getOwner().getNo());
+      theme.setCategory(themeDao.findCategoryByNo(theme.getCategory().getNo()));
+      theme.setOwner(userDao.findByNo(theme.getOwner().getNo()));
+      System.out.println(theme);
+
       Collection<Place> placeList = placeDao.findAllByThemeNo(no);
 
       request.setAttribute("theme", theme);
-      //      request.setAttribute("category", category);
-      request.setAttribute("user", user);
       request.setAttribute("placeList", placeList);
 
       request.getRequestDispatcher("/theme/myTheme/MyThemeDetail.jsp").forward(request, response);
