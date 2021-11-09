@@ -53,10 +53,10 @@
 		  <input id='f-title' type='text' name='title' value='${theme.title}'> 🤍<br>
 		  
 		  <label for='f-nickname'>닉네임</label>
-		  <input id='f-nickname' type='text' name='nickname' value='${theme.owner}' readonly> 🤍<br>
+		  <input id='f-nickname' type='text' name='nickname' value='${user.nickname}' readonly> 🤍<br>
 		  
 		  <label for='f-category'>카테고리</label>
-		  <input id='f-category' type='text' name='category' value='${theme.category}'><br>
+		  <input id='f-category' type='text' name='category' value='${category.name}'><br>
 		  
 		  <label for='f-hashtags'>해시태그</label>
 		  <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}'><br>
