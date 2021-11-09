@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.moj.domain.User;
 
 @WebServlet("/mytheme/list")
 public class MyThemeListController extends HttpServlet {
@@ -38,11 +39,11 @@ public class MyThemeListController extends HttpServlet {
     //    User loginUser = (User) httpSession.getAttribute("loginUser");
     //    System.out.println(loginUser);
 
-    int no = Integer.parseInt(request.getParameter("no"));
+    User loginUser = (User) request.getSession(true).getAttribute("loginUser");
 
     try {
 
-      Collection<Theme> themeList = themeDao.findByUserNo(no);
+      Collection<Theme> themeList = themeDao.findByUserNo(loginUser.getNo());
 
       request.setAttribute("myThemeList", themeList);
       request.getRequestDispatcher("/theme/myTheme/MyThemeList.jsp").forward(request, response);
