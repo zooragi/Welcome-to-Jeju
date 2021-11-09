@@ -18,7 +18,7 @@ width: 60px;
 </head>
  <body>
 <h1>로그인</h1>
-<form action='../auth/login'>
+<form action='../auth/login' method='post'>
 <label for='f-email'>이메일</label>  
 <input id='f-email' type='email' name='email'><br>
 

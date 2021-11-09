@@ -6,10 +6,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
    <title>회원목록</title>
+   
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+  
+  <script src = "../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src = "../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script defer src="../javascript/common.js"></script>
+  <script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
+  
 </head>
  <body>
+ 
+ <jsp:include page="../header.jsp"></jsp:include>
+ <jsp:include page="../sideBar.jsp"></jsp:include>
+ 
 <h1>회원 목록(MVC)</h1>
+
 <table border = '1'>
 <thead>
 <tr>
