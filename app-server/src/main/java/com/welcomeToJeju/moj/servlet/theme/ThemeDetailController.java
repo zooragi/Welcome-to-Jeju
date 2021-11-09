@@ -41,8 +41,6 @@ public class ThemeDetailController extends HttpServlet {
       Theme theme = themeDao.findByNo(no);
       theme.setCategory(themeDao.findCategoryByNo(theme.getCategory().getNo()));
       theme.setOwner(userDao.findByNo(theme.getOwner().getNo()));
-      System.out.println(theme);
-
       Collection<Place> placeList = placeDao.findAllByThemeNo(no);
 
       request.setAttribute("theme", theme);
@@ -52,6 +50,7 @@ public class ThemeDetailController extends HttpServlet {
       request.getRequestDispatcher("/place/PlaceList.jsp").forward(request, response);
 
     } catch (Exception e) {
+      System.out.println(e);
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
