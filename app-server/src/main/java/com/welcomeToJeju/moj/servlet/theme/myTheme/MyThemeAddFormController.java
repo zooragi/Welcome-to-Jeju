@@ -15,7 +15,7 @@ public class MyThemeAddFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/theme/myTheme/MyThemeForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/theme/myTheme/MyThemeAddForm.jsp").forward(request, response);
   }
 
 
