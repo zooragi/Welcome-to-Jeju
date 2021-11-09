@@ -1,18 +1,18 @@
 package com.welcomeToJeju.moj.servlet.place;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.domain.Place;
 
 @WebServlet("/place/detail")
-public class PlaceDetailController extends GenericServlet {
+public class PlaceDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   PlaceDao placeDao;
@@ -23,8 +23,8 @@ public class PlaceDetailController extends GenericServlet {
     placeDao = (PlaceDao) 웹애플리케이션공용저장소.getAttribute("placeDao");
   }
 
-  @Override
-  public void service(ServletRequest request, ServletResponse response)
+  @Override 
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
