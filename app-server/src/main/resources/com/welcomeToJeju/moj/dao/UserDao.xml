@@ -111,7 +111,7 @@
     from
       jeju_user
     where
-      nickname like(concat('%',#{keyword},'%'))
+      nickname like(concat('%',#{keyword},'%')) and active=1
    </select>
    
    <insert id="insertLikedUser">
