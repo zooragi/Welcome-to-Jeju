@@ -44,9 +44,7 @@ width: 60px;
 <span id='f-registeredDate'>${loginUser.registeredDate}</span><br>
 
 <button>[회원수정]</button>
-
-<a href='delete?no=${loginUser.no}'>[회원삭제]</a>
-<a href='list'>[목록]</a><br>
+<button><a href='../user/delete?no=${loginUser.no}'>[탈퇴하기]</a></button>
 
 </form>
 </body>
