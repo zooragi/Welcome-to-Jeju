@@ -233,7 +233,7 @@
     from
       jeju_theme_category
     where
-      no = #{no}
+      category_no = #{no}
   </select>
   
   <update id="updateViewCount">

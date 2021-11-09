@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.Category;
+import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.moj.domain.User;
 
 @WebServlet("/mytheme/add")
 public class MyThemeAddController extends HttpServlet {
@@ -32,38 +35,42 @@ public class MyThemeAddController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    //    Theme theme = new Theme();
-    //
-    //    theme.setTitle(request.getParameter("title"));
-    //    try {
-    //      Category category = themeDao.findCategoryByNo(
-    //          Integer.valueOf(request.getParameter("category")));
-    //      // 카테고리
-    //      theme.setCategory(category);
-    //
-    //      // 해시태그
-    //      theme.getHashtags().add(request.getParameter("hashtag"));
-    //      int isPublic = Integer.valueOf(request.getParameter("isPublic"));
-    //      theme.setIsPublic(isPublic);
-    //
-    //      User user = userDao.findByNo(Integer.valueOf(request.getParameter("no")));
-    //      theme.setOwner(user);
-    //
-    //      themeDao.insert(theme);
-    //      for (String hashtag : theme.getHashtags()) {
-    //        themeDao.insertHashtag(theme.getNo(), hashtag);
-    //      }
-    //      sqlSession.commit();
-    //      response.setHeader("Refresh", "1;url=list");
-    request.getRequestDispatcher("/theme/myTheme/MyThemeAdd.jsp").forward(request, response);
 
-    //    } catch (Exception e) {
-    //      request.setAttribute("error", e);
-    //
-    //      // 오류가 발생하면 오류내용을 출력할 뷰를 호출한다.
-    //      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    //
-    //    }
+    try {
+      Theme theme = new Theme();
+
+      theme.setTitle(request.getParameter("title"));
+
+      Category category = themeDao.findCategoryByNo(
+          Integer.valueOf(request.getParameter("category")));
+      // 카테고리
+      theme.setCategory(category);
+
+      // 해시태그
+      theme.getHashtags().add(request.getParameter("hashtag"));
+      int isPublic = Integer.valueOf(request.getParameter("isPublic"));
+      theme.setIsPublic(isPublic);
+
+
+      // String user = request.getParameter("owner");
+      User loginUser = (User) request.getSession(true).getAttribute("loginUser");
+      theme.setOwner(loginUser);
+
+      themeDao.insert(theme);
+      for (String hashtag : theme.getHashtags()) {
+        themeDao.insertHashtag(theme.getNo(), hashtag);
+      }
+      sqlSession.commit();
+      response.setHeader("Refresh", "1;url=list");
+      request.getRequestDispatcher("/theme/myTheme/MyThemeAdd.jsp").forward(request, response);
+
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+
+      // 오류가 발생하면 오류내용을 출력할 뷰를 호출한다.
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+
+    }
   }
 
 
