@@ -23,10 +23,10 @@
 </thead>
 <tbody>
 
-<c:forEach items="${allThemeList}" var="theme">
+<c:forEach items="${themeList}" var="theme">
 <tr>
 <td><a href='../mytheme/detail?no=${theme.no}'>${theme.title}</a></td> 
-<td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
+<td>${theme.owner.nickname}</td>
 <td>${theme.category.name}</td> 
 <td>${theme.hashtags}</td> 
 </tr>

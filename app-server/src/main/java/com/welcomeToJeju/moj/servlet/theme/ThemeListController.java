@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
-@WebServlet("/theme/list")
-public class AllThemeListController extends HttpServlet {
+@WebServlet("/theme/userlist")
+public class ThemeListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ThemeDao themeDao;
@@ -29,21 +29,24 @@ public class AllThemeListController extends HttpServlet {
       throws ServletException, IOException {
     try {
 
-      Collection<Theme> themeList = themeDao.findAllPublicTheme();
+      int no = Integer.valueOf(request.getParameter("no"));
 
-      request.setAttribute("allThemeList", themeList);
+      Collection<Theme> themeList = themeDao.findPublicThemeByUserNo(no);
 
+      request.setAttribute("themeList", themeList);
       request.setAttribute("pageTitle", "전체테마 리스트");
-      request.setAttribute("contentUrl", "/theme/AllThemeList.jsp");
+      request.setAttribute("contentUrl", "/theme/ThemeList.jsp");
 
       request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+
 
 
     } catch (Exception e){
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-
   }
+
+
+
 }
