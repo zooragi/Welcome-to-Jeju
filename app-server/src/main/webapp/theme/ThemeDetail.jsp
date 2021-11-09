@@ -50,20 +50,18 @@
 		  <input id='f-no' type='text' name='no' value='${theme.no}' readonly><br>
 		  
 		  <label for='f-title'>제목</label>
-		  <input id='f-title' type='text' name='title' value='${theme.title}'> 🤍<br>
+		  <input id='f-title' type='text' name='title' value='${theme.title}' readonly> 🤍<br>
 		  
 		  <label for='f-nickname'>닉네임</label>
-		  <input id='f-nickname' type='text' name='nickname' value='${loginUser.nickname}' readonly> 🤍<br>
+		  <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 🤍<br>
 		  
 		  <label for='f-category'>카테고리</label>
-		  <input id='f-category' type='text' name='category' value='${theme.category.name}'><br>
+		  <input id='f-category' type='text' name='category' value='${theme.category.name}' readonly><br>
 		  
 		  <label for='f-hashtags'>해시태그</label>
-		  <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}'><br>
+		  <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}' readonly><br>
 		
-		  <button>변경</button>
-		  <a href='delete?no=${theme.no}'>[삭제]</a>
-		  <a href='list?no=${user.no}'>[목록]</a>
+		  <a href='../'>[목록]</a>
 		  </form>
 	  </div>
 	</div>

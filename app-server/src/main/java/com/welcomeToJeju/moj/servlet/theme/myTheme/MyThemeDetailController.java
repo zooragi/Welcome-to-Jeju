@@ -27,7 +27,7 @@ public class MyThemeDetailController extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
-    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
+    //    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
     placeDao = (PlaceDao) 웹애플리케이션공용저장소.getAttribute("placeDao");
   }
 
@@ -40,7 +40,7 @@ public class MyThemeDetailController extends HttpServlet {
 
       Theme theme = themeDao.findByNo(no);
       theme.setCategory(themeDao.findCategoryByNo(theme.getCategory().getNo()));
-      theme.setOwner(userDao.findByNo(theme.getOwner().getNo()));
+      //      theme.setOwner(userDao.findByNo(theme.getOwner().getNo()));
       System.out.println(theme);
 
       Collection<Place> placeList = placeDao.findAllByThemeNo(no);
