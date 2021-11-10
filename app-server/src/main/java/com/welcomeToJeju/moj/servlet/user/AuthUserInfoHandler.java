@@ -29,10 +29,9 @@ public class AuthUserInfoHandler extends HttpServlet {
 
     try {
 
-      // User user = (User) request.getSession(true).getAttribute("loginUser");
-      //      User user = userDao.findByNo(no);
-
-      request.getRequestDispatcher("/user/AuthUserInfo.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "회원 상세 보기");
+      request.setAttribute("contentUrl", "/user/AuthUserInfo.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

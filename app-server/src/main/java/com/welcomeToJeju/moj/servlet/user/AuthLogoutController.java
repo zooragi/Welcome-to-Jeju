@@ -16,7 +16,7 @@ public class AuthLogoutController extends HttpServlet {
       throws ServletException, IOException {
 
     request.getSession(true).invalidate();
-
-    request.getRequestDispatcher("/user/AuthLogout.jsp").forward(request, response);
-  }
+    request.setAttribute("pageTitle", "로그아웃");
+    request.setAttribute("contentUrl", "/user/AuthLogout.jsp");
+    request.getRequestDispatcher("/template_main.jsp").forward(request, response);  }
 }

@@ -4,10 +4,8 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 
-<!DOCTYPE html>
-<html>
 <head>
-   <title>내정보</title>
+
 <style>
 label {
 margin-right: 5px;
@@ -25,9 +23,16 @@ width: 60px;
       }
     </style>
     
+    <style>
+  .container {
+    xborder : 1px solid red;
+    width : 640px;
+  }</style>
+    
 </head>
  <body>
-<h1>내 정보</h1>
+ <div class="container">
+<h1>회원 정보</h1>
 
 <form action='../user/update'>
 
@@ -52,10 +57,9 @@ width: 60px;
 <label for='f-registeredDate'>가입일</label>  
 <input id='f-registeredDate' type='date' name='registeredDate' value='${loginUser.registeredDate}' readonly><br>
 
-<button>회원수정</button>
+<button>회원 수정</button>
 <button><a href='../user/delete?no=${loginUser.no}'>탈퇴하기</a></button>
 <button><a href='loginout'>로그아웃</a></button>
-
 </form>
+</div>
 </body>
-</html>

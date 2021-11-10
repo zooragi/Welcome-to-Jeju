@@ -38,7 +38,9 @@ public class AuthLoginController extends HttpServlet {
         throw new Exception("로그인 실패!");
       } else {
         request.getSession(true).setAttribute("loginUser", user);
-        request.getRequestDispatcher("/user/AuthLogin.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "로그인 성공");
+        request.setAttribute("contentUrl", "/user/AuthLogin.jsp");
+        request.getRequestDispatcher("/template_main.jsp").forward(request, response);
       }
 
     } catch (Exception e) {

@@ -33,7 +33,9 @@ public class AdminUserListController extends HttpServlet {
       Collection<User> userList = userDao.findAll();
 
       request.setAttribute("userList", userList);
-      request.getRequestDispatcher("/admin/AdminUserList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "회원 목록보기");
+      request.setAttribute("contentUrl", "/admin/AdminUserList.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

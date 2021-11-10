@@ -33,7 +33,9 @@ public class AdminUserDetailController extends HttpServlet {
       User user = userDao.findByNo(no);
 
       request.setAttribute("user", user);
-      request.getRequestDispatcher("/admin/AdminUserDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "회원 상세 보기");
+      request.setAttribute("contentUrl", "/admin/AdminUserDetail.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

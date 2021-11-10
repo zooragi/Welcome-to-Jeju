@@ -3,10 +3,8 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
     
-<!DOCTYPE html>
-<html>
 <head>
-   <title>로그인</title>
+
 <style>
 label {
 margin-right: 5px;
@@ -15,9 +13,19 @@ display: inline-block;
 width: 60px;
 }
 </style>
+
+ <style>
+  .container {
+  xborder: 1px solid red;
+  width: 640px;
+  }
+  </style>
+
 </head>
+
  <body>
-<h1>로그인</h1>
+ <div class = "container">
+<h1>로그인하기</h1>
 <form action='../auth/login' method='post'>
 <label for='f-email'>이메일</label>  
 <input id='f-email' type='email' name='email'><br>
@@ -30,6 +38,7 @@ width: 60px;
 
 
 </form>
+</div>
 </body>
 </html>
     
