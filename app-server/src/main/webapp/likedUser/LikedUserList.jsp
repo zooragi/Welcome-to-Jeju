@@ -17,6 +17,7 @@
 <tr>
   <th>번호</th>
   <th>닉네임</th>
+  <th>💙</th>
 </tr>
 </thead>
 	
@@ -25,6 +26,7 @@
 	<tr>
     <td>${user.no}</td>
     <td><a href='../theme/userlist?no=${user.no}'>${user.nickname}</a></td>
+    <td>🤍</td>
 	</tr>
 	</c:forEach>
 </tbody>
