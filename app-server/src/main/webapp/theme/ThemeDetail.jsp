@@ -50,7 +50,8 @@
 		  <input id='f-no' type='text' name='no' value='${theme.no}' readonly><br>
 		  
 		  <label for='f-title'>제목</label>
-		  <input id='f-title' type='text' name='title' value='${theme.title}' readonly> 🤍<br>
+		  <input id='f-title' type='text' name='title' value='${theme.title}' readonly>
+		  <a href='../likedtheme/add?no=${theme.no}&no=${loginUser.no}'> 🤍</a><br>
 		  
 		  <label for='f-nickname'>닉네임</label>
 		  <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 🤍<br>
