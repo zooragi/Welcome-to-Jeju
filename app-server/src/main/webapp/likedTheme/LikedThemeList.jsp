@@ -29,7 +29,7 @@
 	<tr>
     <td>${theme.no}</td>
     <td><a href='../theme/detail?no=${theme.no}'>${theme.title}</a></td>
-    <td>${theme.owner.nickname}</td>
+    <td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
     <td>${theme.category.name}</td>
     <td>${theme.hashtags}</td>
     <td><a href='delete?no=${theme.no}&no=${loginUser.no}'>🧡</a></td>
