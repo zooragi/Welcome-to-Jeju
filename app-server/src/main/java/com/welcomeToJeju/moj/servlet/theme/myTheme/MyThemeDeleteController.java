@@ -14,7 +14,7 @@ import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
 @WebServlet("/mytheme/delete")
-public class MyThemeDeleteHandler extends HttpServlet {
+public class MyThemeDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -44,8 +44,8 @@ public class MyThemeDeleteHandler extends HttpServlet {
       themeDao.delete(theme.getNo());
       sqlSession.commit();
 
-      request.setAttribute("theme", theme);
-      request.getRequestDispatcher("/theme/myTheme/ThemeDelete.jsp").forward(request, response);
+      response.setHeader("Refresh", "1;url=list");
+      request.getRequestDispatcher("/theme/myTheme/MyThemeDelete.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
