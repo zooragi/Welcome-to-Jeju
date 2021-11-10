@@ -132,7 +132,7 @@
       jeju_user u
       inner join jeju_liked_user lu on u.user_no=lu.user_no2
     where
-      lu.user_no=#{no}
+      lu.user_no=#{no} and active=1
    </select>
    
    <update id="updateViewCount" parameterType="map">
@@ -178,6 +178,8 @@
       view_cnt
     from
       jeju_user
+    where
+      active=1
     order by view_cnt desc
   </select>
   
