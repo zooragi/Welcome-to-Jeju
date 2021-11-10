@@ -27,7 +27,7 @@
 
 <div class="container">
 <h1>테마 만들기(MVC)</h1>
-<form action='add'>
+<form id ="theme-form" action='add' method = "post">
 <div class="mb-3 row">
     <label for='f-title' class="col-sm-2 col-form-label">테마 제목</label>
     <div class="col-sm-6">
@@ -44,7 +44,7 @@
 </div>
  -->
 
-<select class="form-select" aria-label="카테고리" name ="category" >
+<select class="form-select" aria-label= "f-category" name ="category" >
   <option selected>카테고리</option>
   <option value="1">식당</option>
   <option value="2">카페</option>
@@ -89,6 +89,19 @@
 
 <button class="btn btn-primary btn-sm">등록</button><br>
 </form>
+
+<script>
+document.querySelector("#theme-form").onsubmit = () => {
+  if (document.querySelector("#f-title").value == "" ||
+      document.querySelector("#f-category").value == "" ||) {
+    window.alert("필수 입력 항목이 비어 있습니다.")
+    //Swal.fire("필수 입력 항목이 비어 있습니다.")
+    return false;
+  }
+};
+
+</script>
+
 </div><!--  .container -->
 </body>
 </html>
