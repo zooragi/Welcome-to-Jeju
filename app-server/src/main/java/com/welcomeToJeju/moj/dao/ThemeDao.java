@@ -22,12 +22,13 @@ public interface ThemeDao {
   List<Theme> findPublicThemeByUserNo(int userNo) throws Exception;
   List<Category> findAllCategory() throws Exception;
 
+  // 테마 검색
   Theme findByTitle(String title) throws Exception;
   Theme findByNo(int no) throws Exception;
   List<Theme> findByUserNo(int userNo) throws Exception;
 
-  List<Theme> findByKeyword(String keyword) throws Exception;
   List<Theme> findByHashtag(String hashtag) throws Exception;
+  List<Theme> findByKeyword(String keyword) throws Exception;
 
   Category findCategoryByNo(int no) throws Exception;
 
