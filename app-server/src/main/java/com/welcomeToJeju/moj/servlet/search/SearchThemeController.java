@@ -9,41 +9,41 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import com.welcomeToJeju.moj.dao.UserDao;
-import com.welcomeToJeju.moj.domain.User;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.domain.Theme;
 
-@WebServlet("/search/user")
-public class SearchUserController extends HttpServlet {
+@WebServlet("/search/theme")
+public class SearchThemeController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  UserDao userDao;
+  ThemeDao themeDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
+    themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
   }
 
   @Override
   public void service(ServletRequest request, ServletResponse response) 
       throws ServletException, IOException {
 
-    String keyword = "제주";
+    String keyword = "카페";
 
     // request.getParameter("keyword");
 
     try {
-      Collection<User> userList = userDao.findByKeyword(keyword);
+      Collection<Theme> themeList = themeDao.findByKeyword(keyword);
 
-      request.setAttribute("userList", userList);
-      request.setAttribute("pageTitle", "유저 검색 목록보기");
-      request.setAttribute("contentUrl", "/search/SearchUser.jsp");
+      request.setAttribute("themeList", themeList);
+      request.setAttribute("pageTitle", "테마 검색 목록보기");
+      request.setAttribute("contentUrl", "/search/SearchTheme.jsp");
 
       request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
+
     } catch (Exception e){
       request.setAttribute("error", e);
-
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }

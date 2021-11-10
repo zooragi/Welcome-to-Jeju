@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>유저 검색 결과</title>
+  <title>테마 검색 결과</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   <script src = "../node_modules/@popperjs/core/dist/umd/popper.js"> </script>
   <script src = "../node_modules/bootstrap/dist/js/bootstrap.js"> </script>
@@ -17,18 +17,18 @@
 </head>
 <body>
 <div class = "container">
-<h1>유저 목록 보기</h1>
+<h1>테마 목록 보기</h1>
 <table class = "table table-hover">
 <thead>
   <tr>
-    <th>닉네임</th>
+    <th>테마 제목</th>
   </tr>
 </thead>
 <tbody>
 
-<c:forEach items="${userList}" var="user">
+<c:forEach items="${themeList}" var="theme">
 <tr>
-<td><a href='../theme/userlist?no=${user.no}'>${user.nickname}님의 테마 목록</a></td> 
+<td><a href='../theme/detail?no=${theme.no}'>${theme.title}</a></td> 
 </tr>
 
 </c:forEach>
