@@ -20,7 +20,7 @@
   <th>닉네임</th>
 	<th>카테고리</th>
 	<th>해시태그</th>
-	<th>🧡</th>
+	<th>🤍[취소]</th>
 </tr>
 </thead>
 	
@@ -32,7 +32,7 @@
     <td>${theme.owner.nickname}</td>
     <td>${theme.category.name}</td>
     <td>${theme.hashtags}</td>
-    <td>🤍</td>
+    <td><a href='delete?no=${theme.no}&no=${loginUser.no}'>🧡</a></td>
 	</tr>
 	</c:forEach>
 </tbody>
