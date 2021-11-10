@@ -6,31 +6,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>유저 좋아요 목록 보기</title>
+<title>유저 순위 보기</title>
 </head>
 
 <body>
 
-💙 유저 좋아요 목록 보기
+유저 순위 보기
 <table border='1'>
 <thead>
 <tr>
+  <th>순위</th>
   <th>번호</th>
   <th>닉네임</th>
-  <th>🤍[취소]</th>
 </tr>
 </thead>
-	
+  
 <tbody>
-	<c:forEach items="${userList}" var="user">
-	<tr>
+  <c:forEach items="${userList}" var="user" varStatus="status">
+  <tr>
+    <td>${status.count}</td>
     <td>${user.no}</td>
     <td><a href='../theme/userlist?no=${user.no}'>${user.nickname}</a></td>
-    <td>💙</td>
-	</tr>
-	</c:forEach>
+  </tr>
+  </c:forEach>
 </tbody>
 </table>
 
 </body>
+
 </html>
