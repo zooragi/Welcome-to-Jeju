@@ -25,9 +25,9 @@
 </thead>
   
 <tbody>
-  <c:forEach items="${themeList}" var="theme">
+  <c:forEach items="${themeList}" var="theme" varStatus="status">
   <tr>
-    <td>1</td>
+    <td>${status.count}</td>
     <td>${theme.no}</td>
     <td><a href='../theme/detail?no=${theme.no}'>${theme.title}</a></td>
     <td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
