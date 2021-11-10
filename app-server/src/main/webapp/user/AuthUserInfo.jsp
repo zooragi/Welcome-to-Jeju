@@ -16,11 +16,20 @@ display: inline-block;
 width: 60px;
 }
 </style>
+
+ <style>
+      input{
+        width:150px;
+        height:30px;
+        font-size:15px;
+      }
+    </style>
+    
 </head>
  <body>
-<h1>내 정보(MVC + EL)</h1>
+<h1>내 정보</h1>
 
-<form action='update'>
+<form action='../user/update'>
 
 <label for='f-no'>번호</label>  
 <input id='f-no' type='no' name='no' value='${loginUser.no}' readonly><br>
@@ -41,10 +50,11 @@ width: 60px;
 <input id='f-warningCount' type='text' name='warningCount' value='${loginUser.warningCount}' readonly><br>
 
 <label for='f-registeredDate'>가입일</label>  
-<span id='f-registeredDate'>${loginUser.registeredDate}</span><br>
+<input id='f-registeredDate' type='date' name='registeredDate' value='${loginUser.registeredDate}' readonly><br>
 
-<button>[회원수정]</button>
-<button><a href='../user/delete?no=${loginUser.no}'>[탈퇴하기]</a></button>
+<button>회원수정</button>
+<button><a href='../user/delete?no=${loginUser.no}'>탈퇴하기</a></button>
+<button><a href='loginout'>로그아웃</a></button>
 
 </form>
 </body>
