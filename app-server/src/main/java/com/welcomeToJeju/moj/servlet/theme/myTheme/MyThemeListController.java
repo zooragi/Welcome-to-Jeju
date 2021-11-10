@@ -46,7 +46,9 @@ public class MyThemeListController extends HttpServlet {
       Collection<Theme> themeList = themeDao.findByUserNo(loginUser.getNo());
 
       request.setAttribute("myThemeList", themeList);
-      request.getRequestDispatcher("/theme/myTheme/MyThemeList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "나의 테마 목록보기");
+      request.setAttribute("contentUrl", "/theme/myTheme/MyThemeList.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e){
       request.setAttribute("error", e);

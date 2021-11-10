@@ -15,7 +15,10 @@ public class MyThemeAddFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/theme/myTheme/MyThemeAddForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "나의 테마 등록하기");
+    request.setAttribute("contentUrl", "/theme/myTheme/MyThemeAddForm.jsp");
+
+    request.getRequestDispatcher("/template_main.jsp").forward(request, response);
   }
 
 

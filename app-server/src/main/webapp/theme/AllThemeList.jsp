@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+
 <style>
   .container {
-    width : 800px;
+    width : 640px;
   }</style>
 </head>
 
@@ -25,7 +25,7 @@
 
 <c:forEach items="${allThemeList}" var="theme">
 <tr>
-<td><a href='../mytheme/detail?no=${theme.no}'>${theme.title}</a></td> 
+<td><a href='detail?no=${theme.no}'>${theme.title}</a></td> 
 <td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
 <td>${theme.category.name}</td> 
 <td>${theme.hashtags}</td> 

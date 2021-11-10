@@ -61,8 +61,11 @@ public class MyThemeAddController extends HttpServlet {
         themeDao.insertHashtag(theme.getNo(), hashtag);
       }
       sqlSession.commit();
+
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("/theme/myTheme/MyThemeAdd.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "나의 테마 등록하기");
+      request.setAttribute("contentUrl", "/theme/myTheme/MyThemeAdd.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
