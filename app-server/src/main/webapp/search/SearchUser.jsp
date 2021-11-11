@@ -6,7 +6,7 @@
   <style>
   .container {
     xborder : 1px solid red;
-    width : 800px;
+    width : 640px;
   }</style>
 
 <div class = "container">
