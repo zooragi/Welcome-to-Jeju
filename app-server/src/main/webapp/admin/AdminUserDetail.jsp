@@ -2,24 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-   <title>회원 상세 보기</title>
-   
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-  
-  <script src = "../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src = "../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <script defer src="../javascript/common.js"></script>
-  <script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
-  
+    
+  <head>
 <style>
 label {
 margin-right: 5px;
@@ -29,23 +13,25 @@ width: 60px;
 }
 </style>
 
- <style>
+<style>
       input{
         width:150px;
         height:30px;
         font-size:15px;
       }
-    </style>
+</style>
+
+<style>
+  .container {
+    xborder : 1px solid red;
+    width : 640px;
+  }</style>
     
 </head>
 
  <body>
- 
- <jsp:include page="../header.jsp"></jsp:include>
- <jsp:include page="../sideBar.jsp"></jsp:include>
- 
 
-<div class="card card-body">
+<div class="container">
 <h1>회원 상세 보기</h1>
 <form action='update' method='post'>
 
@@ -76,7 +62,6 @@ width: 60px;
 <a href='list'>[목록]</a><br>
 
 </form>
-</div>
 </div>
 
 </body>

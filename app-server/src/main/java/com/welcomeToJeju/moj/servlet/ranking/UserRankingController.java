@@ -1,6 +1,7 @@
-package com.welcomeToJeju.moj.servlet.user;
+package com.welcomeToJeju.moj.servlet.ranking;
 
 import java.io.IOException;
+import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 
-@WebServlet("/auth/login")
-public class AuthLoginController extends HttpServlet {
+@WebServlet("/ranking/user")
+public class UserRankingController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   UserDao userDao;
@@ -23,32 +24,21 @@ public class AuthLoginController extends HttpServlet {
     userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
 
-  @Override
+  @Override 
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
+      Collection<User> userList = userDao.userRankingByViewCount();
 
-      String email = request.getParameter("email");
-      String password = request.getParameter("password");
-
-      User user = userDao.findByEmailAndPassword(email, password);
-
-      if (user == null) {
-        throw new Exception("로그인 실패!");
-      } else {
-        request.getSession(true).setAttribute("loginUser", user);
-        request.setAttribute("pageTitle", "로그인 성공");
-        request.setAttribute("contentUrl", "/user/AuthLogin.jsp");
-        request.getRequestDispatcher("/template_main.jsp").forward(request, response);
-      }
+      request.setAttribute("userList", userList);
+      request.getRequestDispatcher("/ranking/UserRanking.jsp").forward(request, response);
 
     } catch (Exception e) {
-      System.out.println(e);
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-
   }
+
+
 }
