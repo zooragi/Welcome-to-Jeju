@@ -41,7 +41,10 @@ public class UserAddController extends HttpServlet {
       userDao.insert(user);
       sqlSession.commit();
 
-      request.getRequestDispatcher("/user/UserAdd.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "회원 가입 하기");
+      request.setAttribute("contentUrl", "/user/UserAdd.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
 

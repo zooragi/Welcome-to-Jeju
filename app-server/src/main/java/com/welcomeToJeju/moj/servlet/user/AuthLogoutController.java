@@ -17,6 +17,9 @@ public class AuthLogoutController extends HttpServlet {
 
     request.getSession(true).invalidate();
     request.setAttribute("pageTitle", "로그아웃");
+    response.setHeader("Refresh", "1;../auth/loginform");
     request.setAttribute("contentUrl", "/user/AuthLogout.jsp");
-    request.getRequestDispatcher("/template_main.jsp").forward(request, response);  }
+    request.getRequestDispatcher("/template_main.jsp").forward(request, response);  
+  }
 }
+

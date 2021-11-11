@@ -7,7 +7,8 @@
   .container {
     xborder : 1px solid red;
     width : 640px;
-  }</style>
+  }
+  </style>
 
 <div class = "container">
 <table class = "table table-hover">
@@ -21,7 +22,9 @@
 <th>이메일</th>
 <th>등록일</th>
 <th>경고</th>
-<th>상태</th>
+<th>
+상태
+</th>
 </tr>
 </thead>
 <tbody>

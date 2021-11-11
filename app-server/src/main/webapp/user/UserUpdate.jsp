@@ -2,17 +2,8 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-   <title>회원수정</title>
-</head>
- <body>
-<h1>회원수정결과</h1>
+<h1>나의 정보 수정</h1>
 
-  회원 수정하기 성공!<br>
-<a href='AdminUserList.jsp'>[목록]</a><br>
-</body>
-</html>
+<p>정보 수정하기 성공!</p>
 
 

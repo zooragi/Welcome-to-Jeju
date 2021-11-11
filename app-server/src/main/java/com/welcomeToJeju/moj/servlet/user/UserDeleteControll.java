@@ -43,14 +43,17 @@ public class UserDeleteControll extends HttpServlet {
       userDao.updateActive(user.getNo());
       sqlSession.commit();
 
-      request.getSession(true).invalidate();
-      request.getRequestDispatcher("/user/UserDelete.jsp").forward(request, response);
+      request.getSession().invalidate();
+
+      request.setAttribute("pageTitle", "회원 탈퇴 하기");
+      response.setHeader("Refresh", "1;../auth/loginform");
+      request.setAttribute("contentUrl", "/user/UserDelete.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
 
 }

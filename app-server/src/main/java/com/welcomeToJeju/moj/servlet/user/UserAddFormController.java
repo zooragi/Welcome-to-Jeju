@@ -15,8 +15,10 @@ public class UserAddFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/user/UserAddForm.jsp").forward(request, response);
-  }
 
+    request.setAttribute("pageTitle", "회원 가입 하기");
+    request.setAttribute("contentUrl", "/user/UserAddForm.jsp");
+    request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+  }
 
 }

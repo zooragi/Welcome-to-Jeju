@@ -44,7 +44,9 @@ public class UserUpdateController extends HttpServlet {
       userDao.update(user);
       sqlSession.commit();
 
-      response.sendRedirect("../auth/userinfo");
+      response.setHeader("Refresh", "1;../auth/userinfo");
+      request.setAttribute("contentUrl", "/user/UserUpdate.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
