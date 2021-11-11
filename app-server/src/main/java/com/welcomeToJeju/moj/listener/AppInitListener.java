@@ -8,6 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.welcomeToJeju.moj.dao.PlaceDao;
+import com.welcomeToJeju.moj.dao.ReportDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 
@@ -29,6 +30,7 @@ public class AppInitListener implements ServletContextListener {
       UserDao userDao = sqlSession.getMapper(UserDao.class);
       ThemeDao themeDao = sqlSession.getMapper(ThemeDao.class);
       PlaceDao placeDao = sqlSession.getMapper(PlaceDao.class);
+      ReportDao reportDao = sqlSession.getMapper(ReportDao.class);
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -38,13 +40,13 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("userDao", userDao);
       웹애플리케이션공용저장소.setAttribute("themeDao", themeDao);
       웹애플리케이션공용저장소.setAttribute("placeDao", placeDao);
+      웹애플리케이션공용저장소.setAttribute("reportDao", reportDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }
-
   }
 
   @Override
@@ -53,4 +55,6 @@ public class AppInitListener implements ServletContextListener {
 
     sqlSession.close();
   }
+
+
 }
