@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+
 <style>
   .container {
     width : 800px;
@@ -11,7 +11,6 @@
 
 <div class = "container">
 <h1>테마 목록 보기</h1>
-<a href='../mytheme/addform' class ="btn btn-outline-primary btn-sm" >새 테마 만들기</a><br>
 <table class = "table table-hover">
 <thead>
   <tr>
@@ -32,7 +31,7 @@
 </tr>
 
 </c:forEach>
-
+ 
 </tbody>
 </table>
 </div><!--  .container -->

@@ -32,10 +32,8 @@ public class AdminAllThemeListController extends HttpServlet {
       Collection<Theme> themeList = themeDao.findAll();
 
       request.setAttribute("allThemeList", themeList);
-
       request.setAttribute("pageTitle", "전체테마 리스트");
-      request.setAttribute("contentUrl", "/theme/AllThemeList.jsp");
-
+      request.setAttribute("contentUrl", "/admin/AdminThemeList.jsp");
       request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
 
