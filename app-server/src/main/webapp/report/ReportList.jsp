@@ -39,7 +39,7 @@
 </table>
 
 <br>
-<!-- 
+
 유저 신고 목록 보기
 <table border='1'>
 <thead>
@@ -66,6 +66,6 @@
   </c:forEach>
 </tbody>
 </table>
- -->
+
 </body>
 </html>
