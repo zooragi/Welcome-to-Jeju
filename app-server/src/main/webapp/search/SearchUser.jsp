@@ -11,7 +11,7 @@
 
 <div class = "container">
 
-<h1>유저 목록 보기</h1>
+<h1>${keyword}로 검색한 유저 목록 보기</h1>
 <table class = "table table-hover">
 <thead>
   <tr>

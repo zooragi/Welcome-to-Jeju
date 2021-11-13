@@ -36,6 +36,7 @@ public class SearchThemeController extends HttpServlet {
       Collection<Theme> themeList = themeDao.findByKeyword(keyword);
 
       request.setAttribute("themeList", themeList);
+      request.setAttribute("keyword", keyword);
       request.setAttribute("pageTitle", "테마 검색 목록보기");
       request.setAttribute("contentUrl", "/search/SearchTheme.jsp");
 

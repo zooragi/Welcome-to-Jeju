@@ -11,7 +11,6 @@
 
 <div class = "container">
 <h1>테마 목록 보기</h1>
-<a href='../mytheme/addform' class ="btn btn-outline-primary btn-sm" >새 테마 만들기</a><br>
 <table class = "table table-hover">
 <thead>
   <tr>
@@ -24,15 +23,25 @@
 <tbody>
 
 <c:forEach items="${allThemeList}" var="theme">
+
 <tr>
-<td><a href='detail?no=${theme.no}'>${theme.title}</a></td> 
+<td>
+
+<c:choose>  
+  <c:when test="${theme.owner.no eq loginUser.no}">
+    <a href ="../mytheme/detail?no=${theme.no}"> ${theme.title}</a>
+  </c:when> 
+  <c:otherwise> 
+    <a href = "detail?no=${theme.no}">${theme.title}</a>
+  </c:otherwise> 
+</c:choose>
+</td>
+
 <td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
-<td>${theme.category.name}</td> 
-<td>${theme.hashtags}</td> 
+<td>${theme.category.name}</td>
+<td>${theme.hashtags}</td>
 </tr>
-
 </c:forEach>
-
 </tbody>
 </table>
-</div><!--  .container -->
+</div>

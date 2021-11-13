@@ -44,11 +44,7 @@ public class MyThemeDeleteController extends HttpServlet {
       themeDao.delete(theme.getNo());
       sqlSession.commit();
 
-      response.setHeader("Refresh", "1;url=list");
-      request.setAttribute("pageTitle", "나의 테마 삭제하기");
-      request.setAttribute("contentUrl", "/theme/myTheme/MyThemeDelete.jsp");
-      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
-
+      response.sendRedirect("list");
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
