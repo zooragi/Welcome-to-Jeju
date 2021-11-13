@@ -54,7 +54,8 @@
 		  <a href='../likedtheme/add?no=${theme.no}&no=${loginUser.no}'> 🤍</a><br>
 		  
 		  <label for='f-nickname'>닉네임</label>
-		  <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 🤍<br>
+		  <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 
+		  <a href='../likeduser/add?no=${theme.owner.no}&themeNo=${theme.no}'>🤍</a><br>
 		  
 		  <label for='f-category'>카테고리</label>
 		  <input id='f-category' type='text' name='category' value='${theme.category.name}' readonly><br>

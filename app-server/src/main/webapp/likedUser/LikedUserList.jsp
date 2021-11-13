@@ -18,7 +18,7 @@
 	<tr>
     <td>${user.no}</td>
     <td><a href='../theme/userlist?no=${user.no}'>${user.nickname}</a></td>
-    <td>💙</td>
+    <td><a href='delete?no=${user.no}'>🧡</a></td>
 	</tr>
 	</c:forEach>
 </tbody>

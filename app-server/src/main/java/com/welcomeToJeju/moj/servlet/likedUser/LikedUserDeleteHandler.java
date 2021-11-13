@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 
+@WebServlet("/likeduser/delete")
 public class LikedUserDeleteHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
   UserDao userDao;
@@ -28,11 +30,12 @@ public class LikedUserDeleteHandler extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
 
-      userDao.deleteLikedUser(no, ((User)request.getSession(true).getAttribute("loginUser")).getNo());
+      userDao.deleteLikedUser(
+          Integer.parseInt(request.getParameter("no")), 
+          ((User)request.getSession(true).getAttribute("loginUser")).getNo());
       sqlSession.commit();
-      request.setAttribute("contentUrl", "/theme/AllThemeList.jsp");
+      response.sendRedirect("../theme/list");
 
     } catch (Exception e) {
       System.out.println(e);
