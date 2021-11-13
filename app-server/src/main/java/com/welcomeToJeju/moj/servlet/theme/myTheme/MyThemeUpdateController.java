@@ -41,16 +41,16 @@ public class MyThemeUpdateController extends HttpServlet {
       Theme theme = themeDao.findByNo(no);
       theme.setTitle(request.getParameter("title"));
 
+      System.out.println(theme);
       Category category = themeDao.findCategoryByNo(
           Integer.valueOf(request.getParameter("category")));
       // 카테고리
       theme.setCategory(category);
-      theme.getOwner().getNickname();
-      theme.getIsPublic();
-
+      theme.setIsPublic(theme.getIsPublic());
+      theme.setViewCount(theme.getViewCount());
       // 해시태그
       theme.getHashtags().add(request.getParameter("hashtags"));
-      themeDao.insert(theme);
+      themeDao.update(theme);
       for (String hashtag : theme.getHashtags()) {
         themeDao.insertHashtag(theme.getNo(), hashtag);
       }
