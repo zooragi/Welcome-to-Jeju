@@ -10,18 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.moj.domain.User;
 
-@WebServlet("/ranking/theme")
-public class ThemeRankingController extends HttpServlet {
+@WebServlet("/ranking/")
+public class RankingController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   ThemeDao themeDao;
+  UserDao userDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
+    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
 
   @Override 
@@ -30,17 +34,15 @@ public class ThemeRankingController extends HttpServlet {
 
     try {
       Collection<Theme> themeList = themeDao.themeRankingByViewCount();
+      Collection<User> userList = userDao.userRankingByViewCount();
 
       request.setAttribute("themeList", themeList);
+      request.setAttribute("userList", userList);
 
-      //      request.setAttribute("pageTitle", "순위 보기");
-      //      request.setAttribute("contentUrl", "/ranking/Ranking.jsp");
-      request.setAttribute("pageTitle", "테마 순위 보기");
-      request.setAttribute("contentUrl", "/ranking/ThemeRanking.jsp");
+      request.setAttribute("pageTitle", "순위 보기");
+      request.setAttribute("contentUrl", "/ranking/Ranking.jsp");
 
       request.getRequestDispatcher("/template_main.jsp").forward(request, response);
-
-      //      request.getRequestDispatcher("/ranking/ThemeRanking.jsp").forward(request, response);
 
     } catch (Exception e) {
       System.out.println(e);
