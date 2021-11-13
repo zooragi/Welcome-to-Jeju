@@ -11,13 +11,13 @@
 <body>
 
 테마 신고하기
-<form action="theme">
   <label for='f-no'>번호</label>
   <input id='f-no' type='text' name='no' value='${reportTheme.reportedTheme.no}'><br>
 	
 	<label for='f-title'>신고당한 테마</label>
 	<input id='f-title' type='text' name='title' value='${reportTheme.reprotedTheme.title}'><br>
 	
+<form action="theme">
 	<label for='f-nickname'>신고한 유저</label>
 	<input id='f-nickname' type='text' name='nickname' value='${loginUser.nickname}' readonly><br>
 	
