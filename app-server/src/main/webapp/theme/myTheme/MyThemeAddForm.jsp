@@ -31,7 +31,7 @@
 </div>
  -->
 
-<select class="form-select" aria-label= "f-category" name ="category" >
+<select class="form-select" id = "f-category" aria-label= "f-category" name ="category" >
   <option selected>카테고리</option>
   <option value="1">식당</option>
   <option value="2">카페</option>
@@ -42,7 +42,9 @@
 
 <div class="mb-3 row">
     <label for='f-hashtag' class="col-sm-2 col-form-label">해시태그</label>
+    <div class = "col-sm-6">
       <input id='f-hashtag' type='text' name='hashtag' class = "form-control" value = '${theme.hashtags}'>
+  </div>
 </div>
 
 <!--  

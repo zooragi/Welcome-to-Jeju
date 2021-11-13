@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Place;
@@ -21,11 +22,13 @@ public class ThemeDetailController extends HttpServlet {
   ThemeDao themeDao;
   //  UserDao userDao;
   PlaceDao placeDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     //    userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
     placeDao = (PlaceDao) 웹애플리케이션공용저장소.getAttribute("placeDao");
   }
@@ -38,6 +41,10 @@ public class ThemeDetailController extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Theme theme = themeDao.findByNo(no);
+      themeDao.updateViewCount(theme.getNo());
+
+      sqlSession.commit();
+
       //      theme.setCategory(themeDao.findCategoryByNo(theme.getCategory().getNo()));
       //      theme.setOwner(userDao.findByNo(theme.getOwner().getNo()));
       Collection<Place> placeList = placeDao.findAllByThemeNo(no);

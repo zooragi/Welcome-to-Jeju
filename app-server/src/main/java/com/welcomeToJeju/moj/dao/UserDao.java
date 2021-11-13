@@ -19,7 +19,7 @@ public interface UserDao {
 
   List<User> findByKeyword(String keyword) throws Exception;
 
-  void updateViewCount(HashMap<String,Object> params) throws Exception;
+  void updateViewCount(int userNo) throws Exception;
   void updateReportedCount(HashMap<String,Object> params) throws Exception;
   void updateWarnedCount(HashMap<String,Object> params) throws Exception;
   void updateActive(int userNo) throws Exception;
