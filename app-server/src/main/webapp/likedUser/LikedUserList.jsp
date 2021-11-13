@@ -2,16 +2,8 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>유저 좋아요 목록 보기</title>
-</head>
 
-<body>
-
-💙 유저 좋아요 목록 보기
+<p>💙 유저 좋아요 목록 보기</p>
 <table border='1'>
 <thead>
 <tr>
@@ -26,11 +18,9 @@
 	<tr>
     <td>${user.no}</td>
     <td><a href='../theme/userlist?no=${user.no}'>${user.nickname}</a></td>
-    <td>💙</td>
+    <td><a href='delete?no=${user.no}'>🧡</a></td>
 	</tr>
 	</c:forEach>
 </tbody>
 </table>
 
-</body>
-</html>

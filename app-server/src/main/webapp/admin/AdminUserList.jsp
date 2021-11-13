@@ -6,7 +6,7 @@
 <style>
   .container {
     xborder : 1px solid red;
-    width : 640px;
+    width : 840px;
   }
   </style>
 
@@ -21,7 +21,9 @@
 <th>닉네임</th>
 <th>이메일</th>
 <th>등록일</th>
-<th>경고</th>
+<th>조회수</th>
+<th>경고수</th>
+<th>신고수</th>
 <th>
 상태
 </th>
@@ -36,7 +38,9 @@
     <td><a href='detail?no=${user.no}'>${user.nickname}</a></td>
     <td>${user.email}</td>
     <td>${user.registeredDate}</td>
+    <td>${user.viewCount}</td>
     <td>${user.warningCount}</td>
+    <td>${user.reportedCount}</td>
     <td>
       <c:choose>
         <c:when test="${user.active eq '1'}">
@@ -47,7 +51,6 @@
         </c:when>
       </c:choose>
     </td>    
-
 </tr>
 </c:forEach>
 </tbody>

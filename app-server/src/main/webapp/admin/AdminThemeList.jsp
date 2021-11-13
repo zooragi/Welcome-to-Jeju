@@ -5,20 +5,23 @@
 
 <style>
   .container {
-    width : 800px;
+    width : 840px;
   }</style>
 </head>
 
 <div class = "container">
-<h1>테마 목록 보기</h1>
+<h1>전체 테마 목록 보기</h1>
 <table class = "table table-hover">
 <thead>
   <tr>
+    <th>번호</th>
     <th>제목</th>
     <th>테마 만든이</th>
     <th>카테고리</th>
     <th>해시태그</th>
     <th>공개여부</th>
+    <th>조회수</th>
+    <th>신고수</th>
   </tr>
 </thead>
 <tbody>
@@ -26,7 +29,8 @@
 <c:forEach items="${allThemeList}" var="theme">
 
 <tr>
-<td><a href='../mytheme/detail?no=${theme.no}'>${theme.title}</a></td> 
+<td>${theme.no}</td>
+<td><a href='../admin/themedetail?no=${theme.no}'>${theme.title}</a></td> 
 <td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
 <td>${theme.category.name}</td> 
 <td>${theme.hashtags}</td> 
@@ -40,7 +44,9 @@
  비공개
  </c:when>
  </c:choose>
-</td> 
+</td>
+<td>${theme.viewCount}</td> 
+<td>${theme.reportedCount}</td>  
 
 </tr>
 

@@ -54,16 +54,16 @@
 		  <a href='../likedtheme/add?no=${theme.no}&no=${loginUser.no}'> 🤍</a><br>
 		  
 		  <label for='f-nickname'>닉네임</label>
-		  <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 
-		  <a href='../likeduser/add?no=${theme.owner.no}&themeNo=${theme.no}'>🤍</a><br>
+		  <input id='f-nickname' type='text' name='nickname' value='${theme.owner.nickname}' readonly> 🤍<br>
 		  
 		  <label for='f-category'>카테고리</label>
 		  <input id='f-category' type='text' name='category' value='${theme.category.name}' readonly><br>
 		  
 		  <label for='f-hashtags'>해시태그</label>
 		  <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}' readonly><br>
-		
-		  <a href='../'>[목록]</a>
+		 <button><a href='themedelete?no=${theme.no}'>[삭제]</a></button>
+      <button><a href='alltheme'>[목록]</a></button>
+		 
 		  </form>
 	  </div>
 	</div>

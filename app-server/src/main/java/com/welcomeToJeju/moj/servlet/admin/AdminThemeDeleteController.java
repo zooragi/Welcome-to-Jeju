@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.servlet.theme.myTheme;
+package com.welcomeToJeju.moj.servlet.admin;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -13,8 +13,8 @@ import com.welcomeToJeju.moj.dao.PlaceDao;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
-@WebServlet("/mytheme/delete")
-public class MyThemeDeleteController extends HttpServlet {
+@WebServlet("/admin/themedelete")
+public class AdminThemeDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -44,8 +44,14 @@ public class MyThemeDeleteController extends HttpServlet {
       themeDao.delete(theme.getNo());
       sqlSession.commit();
 
-      response.sendRedirect("list");
+      //      response.setHeader("Refresh", "1;url=alltheme");
+      response.sendRedirect("../admin/alltheme");
+      //      request.setAttribute("pageTitle", "회원 테마 삭제하기");
+      //      request.setAttribute("contentUrl", "/admin/AdminThemeDelete.jsp");
+      //      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+
     } catch (Exception e) {
+      System.out.println(e);
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

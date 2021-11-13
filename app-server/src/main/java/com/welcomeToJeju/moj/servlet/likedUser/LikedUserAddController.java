@@ -32,11 +32,14 @@ public class LikedUserAddController extends HttpServlet {
       throws ServletException, IOException {
     try {
 
-      int no = Integer.parseInt(request.getParameter("no"));
+      int themeNo = Integer.parseInt(request.getParameter("themeNo"));
 
-      userDao.insertLikedUser(no, ((User)request.getSession(true).getAttribute("loginUser")).getNo());
+      userDao.insertLikedUser(
+          Integer.parseInt(request.getParameter("no")), 
+          ((User)request.getSession(true).getAttribute("loginUser")).getNo());
+
       sqlSession.commit();
-      request.setAttribute("contentUrl", "/theme/AllThemeList.jsp");
+      response.sendRedirect("../theme/detail?no=" + themeNo);
 
     } catch (Exception e) {
       System.out.println(e);
