@@ -35,7 +35,12 @@ public class LikedThemeListController extends HttpServlet {
       Collection<Theme> themeList = themeDao.findAllLikedTheme(loginUser.getNo());
 
       request.setAttribute("themeList", themeList);
-      request.getRequestDispatcher("/likedTheme/LikedThemeList.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "테마 좋아요 목록 보기");
+      request.setAttribute("contentUrl", "/likedTheme/LikedThemeList.jsp");
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+
+      //      request.getRequestDispatcher("/likedTheme/LikedThemeList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
