@@ -43,7 +43,7 @@
 <div class="mb-3 row">
     <label for='f-hashtag' class="col-sm-2 col-form-label">해시태그</label>
     <div class = "col-sm-6">
-      <input id='f-hashtag' type='text' name='hashtag' class = "form-control" value = '${theme.hashtags}'>
+      <input id='f-hashtag' type='text' name='hashtags' class = "form-control" value = '${theme.hashtags}'>
   </div>
 </div>
 

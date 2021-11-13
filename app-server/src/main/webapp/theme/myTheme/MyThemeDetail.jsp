@@ -53,17 +53,23 @@
       <input id='f-title' type='text' name='title' value='${theme.title}'><br>
       
       <label for='f-nickname'>닉네임</label>
-      <input id='f-nickname' type='text' name='nickname' value='${loginUser.nickname}' readonly><br>
+      <input id='f-nickname' type='text' value='${loginUser.nickname}' readonly><br>
       
-      <label for='f-category'>카테고리</label>
-      <input id='f-category' type='text' name='category' value='${theme.category.name}'><br>
-      
-      <label for='f-hashtags'>해시태그</label>
-      <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}'><br>
-    
-      <button>변경</button>
-      <a href='delete?no=${theme.no}'>[삭제]</a>
-      <a href='list?no=${user.no}'>[목록]</a>
+			<select class="form-select" id = "f-category" name = "category">
+			<option selected>카테고리</option>
+			<option value="1">식당</option>
+			<option value="2">카페</option>
+			<option value="3">관광명소</option>
+			<option value="4">기타</option>
+			</select>
+ 
+ 
+		 <label for='f-hashtags'>해시태그</label>
+		 <input id='f-hashtags' type='text' name='hashtags' value='${theme.hashtags}'><br>
+		    
+		<button>변경</button>
+		<a href='delete?no=${theme.no}'>[삭제]</a>
+		<a href='list?no=${user.no}'>[목록]</a>
       </form>
     </div>
   </div>
