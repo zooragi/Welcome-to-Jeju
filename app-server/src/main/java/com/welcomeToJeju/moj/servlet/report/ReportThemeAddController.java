@@ -35,35 +35,37 @@ public class ReportThemeAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    ReportTheme reportTheme = new ReportTheme();
-
-    int no = Integer.parseInt(request.getParameter("no"));
-    Theme theme;
     try {
-      theme = themeDao.findByNo(no);
+      //
+      int no = Integer.parseInt(request.getParameter("no"));
+      Theme theme = themeDao.findByNo(no);
+
+      System.out.println(theme);
+
+      ReportTheme reportTheme = new ReportTheme();
+
       reportTheme.setReportedTheme(theme);
-    } catch (Exception e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
-    }
 
-    User loginUser = (User) request.getSession(true).getAttribute("loginUser");
-    reportTheme.setWriter(loginUser);
+      User loginUser = (User) request.getSession(true).getAttribute("loginUser");
+      reportTheme.setWriter(loginUser);
 
-    reportTheme.setContent("content");
+      reportTheme.setContent(request.getParameter("content"));
 
-    reportTheme.setNo(100);
+      System.out.println(reportTheme);
 
-    try {
       //신고당한 횟수
+
+      request.setAttribute("theme", theme);
+      request.setAttribute("reportTheme", reportTheme);
 
       reportDao.insertReportTheme(reportTheme);
       sqlSession.commit();
 
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("ReportTHemeAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("ReportThemeAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
+      System.out.println(e);
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

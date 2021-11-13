@@ -13,13 +13,13 @@
     }
   
     .themeranking {
-    /* margin : 30px; */
+    margin : 30px;
     float : left;
     }
     
     .userranking {
-    /* margin : 30px; */
-    float : right;
+    margin : 30px;
+    float : left;
     }
   </style>
   
