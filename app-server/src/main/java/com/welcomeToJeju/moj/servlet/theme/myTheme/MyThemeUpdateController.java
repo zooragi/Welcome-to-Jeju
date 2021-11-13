@@ -1,6 +1,7 @@
 package com.welcomeToJeju.moj.servlet.theme.myTheme;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -49,6 +50,11 @@ public class MyThemeUpdateController extends HttpServlet {
       theme.setIsPublic(theme.getIsPublic());
       theme.setViewCount(theme.getViewCount());
       // 해시태그
+      themeDao.deleteHashtag(theme.getNo());
+      sqlSession.commit();
+
+      ArrayList<String> hashtagList = new ArrayList<>();
+      theme.setHashtags(hashtagList);
       theme.getHashtags().add(request.getParameter("hashtags"));
       themeDao.update(theme);
       for (String hashtag : theme.getHashtags()) {
