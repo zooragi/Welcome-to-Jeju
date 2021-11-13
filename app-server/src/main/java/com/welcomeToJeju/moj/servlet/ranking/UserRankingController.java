@@ -32,9 +32,18 @@ public class UserRankingController extends HttpServlet {
       Collection<User> userList = userDao.userRankingByViewCount();
 
       request.setAttribute("userList", userList);
-      request.getRequestDispatcher("/ranking/UserRanking.jsp").forward(request, response);
+
+      //      request.setAttribute("pageTitle", "순위 보기");
+      //      request.setAttribute("contentUrl", "/ranking/Ranking.jsp");
+      request.setAttribute("pageTitle", "유저 순위 보기");
+      request.setAttribute("contentUrl", "/ranking/UserRanking.jsp");
+
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+
+      //      request.getRequestDispatcher("/ranking/UserRanking.jsp").forward(request, response);
 
     } catch (Exception e) {
+      System.out.println(e);
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

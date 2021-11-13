@@ -15,7 +15,6 @@
 <table border='1'>
 <thead>
 <tr>
-  <th>번호</th>
   <th>이름</th>
   <th>닉네임</th>
 	<th>카테고리</th>
@@ -27,7 +26,6 @@
 <tbody>
 	<c:forEach items="${themeList}" var="theme">
 	<tr>
-    <td>${theme.no}</td>
     <td><a href='../theme/detail?no=${theme.no}'>${theme.title}</a></td>
     <td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
     <td>${theme.category.name}</td>

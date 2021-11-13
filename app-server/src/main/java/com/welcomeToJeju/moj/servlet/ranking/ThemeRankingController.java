@@ -32,9 +32,18 @@ public class ThemeRankingController extends HttpServlet {
       Collection<Theme> themeList = themeDao.themeRankingByViewCount();
 
       request.setAttribute("themeList", themeList);
-      request.getRequestDispatcher("/ranking/ThemeRanking.jsp").forward(request, response);
+
+      //      request.setAttribute("pageTitle", "순위 보기");
+      //      request.setAttribute("contentUrl", "/ranking/Ranking.jsp");
+      request.setAttribute("pageTitle", "테마 순위 보기");
+      request.setAttribute("contentUrl", "/ranking/ThemeRanking.jsp");
+
+      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+
+      //      request.getRequestDispatcher("/ranking/ThemeRanking.jsp").forward(request, response);
 
     } catch (Exception e) {
+      System.out.println(e);
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

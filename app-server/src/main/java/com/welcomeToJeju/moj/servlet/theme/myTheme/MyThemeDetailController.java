@@ -39,7 +39,7 @@ public class MyThemeDetailController extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
 
       Theme theme = themeDao.findByNo(no);
-      theme.setCategory(themeDao.findCategoryByNo(theme.getCategory().getNo()));
+      //      theme.setCategory(themeDao.findCategoryByNo(theme.getCategory().getNo()));
       //      theme.setOwner(userDao.findByNo(theme.getOwner().getNo()));
       Collection<Place> placeList = placeDao.findAllByThemeNo(no);
 
