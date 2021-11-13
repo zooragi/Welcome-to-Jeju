@@ -24,7 +24,17 @@
 
 <c:forEach items="${themeList}" var="theme">
 <tr>
-<td><a href='../theme/detail?no=${theme.no}'>${theme.title}</a></td> 
+<td>
+
+<c:choose>  
+  <c:when test="${theme.owner.no eq loginUser.no}">
+    <a href ="../mytheme/detail?no=${theme.no}"> ${theme.title}</a>
+  </c:when> 
+  <c:otherwise> 
+    <a href = "detail?no=${theme.no}">${theme.title}</a>
+  </c:otherwise> 
+</c:choose>
+</td>
 <td>${theme.owner.nickname}</td>
 <td>${theme.category.name}</td> 
 <td>${theme.hashtags}</td> 

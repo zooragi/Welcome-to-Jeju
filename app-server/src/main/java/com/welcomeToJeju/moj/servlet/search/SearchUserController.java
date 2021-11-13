@@ -36,6 +36,7 @@ public class SearchUserController extends HttpServlet {
       Collection<User> userList = userDao.findByKeyword(keyword);
 
       request.setAttribute("userList", userList);
+      request.setAttribute("keyword", keyword);
       request.setAttribute("pageTitle", "유저 검색 목록보기");
       request.setAttribute("contentUrl", "/search/SearchUser.jsp");
 
