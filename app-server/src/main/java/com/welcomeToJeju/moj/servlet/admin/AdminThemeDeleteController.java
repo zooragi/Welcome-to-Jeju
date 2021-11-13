@@ -44,12 +44,14 @@ public class AdminThemeDeleteController extends HttpServlet {
       themeDao.delete(theme.getNo());
       sqlSession.commit();
 
-      response.setHeader("Refresh", "1;url=alltheme");
-      request.setAttribute("pageTitle", "회원 테마 삭제하기");
-      request.setAttribute("contentUrl", "/admin/AdminThemeDelete.jsp");
-      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+      //      response.setHeader("Refresh", "1;url=alltheme");
+      response.sendRedirect("../admin/alltheme");
+      //      request.setAttribute("pageTitle", "회원 테마 삭제하기");
+      //      request.setAttribute("contentUrl", "/admin/AdminThemeDelete.jsp");
+      //      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
+      System.out.println(e);
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
