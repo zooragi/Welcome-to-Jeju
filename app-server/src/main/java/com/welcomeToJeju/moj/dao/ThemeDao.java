@@ -32,7 +32,7 @@ public interface ThemeDao {
 
   Category findCategoryByNo(int no) throws Exception;
 
-  void updateViewCount(HashMap<String,Object> params) throws Exception;
+  void updateViewCount(int themeNo) throws Exception;
   void updateReportedCount(HashMap<String,Object> params) throws Exception;
 
   List<Theme> themeRankingByViewCount() throws Exception;

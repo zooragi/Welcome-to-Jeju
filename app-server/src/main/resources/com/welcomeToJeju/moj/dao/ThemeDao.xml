@@ -265,9 +265,9 @@
       category_no = #{no}
   </select>
   
-  <update id="updateViewCount">
+  <update id="updateViewCount" parameterType = "int">
 	  update jeju_theme set 
-      view_cnt=#{viewCnt}
+      view_cnt= view_cnt + 1
     where 
       theme_no=#{themeNo}
   </update>
