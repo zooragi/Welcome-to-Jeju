@@ -7,11 +7,6 @@
 <title>순위 보기</title>
 
   <style>
-    .ranking {
-    margin : 30px;
-    float : center;
-    }
-  
     .themeranking {
     margin : 30px;
     float : left;
