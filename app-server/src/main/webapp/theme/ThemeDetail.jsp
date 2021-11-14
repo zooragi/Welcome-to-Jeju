@@ -29,6 +29,11 @@
     margin : 30px;
     float : right;
     }
+    
+    .placedetail {
+    margin : 30px;
+    float : center;
+    }
   </style>
 </head>
 
@@ -76,5 +81,10 @@
 <br>
 <jsp:include page="../place/PlaceList.jsp"/>
 </div>  <!-- .placemenu -->
+
+<div class="placedetail">
+<jsp:include page="../place/PlaceDetail.jsp"/>
+</div>  <!-- .placedetail -->
+
 </body>
 </html>
