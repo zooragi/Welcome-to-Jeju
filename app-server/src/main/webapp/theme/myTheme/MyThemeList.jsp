@@ -8,6 +8,8 @@
   .container {
     xborder : 1px solid red;
     width : 1000px;
+    margin: 10px 100px 0px 320px;
+    
   }
   
   .card {

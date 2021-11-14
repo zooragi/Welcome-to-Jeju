@@ -10,7 +10,7 @@
   }</style>
   
 <div class = "container">
-<h1>${keyword}로 검색한 테마 목록 보기</h1>
+<h1>📢${keyword}로 검색한 테마 목록 보기</h1>
 <table class = "table table-hover">
 <thead>
   <tr>
