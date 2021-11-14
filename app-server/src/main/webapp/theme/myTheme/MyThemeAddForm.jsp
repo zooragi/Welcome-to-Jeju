@@ -92,6 +92,8 @@ function check() {
 </div>
 </div>
 
+<br>
+<br>
 <p>
 공개 여부는 추후에 변경이 불가능합니다!
 </p>
