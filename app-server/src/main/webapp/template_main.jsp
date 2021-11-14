@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="${contextRoot}/node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="${contextRoot}/css/common.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
   <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
   
   <script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
