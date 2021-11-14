@@ -7,12 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>장소 목록 보기</title>
+
+<style>
+  h6 {
+    text-align: center;
+  }
+</style>
+
 </head>
 
 <body>
 
+<!-- 
 장소 목록 보기 📄
 <table border='1'>
+ -->
+
+<br>
+<h6>장소 목록 보기 📄</h6>
+
+<table class="table table-hover">
 <thead>
 <tr>
   <th>번호</th>

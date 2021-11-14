@@ -82,9 +82,11 @@
 <jsp:include page="../place/PlaceList.jsp"/>
 </div>  <!-- .placemenu -->
 
+<!-- 
 <div class="placedetail">
 <jsp:include page="../place/PlaceDetail.jsp"/>
-</div>  <!-- .placedetail -->
+</div>
+ -->
 
 </body>
 </html>
