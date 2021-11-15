@@ -1,7 +1,6 @@
 package com.welcomeToJeju.moj.servlet.likedUser;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +18,9 @@ public class LikedUserDeleteHandler extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
+  public void init() {
 
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
