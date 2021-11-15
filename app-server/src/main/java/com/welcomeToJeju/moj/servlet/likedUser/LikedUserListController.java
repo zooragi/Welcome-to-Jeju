@@ -2,7 +2,6 @@ package com.welcomeToJeju.moj.servlet.likedUser;
 
 import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +18,8 @@ public class LikedUserListController extends HttpServlet {
   UserDao userDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     userDao = (UserDao) 웹애플리케이션공용저장소.getAttribute("userDao");
   }
 
@@ -36,11 +35,9 @@ public class LikedUserListController extends HttpServlet {
       request.setAttribute("userList", userList);
       request.setAttribute("pageTitle", "좋아하는 유저 리스트");
       request.setAttribute("contentUrl", "/likedUser/LikedUserList.jsp");
-      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
