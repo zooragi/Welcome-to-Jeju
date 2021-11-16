@@ -108,7 +108,8 @@ public class AppConfig {
     // HttpServletRequest를 이용하여 직접 업로드 파일의 콘텐트를 꺼내야 한다.
     // 즉 편리하게 파라미터로 받을 수 없다.
     //
-    return new StandardServletMultipartResolver(); // Servlet 3.0 API의 멀티파트 처리 기능을 사용할 경우
+    return new StandardServletMultipartResolver();
+    // Servlet 3.0 API의 멀티파트 처리 기능을 사용할 경우
   }
 
   @Bean

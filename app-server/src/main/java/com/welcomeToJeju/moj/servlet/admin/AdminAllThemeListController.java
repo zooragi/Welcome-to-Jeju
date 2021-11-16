@@ -1,47 +1,29 @@
 package com.welcomeToJeju.moj.servlet.admin;
 
-import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.domain.Theme;
 
-@WebServlet("/admin/alltheme")
-public class AdminAllThemeListController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminAllThemeListController {
 
-  ThemeDao themeDao;
+  @Autowired ThemeDao themeDao;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    themeDao = (ThemeDao) 웹애플리케이션공용저장소.getAttribute("themeDao");
-  }
+  @GetMapping("/admin/alltheme")
+  public ModelAndView list() throws Exception {
 
-  @Override
-  public void service(ServletRequest request, ServletResponse response) 
-      throws ServletException, IOException {
-    try {
+    Collection<Theme> themeList = themeDao.findAll();
 
-      Collection<Theme> themeList = themeDao.findAll();
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("allThemeList", themeList);
+    mv.addObject("pageTitle", "전체테마 리스트");
+    mv.addObject("contentUrl", "admin/AdminThemeList.jsp");
+    mv.setViewName("template_main");
 
-      request.setAttribute("allThemeList", themeList);
-      request.setAttribute("pageTitle", "전체테마 리스트");
-      request.setAttribute("contentUrl", "/admin/AdminThemeList.jsp");
-      request.getRequestDispatcher("/template_main.jsp").forward(request, response);
-
-
-    } catch (Exception e){
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
-
-
+    return mv;
   }
 }

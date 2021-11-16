@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:if test="${not empty refresh}">
+  <meta http-equiv="Refresh" content="${refresh}">   
+</c:if>
   <title>${pageTitle}</title>
   <link rel="stylesheet" href="${contextRoot}/node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="${contextRoot}/css/common.css">
@@ -20,8 +23,8 @@
 </head>
 <body>
 
-<jsp:include page="/header.jsp"/>
-<jsp:include page="/sideBar.jsp"/>
+<jsp:include page="header.jsp"/>
+<jsp:include page="sideBar.jsp"/>
 
 <jsp:include page="${contentUrl}"/>
 

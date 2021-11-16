@@ -31,7 +31,7 @@
     </init-param>
     <init-param> <!-- 빈 컨테이너의 설정 정보를 다루는 클래스를 지정한다. -->
       <param-name>contextConfigLocation</param-name>
-      <param-value>com.eomcs.pms.config.AppConfig</param-value>
+      <param-value>com.welcomeToJeju.moj.config.AppConfig</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
     <multipart-config>

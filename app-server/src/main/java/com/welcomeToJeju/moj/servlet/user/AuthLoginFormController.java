@@ -16,8 +16,8 @@ public class AuthLoginFormController extends HttpServlet {
       throws ServletException, IOException {
 
     request.setAttribute("pageTitle", "로그인 하기");
-    request.setAttribute("contentUrl", "/user/AuthLoginForm.jsp");
-    request.getRequestDispatcher("/template_main.jsp").forward(request, response);
+    request.setAttribute("contentUrl", "/WEB-INF/jsp/user/AuthLoginForm.jsp");
+    request.getRequestDispatcher("/WEB-INF/jsp/template_main.jsp").forward(request, response);
   }
 
 
