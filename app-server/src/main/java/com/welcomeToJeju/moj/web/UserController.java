@@ -81,7 +81,7 @@ public class UserController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원 정보 수정");
-    mv.addObject("refresh", "1;../auth/login");
+    mv.addObject("refresh", "1;../auth/loginform");
     mv.addObject("contentUrl", "user/UserUpdate.jsp");
     mv.setViewName("template_main");
     return mv;

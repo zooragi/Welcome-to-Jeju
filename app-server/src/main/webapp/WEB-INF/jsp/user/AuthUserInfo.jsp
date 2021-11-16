@@ -34,7 +34,7 @@ width: 60px;
  <div class="container">
 <h1>회원 정보</h1>
 
-<form action='../user/update' method="POST">
+<form action='../user/update' method='post'>
 
 <label for='f-no'>번호</label>  
 <input id='f-no' type='no' name='no' value='${loginUser.no}' readonly><br>
