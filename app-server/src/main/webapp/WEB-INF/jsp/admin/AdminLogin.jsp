@@ -12,7 +12,7 @@
 <button><a href='../admin/alltheme'>전체 테마 목록 보기</a></button><br>
 <button><a href='../admin/list'>회원 목록 보기</a></button><br>
 <button><a href='../auth/userinfo'>내 정보</a></button>
-<button><a href='../auth/loginout'>로그아웃</a></button>
+<button><a href='../admin/logout'>로그아웃</a></button>
 
 </body>
 </html>
