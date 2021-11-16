@@ -3,7 +3,6 @@ package com.welcomeToJeju.moj.servlet.user;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.User;
 
-@WebServlet("/auth/login")
+//@WebServlet("/auth/login")
 public class AuthLoginController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
