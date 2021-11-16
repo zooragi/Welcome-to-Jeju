@@ -22,11 +22,17 @@
   <script defer src="${contextRoot}/javascript/common.js"></script>
 </head>
 <body>
+<div class="wrap">
+<jsp:include page="./header.jsp"/>
+<jsp:include page="./sideBar.jsp"/>
+<div class="container">
+    <div class="main-container">
+        <jsp:include page="${contentUrl}"/>
+    </div>
+</div>
 
-<jsp:include page="header.jsp"/>
-<jsp:include page="sideBar.jsp"/>
-
-<jsp:include page="${contentUrl}"/>
+<jsp:include page="./footer.jsp"/>
+</div>
 
 </body>
 </html>

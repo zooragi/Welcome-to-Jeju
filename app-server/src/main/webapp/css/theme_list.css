@@ -1,0 +1,53 @@
+.container .main-container h1{
+    padding: var(--font-large);
+}
+.theme-list
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: var(--font-mirco);
+}
+
+.theme-list .list-container {
+    padding: var(--font-more-small);
+    flex: 1 1 30%;
+}
+
+.theme-list .content:hover
+{
+    background-color: var(--green-color);
+}
+.theme-list li .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-color);
+    border-radius: 12px;
+    padding: var(--font-medium);
+    box-shadow: 2px 2px;
+    height: 152px;
+}
+
+.theme-list li .content:hover {
+    cursor: pointer;
+}
+
+.theme-list li .content div {
+    padding: var(--font-mirco);
+}
+
+.theme-list li .content .icon {
+    font-size: var(--font-huge);
+    margin: var(--font-small);
+}
+
+.theme-list li .content .theme-title {
+    font-size: var(--font-medium);
+}
+
+.theme-list li .content .theme-count {
+    font-size: var(--font-small);
+    color: var(--black-light-color);
+}
