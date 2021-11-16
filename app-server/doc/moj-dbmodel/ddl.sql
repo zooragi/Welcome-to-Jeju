@@ -243,7 +243,7 @@ ALTER TABLE jeju_theme_hashtag
 CREATE TABLE jeju_place_photo (
   place_photo_no INTEGER      NOT NULL COMMENT '장소사진번호', -- 장소사진번호
   place_id       VARCHAR(255) NOT NULL COMMENT '장소번호', -- 장소번호
-  user_no        INTEGER      NULL     COMMENT '유저번호', -- 유저번호
+  user_no        INTEGER      NOT NULL COMMENT '유저번호', -- 유저번호
   file_path      VARCHAR(255) NOT NULL COMMENT '장소사진' -- 장소사진
 )
 COMMENT '장소사진';
@@ -262,7 +262,7 @@ ALTER TABLE jeju_place_photo
 CREATE TABLE jeju_place_comment (
   comment_no INTEGER      NOT NULL COMMENT '후기번호', -- 후기번호
   place_id   VARCHAR(255) NOT NULL COMMENT '장소번호', -- 장소번호
-  user_no    INTEGER      NULL     COMMENT '유저번호', -- 유저번호
+  user_no    INTEGER      NOT NULL COMMENT '유저번호', -- 유저번호
   comment    TEXT         NOT NULL COMMENT '장소후기' -- 장소후기
 )
 COMMENT '장소후기';
