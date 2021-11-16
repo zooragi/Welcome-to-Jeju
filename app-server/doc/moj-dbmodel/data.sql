@@ -1,6 +1,6 @@
 -- 회원
 insert into jeju_user(user_no, email, password, nickname )
-values(0, 'root@test.com', password('0000'), '제주정승');
+values(20210621, 'root@test.com', password('0000'), '제주정승');
 
 insert into jeju_user(user_no, email, password, nickname )
 values(1, 'aaa@test.com', password('1111'), '감귤밭떼기');
@@ -12,7 +12,7 @@ insert into jeju_user(user_no, email, password, nickname )
 values(3, 'ccc@test.com', password('1111'), '리슈언');
 
 insert into jeju_user(user_no, email, password, nickname )
-values(4, 'ddd@test.com', password('1111'), '뜜휜');
+values(4, 'ddd@test.com', password('1111'), '특공대');
 
 insert into jeju_user(user_no, email, password, nickname )
 values(5, 'eee@test.com', password('1111'), '유니버스룸');
