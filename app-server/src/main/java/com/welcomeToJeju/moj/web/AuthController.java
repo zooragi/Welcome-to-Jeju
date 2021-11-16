@@ -23,7 +23,7 @@ public class AuthController {
   public ModelAndView loginform() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "로그인");
-    mv.addObject("contentUrl", "user/AuthLoginForm.jsp");
+    mv.addObject("contentUrl", "user/AuthLoginForm2.jsp");
     mv.setViewName("template_main");
     return mv;
   }
@@ -53,7 +53,7 @@ public class AuthController {
       mv.setViewName("template_main");
 
     } else {
-      mv.addObject("refresh", "2;url=loginForm");
+      mv.addObject("refresh", "2;url=loginform");
       mv.addObject("pageTitle", "로그인 오류");
       mv.addObject("contentUrl", "user/LoginFail.jsp");
       mv.setViewName("template_main");

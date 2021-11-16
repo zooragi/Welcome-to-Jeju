@@ -77,14 +77,15 @@ header {
     
 header .logo{
     font-size: var(--font-large);
+    display:inline-block;
+    width:400px;
 }
 header .logo .title{
     padding-left: var(--padding);
 }
 
 header .logout-box{
-    display: flex;
-    font-size: var(--font-medium);
+    float:right;
 }
 
 header .logout-box .login{
