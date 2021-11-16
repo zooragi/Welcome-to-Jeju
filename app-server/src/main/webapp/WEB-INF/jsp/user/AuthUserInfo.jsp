@@ -34,7 +34,7 @@ width: 60px;
  <div class="container">
 <h1>회원 정보</h1>
 
-<form action='../user/update'>
+<form action='../user/update' method="POST">
 
 <label for='f-no'>번호</label>  
 <input id='f-no' type='no' name='no' value='${loginUser.no}' readonly><br>
@@ -59,7 +59,7 @@ width: 60px;
 
 <button>회원 수정</button>
 <button><a href='../user/delete?no=${loginUser.no}'>탈퇴하기</a></button>
-<button><a href='loginout'>로그아웃</a></button>
+<button><a href='logout'>로그아웃</a></button>
 </form>
 </div>
 </body>
