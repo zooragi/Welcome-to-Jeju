@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.web;
+package com.welcomeToJeju.moj.web.theme.myTheme;
 
 import javax.servlet.ServletContext;
 import org.apache.ibatis.session.SqlSessionFactory;

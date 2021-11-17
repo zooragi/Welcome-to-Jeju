@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.web;
+package com.welcomeToJeju.moj.web.user;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;

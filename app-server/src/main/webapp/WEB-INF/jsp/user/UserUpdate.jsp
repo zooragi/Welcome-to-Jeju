@@ -2,8 +2,4 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 
-<h1>나의 정보 수정</h1>
-
-<p>정보 수정하기 성공!</p>
-
-
+<h1 style=text-align:center;>내 정보 수정 성공!</h1>
