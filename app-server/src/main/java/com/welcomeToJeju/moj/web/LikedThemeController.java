@@ -1,0 +1,59 @@
+package com.welcomeToJeju.moj.web;
+
+import java.util.Collection;
+import javax.servlet.ServletContext;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+import com.welcomeToJeju.moj.dao.ThemeDao;
+import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.Theme;
+
+@Controller
+public class LikedThemeController {
+
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired UserDao userDao;
+  @Autowired ServletContext sc;
+  @Autowired ThemeDao themeDao;
+
+  @GetMapping("/likedtheme/add")
+  public ModelAndView add(int themeNo, int userNo) throws Exception {
+
+    themeDao.insertLikedTheme(themeNo, userNo);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("redirect:../theme/detail?no=" + themeNo);
+    return mv;
+
+  }
+
+  @GetMapping("/likedtheme/list")
+  public ModelAndView list(int no) throws Exception {
+
+    Collection<Theme> themeList = themeDao.findAllLikedTheme(no);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("themeList", themeList);
+    mv.addObject("pageTitle", "테마 좋아요 목록");
+    mv.addObject("contentUrl", "likedTheme/LikedThemeList.jsp");
+    mv.setViewName("template_main");
+    return mv;
+
+  }
+
+  @GetMapping("/likedtheme/delete")
+  public ModelAndView delete(int themeNo, int userNo) throws Exception {
+
+    themeDao.deleteLikedTheme(themeNo, userNo);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("redirect:../theme/detail?no=" + themeNo);
+    return mv;
+  }
+
+}
