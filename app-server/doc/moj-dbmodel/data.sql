@@ -188,3 +188,50 @@ values(5,2,'조개집이 아니고 고기집인데요',1);
 
 Insert into jeju_report_theme(user_no, theme_no, content, report_status_no)
 values(3,19,'미성년자에게 술강요',1);
+
+-- 장소_유저_테마
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('1261877281',1,8);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('1261877281',2,15);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('1261877281',3,12);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('1261877281',4,2);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('1641211499',3,1);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('1641211499',6,15);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('1641211499',2,4);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('269602057',4,1);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('269602057',2,3);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('269602057',5,10);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('269602057',1,16);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('27525363',6,16);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('27525363',5,10);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('27525363',3,5);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('27525363',4,9);
+
