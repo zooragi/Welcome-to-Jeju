@@ -10,7 +10,7 @@
 </style>
 
 <br>
-<h1>테마 순위 보기</h1>
+<h1>🏆 테마 순위 보기</h1>
 
 <table class="table table-hover">
 <thead>
