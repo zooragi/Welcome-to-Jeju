@@ -1,129 +1,106 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
- <style>
-  .container {
-  xborder: 1px solid red;
-  width: 800px;
-  }
- 
-  .form-select {
-    width:110px;
-    display:inline-block;
-    margin-right: 10px;
-    
-  }
-  
-  .publicCheck {
-    display:inline-block;
-  }
-
-  
-  .title {
-    width:133px;
+<style>
+  .add-form {
+    /* width: 60%; */
+    /* border-radius: 6px; */
+    /* box-shadow: 3px 3px; */
+    background-color: transparent;
+    /* background-color: #f8f8f8; */
+    /* background-color: #F6BB43; */
+    /* text-align: center; */
+    margin: 0 auto;
+    padding: 30px;
   }
   
-  .form-check {
-    display: inline-block;
-    margin-right: 10px;
-  
-  }
+  /* .form-select {
+    width: 66%;
+  } */
 </style>
 
-<script type="text/javascript">
-function check() {
-  if(!document.f-title.title.value) {
-    alert("필수 입력 항목이 비어있습니다.");
-  return false;
-  }
-};
-</script>
-  
+<br>
+<h1 style=text-align:center;>나의 테마 만들기</h1>
+<br>
 
-<div class = "container">
-<h1>테마 만들기</h1>
-<form id ="theme-form" name = "theme-form" action='add' method = "post" onsubmit = "return check()">
-
-<div class = "t">
-<div class="mb-3 row">
-    <label for='f-title' class="col-sm-2 col-form-label title">테마 제목</label>
-    <div class="col-sm-6">
-       <input id='f-title' type='text' name='title' class = "form-control" >
-    </div>
-</div>
-</div>
-
-
-
+<div class="add-form">
+<form id="theme-form" action="add" method="post" enctype="multipart/form-data">
 
 <div class="mb-3 row">
-    <label for='f-hashtag' class="col-sm-2 col-form-label">해시태그</label>
-    <div class = "col-sm-6">
-      <input id='f-hashtag' type='text' name='hashtags' class = "form-control" value = '${theme.hashtags}'>
+<h4>테마 이름</h4>
+	<!-- <label for='f-title' class="col-sm-2 col-form-label form-control-lg">테마 이름</label> -->
+	<div class="col-sm-6">
+	<input id='f-title' type='text' name='title' class="form-control" >
+	</div>
+</div>
+
+<div class="mb-3 row">
+<h4>닉네임</h4>
+  <!-- <label for='f-owner' class="col-sm-2 col-form-label form-control-lg">닉네임</label> -->
+  <div class = "col-sm-6">
+  <input id='f-owner' type='text' name='owner' class="form-control" value="${loginUser.nickname}" readonly>
   </div>
 </div>
 
-
-<select class="form-select" id = "f-category" aria-label= "f-category" name ="category" >
-  <option selected>카테고리</option>
+<div>
+<h4>카테고리</h4>
+<select class="form-select" aria-label="f-category" id="f-category" name ="category" >
+  <option selected value="">👇</option>
   <option value="1">식당</option>
   <option value="2">카페</option>
   <option value="3">관광명소</option>
   <option value="4">기타</option>
 </select>
-
-<div class = "publicCheck">
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="isPublic" id="f-isPublic" value = '1' checked>
-  <label class="form-check-label" for="flexRadioDefault1">
-   공개
-  </label>
 </div>
 
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="isPublic" id="f-notPublic" value = '0' >
-  <label class="form-check-label" for="flexRadioDefault2">
-    비공개
-  </label>
+<div>
+<h4>공개 여부</h4>
+<select class="form-select" aria-label="f-isPublic" id="f-isPublic" name ="isPublic" >
+  <!-- <option selected>👇</option> -->
+  <option selected value="1">공개</option>
+  <!-- <option value="1">공개</option> -->
+  <option value="0">비공개</option>
+</select>
 </div>
-</div>
-
-<br>
-<br>
-<p>
-공개 여부는 추후에 변경이 불가능합니다!
-</p>
-<p>
-공개 테마는 다른 유저들과 공유가 가능한 테마입니다. 
-</p>
-<p>비공개 테마는 큐레이터님께만 보이는 테마입니다.
-</p>
-<div class="mb-3 row">
-  <label for='f-owner' class="col-sm-2 col-form-label">만든이</label>
- <div class = "col-sm-6">
-  <input id='f-owner' type='text' name='owner' class = "form-control" value = '${loginUser.nickname}' readonly>
-  </div>
-</div>
-
-<button type = "submit" class="btn btn-primary btn-sm">등록</button><br>
-</form>
-</div><!--  .content -->
 
 <!-- 
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" value ="1" id="f-isPublic" name="isPublic">
+  <label class="form-check-label" for="flexCheckChecked">
+  공개
+  </label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" value ="0" id="f-isNotPublic" name="isPublic">
+  <label class="form-check-label" for="flexCheckDefault">
+  비공개
+  </label>
+</div>
+ -->
+
+<div class="mb-3 row">
+	<!-- <label for='f-hashtag' class="col-sm-2 col-form-label">해시태그</label> -->
+	<h4>해시태그</h4>
+	<div class="col-sm-6">
+	<input id='f-hashtag' type='text' name='hashtags' class="form-control" value="">
+	</div>
+</div>
+
+<button type="submit" class="btn btn-primary btn-sm">만들기</button>
+
+</form>
+</div>
+
 <script>
 document.querySelector("#theme-form").onsubmit = () => {
   if (document.querySelector("#f-title").value == "" ||
-      document.querySelector("#f-category").value == "" ||) {
-    window.alert("필수 입력 항목이 비어 있습니다.")
-    //Swal.fire("필수 입력 항목이 비어 있습니다.")
+      document.querySelector("#f-category").value == "" ||
+      document.querySelector("#f-hashtag").value == "") {
+    window.alert("필수 입력 항목이 비어 있음!")
     return false;
   }
 };
-
 </script>
- -->
-
