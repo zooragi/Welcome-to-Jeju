@@ -20,6 +20,9 @@ width: 60px;
   }
   </style>
 
+
+
+
  <div class = "container">
 <h1>회원 가입</h1>
 <form id="user-form" action='add' method='post'>
@@ -31,5 +34,17 @@ width: 60px;
 <button><a href='../auth/loginform'>로그인!</a></button><br>
 </form>
 </div>
+
+
+<script>
+document.querySelector("#user-form").onsubmit = () => {
+  if (document.querySelector("#f-email").value == "" ||
+      document.querySelector("#f-password").value == "" ||
+      document.querySelector("#f-nickname").value == "") {
+    window.alert("필수 입력 항목이 비어 있음!")
+    return false;
+  }
+};
+</script>
 
     

@@ -9,13 +9,14 @@
 		padding: var(--font-great) 0 ;
 	}
 </style>
+
 <div class="card-container">
   <div class="card align-middle" style="width:20rem; border-radius:20px;">
     <div class="card-title" style="margin-top:30px;">
       <h2 class="card-title text-center" style="color:#113366;">🔐 로그인하기</h2>
     </div>
     <div class="card-body">
-      <form class="form-signin" action='../auth/login' method="POST" onSubmit="logincall();return false">
+      <form id = "form-signin" class="form-signin" action='../auth/login' method="POST" onSubmit="logincall();return false">
         <h5 class="form-signin-heading">로그인 정보를 입력하세요</h5>
         <label for="inputEmail" class="sr-only">이메일</label>
         <input id='f-email' type='email' name='email' value="${cookie.email.value}" class="form-control" placeholder="Your ID" required autofocus><BR>

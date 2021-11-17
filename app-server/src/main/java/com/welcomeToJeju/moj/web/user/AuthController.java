@@ -48,7 +48,7 @@ public class AuthController {
 
       ModelAndView mv = new ModelAndView();
       mv.addObject("pageTitle", "로그인 성공!");
-      mv.addObject("contentUrl", "user/AuthLogin.jsp");
+      mv.addObject("contentUrl", "admin/AuthLogin.jsp");
       mv.setViewName("template_main");
 
       return mv;
