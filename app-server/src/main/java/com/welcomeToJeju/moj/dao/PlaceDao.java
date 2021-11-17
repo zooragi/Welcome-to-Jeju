@@ -15,7 +15,6 @@ public interface PlaceDao {
   void deletePhoto(String id) throws Exception;
   void deleteComment(String id) throws Exception;
 
-  //  List<Place> findByThemeTitle(String themeTitle) throws Exception;
   List<Place> findAllByThemeNo(int themeNo) throws Exception;
 
   Place findByPlaceId(String id) throws Exception;

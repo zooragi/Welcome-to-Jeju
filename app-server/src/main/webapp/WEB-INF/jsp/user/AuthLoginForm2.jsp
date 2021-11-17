@@ -2,37 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-
 <style>
-
-.container {
- xwidth: 680px;
-  xmargin: 100px 300px 100px 500px;
-  xpadding: 100px;
-  
-}
-
-.card {
-  xpadding:100px;
-  margin:100px 200px 100px 400px;
-}
-
+	.card-container{
+		display : flex;
+		justify-content: center;
+		padding: var(--font-great) 0 ;
+	}
 </style>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  </head>
-
-<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
-<div class = "container">
+<div class="card-container">
   <div class="card align-middle" style="width:20rem; border-radius:20px;">
     <div class="card-title" style="margin-top:30px;">
       <h2 class="card-title text-center" style="color:#113366;">🔐 로그인하기</h2>
@@ -59,7 +36,7 @@
      </form>
       
     </div>
-  </div>
+</div>
 
   <div class="modal">
   </div>
