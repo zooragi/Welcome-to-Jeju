@@ -48,7 +48,7 @@
         
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="saveEmail" ${not empty cookie.email ? "checked":""}/> 이메일 저장
+            <input type="checkbox" name="saveEmail" ${not empty cookie.email ? "checked":""}/> 이메일 저장
           </label>
         </div>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style="color : #ffff; background-color:#F6BB43; border:none;">로 그 인</button>
