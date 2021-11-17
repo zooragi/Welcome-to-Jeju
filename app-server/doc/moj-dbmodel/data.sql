@@ -52,32 +52,32 @@ insert into jeju_theme(theme_no, user_no, title, share, public, category_no, cre
 
 
 -- 장소
-insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values(1261877281,로맨틱새우,제주특별자치도 제주시 애월읍 곽지리 1584-5,126.305303780014,33.4481834855432)
-insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values(1641211499,도치돌목장,제주특별자치도 제주시 애월읍 납읍리 102,126.365809643225,33.4099556021011)
-insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values(269602057,오션뷰제주 게스트하우스,제주특별자치도 서귀포시 안덕면 창천리 785-2,126.367031286534, 33.2322187489819)
-insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values(27525363,깡촌흑돼지,제주특별자치도 제주시 조천읍 함덕리 1001,126.667135470078, 33.541274383213)
+insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('1261877281','로맨틱새우','제주특별자치도 제주시 애월읍 곽지리 1584-5',126.305303780014,33.4481834855432)
+insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('1641211499','도치돌목장','제주특별자치도 제주시 애월읍 납읍리 102',126.365809643225,33.4099556021011)
+insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('269602057','오션뷰제주 게스트하우스','제주특별자치도 서귀포시 안덕면 창천리 785-2',126.367031286534, 33.2322187489819)
+insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('27525363','깡촌흑돼지','제주특별자치도 제주시 조천읍 함덕리 1001',126.667135470078, 33.541274383213)
 
 -- 후기
-insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(1, 1261877281, '새우집인데 조개가 존맛 ㅠㅠ', 1);
-insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(2, 1641211499, '귀여운 양', 1);
+insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(1, '1261877281', '새우집인데 조개가 존맛 ㅠㅠ', 1);
+insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(2, '1641211499', '귀여운 양', 1);
 
-insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(3, 1261877281, '새우가 맛있음!!', 4);
-insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(4, 269602057, '분위기가 너무 좋다.', 4);
+insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(3, '1261877281', '새우가 맛있음!!', 4);
+insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(4, '269602057', '분위기가 너무 좋다.', 4);
 
-insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(5, 27525363, '흑돼지 존맛집!!', 2);
-insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(6, 27525363, '현지인들도 매일 가는 맛집', 5);
-insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(7, 27525363, '주차장이 넓은 삼겹살맛집', 3);
+insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(5, '27525363', '흑돼지 존맛집!!', 2);
+insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(6, '27525363', '현지인들도 매일 가는 맛집', 5);
+insert into jeju_place_comment(comment_no, place_id, comment, user_no) values(7, '27525363', '주차장이 넓은 삼겹살맛집', 3);
 
 -- 사진
-insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(1, 1261877281,  'aaa.gif', 1);
-insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(2, 1641211499, '양.jpg', 1);
+insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(1, '1261877281',  'aaa.gif', 1);
+insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(2, '1641211499', '양.jpg', 1);
 
-insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(3, 1261877281, '새우사진.jpg', 4);
-insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(4, 269602057, '오션뷰.jpg', 4);
+insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(3, '1261877281', '새우사진.jpg', 4);
+insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(4, '269602057', '오션뷰.jpg', 4);
 
-insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(5, 27525363, '돼지.jpg', 2);
-insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(6, 27525363, '흑돼지.jpg', 5);
-insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(7, 27525363, '삼겹살.gif', 3);
+insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(5, '27525363', '돼지.jpg', 2);
+insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(6, '27525363', '흑돼지.jpg', 5);
+insert into jeju_place_photo(place_photo_no, place_id, file_path, user_no) values(7, '27525363', '삼겹살.gif', 3);
 
 -- 좋아하는 유저
 Insert into jeju_liked_user(user_no, user_no2) values(1,2);
