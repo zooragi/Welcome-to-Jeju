@@ -1,8 +1,5 @@
 -- 회원
 insert into jeju_user(user_no, email, password, nickname )
-values(20210621, 'root@test.com', password('0000'), '제주정승');
-
-insert into jeju_user(user_no, email, password, nickname )
 values(1, 'aaa@test.com', password('1111'), '감귤밭떼기');
 
 insert into jeju_user(user_no, email, password, nickname )
@@ -27,31 +24,31 @@ insert into jeju_theme_category(category_no, name) values(3, '관광명소');
 insert into jeju_theme_category(category_no, name) values(4, '기타');
 
 -- 테마
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(1, 1, '애월에 가면', 0, 1, 3);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(2, 1, '조개 맛있는 집', 0, 1, 1);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(3, 1, '서귀포 숙소 추천', 0, 1, 4);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(1, 1, '애월에 가면', 0, 1, 3, 20210621);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(2, 1, '조개 맛있는 집', 0, 1, 1,20210627);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(3, 1, '서귀포 숙소 추천', 0, 1, 4, 20210808);
 
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(4, 2, '바람을 벗삼아 떠나보자', 0, 1, 3);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(5, 2, '제주도 향토 음식', 0, 1, 1);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(6, 2, '제주의 봄', 0, 1, 4);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(4, 2, '바람을 벗삼아 떠나보자', 0, 1, 3, 20210808);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(5, 2, '제주도 향토 음식', 0, 1, 1, 20210809);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(6, 2, '제주의 봄', 0, 1, 4, 2021-08-22);
 
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(7, 3, '바다가 사랑한 섬 우도', 0, 1, 3);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(8, 3, '제주에서 꼭 먹어야하는 음식', 0, 1, 1);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(9, 3, '화장실 깨끗한 장소', 0, 1, 4);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(7, 3, '바다가 사랑한 섬 우도', 0, 1, 3, 20210901);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(8, 3, '제주에서 꼭 먹어야하는 음식', 0, 1, 1, 20210903);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(9, 3, '화장실 깨끗한 장소', 0, 1, 4, 20210909);
 
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(10, 4, '제주 동부 투어', 0, 1, 3);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(11, 4, '자연광이 좋은 카페', 0, 1, 2);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(12, 4, '해산물 맛집', 0, 1, 1);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(10, 4, '제주 동부 투어', 0, 1, 3, 20210921);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(11, 4, '자연광이 좋은 카페', 0, 1, 2, 20211001);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(12, 4, '해산물 맛집', 0, 1, 1, 20211009);
 
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(13, 5, '노을에 잠기는 바다', 0, 1, 3);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(14, 5, '반려동물과 함께 가기 좋은 카페', 0, 1, 2);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(15, 5, '제주도민은 여기만 간다', 0, 1, 4);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(13, 5, '노을에 잠기는 바다', 0, 1, 3, 20211101);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(14, 5, '반려동물과 함께 가기 좋은 카페', 0, 1, 2, 20211105);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(15, 5, '제주도민은 여기만 간다', 0, 1, 4, 20211111);
 
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(16, 6, '2020 제주', 0, 0, 4);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(17, 6, '인스타 감성샷 남길 때', 0, 1, 4);
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(18, 6, '24시간 병원', 0, 1, 2);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(16, 6, '2020 제주', 0, 0, 4, 20211029);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(17, 6, '인스타 감성샷 남길 때', 0, 1, 4, 20211001);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(18, 6, '24시간 병원', 0, 1, 2, 20211129);
 
-insert into jeju_theme(theme_no, user_no, title, share, public, category_no) values(19, 6, '미성년자도 달리자', 0, 1, 1);
+insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(19, 6, '미성년자도 달리자', 0, 1, 1,20211030);
 
 
 -- 후기

@@ -77,7 +77,8 @@ CREATE TABLE jeju_theme (
   public       INTEGER      NOT NULL DEFAULT 1 COMMENT '공개여부', -- 공개여부
   share        INTEGER      NOT NULL COMMENT '공유여부', -- 공유여부
   view_cnt     INTEGER      NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
-  reported_cnt INTEGER      NULL     DEFAULT 0 COMMENT '신고수' -- 신고수
+  reported_cnt INTEGER      NULL     DEFAULT 0 COMMENT '신고수', -- 신고수
+  created_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
 )
 COMMENT '테마';
 
