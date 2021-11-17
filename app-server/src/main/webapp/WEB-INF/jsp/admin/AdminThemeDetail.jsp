@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+
+<!--  <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -18,7 +19,8 @@
   <script src = "../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <script defer src="../javascript/common.js"></script>
   <script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
-  
+</head>
+   -->
   <style>
     .themedetail {
     margin : 30px;
@@ -30,13 +32,13 @@
     float : right;
     }
   </style>
-</head>
 
 <body>
-
+<!-- 
 <jsp:include page="../header.jsp"></jsp:include>
 <jsp:include page="../sideBar.jsp"></jsp:include>
-
+ --> <br> <br> <br> <br> <br>
+ 
 <div class="themedetail">
 	<p>
 	  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -75,4 +77,5 @@
 <jsp:include page="../place/PlaceList.jsp"/>
 </div>  <!-- .placemenu -->
 </body>
-</html>
+
+<!-- </html> -->
