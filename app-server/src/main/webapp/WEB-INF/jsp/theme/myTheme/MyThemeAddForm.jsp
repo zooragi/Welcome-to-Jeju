@@ -30,7 +30,7 @@
 <div class="mb-3 row">
 <h4>테마 이름</h4>
 	<!-- <label for='f-title' class="col-sm-2 col-form-label form-control-lg">테마 이름</label> -->
-	<div class="col-sm-6">
+	<div class="col-sm-16">
 	<input id='f-title' type='text' name='title' class="form-control" >
 	</div>
 </div>
@@ -38,7 +38,7 @@
 <div class="mb-3 row">
 <h4>닉네임</h4>
   <!-- <label for='f-owner' class="col-sm-2 col-form-label form-control-lg">닉네임</label> -->
-  <div class = "col-sm-6">
+  <div class = "col-sm-16">
   <input id='f-owner' type='text' name='owner' class="form-control" value="${loginUser.nickname}" readonly>
   </div>
 </div>
@@ -83,7 +83,7 @@
 <div class="mb-3 row">
 	<!-- <label for='f-hashtag' class="col-sm-2 col-form-label">해시태그</label> -->
 	<h4>해시태그</h4>
-	<div class="col-sm-6">
+	<div class="col-sm-16">
 	<input id='f-hashtag' type='text' name='hashtags' class="form-control" value="">
 	</div>
 </div>

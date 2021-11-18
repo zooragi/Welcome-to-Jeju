@@ -25,5 +25,3 @@
         </ul>
     </div>
 </div><!--  .container -->
-
-
