@@ -28,7 +28,7 @@
 <form id="theme-form" action="add" method="post" enctype="multipart/form-data">
 
 <div class="mb-3 row">
-<h6>테마 이름</h6>
+<h5>테마 이름</h5>
 	<!-- <label for='f-title' class="col-sm-2 col-form-label form-control-lg">테마 이름</label> -->
 	<div class="col-sm-16">
 	<input id='f-title' type='text' name='title' class="form-control" >
@@ -44,7 +44,7 @@
 </div>
 
 <div>
-<h4>카테고리</h4>
+<h5>카테고리</h5>
 <select class="form-select" aria-label="f-category" id="f-category" name ="category" >
   <option selected value="">👇</option>
   <option value="1">식당</option>
@@ -55,7 +55,7 @@
 </div>
 
 <div>
-<h3>공개 여부</h3>
+<h5>공개 여부</h5>
 <select class="form-select" aria-label="f-isPublic" id="f-isPublic" name ="isPublic" >
   <!-- <option selected>👇</option> -->
   <option selected value="1">공개</option>
@@ -82,7 +82,7 @@
 
 <div class="mb-3 row">
 	<!-- <label for='f-hashtag' class="col-sm-2 col-form-label">해시태그</label> -->
-	<h2>해시태그</h2>
+	<h5>해시태그</h5>
 	<div class="col-sm-16">
 	<input id='f-hashtag' type='text' name='hashtags' class="form-control" value="">
 	</div>
