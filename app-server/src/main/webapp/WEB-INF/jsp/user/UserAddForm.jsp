@@ -29,15 +29,19 @@ width: 60px;
 
 <div class="mb-3 row">
 <h4>이메일</h4>
-  <!-- <label for='f-title' class="col-sm-2 col-form-label form-control-lg">테마 이름</label> -->
   <div class="col-sm-6">
-  <input id='f-email' type='email' name='email' class="form-control" >
+  <input id='f-email' type='email' name='email' class="form-control" > 
+  <div class="invalid-feedback">
+        이미 존재하는 이메일입니다.
+    </div>
+  </div>
+  <div class="col-auto">
+    <button id="x-email-check-btn" type="button" class="btn btn-primary form-control">중복검사</button>
   </div>
 </div>
 
 <div class="mb-3 row">
 <h4>암호</h4>
-  <!-- <label for='f-owner' class="col-sm-2 col-form-label form-control-lg">닉네임</label> -->
   <div class = "col-sm-6">
   <input id='f-password' type='password' name='password' class="form-control">
   </div>
@@ -45,9 +49,14 @@ width: 60px;
 
 <div class="mb-3 row">
 <h4>닉네임</h4>
-  <!-- <label for='f-owner' class="col-sm-2 col-form-label form-control-lg">닉네임</label> -->
   <div class = "col-sm-6">
   <input id='f-nickname' type='nickname' name='nickname' class="form-control">
+  <div class="invalid-feedback">
+        이미 존재하는 닉네임입니다.
+    </div>
+  </div>
+  <div class="col-auto">
+    <button id="x-nickname-check-btn" type="button" class="btn btn-primary form-control">중복검사</button>
   </div>
 </div>
 <!-- 
@@ -55,7 +64,7 @@ width: 60px;
 <label for='f-password'>암호</label>  <input id='f-password' type='password' name='password'><br>
 <label for='f-nickname'>닉네임</label>  <input id='f-nickname' type='nickname' name='nickname'><br>
  -->
-<button class="btn btn-primary btn-sm">가입하기!</button>
+<button id="x-add-btn" class="btn btn-primary btn-sm">가입하기</button><br>
 <button><a href='../auth/loginform'>로그인!</a></button><br>
 </form>
 </div>
@@ -70,6 +79,45 @@ document.querySelector("#user-form").onsubmit = () => {
     return false;
   }
 };
+
+var addBtn = document.querySelector("#x-add-btn");
+var emailTag = document.querySelector("#f-email");
+addBtn.setAttribute("disabled", "disabled");
+
+document.querySelector("#x-email-check-btn").onclick = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function() {
+      if (this.responseText == "false") {
+          addBtn.removeAttribute("disabled");
+          emailTag.classList.remove("is-invalid");
+      } else {
+        addBtn.setAttribute("disabled", "disabled");
+        emailTag.classList.add("is-invalid");
+      }
+    })
+    xhr.open("get", "checkEmail?email=" + emailTag.value);
+    xhr.send();
+};
+
+var addBtn = document.querySelector("#x-add-btn");
+var nicknameTag = document.querySelector("#f-nickname");
+addBtn.setAttribute("disabled", "disabled");
+
+document.querySelector("#x-nickname-check-btn").onclick = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function() {
+      if (this.responseText == "false") {
+          addBtn.removeAttribute("disabled");
+          nicknameTag.classList.remove("is-invalid");
+      } else {
+        addBtn.setAttribute("disabled", "disabled");
+        nicknameTag.classList.add("is-invalid");
+      }
+    })
+    xhr.open("get", "checkNickname?nickname=" + nicknameTag.value);
+    xhr.send();
+};
+
 </script>
 
     

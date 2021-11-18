@@ -15,6 +15,7 @@ public interface UserDao {
   User findByNickname(String nickname) throws Exception;
   User findByNo(int userNo) throws Exception;
 
+  User findByEmail(String email) throws Exception;
   User findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
 
   List<User> findByKeyword(String keyword) throws Exception;

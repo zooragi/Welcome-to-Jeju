@@ -67,6 +67,21 @@
       nickname=#{nickname}
   </select>
   
+    <select id="findByEmail" resultMap="UserMap" parameterType="String">
+    select
+      user_no,
+      email,
+      nickname,
+      created_dt,
+      view_cnt,
+      reported_cnt,
+      warned_cnt
+    from
+      jeju_user
+    where
+      email=#{email}
+  </select>
+  
   <select id="findByNo" resultMap="UserMap" parameterType="int">
     select
       user_no,
