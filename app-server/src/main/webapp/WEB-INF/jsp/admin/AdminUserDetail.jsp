@@ -33,7 +33,7 @@ width: 60px;
 
 <div class="container">
 <h1>회원 상세 보기</h1>
-<form action='update' method='post'>
+<form action='userupdate' method='post'>
 
 <label for='f-no'>번호</label>  
 <input id='f-no' type='no' name='no' value='${user.no}' readonly><br>
@@ -58,8 +58,8 @@ width: 60px;
 
 <button>[회원수정]</button>
 
-<a href='delete?no=${user.no}'>[회원삭제]</a>
-<a href='list'>[목록]</a><br>
+<a href='userdelete?no=${user.no}'>[회원삭제]</a>
+<a href='userlist'>[목록]</a><br>
 
 </form>
 </div>

@@ -35,7 +35,7 @@
 
 <tr>
     <td>${user.no}</td>
-    <td><a href='detail?no=${user.no}'>${user.nickname}</a></td>
+    <td><a href='userdetail?no=${user.no}'>${user.nickname}</a></td>
     <td>${user.email}</td>
     <td>${user.registeredDate}</td>
     <td>${user.viewCount}</td>
