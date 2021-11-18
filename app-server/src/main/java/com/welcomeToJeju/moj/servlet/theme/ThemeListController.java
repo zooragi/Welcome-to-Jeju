@@ -38,7 +38,7 @@ public class ThemeListController extends HttpServlet {
 
       int no = Integer.valueOf(request.getParameter("no"));
 
-      Collection<Theme> themeList = themeDao.findPublicThemeByUserNo(no);
+      Collection<Theme> themeList = themeDao.findAllPublicThemeByUserNo(no);
       userDao.updateViewCount(no);
 
       sqlSession.commit();

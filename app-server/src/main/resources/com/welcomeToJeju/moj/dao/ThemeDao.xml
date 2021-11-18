@@ -115,7 +115,7 @@
 	    t.theme_no
 	</select>
 	
-	 <select id="findPublicThemeByUserNo" resultMap="ThemeMap" parameterType = "int">
+	 <select id="findAllPublicThemeByUserNo" resultMap="ThemeMap" parameterType = "int">
     select 
       t.theme_no,
       t.title,
