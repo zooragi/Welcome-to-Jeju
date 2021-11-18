@@ -14,49 +14,54 @@ width: 60px;
 </style>
 
  <style>
-  .container {
-  xborder: 1px solid red;
-  width: 640px;
+ 
+.add-form {
+    width: 30%;
+    background-color: transparent;
+    margin: 0 auto;
+    padding: 30px;
   }
+  
   </style>
 
 
 
-
- <div class = "container">
+<br>
 <h1 style=text-align:center;>회원 가입</h1>
+<br>
+<div class = "add-form">
 <form id="user-form" action='add' method='post'>
 
 <div class="mb-3 row">
-<h4>이메일</h4>
-  <div class="col-sm-6">
+<h5>이메일</h5>
+  <div class="col-sm-16">
   <input id='f-email' type='email' name='email' class="form-control" > 
   <div class="invalid-feedback">
         이미 존재하는 이메일입니다.
     </div>
   </div>
   <div class="col-auto">
-    <button id="x-email-check-btn" type="button" class="btn btn-primary form-control">중복검사</button>
+    <button id="x-email-check-btn" type="button" class="btn btn-outline-dark form-control">중복검사</button>
   </div>
 </div>
 
 <div class="mb-3 row">
-<h4>암호</h4>
-  <div class = "col-sm-6">
+<h5>암호</h5>
+  <div class = "col-sm-16">
   <input id='f-password' type='password' name='password' class="form-control">
   </div>
 </div>
 
 <div class="mb-3 row">
-<h4>닉네임</h4>
-  <div class = "col-sm-6">
+<h5>닉네임</h5>
+  <div class = "col-sm-16">
   <input id='f-nickname' type='nickname' name='nickname' class="form-control">
   <div class="invalid-feedback">
         이미 존재하는 닉네임입니다.
     </div>
   </div>
   <div class="col-auto">
-    <button id="x-nickname-check-btn" type="button" class="btn btn-primary form-control">중복검사</button>
+    <button id="x-nickname-check-btn" type="button" class="btn btn-outline-dark form-control">중복검사</button>
   </div>
 </div>
 <!-- 
@@ -64,11 +69,11 @@ width: 60px;
 <label for='f-password'>암호</label>  <input id='f-password' type='password' name='password'><br>
 <label for='f-nickname'>닉네임</label>  <input id='f-nickname' type='nickname' name='nickname'><br>
  -->
-<button id="x-add-btn" class="btn btn-primary btn-sm">가입하기</button><br>
-<button><a href='../auth/loginform'>로그인!</a></button><br>
+<button id="x-add-btn" class="btn btn-outline-dark form-control">가입하기</button><br>
+<br>
+<button class="btn btn-outline-dark form-control"><a href='../auth/loginform'>로그인!</a></button><br>
 </form>
 </div>
-
 
 <script>
 document.querySelector("#user-form").onsubmit = () => {

@@ -26,7 +26,9 @@ width: 100px;
 }
 </style>
 
+<br>
 <h1>🔐 로그인하기</h1>
+<br>
 <form action='../auth/login' method='post'>
 <label for='f-email'>이메일</label>  
 <input id='f-email' type='email' name='email' value="${cookie.email.value}"><br>
@@ -41,13 +43,12 @@ width: 100px;
   </label>
 </div>
 
-<button>로그인</button>
 <button><a href='../user/addform'>회원가입</a></button><br>
 <button><a href='../admin/loginform'>관리자 로그인</a></button><br>
 
 
 </form>
-</div>
+
 </body>
 </html>
     
