@@ -15,7 +15,7 @@
 <br>
 
 <button type="button" class="btn btn-link">
-  <a href="../mytheme/addform">만들기</a>
+  <a href="addform">만들기</a>
 </button>
 
 <ul class="theme-list">
