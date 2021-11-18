@@ -1,6 +1,7 @@
 package com.welcomeToJeju.moj.web.theme.myTheme;
 
 import java.util.Collection;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
+import com.welcomeToJeju.moj.domain.Category;
 import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.moj.domain.User;
 
 @Controller
 public class MyThemeController {
@@ -28,9 +31,12 @@ public class MyThemeController {
   }
 
   @PostMapping("/mytheme/add")
-  public ModelAndView add(Theme theme, String owner, int category) throws Exception {
-    theme.setOwner(userDao.findByNickname("owner"));
-    theme.setCategory(themeDao.findCategoryByNo(category));
+  public ModelAndView add(HttpSession session, Theme theme, int category) throws Exception {
+    User user = (User) session.getAttribute("loginUser");
+    theme.setOwner(user);
+
+    Category c = themeDao.findCategoryByNo(category);
+    theme.setCategory(c);
 
     themeDao.insert(theme);
     sqlSessionFactory.openSession().commit();
