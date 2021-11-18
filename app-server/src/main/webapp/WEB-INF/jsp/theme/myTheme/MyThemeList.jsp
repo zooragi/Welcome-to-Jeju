@@ -32,6 +32,16 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
   </a>
 </c:forEach>
 </ul>
+<ul class="theme-list">
+  <a class="list-container" href="addform">
+    <li>
+    <div class="content">
+      <div class="icon">📝➕</div>
+      <div class="theme-title">나의 테마 만들기</div>
+    </div>  <!-- .content -->
+    </li>
+  </a>
+</ul>
 
 </div>  <!-- .main-container -->
 </div>  <!-- .container -->
