@@ -18,13 +18,29 @@ public class ThemeController {
   @Autowired SqlSessionFactory sqlSessionFactory;
 
   @GetMapping("/theme/list")
-  public ModelAndView allList() throws Exception {
+  public ModelAndView allThemeList() throws Exception {
     Collection<Theme> themeList = themeDao.findAllPublicTheme();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("themeList", themeList);
     mv.addObject("pageTitle", "전체 테마 보기");
     mv.addObject("contentUrl", "theme/AllThemeList.jsp");
+    mv.setViewName("template_main");
+
+    return mv;
+  }
+
+  @GetMapping("/theme/userlist")
+  public ModelAndView userThemeList(int no) throws Exception {
+    Collection<Theme> themeList = themeDao.findAllPublicThemeByUserNo(no);
+
+    userDao.updateViewCount(no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("themeList", themeList);
+    mv.addObject("pageTitle", "유저 테마 목록 보기");
+    mv.addObject("contentUrl", "theme/UserThemeList.jsp");
     mv.setViewName("template_main");
 
     return mv;

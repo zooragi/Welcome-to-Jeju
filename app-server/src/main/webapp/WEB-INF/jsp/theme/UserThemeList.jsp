@@ -11,11 +11,11 @@
 <div class="main-container">
 
 <br>
-<h1 style=text-align:center;>전체 테마 보기</h1>
+<h1 style=text-align:center;>${theme.owner.nickname} 테마 목록 보기</h1>
 <br>
 
 <button type="button" class="btn btn-link">
-  <a href="../mytheme/addform">만들기</a>
+  <a href="addform">만들기</a>
 </button>
 
 <ul class="theme-list">
@@ -24,7 +24,7 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
   <a class="list-container" href="detail?no=${theme.no}">
     <li>
     <div class="content">
-      <div class="icon">🌴</div>
+      <div class="icon">🌊</div>
       <div class="theme-title">${theme.title}</div>
       <div class="theme-count">${theme.hashtags}</div>
     </div>  <!-- .content -->
@@ -33,7 +33,7 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
 </c:forEach>
 </ul>
 <ul class="theme-list">
-  <a class="list-container" href="../mytheme/addform">
+  <a class="list-container" href="addform">
     <li>
     <div class="content">
       <div class="icon">📝➕</div>
