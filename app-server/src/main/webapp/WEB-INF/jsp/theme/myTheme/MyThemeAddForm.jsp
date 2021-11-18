@@ -4,7 +4,7 @@
 
 <style>
   .add-form {
-    /* width: 60%; */
+    width: 30%;
     /* border-radius: 6px; */
     /* box-shadow: 3px 3px; */
     background-color: transparent;
@@ -15,9 +15,9 @@
     padding: 30px;
   }
   
-  /* .form-select {
-    width: 66%;
-  } */
+  .form-select {
+  margin-bottom: 15px;
+  }
 </style>
 
 <br>
@@ -28,7 +28,7 @@
 <form id="theme-form" action="add" method="post" enctype="multipart/form-data">
 
 <div class="mb-3 row">
-<h4>테마 이름</h4>
+<h6>테마 이름</h6>
 	<!-- <label for='f-title' class="col-sm-2 col-form-label form-control-lg">테마 이름</label> -->
 	<div class="col-sm-16">
 	<input id='f-title' type='text' name='title' class="form-control" >
@@ -36,7 +36,7 @@
 </div>
 
 <div class="mb-3 row">
-<h4>닉네임</h4>
+<h5>닉네임</h5>
   <!-- <label for='f-owner' class="col-sm-2 col-form-label form-control-lg">닉네임</label> -->
   <div class = "col-sm-16">
   <input id='f-owner' type='text' name='owner' class="form-control" value="${loginUser.nickname}" readonly>
@@ -55,7 +55,7 @@
 </div>
 
 <div>
-<h4>공개 여부</h4>
+<h3>공개 여부</h3>
 <select class="form-select" aria-label="f-isPublic" id="f-isPublic" name ="isPublic" >
   <!-- <option selected>👇</option> -->
   <option selected value="1">공개</option>
@@ -82,13 +82,15 @@
 
 <div class="mb-3 row">
 	<!-- <label for='f-hashtag' class="col-sm-2 col-form-label">해시태그</label> -->
-	<h4>해시태그</h4>
+	<h2>해시태그</h2>
 	<div class="col-sm-16">
 	<input id='f-hashtag' type='text' name='hashtags' class="form-control" value="">
 	</div>
 </div>
 
-<button type="submit" class="btn btn-primary btn-sm">만들기</button>
+<br>
+
+<button type="submit" class="btn btn-outline-dark">만들기</button>
 
 </form>
 </div>
