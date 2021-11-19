@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<c:set scope="page" var="contextRoot" value="${pageContext.servletContext.contextPath}"/>
 <div class="side-menu-bar">
     <button class="close-button">
         <i class="fas fa-times"></i>
     </button>
     <div class="home-menu-box">
         <ul class="home-menu-list">
-            <a href="#">
+            <a href="${contextRoot}/app/home">
                 <li>
                     <span class="emozi">🏠</span>
                     <span class="name">홈으로</span>
@@ -19,9 +19,11 @@
     <c:if test="${!empty loginUser}">
         <div class="my-menu-box">
             <ul class="my-menu-list">
-                <a href="#">
-                    <li><span class="emozi">🗺</span><span class="name">나의 지도 관리</span></li>
-                    <li><span class="emozi">🔧</span><span class="name">내 정보 변경</span></li>
+                <a href="${contextRoot}/app/mytheme/list?no=${loginUser.no}">
+                    <li><span class="emozi">🗺</span><span class="name">나의 테마 관리</span></li>
+                </a>
+                <a href = "${contextRoot}/app/auth/userinfo">
+                    <li><span class="emozi">🔧</span><span class="name">내 정보</span></li>
                 </a>
             </ul>
         </div>
@@ -39,7 +41,7 @@
         <div class="logout-menu-box">
             <ul class="logout-menu-box-list">
                 <li>
-                    <form action='./auth/loginform'>
+                    <form action='${contextRoot}/app/auth/loginform'>
                         <span class="emozi">🚪</span><button type="submit" class="name">로그인</button>
                     </form>
                 </li>
@@ -51,7 +53,7 @@
         <div class="logout-menu-box">
             <ul class="logout-menu-box-list">
                 <li>
-                    <form action='./auth/logout'>
+                    <form action='${contextRoot}/app/auth/logout'>
                         <span class="emozi">🚪</span><button type="submit" class="name">로그아웃</button>
                     </form>
                 </li>

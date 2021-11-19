@@ -20,7 +20,7 @@
         <ul class="slide-theme-content">
             <c:forEach items="${Top10Themes}" var="theme">
                 <li>
-                    <a href="#" class="slide-theme-content-item">
+                    <a href="theme/detail?no=${theme.no}" class="slide-theme-content-item">
                         <div class="icon">👅</div>
                         <div class="theme-title">${theme.title}</div>
                         <div class="curators">${theme.hashtags}</div>
@@ -47,7 +47,7 @@
             <ul class="hot-curators-list">
                 <c:forEach items="${Top10User}" var="user">
                     <li>
-                        <a href="#" class="content">
+                        <a href="theme/userlist?no=${user.no}" class="content">
                             <div class="icon">💀</div>
                             <div class="curator-name">${user.nickname}</div>
                             <div class="theme-count">${user.registeredDate}</div>
@@ -64,7 +64,7 @@
             <ul class="hot-theme-list">
                 <c:forEach items="${latest10Theme}" var="theme">
                     <li>
-                        <a href="#" class="content">
+                        <a href="theme/detail?no=${theme.no}" class="content">
                             <div class="icon">🥤</div>
                             <div class="theme-content">
                                 <div class="theme-title">${theme.title}</div>
