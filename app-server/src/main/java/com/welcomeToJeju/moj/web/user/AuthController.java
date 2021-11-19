@@ -47,10 +47,8 @@ public class AuthController {
       session.setAttribute("loginUser", user);
 
       ModelAndView mv = new ModelAndView();
-      mv.addObject("pageTitle", "로그인 성공!");
-      mv.addObject("contentUrl", "admin/AuthLogin.jsp");
-      mv.setViewName("template_main");
-
+      mv.setViewName("redirect:../home");
+      
       return mv;
     } 
 
@@ -60,9 +58,7 @@ public class AuthController {
 
     if (user != null) {
       session.setAttribute("loginUser", user);
-      mv.addObject("pageTitle", "로그인 성공!");
-      mv.addObject("contentUrl", "user/AuthLogin.jsp");
-      mv.setViewName("template_main");
+      mv.setViewName("redirect:../home");
       return mv;
 
     } else {
@@ -80,11 +76,7 @@ public class AuthController {
     session.invalidate();
 
     ModelAndView mv = new ModelAndView();
-
-    mv.addObject("pageTitle", "로그아웃");
-    mv.addObject("contentUrl", "user/AuthLogout.jsp");
-    mv.addObject("refresh", "1;url=loginform");
-    mv.setViewName("template_main");
+    mv.setViewName("redirect:../home");
 
     return mv;
   }

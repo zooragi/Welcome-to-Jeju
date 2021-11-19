@@ -52,6 +52,22 @@
       user_no desc
   </select>
   
+  <select id="userTop10" resultMap="UserMap">
+        select
+            user_no,
+            email,
+            nickname,
+            created_dt,
+            view_cnt,
+            reported_cnt,
+            warned_cnt,
+            active
+        from
+            jeju_user
+        order by
+            view_cnt desc
+    </select>
+  
   <select id="findByNickname" resultMap="UserMap" parameterType="String">
     select
       user_no,

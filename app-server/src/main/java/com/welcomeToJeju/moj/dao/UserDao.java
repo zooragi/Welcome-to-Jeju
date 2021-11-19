@@ -11,6 +11,7 @@ public interface UserDao {
   void update(User user) throws Exception;
   void delete(int userNo) throws Exception;
   List<User> findAll() throws Exception;
+  List<User> userTop10() throws Exception;
 
   User findByNickname(String nickname) throws Exception;
   User findByNo(int userNo) throws Exception;

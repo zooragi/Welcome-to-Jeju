@@ -6,7 +6,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin: var(--font-mirco);
+    margin: var(--font-micro);
 }
 
 .theme-list .list-container {
@@ -35,7 +35,7 @@
 }
 
 .theme-list li .content div {
-    padding: var(--font-mirco);
+    padding: var(--font-micro);
 }
 
 .theme-list li .content .icon {

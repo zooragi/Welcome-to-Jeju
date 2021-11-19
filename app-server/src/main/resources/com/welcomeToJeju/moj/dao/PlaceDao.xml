@@ -25,6 +25,11 @@
       <result column="user_no" property="userNo"/>
       <result column="comment" property="comment"/>
     </collection>
+    
+    <collection property="themes" javaType="Theme">
+      <id column="theme_no" property="no"/>
+      <result column="title" property="title"/>
+    </collection>
   </resultMap>
   
   <insert id="insert" parameterType="Place"
@@ -102,5 +107,23 @@
       join jeju_place_comment c on p.place_id=c.place_id
     where p.place_id=#{id}
   </select>
+
+	<select id="findTop10" resultMap="PlaceMap">
+       select
+           p.place_id,
+           p.place_name,
+           p.place_address,
+           p.x_coord,
+           p.y_coord,
+           jput.theme_no,
+           jput.user_no,
+           jput.place_id,
+           jt.title
+       from
+           jeju_place p
+               join jeju_place_user_theme jput on jput.place_id=p.place_id
+               join jeju_theme jt on jput.theme_no=jt.theme_no
+
+    </select>
   
 </mapper>

@@ -11,6 +11,7 @@ public class Place {
 
   private List<Photo> photos = new ArrayList<>();
   private List<Comment> comments = new ArrayList<>();
+  private List<Theme> themes = new ArrayList<>();
 
   private String xCoord;
   private String yCoord;
@@ -21,10 +22,18 @@ public class Place {
         + ", storeAddress=" + storeAddress + ", xCoord=" + xCoord + ", yCoord=" + yCoord + "]";
   }
 
+  public List<Theme> getThemes() {
+    return themes;
+}
+
+public void setThemes(List<Theme> themes) {
+    this.themes = themes;
+}
   public String getId() {
     return id;
   }
 
+  
   public void setId(String id) {
     this.id = id;
   }

@@ -32,7 +32,7 @@
     --font-medium: 18px;
     --font-small: 12px;
     --font-more-small : 8px;
-    --font-mirco: 2px;
+    --font-micro: 2px;
 
 }
 
@@ -55,7 +55,8 @@ a{
     text-decoration:none
 }
 a:hover{
-    text-decoration:none
+    text-decoration:none;
+    color:var(--black-color);
 }
 button,
 button:focus{
@@ -63,10 +64,6 @@ button:focus{
     border: none;
     cursor: pointer;
     outline: none;
-}
-
-.wrap{
-	width: 100%;
 }
 
 /* header */
@@ -82,15 +79,15 @@ header {
 
 header .logo{
     font-size: var(--font-large);
-    display:inline-block;
-    width:400px;
 }
 header .logo .title{
     padding-left: var(--padding);
 }
 
 header .logout-box{
-    float:right;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-medium);
 }
 
 header .logout-box .login{
