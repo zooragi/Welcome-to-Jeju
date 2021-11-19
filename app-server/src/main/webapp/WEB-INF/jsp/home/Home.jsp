@@ -5,6 +5,7 @@
 <c:set scope="page" var="contextRoot" value="${pageContext.servletContext.contextPath}"/>
 <!DOCTYPE html>
 <html>
+<title>제주 옵서예</title>
 <jsp:include page="../template_head.jsp"/>
 <link rel="stylesheet" href="${contextRoot}/css/home.css">
 <script defer src="${contextRoot}/javascript/home.js"></script>

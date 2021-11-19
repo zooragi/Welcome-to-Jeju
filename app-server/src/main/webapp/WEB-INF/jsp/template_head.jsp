@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set scope="page" var="contextRoot" value="${pageContext.servletContext.contextPath}"/>
 <head>
-    <title>${pageTitle}</title>
     <link rel="stylesheet" href="${contextRoot}/node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="${contextRoot}/css/common.css?ver=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">

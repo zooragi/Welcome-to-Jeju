@@ -10,16 +10,7 @@
   <meta http-equiv="Refresh" content="${refresh}">   
 </c:if>
   <title>${pageTitle}</title>
-  <link rel="stylesheet" href="${contextRoot}/node_modules/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="${contextRoot}/css/common.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-  
-  <script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
-  <script src = "${contextRoot}/node_modules/@popperjs/core/dist/umd/popper.js"> </script>
-  <script src = "${contextRoot}/node_modules/bootstrap/dist/js/bootstrap.js"> </script>
-  <script defer src="${contextRoot}/javascript/common.js"></script>
+<jsp:include page="./template_head.jsp"/>
 </head>
 <body>
 <jsp:include page="./header.jsp"/>
