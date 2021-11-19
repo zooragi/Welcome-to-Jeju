@@ -32,12 +32,14 @@
             <i class="fas fa-angle-right"></i>
         </button>
     </div>
+    <form id = "search-form" action = "${contextRoot}/app/search/theme">
     <div class="search-container">
-        <input type="text" name="search-bar" id="search-bar">
+        <input type="text" name="keyword" id="search-bar">
         <button class="search-icon">
             <i class="fas fa-search"></i>
         </button>
     </div>
+    </form>
     <div class="dash-board">
         <div class="hot-curators">
             <div class="title">
