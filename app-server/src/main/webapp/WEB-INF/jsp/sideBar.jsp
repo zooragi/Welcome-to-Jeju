@@ -35,8 +35,21 @@
                 <li><span class="emozi">👨‍👨‍👦</span><span class="name">다른 유저 지도 보기</span></li>
                 <li><span class="emozi">🚨</span><span class="name">신고하기</span></li>
             </a>
-        </ul>
+        </ul>        
     </div>
+    <c:if test="${loginUser.nickname eq '제주정승'}">
+    <div class="public-menu-box">
+      <ul class = "public-menu-box-list">
+          <a href="${contextRoot}/app/admin/themelist">
+             <li><span class="emozi">👨‍👨‍👦</span><span class="name">테마 관리</span></li>
+          </a>
+          <a href="${contextRoot}/app/admin/userlist">
+           <li><span class="emozi">👨‍👨‍👦</span><span class="name">유저 관리</span></li>
+          </a>
+           <li><span class="emozi">🗺️</span><span class="name">신고 처리하기</span></li> 
+      </ul>
+    </div>
+    </c:if>
     <c:if test="${empty loginUser}">
         <div class="logout-menu-box">
             <ul class="logout-menu-box-list">

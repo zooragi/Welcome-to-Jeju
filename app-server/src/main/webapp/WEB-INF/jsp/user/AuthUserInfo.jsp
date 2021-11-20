@@ -24,7 +24,7 @@
 <br>
 
 <div class = "info-form">
-<form action='../user/update' method='post'>
+<form id = "update-form" action='../user/update' method='post'>
 
 
 <div class="mb-3 row">
@@ -44,13 +44,7 @@
 <div class="mb-3 row">
 <h5>닉네임</h5>
   <div class = "col-sm-16">
-  <input id='f-nickname' type='nickname' name='nickname' class="form-control" value='${loginUser.nickname}'>
-  <div class="invalid-feedback">
-        이미 존재하는 닉네임입니다.
-    </div>
-  </div>
-  <div class="col-auto">
-    <button id="x-nickname-check-btn" type="button" class="btn btn-outline-dark form-control">중복검사</button>
+  <input id='f-nickname' type='nickname' name='nickname' class="form-control" value = "${loginUser.nickname}">
   </div>
 </div>
 
@@ -75,7 +69,7 @@
   </div>
 </div>
 
-<button id = "x-update-btn">회원 수정</button>
+<button id ="x-update-btn">회원 수정</button>
 <button><a href='../user/delete?no=${loginUser.no}'>탈퇴하기</a></button>
 <button><a href='logout'>로그아웃</a></button>
 
@@ -106,25 +100,5 @@
 </form>
 </div>
 
-<script type="text/javascript">
-var updateBtn = document.querySelector("#x-update-btn");
-var nicknameTag = document.querySelector("#f-nickname");
-updateBtn.setAttribute("disabled", "disabled");
-
-document.querySelector("#x-nickname-check-btn").onclick = () => {
-    var xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", function() {
-      if (this.responseText == "false") {
-          updateBtn.removeAttribute("disabled");
-          nicknameTag.classList.remove("is-invalid");
-      } else {
-        updateBtn.setAttribute("disabled", "disabled");
-        nicknameTag.classList.add("is-invalid");
-      }
-    })
-    xhr.open("get", "../user/checkNickname?nickname=" + nicknameTag.name);
-    xhr.send();
-};
-</script>
 
 

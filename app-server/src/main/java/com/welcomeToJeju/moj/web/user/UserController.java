@@ -103,6 +103,7 @@ public class UserController {
 
     userDao.update(user);
     sqlSessionFactory.openSession().commit();
+    session.invalidate();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원 정보 수정");
