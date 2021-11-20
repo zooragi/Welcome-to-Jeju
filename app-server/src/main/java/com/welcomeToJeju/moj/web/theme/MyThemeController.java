@@ -82,7 +82,7 @@ public class MyThemeController {
     return mv;
   }
   
-//테스트!!
+// 테스트!!
   @GetMapping("/mytheme/delete")
   public ModelAndView delete(HttpSession session, int no) throws Exception {
     User user = (User) session.getAttribute("loginUser");
