@@ -21,7 +21,7 @@
 <ul class="theme-list">
 <c:forEach items="${themeList}" var="theme"
 begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
-  <a class="list-container" href="detail?no=${theme.no}">
+  <a class="list-container" href="./place/list?no=${theme.no}">
     <li>
     <div class="content">
       <div class="icon">🌴</div>
