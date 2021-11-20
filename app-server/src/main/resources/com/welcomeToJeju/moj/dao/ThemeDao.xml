@@ -379,6 +379,7 @@
                  left join jeju_theme_hashtag h on t.theme_no = h.theme_no
                  left join jeju_theme_category c on t.category_no = c.category_no
                  inner join jeju_user u on u.user_no = t.user_no
+        where t.public = 1
         order by
             t.view_cnt
         desc
@@ -401,6 +402,7 @@
                  left join jeju_theme_hashtag h on t.theme_no = h.theme_no
                  left join jeju_theme_category c on t.category_no = c.category_no
                  inner join jeju_user u on u.user_no = t.user_no
+        where t.public = 1
         group by
             t.created_dt desc
         limit 10
