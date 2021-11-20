@@ -1,11 +1,9 @@
 package com.welcomeToJeju.moj.web;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,4 +31,10 @@ public class PlaceController {
 		return new Gson().toJson(placeDao.findAllByThemeNo(themeNo));
 	}
 	
+	@GetMapping("/place/search")
+	public String search(Model model, String keyword) throws Exception{
+		System.out.println(keyword);
+		model.addAttribute("searchedPlace", keyword);
+		return "place/PlaceSearch";
+	}
 }

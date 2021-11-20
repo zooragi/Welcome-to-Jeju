@@ -30,7 +30,7 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
     </div>  <!-- .content -->
     </li>
   </a>
-</c:forEach>
+</c:forEach>	
 </ul>
 <ul class="theme-list">
   <a class="list-container" href="../mytheme/addform">
