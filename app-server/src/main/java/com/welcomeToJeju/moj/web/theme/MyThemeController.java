@@ -1,4 +1,4 @@
-package com.welcomeToJeju.moj.web.theme.myTheme;
+package com.welcomeToJeju.moj.web.theme;
 
 import java.util.Collection;
 import javax.servlet.http.HttpSession;
@@ -59,7 +59,26 @@ public class MyThemeController {
     mv.addObject("pageTitle", "나의 테마 목록 보기");
     mv.addObject("contentUrl", "theme/myTheme/MyThemeList.jsp");
     mv.setViewName("template_main");
+    return mv;
+  }
 
+  // 테스트!!
+  @PostMapping("/mytheme/update")
+  public ModelAndView update(Theme theme, int category) throws Exception {
+    Theme oldTheme = themeDao.findByNo(theme.getNo());
+
+    if (oldTheme == null) {
+      throw new Exception("..");
+    }
+
+    Category c = themeDao.findCategoryByNo(category);
+    theme.setCategory(c);
+
+    themeDao.update(theme);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no=" + theme.getNo());
     return mv;
   }
 
