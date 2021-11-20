@@ -21,7 +21,7 @@
         <ul class="slide-theme-content">
             <c:forEach items="${Top10Themes}" var="theme">
                 <li>
-                    <a href="theme/detail?no=${theme.no}" class="slide-theme-content-item">
+                    <a href="place/list?no=${theme.no}" class="slide-theme-content-item">
                         <div class="icon">👅</div>
                         <div class="theme-title">${theme.title}</div>
                         <div class="curators">${theme.hashtags}</div>
