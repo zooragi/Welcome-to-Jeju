@@ -34,9 +34,9 @@ public class LikedUserController {
   }
 
   @GetMapping("/likeduser/list")
-  public ModelAndView list(int no) throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
 
-    Collection<User> userList = userDao.findAllLikedUser(no);
+    Collection<User> userList = userDao.findAllLikedUser(((User) session.getAttribute("loginUser")).getNo());
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("userList", userList);
