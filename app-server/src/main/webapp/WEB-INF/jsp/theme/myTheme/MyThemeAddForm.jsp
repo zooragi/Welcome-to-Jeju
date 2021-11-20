@@ -39,28 +39,28 @@
 <h5>닉네임</h5>
   <!-- <label for='f-owner' class="col-sm-2 col-form-label form-control-lg">닉네임</label> -->
   <div class = "col-sm-16">
-  <input id='f-owner' type='text' name='owner' class="form-control" value="${loginUser.nickname}" readonly>
+  <input id='f-owner' type='text' class="form-control" value="${loginUser.nickname}" readonly>
   </div>
 </div>
 
 <div>
 <h5>카테고리</h5>
-<select class="form-select" aria-label="f-category" id="f-category" name ="category" >
+<select class="form-select" aria-label="f-category" id="f-category" name="category">
   <option selected value="">👇</option>
-  <option value="1">식당</option>
-  <option value="2">카페</option>
-  <option value="3">관광명소</option>
-  <option value="4">기타</option>
+  <option value="1" name="category">식당</option>
+  <option value="2" name="category">카페</option>
+  <option value="3" name="category">관광명소</option>
+  <option value="4" name="category">기타</option>
 </select>
 </div>
 
 <div>
 <h5>공개 여부</h5>
 <select class="form-select" aria-label="f-isPublic" id="f-isPublic" name ="isPublic" >
-  <!-- <option selected>👇</option> -->
   <option selected value="1">공개</option>
-  <!-- <option value="1">공개</option> -->
   <option value="0">비공개</option>
+  <!-- <option selected>👇</option> -->
+  <!-- <option value="1">공개</option> -->
 </select>
 </div>
 
