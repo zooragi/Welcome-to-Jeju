@@ -12,7 +12,7 @@
 
     <div class="logout-box">
         <c:if test="${empty loginUser}">
-            <form class="login_form" action='./auth/loginform'>
+            <form class="login_form" action='${contextRoot}/app/auth/loginform'>
                 <button type="submit" class="login">로그인</button>
             </form>
         </c:if>
