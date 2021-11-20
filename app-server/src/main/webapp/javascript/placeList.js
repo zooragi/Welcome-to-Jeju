@@ -12,7 +12,7 @@
     let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
             center: new kakao.maps.LatLng(33.3700, 126.4500), // 지도의 중심좌표
-            level: 6 // 지도의 확대 레벨
+            level: 9 // 지도의 확대 레벨
         };  
 
     // 지도를 생성합니다    
@@ -33,8 +33,6 @@
 
 				function getDataFromServer(){
 					let xhr = new XMLHttpRequest();
-					let loginUser = window.sessionStorage.getItem("loginUser");
-					console.log(loginUser);
 					xhr.onreadystatechange = () => {
 					  if (xhr.readyState != 4 || xhr.status != 200)
 					    return;
@@ -56,7 +54,7 @@
             for ( let i=0; i<places.length; i++ ) {
 
                 // 마커를 생성하고 지도에 표시합니다
-                let placePosition = new kakao.maps.LatLng(places[i].y, places[i].x);
+                let placePosition = new kakao.maps.LatLng(places[i].yCoord, places[i].xCoord);
                 let marker = addMarker(placePosition, i);
                 let itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 
@@ -83,7 +81,7 @@
                     itemEl.onmouseout =  function () {
                         infowindow.close();
                     };
-                })(marker, places[i].place_name);
+                })(marker, places[i].storeName);
 
                 fragment.appendChild(itemEl);
             }
@@ -140,7 +138,7 @@
         // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
         // 인포윈도우에 장소명을 표시합니다
         function displayInfowindow(marker, title) {
-            let content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+            let content = '<div class="marker" style="padding:10px;z-index:1;text-align:center;">' + title + '</div>';
 
             infowindow.setContent(content);
             infowindow.open(map, marker);
@@ -165,10 +163,10 @@
                 if (!$placesList.contains(liTag)) return;
 
                 let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
-                
                 // 이동할 위도 경도 위치를 생성합니다 
-                let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].y, placeData[selectedPlaceItemNum-1].x);
-                
+                let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].yCoord, placeData[selectedPlaceItemNum-1].xCoord);
+                console.log(map.panTo(moveLatLon))
+
                 // 지도 중심을 부드럽게 이동시킵니다
                 // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
                 map.panTo(moveLatLon);
