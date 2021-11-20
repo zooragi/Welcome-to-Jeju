@@ -51,7 +51,7 @@ insert into jeju_theme(theme_no, user_no, title, share, public, category_no, cre
 insert into jeju_theme(theme_no, user_no, title, share, public, category_no, created_dt) values(19, 6, '미성년자도 달리자', 0, 1, 1,20211030);
 
 -- 장소
-insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('1261877281', '로맨틱새우', '제주특별자치도 제주시 애월읍 곽지리 1584-5', 126.305303780014,33. 4481834855432);
+insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('1261877281', '로맨틱새우', '제주특별자치도 제주시 애월읍 곽지리 1584-5', 126.305303780014, 33.4481834855432);
 insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('1641211499', '도치돌목장', '제주특별자치도 제주시 애월읍 납읍리 102', 126.365809643225, 33.4099556021011);
 insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('269602057', '오션뷰제주 게스트하우스', '제주특별자치도 서귀포시 안덕면 창천리 785-2', 126.367031286534, 33.2322187489819);
 insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord) values('27525363', '깡촌흑돼지', '제주특별자치도 제주시 조천읍 함덕리 1001', 126.667135470078, 33.541274383213);

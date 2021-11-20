@@ -25,6 +25,7 @@
 <tbody>
   <c:forEach items="${userList}" var="user">
   <tr>
+    <td></td><td></td><td></td>
     <td>${user.no}</td>
     <td><a href='../theme/userlist?no=${user.no}'>${user.nickname}</a></td>
     <td><a href='delete?no=${user.no}'>🧡</a></td>

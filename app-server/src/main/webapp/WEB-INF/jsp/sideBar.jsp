@@ -31,7 +31,8 @@
     <div class="public-menu-box">
         <ul class="public-menu-box-list">
             <a href="#">
-                <li><span class="emozi">🗺️</span><span class="name">지도에서 장소찾기</span></li>
+                <li><span class="emozi">📃</span>
+                 <a href="${contextRoot}/app/theme/list"><span class="name">전체 테마보기</span></a></li>
                 <li><span class="emozi">🏆</span>
                 <a href="${contextRoot}/app/ranking"><span class="name">순위</span></a></li>
                 <li><span class="emozi">🚨</span><span class="name">신고하기</span></li>

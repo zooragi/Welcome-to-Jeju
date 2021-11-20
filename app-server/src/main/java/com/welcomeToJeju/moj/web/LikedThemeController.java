@@ -2,6 +2,7 @@ package com.welcomeToJeju.moj.web;
 
 import java.util.Collection;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.moj.domain.User;
 
 @Controller
 public class LikedThemeController {
@@ -32,9 +34,9 @@ public class LikedThemeController {
   }
 
   @GetMapping("/likedtheme/list")
-  public ModelAndView list(int no) throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
 
-    Collection<Theme> themeList = themeDao.findAllLikedTheme(no);
+    Collection<Theme> themeList = themeDao.findAllLikedTheme(((User) session.getAttribute("loginUser")).getNo());
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("themeList", themeList);

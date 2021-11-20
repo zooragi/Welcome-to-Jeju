@@ -43,7 +43,7 @@ public class MyThemeController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("theme", theme);
-    mv.addObject("refresh", "2;url=list");
+    mv.addObject("refresh", "2;url=list?no=" + user.getNo());
     mv.addObject("pageTitle", "나의 테마 만들기");
     mv.addObject("contentUrl", "theme/myTheme/MyThemeAdd.jsp");
     mv.setViewName("template_main");

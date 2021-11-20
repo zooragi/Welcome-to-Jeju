@@ -34,9 +34,9 @@ public class LikedUserController {
   }
 
   @GetMapping("/likeduser/list")
-  public ModelAndView list(int no) throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
 
-    Collection<User> userList = userDao.findAllLikedUser(no);
+    Collection<User> userList = userDao.findAllLikedUser(((User) session.getAttribute("loginUser")).getNo());
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("userList", userList);
@@ -48,12 +48,13 @@ public class LikedUserController {
   }
 
   @GetMapping("/likeduser/delete")
-  public ModelAndView delete(int no, HttpSession session) throws Exception {
+  public ModelAndView delete(int themeNo, int userNo, HttpSession session) throws Exception {
 
-    userDao.deleteLikedUser(no, ((User)session.getAttribute("loginUser")).getNo());
+    userDao.deleteLikedUser(userNo, ((User)session.getAttribute("loginUser")).getNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
+    mv.addObject("contentUrl", "redirect:../theme/detail?no=" + themeNo);
     return mv;
   }
 

@@ -23,6 +23,7 @@ public interface ThemeDao {
   List<Theme> findAllPublicTheme() throws Exception;
   List<Theme> findAllPublicThemeByUserNo(int userNo) throws Exception;
   List<Category> findAllCategory() throws Exception;
+  List<Theme> findAllByPlaceId(String placeId) throws Exception;
 
   // 테마 검색
   Theme findByTitle(String title) throws Exception;

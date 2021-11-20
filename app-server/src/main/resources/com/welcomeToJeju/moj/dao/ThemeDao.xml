@@ -265,6 +265,32 @@
       category_no = #{no}
   </select>
   
+  
+  <select id="findAllByPlaceId" resultMap="ThemeMap" parameterType = "String">
+    select 
+      t.theme_no,
+      t.title,
+      t.public,
+      t.share,
+      t.view_cnt,
+      h.name hashtag_name,
+      t.category_no,
+      c.name category_name,
+      t.user_no owner_no,
+      u.nickname owner_nickname,
+      jput.place_id
+    from jeju_theme t
+      left join jeju_theme_hashtag h on t.theme_no = h.theme_no
+      left join jeju_theme_category c on t.category_no = c.category_no
+      inner join jeju_user u on u.user_no = t.user_no
+      inner join jeju_place_user_theme jput on jput.theme_no = t.theme_no
+    where
+      public = 1 and place_id= #{place_id}
+    order by
+      t.theme_no
+  </select>
+  
+  
   <update id="updateViewCount" parameterType = "int">
 	  update jeju_theme set 
       view_cnt= view_cnt + 1
