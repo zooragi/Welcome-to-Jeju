@@ -10,7 +10,7 @@
 	<meta charset="utf-8">
 	<title>장소 리스트</title>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=667ac3a1fc68d5afe81179dea5f4ff16&libraries=services"></script>
-	<script defer type="text/javascript" src="${contextRoot}/javascript/placeList.js?ver=2"></script>
+	<script defer type="text/javascript" src="${contextRoot}/javascript/placeList.js?ver=1"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
@@ -27,9 +27,6 @@
 			</div>
 		</div>
 	
-<script>
-console.log("html");
-</script>
 </body>
 
 </html>

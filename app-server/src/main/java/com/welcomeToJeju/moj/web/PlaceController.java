@@ -1,5 +1,7 @@
 package com.welcomeToJeju.moj.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +27,11 @@ public class PlaceController {
 		return mv;
 	}
 	
-	@GetMapping(value="/place/list01", produces="text/plain;charset=UTF-8")
+	@PostMapping(value="/place/list01", produces="text/plain;charset=UTF-8")
   @ResponseBody
-	public String list_post() throws Exception{
+	public String list_post(HttpServletRequest request) throws Exception{
+		System.out.println("통신");
+		System.out.println(request.getAttribute("name"));
 		return new Gson().toJson(placeDao.findAllByThemeNo(16));
 	}
 	

@@ -3,9 +3,9 @@
     "use strict"
 
     const qs = x => document.querySelector(x);
-    let placeData = [];
+    
     const $placesList = qs("#placesList");
-
+		let placeData = [];
     // 마커를 담을 배열입니다
     let markers = [];
 
@@ -26,9 +26,7 @@
         const regex = /[^0-9]/g;
 
         function init() {
-						console.log("js")
 						getDataFromServer();
-            displayPlaces(placeData);
             placeListClickEvent();
             moveMapLocationEvent();
         }
@@ -38,10 +36,13 @@
 					xhr.onreadystatechange = () => {
 					  if (xhr.readyState != 4 || xhr.status != 200)
 					    return;
-					  placeData = xhr.responseText;
+					  placeData = JSON.parse(xhr.responseText);
+						console.log(placeData.length);
+						displayPlaces(placeData);
 					};
-					xhr.open("GET", "../../app/place/list01", true);
-					xhr.send();
+					xhr.open("POST", "../../app/place/list01", true);
+					xhr.setRequestHeader('Content-Type', 'text/plain');
+					xhr.send("name=16");
 				}
 				
         // 검색 결과 목록과 마커를 표출하는 함수입니다
@@ -97,7 +98,6 @@
 
         // 검색결과 항목을 Element로 반환하는 함수입니다
         function getListItem(index, places) {
-						console.log(places);
             let el = document.createElement('li'),
             itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                         '<div class="info">' +
