@@ -32,7 +32,9 @@
         }
 
 				function getDataFromServer(){
-					var xhr = new XMLHttpRequest();
+					let xhr = new XMLHttpRequest();
+					let loginUser = window.sessionStorage.getItem("loginUser");
+					console.log(loginUser);
 					xhr.onreadystatechange = () => {
 					  if (xhr.readyState != 4 || xhr.status != 200)
 					    return;
@@ -40,9 +42,9 @@
 						console.log(placeData.length);
 						displayPlaces(placeData);
 					};
-					xhr.open("POST", "../../app/place/list01", true);
-					xhr.setRequestHeader('Content-Type', 'text/plain');
-					xhr.send("name=16");
+					xhr.open("GET", "../../app/place/list01?name=16", true);
+					//xhr.setRequestHeader('Content-Type', 'application/json');
+					xhr.send();
 				}
 				
         // 검색 결과 목록과 마커를 표출하는 함수입니다

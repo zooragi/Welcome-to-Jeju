@@ -67,7 +67,7 @@
             <ul class="hot-theme-list">
                 <c:forEach items="${latest10Theme}" var="theme">
                     <li>
-                        <a href="theme/detail?no=${theme.no}" class="content">
+                        <a href="place/list?no=${theme.no}" class="content">
                             <div class="icon">🥤</div>
                             <div class="theme-content">
                                 <div class="theme-title">${theme.title}</div>

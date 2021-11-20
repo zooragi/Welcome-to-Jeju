@@ -17,22 +17,20 @@ public class PlaceController {
 
 	@Autowired
 	PlaceDao placeDao;
+	int themeNo = 0;
 	
 	@GetMapping("/place/list")
-	public ModelAndView list_get() throws Exception{
+	public ModelAndView list(String no) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("placeList", new Gson().toJson(placeDao.findAllByThemeNo(16)));
-		
+		themeNo = Integer.parseInt(no);
 		mv.setViewName("place/PlaceList2");
 		return mv;
 	}
 	
-	@PostMapping(value="/place/list01", produces="text/plain;charset=UTF-8")
+	@GetMapping(value="/place/list01", produces="application/json;charset=UTF-8")
   @ResponseBody
-	public String list_post(HttpServletRequest request) throws Exception{
-		System.out.println("통신");
-		System.out.println(request.getAttribute("name"));
-		return new Gson().toJson(placeDao.findAllByThemeNo(16));
+	public String list_get() throws Exception{
+		return new Gson().toJson(placeDao.findAllByThemeNo(themeNo));
 	}
 	
 }
