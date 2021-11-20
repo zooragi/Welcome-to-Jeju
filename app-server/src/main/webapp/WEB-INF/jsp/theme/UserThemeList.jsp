@@ -15,7 +15,7 @@
 <br>
 
 <button type="button" class="btn btn-link">
-  <a href="addform">만들기</a>
+  <a href="../mytheme/addform">만들기</a>
 </button>
 
 <ul class="theme-list">
@@ -33,7 +33,7 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
 </c:forEach>
 </ul>
 <ul class="theme-list">
-  <a class="list-container" href="addform">
+  <a class="list-container" href="../mytheme/addform">
     <li>
     <div class="content">
       <div class="icon">📝➕</div>
