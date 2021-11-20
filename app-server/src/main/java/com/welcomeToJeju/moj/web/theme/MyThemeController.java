@@ -82,5 +82,18 @@ public class MyThemeController {
     return mv;
   }
 
+  //테스트!!
+  @GetMapping("/mytheme/delete")
+  public ModelAndView delete(HttpSession session, int no) throws Exception {
+    User user = (User) session.getAttribute("loginUser");
+
+    themeDao.delete(no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:list?no=" + user.getNo());
+    return mv;
+  }
+
 
 }
