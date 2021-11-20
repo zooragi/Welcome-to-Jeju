@@ -48,12 +48,13 @@ public class LikedUserController {
   }
 
   @GetMapping("/likeduser/delete")
-  public ModelAndView delete(int no, HttpSession session) throws Exception {
+  public ModelAndView delete(int themeNo, int userNo, HttpSession session) throws Exception {
 
-    userDao.deleteLikedUser(no, ((User)session.getAttribute("loginUser")).getNo());
+    userDao.deleteLikedUser(userNo, ((User)session.getAttribute("loginUser")).getNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
+    mv.addObject("contentUrl", "redirect:../theme/detail?no=" + themeNo);
     return mv;
   }
 
