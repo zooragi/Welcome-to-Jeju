@@ -208,6 +208,9 @@ Insert into jeju_place_user_theme(place_id, user_no, theme_no)
 values('1641211499', 6, 15);
 
 Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
+values('27525363', 3, 15);
+
+Insert into jeju_place_user_theme(place_id, user_no, theme_no) 
 values('1641211499', 2, 4);
 
 Insert into jeju_place_user_theme(place_id, user_no, theme_no) 

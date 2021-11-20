@@ -39,11 +39,9 @@
 					  if (xhr.readyState != 4 || xhr.status != 200)
 					    return;
 					  placeData = JSON.parse(xhr.responseText);
-						console.log(placeData.length);
 						displayPlaces(placeData);
 					};
-					xhr.open("GET", "../../app/place/list01?name=16", true);
-					//xhr.setRequestHeader('Content-Type', 'application/json');
+					xhr.open("GET", "../../app/place/list01", true);
 					xhr.send();
 				}
 				
