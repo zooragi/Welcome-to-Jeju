@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import com.welcomeToJeju.moj.dao.PlaceDao;
 
 @Controller
-public class CommentController {
+public class PlaceCommentController {
 
   @Autowired PlaceDao placeDao;
   @Autowired ServletContext sc;

@@ -3,14 +3,15 @@ package com.welcomeToJeju.moj.domain;
 public class Photo {
 
   int no;
-  String placeId;
-  int userNo;
   String filePath;
+
+  int userNo;
+  String placeId;
 
   @Override
   public String toString() {
-    return "Photo [no=" + no + ", placeId=" + placeId + ", userNo=" + userNo + ", filePath="
-        + filePath + "]";
+    return "Photo [no=" + no + ", filePath=" + filePath + ", userNo=" + userNo + ", placeId="
+        + placeId + "]";
   }
 
   public int getNo() {
@@ -21,12 +22,12 @@ public class Photo {
     this.no = no;
   }
 
-  public String getPlaceId() {
-    return placeId;
+  public String getFilePath() {
+    return filePath;
   }
 
-  public void setPlaceId(String placeId) {
-    this.placeId = placeId;
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
   }
 
   public int getUserNo() {
@@ -37,12 +38,12 @@ public class Photo {
     this.userNo = userNo;
   }
 
-  public String getFilePath() {
-    return filePath;
+  public String getPlaceId() {
+    return placeId;
   }
 
-  public void setFilePath(String filePath) {
-    this.filePath = filePath;
+  public void setPlaceId(String placeId) {
+    this.placeId = placeId;
   }
 
 
