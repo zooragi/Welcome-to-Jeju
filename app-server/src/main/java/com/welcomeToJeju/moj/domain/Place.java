@@ -17,23 +17,15 @@ public class Place {
   private String y;
 
   @Override
-  public String toString() {
-    return "Place [id=" + id + ", place_name=" + place_name
-        + ", address_name=" + address_name + ", x=" + x + ", y=" + y + "]";
-  }
+	public String toString() {
+		return "Place [id=" + id + ", place_name=" + place_name + ", address_name=" + address_name + ", photos=" + photos
+				+ ", comments=" + comments + ", themes=" + themes + ", x=" + x + ", y=" + y + "]";
+	}
 
-  public List<Theme> getThemes() {
-    return themes;
-}
-
-public void setThemes(List<Theme> themes) {
-    this.themes = themes;
-}
-  public String getId() {
+	public String getId() {
     return id;
   }
 
-  
   public void setId(String id) {
     this.id = id;
   }
@@ -86,5 +78,13 @@ public void setThemes(List<Theme> themes) {
   public void setComments(List<Comment> comments) {
     this.comments = comments;
   }
+
+	public List<Theme> getThemes() {
+		return themes;
+	}
+
+	public void setThemes(List<Theme> themes) {
+		this.themes = themes;
+	}
 
 }
