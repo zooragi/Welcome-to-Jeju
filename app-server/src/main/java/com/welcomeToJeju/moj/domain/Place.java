@@ -18,22 +18,15 @@ public class Place {
 
   @Override
   public String toString() {
-    return "Place [id=" + id + ", storeName=" + storeName
-        + ", storeAddress=" + storeAddress + ", xCoord=" + xCoord + ", yCoord=" + yCoord + "]";
+    return "Place [id=" + id + ", storeName=" + storeName + ", storeAddress=" + storeAddress
+        + ", photos=" + photos + ", comments=" + comments + ", themes=" + themes + ", xCoord="
+        + xCoord + ", yCoord=" + yCoord + "]";
   }
 
-  public List<Theme> getThemes() {
-    return themes;
-}
-
-public void setThemes(List<Theme> themes) {
-    this.themes = themes;
-}
   public String getId() {
     return id;
   }
 
-  
   public void setId(String id) {
     this.id = id;
   }
@@ -68,6 +61,14 @@ public void setThemes(List<Theme> themes) {
 
   public void setComments(List<Comment> comments) {
     this.comments = comments;
+  }
+
+  public List<Theme> getThemes() {
+    return themes;
+  }
+
+  public void setThemes(List<Theme> themes) {
+    this.themes = themes;
   }
 
   public String getxCoord() {
