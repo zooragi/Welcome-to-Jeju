@@ -92,8 +92,6 @@ public class UserController {
 
   @PostMapping("/user/update")
   public ModelAndView update(User user, HttpSession session) throws Exception {
-
-
     User oldUser = (User) session.getAttribute("loginUser");
     user.setNo(oldUser.getNo());
     user.setEmail(oldUser.getEmail());
