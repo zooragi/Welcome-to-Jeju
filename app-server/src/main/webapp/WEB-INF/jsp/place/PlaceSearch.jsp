@@ -11,7 +11,7 @@
 	<title>장소 리스트</title>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=667ac3a1fc68d5afe81179dea5f4ff16&libraries=services"></script>
 	<script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
-	<script defer type="text/javascript" src="${contextRoot}/javascript/place_search.js?ver=2"></script>
+	<script defer type="text/javascript" src="${contextRoot}/javascript/place_search.js?ver=1"></script>
 	<script src = "${contextRoot}/node_modules/@popperjs/core/dist/umd/popper.js"> </script>
   <script src = "${contextRoot}/node_modules/bootstrap/dist/js/bootstrap.js"> </script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">

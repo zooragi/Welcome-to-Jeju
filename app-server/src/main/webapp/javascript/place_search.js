@@ -8,6 +8,8 @@
     const $keywordSearhButton = qs(".keywordSearhButton");
     const $inputKeyword = qs("#keyword");
 		const $placeAddBtn = qs(".place_add_btn");
+		const $fPhoto = qs("#f-photo");
+		const $fName = qs("#f-name");
     // 마커를 담을 배열입니다
     let markers = [];
 
@@ -41,10 +43,15 @@
 
 				function sendPlaceItemToServer(){
 					let xhr = new XMLHttpRequest();
+					
+					selectedPlaceInfo.photos = [{filePath : $fPhoto.files[0].name}];
+					selectedPlaceInfo.comments = [{comment : $fName.value}];
+					
+					console.log(selectedPlaceInfo.photos);
+					window.alert(1);
 					xhr.open("POST", "../../app/place/add", true);
 					xhr.setRequestHeader("Content-Type", "application/json");
-					console.log(selectedPlaceInfo);
-					xhr.send(selectedPlaceInfo);
+					xhr.send(JSON.stringify(selectedPlaceInfo));
 				}
 
         function keywordSearchEvent() {
@@ -269,7 +276,7 @@
                 if (!$placesList.contains(btnTag)) return;
 
                 let selectedPlaceItemNum = parseInt(btnTag.className.replace(regex, ""));
-                console.log(placeData[selectedPlaceItemNum-1]);
+                //console.log(placeData[selectedPlaceItemNum-1]);
 								document.querySelector(".modal").style.display = 'block';
 								document.getElementsByTagName("BODY")[0].style.overflow = 'hidden';
 								document.querySelector(".modal").classList.toggle('show');

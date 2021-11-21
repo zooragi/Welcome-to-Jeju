@@ -21,7 +21,14 @@ width: 60px;
     margin: 0 auto;
     padding: 30px;
   }
-  
+  .col-auto{
+  display: flex;
+  	width:100%;
+  }
+  .col-auto button {
+  	justify-content: flex-end;
+  	width:50%;
+  }
   </style>
 
 <br>
