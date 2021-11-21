@@ -1,3 +1,47 @@
+var connection = mysql.createConnection({
+    host : 'you_ip',
+    user : 'user',
+    password : 'password',
+    database : 'db',
+    charset : 'utf8mb4'
+});
+
+create database emoji character set utf8mb4 collate utf8mb4_general_ci;
+
+ALTER DATABASE jejudb CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER DATABASE jejudb
+CHARACTER SET = utf8mb4 
+COLLATE = utf8mb4_unicode_ci;
+
+-- 이모지
+CREATE TABLE emoji (
+  no    INTEGER      NOT NULL COMMENT '번호', -- no
+  emoji VARCHAR(255) NOT NULL COMMENT '이모지' -- 이모지
+)
+COMMENT '이모지';
+
+insert into emoji(no, emoji)
+valuse(1, '✈️');
+insert into emoji(no, emoji)
+valuse(2, '🌴');
+insert into emoji(no, emoji)
+valuse(3, '🍊');
+insert into emoji(no, emoji)
+valuse(4, '🚢');
+insert into emoji(no, emoji)
+valuse(5, '🌊');
+insert into emoji(no, emoji)
+valuse(6, '🥜');
+insert into emoji(no, emoji)
+valuse(7, '🛵');
+insert into emoji(no, emoji)
+valuse(8, '🐟');
+insert into emoji(no, emoji)
+valuse(9, '🗿');
+insert into emoji(no, emoji)
+valuse(10, '🌠');
+
 -- 회원
 insert into jeju_user(user_no, email, password, nickname )
 values(1, 'aaa@test.com', password('1111'), '감귤밭떼기');

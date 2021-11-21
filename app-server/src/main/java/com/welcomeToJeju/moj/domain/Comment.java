@@ -3,14 +3,15 @@ package com.welcomeToJeju.moj.domain;
 public class Comment {
 
   int no;
-  String placeId;
-  int userNo;
   String comment;
+
+  int userNo;
+  String placeId;
 
   @Override
   public String toString() {
-    return "Comment [no=" + no + ", placeId=" + placeId + ", userNo=" + userNo + ", comment="
-        + comment + "]";
+    return "Comment [no=" + no + ", comment=" + comment + ", userNo=" + userNo + ", placeId="
+        + placeId + "]";
   }
 
   public int getNo() {
@@ -21,12 +22,12 @@ public class Comment {
     this.no = no;
   }
 
-  public String getPlaceId() {
-    return placeId;
+  public String getComment() {
+    return comment;
   }
 
-  public void setPlaceId(String placeId) {
-    this.placeId = placeId;
+  public void setComment(String comment) {
+    this.comment = comment;
   }
 
   public int getUserNo() {
@@ -37,12 +38,12 @@ public class Comment {
     this.userNo = userNo;
   }
 
-  public String getComment() {
-    return comment;
+  public String getPlaceId() {
+    return placeId;
   }
 
-  public void setComment(String comment) {
-    this.comment = comment;
+  public void setPlaceId(String placeId) {
+    this.placeId = placeId;
   }
 
 
