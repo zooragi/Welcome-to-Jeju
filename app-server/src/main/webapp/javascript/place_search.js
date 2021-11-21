@@ -7,6 +7,7 @@
     const $placesList = qs("#placesList");
     const $keywordSearhButton = qs(".keywordSearhButton");
     const $inputKeyword = qs("#keyword");
+		const $placeAddBtn = qs(".place_add_btn");
     // 마커를 담을 배열입니다
     let markers = [];
 
@@ -28,13 +29,23 @@
 
     function mapApi() {
         let placeData = [];
+				let selectedPlaceInfo;
         const regex = /[^0-9]/g;
 
         function init() {
             placeListClickEvent();
             keywordSearchEvent();
             moveMapLocationEvent();
+						placeAddBtnEvent();
         }
+
+				function sendPlaceItemToServer(){
+					let xhr = new XMLHttpRequest();
+					xhr.open("POST", "../../app/place/add", true);
+					xhr.setRequestHeader("Content-Type", "application/json");
+					console.log(selectedPlaceInfo);
+					xhr.send(selectedPlaceInfo);
+				}
 
         function keywordSearchEvent() {
 						window.onload = searchPlaces();
@@ -265,7 +276,7 @@
 
             });
         }
-          function moveMapLocationEvent() {
+        function moveMapLocationEvent() {
               $placesList.addEventListener('mouseover', (e) => {
               let liTag = e.target.closest('li'); 
               if (!liTag) return; 
@@ -275,13 +286,17 @@
               
               // 이동할 위도 경도 위치를 생성합니다 
               let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].y, placeData[selectedPlaceItemNum-1].x);
-              
+              selectedPlaceInfo = placeData[selectedPlaceItemNum-1];
               // 지도 중심을 부드럽게 이동시킵니다
               // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
               map.panTo(moveLatLon);
           });
         }
-
+				
+				function placeAddBtnEvent(){
+					$placeAddBtn.addEventListener('click', sendPlaceItemToServer);
+				}
+				
         init();
     }
     mapApi();

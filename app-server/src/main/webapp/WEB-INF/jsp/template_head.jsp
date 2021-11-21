@@ -5,7 +5,7 @@
 <c:set scope="page" var="contextRoot" value="${pageContext.servletContext.contextPath}"/>
 <head>
     <link rel="stylesheet" href="${contextRoot}/node_modules/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="${contextRoot}/css/common.css?ver=3">
+    <link rel="stylesheet" href="${contextRoot}/css/common.css?ver=2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">

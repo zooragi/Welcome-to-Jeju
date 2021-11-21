@@ -6,20 +6,20 @@ import java.util.List;
 public class Place {
 
   private String id;
-  private String storeName;
-  private String storeAddress;
+  private String place_name;
+  private String address_name;
 
   private List<Photo> photos = new ArrayList<>();
   private List<Comment> comments = new ArrayList<>();
   private List<Theme> themes = new ArrayList<>();
 
-  private String xCoord;
-  private String yCoord;
+  private String x;
+  private String y;
 
   @Override
   public String toString() {
-    return "Place [id=" + id + ", storeName=" + storeName
-        + ", storeAddress=" + storeAddress + ", xCoord=" + xCoord + ", yCoord=" + yCoord + "]";
+    return "Place [id=" + id + ", place_name=" + place_name
+        + ", address_name=" + address_name + ", x=" + x + ", y=" + y + "]";
   }
 
   public List<Theme> getThemes() {
@@ -38,23 +38,40 @@ public void setThemes(List<Theme> themes) {
     this.id = id;
   }
 
-  public String getStoreName() {
-    return storeName;
-  }
+  
+  public String getPlace_name() {
+		return place_name;
+	}
 
-  public void setStoreName(String storeName) {
-    this.storeName = storeName;
-  }
+	public void setPlace_name(String place_name) {
+		this.place_name = place_name;
+	}
 
-  public String getStoreAddress() {
-    return storeAddress;
-  }
+	public String getAddress_name() {
+		return address_name;
+	}
 
-  public void setStoreAddress(String storeAddress) {
-    this.storeAddress = storeAddress;
-  }
+	public void setAddress_name(String address_name) {
+		this.address_name = address_name;
+	}
 
-  public List<Photo> getPhotos() {
+	public String getX() {
+		return x;
+	}
+
+	public void setX(String x) {
+		this.x = x;
+	}
+
+	public String getY() {
+		return y;
+	}
+
+	public void setY(String y) {
+		this.y = y;
+	}
+
+	public List<Photo> getPhotos() {
     return photos;
   }
 
@@ -69,22 +86,5 @@ public void setThemes(List<Theme> themes) {
   public void setComments(List<Comment> comments) {
     this.comments = comments;
   }
-
-  public String getxCoord() {
-    return xCoord;
-  }
-
-  public void setxCoord(String xCoord) {
-    this.xCoord = xCoord;
-  }
-
-  public String getyCoord() {
-    return yCoord;
-  }
-
-  public void setyCoord(String yCoord) {
-    this.yCoord = yCoord;
-  }
-
 
 }
