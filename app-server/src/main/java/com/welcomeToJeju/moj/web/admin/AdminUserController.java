@@ -1,13 +1,10 @@
 package com.welcomeToJeju.moj.web.admin;
 
 import java.util.Collection;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
@@ -16,10 +13,9 @@ import com.welcomeToJeju.moj.domain.User;
 @Controller
 public class AdminUserController {
 
-  @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired UserDao userDao;
   @Autowired ThemeDao themeDao;
-  @Autowired ServletContext sc;
+  @Autowired SqlSessionFactory sqlSessionFactory;
 
   @GetMapping("/admin/userlist")
   public ModelAndView list() throws Exception {
@@ -48,25 +44,6 @@ public class AdminUserController {
 
   }
 
-  @PostMapping("/admin/userupdate")
-  public ModelAndView update(User user, HttpSession session) throws Exception {
-    User oldUser = userDao.findByNo(user.getNo());
-
-    user.setNo(oldUser.getNo());
-    user.setEmail(oldUser.getEmail());
-    user.setRegisteredDate(oldUser.getRegisteredDate());
-    user.setReportedCount(oldUser.getReportedCount());
-    user.setViewCount(oldUser.getViewCount());
-
-    userDao.update(user);
-    sqlSessionFactory.openSession().commit();
-
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:userlist");
-
-    return mv;
-  }
-
   @GetMapping("/admin/userdelete")
   public ModelAndView delete(int no) throws Exception {
     User user = userDao.findByNo(no);
@@ -78,6 +55,7 @@ public class AdminUserController {
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:userlist");
+
     return mv;
   }
 
