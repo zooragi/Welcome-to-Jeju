@@ -54,7 +54,7 @@
             for ( let i=0; i<places.length; i++ ) {
 
                 // 마커를 생성하고 지도에 표시합니다
-                let placePosition = new kakao.maps.LatLng(places[i].yCoord, places[i].xCoord);
+                let placePosition = new kakao.maps.LatLng(places[i].y, places[i].x);
                 let marker = addMarker(placePosition, i);
                 let itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 
@@ -81,7 +81,7 @@
                     itemEl.onmouseout =  function () {
                         infowindow.close();
                     };
-                })(marker, places[i].storeName);
+                })(marker, places[i].place_name);
 
                 fragment.appendChild(itemEl);
             }
@@ -96,16 +96,17 @@
 
         // 검색결과 항목을 Element로 반환하는 함수입니다
         function getListItem(index, places) {
+						console.log(places);
             let el = document.createElement('li'),
             itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                         '<div class="info">' +
-                        '   <h5>' + places.storeName + '</h5>';
+                        '   <h5>' + places.place_name + '</h5>';
 
             if (places.road_address_name) {
                 itemStr += '    <span>' + places.road_address_name + '</span>' +
-                            '   <span class="jibun gray">' +  places.storeAddress  + '</span>';
+                            '   <span class="jibun gray">' +  places.address_name  + '</span>';
             } else {
-                itemStr += '    <span>' +  places.storeAddress  + '</span>'; 
+                itemStr += '    <span>' +  places.address_name  + '</span>'; 
             }
                         
             //itemStr += '  <span class="tel">' + places.phone  + '</span>' +
@@ -164,8 +165,8 @@
 
                 let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
                 // 이동할 위도 경도 위치를 생성합니다 
-                let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].yCoord, placeData[selectedPlaceItemNum-1].xCoord);
-                console.log(map.panTo(moveLatLon))
+                console.log(placeData[selectedPlaceItemNum-1]);
+                let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].y, placeData[selectedPlaceItemNum-1].x);
 
                 // 지도 중심을 부드럽게 이동시킵니다
                 // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다

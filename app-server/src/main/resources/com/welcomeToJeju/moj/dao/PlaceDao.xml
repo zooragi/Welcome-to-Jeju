@@ -7,10 +7,10 @@
   
   <resultMap type="Place" id="PlaceMap">
     <id column="place_id" property="id"/> 
-    <result column="place_name" property="storeName"/>
-    <result column="place_address" property="storeAddress"/>
-    <result column="x_coord" property="xCoord"/>
-    <result column="y_coord" property="yCoord"/>
+    <result column="place_name" property="place_name"/>
+    <result column="place_address" property="address_name"/>
+    <result column="x_coord" property="x"/>
+    <result column="y_coord" property="y"/>
     
     <collection property="photos" ofType="Photo">
       <id column="place_photo_no" property="no"/>
@@ -35,7 +35,7 @@
   <insert id="insert" parameterType="Place"
     useGeneratedKeys="true" keyColumn="place_id" keyProperty="id">
     insert into jeju_place(place_id, place_name, place_address,x_coord,y_coord)
-    values(#{id},#{storeName},#{storeAddress},#{xCoord},#{yCoord})
+    values(#{id},#{place_name},#{address_name},#{x},#{y})
   </insert>
   
   <insert id="insertPhoto" parameterType="Map">

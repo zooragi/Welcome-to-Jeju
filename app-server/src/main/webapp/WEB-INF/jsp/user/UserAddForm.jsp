@@ -24,8 +24,6 @@ width: 60px;
   
   </style>
 
-
-
 <br>
 <h1 style=text-align:center;>회원 가입</h1>
 <br>

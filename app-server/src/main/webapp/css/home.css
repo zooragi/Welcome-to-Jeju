@@ -63,7 +63,6 @@ main {
     margin:0 auto;
     padding: var(--font-medium);
 
-    font-family: 'Gugi', cursive;
     font-size: var(--font-large);
     line-height: 18px;
 

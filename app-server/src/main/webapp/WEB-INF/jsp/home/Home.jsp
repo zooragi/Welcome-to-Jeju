@@ -95,8 +95,8 @@
                 <li>
                     <a href="#" class="content">
                         <div class="desc">
-                            <div class="name">${place.storeName}</div>
-                            <div class="address">${place.storeAddress}</div>
+                            <div class="name">${place.place_name}</div>
+                            <div class="address">${place.address_name}</div>
                         </div>
                         <div class="themes">
                             <c:forEach items="${place.themes}" var="placeBelongTheme" begin="0" end="2">
