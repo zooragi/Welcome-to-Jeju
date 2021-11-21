@@ -71,7 +71,6 @@
             if (status === kakao.maps.services.Status.OK) {
                 
                 placeData = data;
-                console.log(placeData);
                 // 정상적으로 검색이 완료됐으면
                 // 검색 목록과 마커를 표출합니다
                 displayPlaces(data);
@@ -140,6 +139,7 @@
                 })(marker, places[i].place_name);
 
                 fragment.appendChild(itemEl);
+								
             }
 
             // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
@@ -167,13 +167,12 @@
                         
             itemStr += '  <span class="tel">' + places.phone  + '</span>' +
                         '</div>';
-            itemStr += '<button class="placeButton">선택하기</button>';
-            
+            itemStr += '<button class="placeButton button_'+ (index+1) +'" >선택하기</button>';
             
             el.innerHTML = itemStr;
             el.className = 'item';
-
             return el;
+
         }
 
         // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
@@ -254,30 +253,33 @@
 
         function placeListClickEvent() {
             $placesList.addEventListener('click', (e) => {
-                let liTag = e.target.closest('li'); 
-                if (!liTag) return; 
-                if (!$placesList.contains(liTag)) return;
+                let btnTag = e.target.closest('button'); 
+                if (!btnTag) return; 
+                if (!$placesList.contains(btnTag)) return;
 
-                let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
-                
+                let selectedPlaceItemNum = parseInt(btnTag.className.replace(regex, ""));
                 console.log(placeData[selectedPlaceItemNum-1]);
+								document.querySelector(".modal").style.display = 'block';
+								document.getElementsByTagName("BODY")[0].style.overflow = 'hidden';
+								document.querySelector(".modal").classList.toggle('show');
+
             });
         }
-            function moveMapLocationEvent() {
-                $placesList.addEventListener('mouseover', (e) => {
-                let liTag = e.target.closest('li'); 
-                if (!liTag) return; 
-                if (!$placesList.contains(liTag)) return;
+          function moveMapLocationEvent() {
+              $placesList.addEventListener('mouseover', (e) => {
+              let liTag = e.target.closest('li'); 
+              if (!liTag) return; 
+              if (!$placesList.contains(liTag)) return;
 
-                let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
-                
-                // 이동할 위도 경도 위치를 생성합니다 
-                let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].y, placeData[selectedPlaceItemNum-1].x);
-                
-                // 지도 중심을 부드럽게 이동시킵니다
-                // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-                map.panTo(moveLatLon);
-            });
+              let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
+              
+              // 이동할 위도 경도 위치를 생성합니다 
+              let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].y, placeData[selectedPlaceItemNum-1].x);
+              
+              // 지도 중심을 부드럽게 이동시킵니다
+              // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+              map.panTo(moveLatLon);
+          });
         }
 
         init();
