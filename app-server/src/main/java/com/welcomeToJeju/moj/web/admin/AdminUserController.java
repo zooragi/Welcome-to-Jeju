@@ -41,7 +41,6 @@ public class AdminUserController {
     mv.setViewName("template_main");
 
     return mv;
-
   }
 
   @GetMapping("/admin/userdelete")
