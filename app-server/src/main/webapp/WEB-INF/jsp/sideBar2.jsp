@@ -6,20 +6,24 @@
     <button class="close-button">
         <i class="fas fa-times"></i>
     </button>
+    <div class="home-menu-box">
+        <ul class="home-menu-list">
+            <a href="${contextRoot}/app/home">
+                <li>
+                    <span class="emozi">🏠</span>
+                    <span class="name">홈으로</span>
+                </li>
+            </a>
+        </ul>
+    </div>
     <c:if test="${!empty loginUser}">
         <div class="my-menu-box">
             <ul class="my-menu-list">
-                <a href = "${contextRoot}/app/auth/userinfo">
-                    <li><span class="emozi">🔧</span><span class="name">내 정보</span></li>
-                </a>
                 <a href="${contextRoot}/app/mytheme/list?no=${loginUser.no}">
                     <li><span class="emozi">🗺</span><span class="name">나의 테마 관리</span></li>
                 </a>
-                 <a href="${contextRoot}/app/likedtheme/list">
-                    <li><span class="emozi">📌</span><span class="name">좋아하는 테마</span></li>
-                </a>
-                 <a href="${contextRoot}/app/likeduser/list">
-                    <li><span class="emozi">📌</span><span class="name">좋아하는 유저</span></li>
+                <a href = "${contextRoot}/app/auth/userinfo">
+                    <li><span class="emozi">🔧</span><span class="name">내 정보</span></li>
                 </a>
             </ul>
         </div>
@@ -59,6 +63,7 @@
             </ul>
         </div>
     </c:if>
+
     <c:if test="${!empty loginUser}">
         <div class="logout-menu-box">
             <ul class="logout-menu-box-list">
