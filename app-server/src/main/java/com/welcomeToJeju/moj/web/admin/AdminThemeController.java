@@ -23,7 +23,7 @@ public class AdminThemeController {
     Collection<Theme> themeList = themeDao.findAll();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("allThemeList", themeList);
+    mv.addObject("themeList", themeList);
     mv.addObject("pageTitle", "전체 테마 보기");
     mv.addObject("contentUrl", "admin/AdminThemeList.jsp");
     mv.setViewName("template_main");
@@ -58,7 +58,7 @@ public class AdminThemeController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../admin/themelist");
+    mv.setViewName("redirect:themelist");
 
     return mv;
   }

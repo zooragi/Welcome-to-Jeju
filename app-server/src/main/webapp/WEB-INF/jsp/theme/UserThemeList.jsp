@@ -11,12 +11,8 @@
 <div class="main-container">
 
 <br>
-<h1 style=text-align:center;>${theme.owner.nickname} 테마 목록 보기</h1>
+<h1 style=text-align:center;>${user.nickname}님의 테마 목록 보기</h1>
 <br>
-
-<button type="button" class="btn btn-link">
-  <a href="../mytheme/addform">만들기</a>
-</button>
 
 <ul class="theme-list">
 <c:forEach items="${themeList}" var="theme"
@@ -31,16 +27,6 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
     </li>
   </a>
 </c:forEach>
-</ul>
-<ul class="theme-list">
-  <a class="list-container" href="../mytheme/addform">
-    <li>
-    <div class="content">
-      <div class="icon">📝➕</div>
-      <div class="theme-title">나의 테마 만들기</div>
-    </div>  <!-- .content -->
-    </li>
-  </a>
 </ul>
 
 </div>  <!-- .main-container -->
