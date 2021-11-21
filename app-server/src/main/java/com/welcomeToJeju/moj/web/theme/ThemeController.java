@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.welcomeToJeju.moj.dao.ThemeDao;
 import com.welcomeToJeju.moj.dao.UserDao;
 import com.welcomeToJeju.moj.domain.Theme;
+import com.welcomeToJeju.moj.domain.User;
 
 @Controller
 public class ThemeController {
@@ -33,12 +34,14 @@ public class ThemeController {
   @GetMapping("/theme/userlist")
   public ModelAndView userThemeList(int no) throws Exception {
     Collection<Theme> themeList = themeDao.findAllPublicThemeByUserNo(no);
+    User user = userDao.findByNo(no);
 
     userDao.updateViewCount(no);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("themeList", themeList);
+    mv.addObject("user", user);
     mv.addObject("pageTitle", "유저 테마 목록 보기");
     mv.addObject("contentUrl", "theme/UserThemeList.jsp");
     mv.setViewName("template_main");
