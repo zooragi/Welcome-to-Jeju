@@ -9,9 +9,10 @@
 <jsp:include page="../template_head.jsp"/>
 <link rel="stylesheet" href="${contextRoot}/css/home.css">
 <script defer src="${contextRoot}/javascript/home.js"></script>
-<body>
 
+<body>
 <main>
+
     <jsp:include page="../header.jsp"/>
     <jsp:include page="../sideBar.jsp"/>
     <div class="theme-slide">
@@ -64,7 +65,9 @@
                 <span>최신 테마</span>
                 <div class="sub">최근 등록된 테마</div>
             </div>
-            <ul class="hot-theme-list">
+              <div class="owl-carousel owl-theme">
+              <div class = "item">
+                <ul class="hot-theme-list">
                 <c:forEach items="${latest10Theme}" var="theme">
                     <li>
                         <a href="place/list?no=${theme.no}" class="content">
@@ -76,7 +79,9 @@
                         </a>
                     </li>
                 </c:forEach>
-            </ul>
+                </ul>
+             </div>
+             </div>
         </div>
     </div>
 
@@ -103,6 +108,29 @@
             </c:forEach>
         </ul>
     </div>
+    
+<script type="text/javascript">
+  $(document).ready(function(){
+	  $(".owl-carousel").owlCarousel({
+		    stagePadding: 50,
+		    loop:true,
+		    margin:10,
+		    nav:true,
+		    responsive:{
+		        0:{
+		            items:1
+		        },
+		        600:{
+		            items:3
+		        },
+		        1000:{
+		            items:5
+		        }
+		    }
+	});
+</script>
+    
+    
 </main>
 <footer>
     <div class="footer-link">
@@ -115,5 +143,8 @@
     <div><a href="#">개인정보처리방침</a></div>
 
 </footer>
+
+
+
 </body>
 </html>

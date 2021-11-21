@@ -38,7 +38,7 @@ public class UserController {
   @GetMapping("/user/checkNickname")
   @ResponseBody
   public String checkNickname(String nickname) throws Exception {
-    User user = userDao.findByEmail(nickname);
+    User user = userDao.findByNickname(nickname);
     if (user == null) {
       return "false";
     } else {
@@ -65,7 +65,7 @@ public class UserController {
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "회원 가입 하기");
-    mv.addObject("contentUrl", "user/UserAddForm.jsp");
+    mv.addObject("contentUrl", "user/UserAddForm2.jsp");
     mv.setViewName("template_main");
     return mv;
   }

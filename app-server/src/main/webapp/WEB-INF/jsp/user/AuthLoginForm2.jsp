@@ -8,6 +8,13 @@
 		justify-content: center;
 		padding: var(--font-great) 0 ;
 	}
+	
+	.btn{
+	float:left;
+	margin-left: 20px;
+	margin-right: 20px;
+	}
+	
 </style>
 
 <div class="card-container">
@@ -29,9 +36,9 @@
             <input type="checkbox" name="saveEmail" ${not empty cookie.email ? "checked":""}/> 이메일 저장
           </label>
         </div>
+        <br>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style="color : #ffff; background-color:#F6BB43; border:none;">로 그 인</button>
     </form>
-    <br>
       <form class="form-signin" action='../user/addform'>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style="color : #ffff; background-color:#F6BB43; border:none;">회원가입</button><br>
      </form>
