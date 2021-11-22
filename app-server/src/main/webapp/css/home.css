@@ -141,6 +141,7 @@ main {
 .dash-board .hot-theme .hot-theme-list,
 .hot-place .hot-place-list{
     display:flex;
+    height : 130px;
     margin: var(--font-micro);
 }
 .dash-board .hot-curators .hot-curators-list li,
