@@ -5,35 +5,67 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <c:set scope="page" var="contextRoot" value="${pageContext.request.contextPath}"/>
+<jsp:include page="../template_head.jsp"/>
 <link rel="stylesheet" href="${contextRoot}/css/theme_list.css">
+<link rel="stylesheet" href="${contextRoot}/css/home.css">
+<script defer src="${contextRoot}/javascript/home.js"></script>
 
-  <style>
-    .ranking {
-    margin : 30px;
-    float : center;
-    }
-  
-    .themeranking {
-    margin : 30px;
-    float : left;
-    }
-    
-    .userranking {
-    margin : 30px;
-    float : left;
-    }
-  </style>
-  
-<body>
+<div class="container">
+<div class="main-container">
 
-<div class="ranking">
-<div class="themeranking">
-  <jsp:include page="ThemeRanking.jsp"/>
-</div>
+<br>
+<h1 style=text-align:center;>🏆 테마 순위</h1>
+<br>
 
-<div class="userranking">
-  <jsp:include page="UserRanking.jsp"/>
-</div>
-</div>
+<ul class="theme-list">
+<c:forEach items="${themeList}" var="theme" varStatus="status">
+<c:set var="i" value="${i+1}"/>
+  <a class="list-container" href="../place/list?no=${theme.no}">
+  <td> 🏅 ${i}등 </td>
+    <li>
+    <div class="content">
+      <div class="icon">🧚</div>
+      <div class="theme-title">${theme.title}</div>
+      <div class="theme-count">${theme.hashtags}</div>
+    </div>  <!-- .content -->
+    </li>
+  </a>
+</c:forEach>  
+<c:forEach begin="0" end="${3-(fn:length(themeList)%3)-1}">
+    <a class="list-container" style=visibility:hidden;>
+      <li>
+        <div class="content">
+          <div class="icon">✈️</div>
+          <div class="theme-title">${theme.title}</div>
+          <div class="theme-count">#${theme.hashtags}</div>
+        </div>  <!-- .content -->
+      </li>
+    </a>
+</c:forEach>
+</ul>
 
-</body>
+</div>  <!-- .main-container -->
+</div>  <!-- .container -->
+
+<div class="dash-board">
+        <div class="hot-curators">
+            <div class="title">
+                <br>
+                  <h1 style=text-align:center;>🏆 유저 순위</h1>
+                <br>
+            </div>
+            <ul class="hot-curators-list">
+                <c:forEach items="${userList}" var="user" varStatus="status">
+                <c:set var="z" value="${z+1}"/>
+                <td> 🏅 ${z}등 </td>
+                    <li>
+                        <a href="theme/userlist?userNo=${user.no}" class="content">
+                            <div class="icon">🧙</div>
+                            <div class="curator-name">${user.nickname}</div>
+                            <div class="theme-count">${user.registeredDate}</div>
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
+            </div>
+            </div>
