@@ -22,7 +22,7 @@
   <style>
     .themedetail {
     margin : 30px;
-    float : left;
+    float : right;
     }
     
     .placemenu {
@@ -75,7 +75,7 @@
 	  </div>
 	</div>
 </div>  <!-- .themedetail -->
-
+ 
 <div class="placemenu">
 <a href='../place/add'>장소 등록하기 ✏️</a>
 <br>
@@ -86,7 +86,7 @@
 <div class="placedetail">
 <jsp:include page="../place/PlaceDetail.jsp"/>
 </div>
- -->
+-->
 
 </body>
 </html>

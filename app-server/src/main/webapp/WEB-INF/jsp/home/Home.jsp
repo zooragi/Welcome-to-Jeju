@@ -7,7 +7,7 @@
 <html>
 <title>제주 옵서예</title>
 <jsp:include page="../template_head.jsp"/>
-<link rel="stylesheet" href="${contextRoot}/css/home.css?ver=2">
+<link rel="stylesheet" href="${contextRoot}/css/home.css?ver=1">
 <script defer src="${contextRoot}/javascript/home.js"></script>
 <style>
 .owl-dots{display:none;}
@@ -64,7 +64,7 @@
                 <span>유저 순위</span>
                 <div class="sub">인기 있는 유저</div>
             </div>
-            <ul class="hot-curators-list">
+            <ul class="hot-curators-list .owl-carousel2">
                 <c:forEach items="${Top10User}" var="user">
                     <li>
                         <a href="theme/userlist?no=${user.no}" class="content">
@@ -182,6 +182,26 @@
         
         owl.owlCarousel({
             items:3,                 // 한번에 보여줄 아이템 수
+            loop:true,               // 반복여부
+            margin:35,               // 오른쪽 간격
+            autoplay:false,           // 자동재생 여부
+            autoplayTimeout:1800,    // 재생간격
+            autoplayHoverPause:true  //마우스오버시 멈출지 여부
+        });    
+        
+        $('.customNextBtn').click(function() {
+            owl.trigger('next.owl.carousel');
+        })
+        
+        $('.customPrevBtn').click(function() {
+            owl.trigger('prev.owl.carousel', [300]);
+        })
+    });
+    $(document).ready(function(){
+        var owl = $('.owl-carousel2');
+        
+        owl.owlCarousel({
+            items:7,                 // 한번에 보여줄 아이템 수
             loop:true,               // 반복여부
             margin:35,               // 오른쪽 간격
             autoplay:false,           // 자동재생 여부
