@@ -1,39 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true" %>
+    trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<style>
-  h1 {
-    text-align: center;
-  }
-</style>
+<c:set scope="page" var="contextRoot" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="${contextRoot}/css/theme_list.css">
+
+<div class="container">
+<div class="main-container">
 
 <br>
-<h1>🧡 테마 좋아요 목록 보기</h1>
+<h1 style=text-align:center;>내가 좋아하는 테마 보기</h1>
+<br>
 
-<table class="table table-hover">
-<thead>
-<tr>
-  <th></th><th></th><th></th>
-  <th>이름</th>
-  <th>닉네임</th>
-  <th>카테고리</th>
-  <th>해시태그</th>
-  <th>🤍[취소]</th>
-</tr>
-</thead>
+<ul class="theme-list">
+<c:forEach items="${themeList}" var="theme">
+<a href='delete?no=${theme.no}&no=${loginUser.no}'>🧡</a>
+  <a class="list-container" href="../place/list?no=${theme.no}">
+    <li>
+    <div class="content">
+      <div class="icon">🧚</div>
+      <div class="theme-title">${theme.title}</div>
+      <div class="theme-count">${theme.hashtags}</div>
+    </div>  <!-- .content -->
+    </li>
+  </a>
+</c:forEach>  
+<c:forEach begin="0" end="${3-(fn:length(themeList)%3)-1}">
+    <a class="list-container" style=visibility:hidden;>
+      <li>
+        <div class="content">
+          <div class="icon">✈️</div>
+          <div class="theme-title">${theme.title}</div>
+          <div class="theme-count">#${theme.hashtags}</div>
+        </div>  <!-- .content -->
+      </li>
+    </a>
+</c:forEach>
+</ul>
 
-<tbody>
-  <c:forEach items="${themeList}" var="theme">
-  <tr>
-    <td></td><td></td><td></td>
-    <td><a href='../theme/detail?no=${theme.no}'>${theme.title}</a></td>
-    <td><a href='../theme/userlist?no=${theme.owner.no}'>${theme.owner.nickname}</a></td>
-    <td>${theme.category.name}</td>
-    <td>${theme.hashtags}</td>
-    <td><a href='delete?no=${theme.no}&no=${loginUser.no}'>🧡</a></td>
-  </tr>
-  </c:forEach>
-</tbody>
-</table>
+</div>  <!-- .main-container -->
+</div>  <!-- .container -->
