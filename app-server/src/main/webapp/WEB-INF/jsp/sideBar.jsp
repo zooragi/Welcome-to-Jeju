@@ -32,7 +32,7 @@
 <div class="public-menu-box">
 <ul class="public-menu-box-list">
   <a href="${contextRoot}/app/theme/list">
-	<li><span class="emozi">🗺</span><span class="name">전체 테마보기</span></li>
+	<li><span class="emozi">🗺</span><span class="name">전체 테마 보기</span></li>
 	</a>
 	<a href="${contextRoot}/app/ranking">
 	<li><span class="emozi">🏆</span><span class="name">순위</span></li>
