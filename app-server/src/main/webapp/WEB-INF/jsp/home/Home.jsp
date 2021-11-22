@@ -45,7 +45,7 @@
     <div class="dash-board">
         <div class="hot-curators">
             <div class="title">
-                <span>인기 있는 유저</span>
+                <span>유저 순위</span>
                 <div class="sub">인기 있는 유저</div>
             </div>
             <ul class="hot-curators-list">
@@ -63,7 +63,7 @@
         
         <div class="hot-theme">
             <div class="title">
-                <span>인기 있는 테마</span>
+                <span>테마 순위</span>
                 <div class="sub">인기 있는 테마</div>
             </div>
             <div class="owl-carousel owl-theme">
@@ -112,7 +112,7 @@
             <div class="hot-theme">
             <div class="title">
                 <span>전체 테마</span>
-                <div class="sub">전체 테마</div>
+                <div class="sub">전체 테마 목록</div>
             </div>
             <div class="owl-carousel owl-theme">
             <div class = "item">
@@ -136,7 +136,7 @@
 
    <div class="hot-place">
         <div class="title">
-            <span>인기있는 지도</span>
+            <span>지도 순위</span>
             <div class="sub">인기있는 지도</div>
         </div>
         <ul class="hot-place-list">
