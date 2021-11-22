@@ -45,8 +45,8 @@
     <div class="dash-board">
         <div class="hot-curators">
             <div class="title">
-                <span>핫 큐레이터</span>
-                <div class="sub">최근 인기있는 큐레이터</div>
+                <span>인기 있는 유저</span>
+                <div class="sub">인기 있는 유저</div>
             </div>
             <ul class="hot-curators-list">
                 <c:forEach items="${Top10User}" var="user">
@@ -59,14 +59,39 @@
                     </li>
                 </c:forEach>
             </ul>
+            </div>
+        
+        <div class="hot-theme">
+            <div class="title">
+                <span>인기 있는 테마</span>
+                <div class="sub">인기 있는 테마</div>
+            </div>
+            <div class="owl-carousel owl-theme">
+            <div class = "item">
+            <ul class="hot-theme-list">
+                <c:forEach items="${Top10Themes}" var="theme">
+                    <li>
+                        <a href="place/list?no=${theme.no}" class="content">
+                            <div class="icon">💀</div>
+                            <div class="theme-content">
+                                <div class="theme-title">${theme.title}</div>
+                                <div class="curators">${theme.hashtags}</div>
+                            </div>
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
         </div>
+        </div>
+        </div>
+        
         <div class="hot-theme">
             <div class="title">
                 <span>최신 테마</span>
                 <div class="sub">최근 등록된 테마</div>
             </div>
-              <div class="owl-carousel owl-theme">
-              <div class = "item">
+            <div class="owl-carousel owl-theme">
+            <div class = "item">
                 <ul class="hot-theme-list">
                 <c:forEach items="${latest10Theme}" var="theme">
                     <li>
@@ -82,13 +107,37 @@
                 </ul>
              </div>
              </div>
-        </div>
-    </div>
+             </div>
+        
+            <div class="hot-theme">
+            <div class="title">
+                <span>전체 테마</span>
+                <div class="sub">전체 테마</div>
+            </div>
+            <div class="owl-carousel owl-theme">
+            <div class = "item">
+                <ul class="hot-theme-list">
+                <c:forEach items="${allTheme}" var="theme">
+                    <li>
+                        <a href="place/list?no=${theme.no}" class="content">
+                            <div class="icon">🥤</div>
+                            <div class="theme-content">
+                                <div class="theme-title">${theme.title}</div>
+                                <div class="curators">${theme.hashtags}</div>
+                            </div>
+                        </a>
+                    </li>
+                </c:forEach>
+                </ul>
+             </div>
+             </div>
+             </div>
+             </div>
 
-    <div class="hot-place">
+   <div class="hot-place">
         <div class="title">
-            <span>핫 지도</span>
-            <div class="sub">최근 인기있는 지도</div>
+            <span>인기있는 지도</span>
+            <div class="sub">인기있는 지도</div>
         </div>
         <ul class="hot-place-list">
             <c:forEach items="${Top10Places}" var="place">
@@ -108,6 +157,8 @@
             </c:forEach>
         </ul>
     </div>
+   
+  
     
 <script type="text/javascript">
   $(document).ready(function(){

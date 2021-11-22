@@ -49,7 +49,7 @@
     from
       jeju_user
     order by
-      user_no desc
+      user_no
   </select>
   
   <select id="userTop10" resultMap="UserMap">

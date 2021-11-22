@@ -1,5 +1,4 @@
 
-<%@page import="com.welcomeToJeju.moj.domain.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
@@ -93,6 +92,13 @@ style = "color : #ffff; background-color:#F6BB43; border:none;">로그아웃</bu
 </div>
 
 <script>
+document.querySelector("#update-form").onsubmit = () => {
+	  if (document.querySelector("#f-password").value == "" ) {
+	      window.alert("필수 입력 항목이 비어 있음!")
+	      return false;
+	    }
+	  };
+
 var updateBtn = document.querySelector("#x-update-btn");
 var nicknameTag = document.querySelector("#f-nickname");
 updateBtn.setAttribute("disabled", "disabled");
