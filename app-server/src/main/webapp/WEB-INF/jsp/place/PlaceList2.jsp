@@ -15,27 +15,52 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="${contextRoot}/css/place_list.css?ver=1">
+	<link rel="stylesheet" href="${contextRoot}/css/place_list.css?ver=2">
 </head>
 
+
+
 <body>
-	<div class="map_container full-height">
-		<div class="map_wrap">
-			<div id="map"></div>
-				<div id="menu_wrap" class="bg_white">
-					<ul id="placesList"></ul>
-				</div>
+	<div class="modal">
+  	<div class="modal_body">
+  		<div class="place_info_box">
+		    <label for='f-place-name'>장소 이름</label>
+		    <input id='place_name' type='text' name='place_name' readonly>
+	    </div>
+		  
+	    <div class="place_info_box">
+ 			  <label for='f-address-name'>주소</label>
+		    <input id='address_name' type='text' name='address_name' readonly>
+	    </div>
+	    
+			<div class="place_info_box">
+			  <label for='f-comment'>후기</label>
+		    <div id='place_comment' rows="5" cols="30"></div>
 			</div>
+			
+			<button class="place_cancel_btn" type="button">닫기</button>
 		</div>
-		
-		<form id="place_search_box" action="${contextRoot}/app/place/search">
-			<div class="place_search_container">
-				  <input class="place_search" name="keyword" type="text" placeholder="장소를 검색하세요.">		
-			    <button class="search-icon">
-	           <i class="fas fa-search"></i>
-	        </button>
-			</div>
-    </form>
+	</div>
+  	
+  	
+  	
+			<div class="map_container full-height">
+				<div class="map_wrap">
+					<div id="map"></div>
+						<div id="menu_wrap" class="bg_white">
+							<ul id="placesList"></ul>
+						</div>
+					</div>
+				</div>
+				
+				<form id="place_search_box" action="${contextRoot}/app/place/search">
+					<div class="place_search_container">
+						  <input class="place_search" name="keyword" type="text" placeholder="장소를 검색하세요.">		
+					    <button class="search-icon">
+			           <i class="fas fa-search"></i>
+			        </button>
+					</div>
+		    </form>
 
 	
 </body>

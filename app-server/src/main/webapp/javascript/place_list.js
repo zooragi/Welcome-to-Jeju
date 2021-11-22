@@ -5,6 +5,9 @@
     const qs = x => document.querySelector(x);
     
     const $placesList = qs("#placesList");
+		const $placeName = qs("#place_name");
+		const $placeAddress = qs("#address_name");
+		const $placeComment = qs("#place_comment");
 		let placeData = [];
     // 마커를 담을 배열입니다
     let markers = [];
@@ -96,7 +99,6 @@
 
         // 검색결과 항목을 Element로 반환하는 함수입니다
         function getListItem(index, places) {
-						console.log(places);
             let el = document.createElement('li'),
             itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                         '<div class="info">' +
@@ -109,8 +111,6 @@
                 itemStr += '    <span>' +  places.address_name  + '</span>'; 
             }
                         
-            //itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-            //            '</div>';
             
             
             el.innerHTML = itemStr;
@@ -151,9 +151,29 @@
                 if (!liTag) return; 
                 if (!$placesList.contains(liTag)) return;
 
+								
                 let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
-                
-                console.log(placeData[selectedPlaceItemNum-1].x);
+								$placeName.value = placeData[selectedPlaceItemNum-1].place_name;
+								$placeAddress.value = placeData[selectedPlaceItemNum-1].address_name;
+								let comments = placeData[selectedPlaceItemNum-1].comments;
+								let place_comments = "";
+								let count = 1;
+								comments.forEach(e => {
+									place_comments += `${count++}. ` + e.comment + "\r\n"
+								});
+								console.log(place_comments);
+								$placeComment.innerText = place_comments;
+								
+								document.querySelector(".modal").style.display = 'block';
+								document.getElementsByTagName("BODY")[0].style.overflow = 'hidden';
+								document.querySelector(".modal").classList.toggle('show');
+								                	
+								qs('.place_cancel_btn').addEventListener('click',()=>{
+									document.getElementsByTagName("BODY")[0].style.overflow = 'visible';
+									document.querySelector(".modal").style.display = 'none';
+									document.querySelector(".modal").classList.toggle('show');
+								});
+
             });
         }
 
@@ -165,7 +185,6 @@
 
                 let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
                 // 이동할 위도 경도 위치를 생성합니다 
-                console.log(placeData[selectedPlaceItemNum-1]);
                 let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].y, placeData[selectedPlaceItemNum-1].x);
 
                 // 지도 중심을 부드럽게 이동시킵니다

@@ -7,9 +7,11 @@
     const $placesList = qs("#placesList");
     const $keywordSearhButton = qs(".keywordSearhButton");
     const $inputKeyword = qs("#keyword");
-		const $placeAddBtn = qs(".place_add_btn");
-		const $fPhoto = qs("#f-photo");
-		const $fName = qs("#f-name");
+		const $placeId = qs("#place_id");
+		const $placeX = qs("#place_x");
+		const $placeY = qs("#place_y");
+		const $placeName = qs("#place_name");
+		const $placeAddress = qs("#address_name");
     // 마커를 담을 배열입니다
     let markers = [];
 
@@ -38,21 +40,8 @@
             placeListClickEvent();
             keywordSearchEvent();
             moveMapLocationEvent();
-						placeAddBtnEvent();
+						
         }
-
-				function sendPlaceItemToServer(){
-					let xhr = new XMLHttpRequest();
-					
-					selectedPlaceInfo.photos = [{filePath : $fPhoto.files[0].name}];
-					selectedPlaceInfo.comments = [{comment : $fName.value}];
-					
-					console.log(selectedPlaceInfo.photos);
-					window.alert(1);
-					xhr.open("POST", "../../app/place/add", true);
-					xhr.setRequestHeader("Content-Type", "application/json");
-					xhr.send(JSON.stringify(selectedPlaceInfo));
-				}
 
         function keywordSearchEvent() {
 						window.onload = searchPlaces();
@@ -66,6 +55,7 @@
             });
         }
 
+			
         // 키워드 검색을 요청하는 함수입니다
         function searchPlaces() {
             let keyword = $inputKeyword.value;
@@ -274,12 +264,23 @@
                 let btnTag = e.target.closest('button'); 
                 if (!btnTag) return; 
                 if (!$placesList.contains(btnTag)) return;
-
+								
                 let selectedPlaceItemNum = parseInt(btnTag.className.replace(regex, ""));
-                //console.log(placeData[selectedPlaceItemNum-1]);
+								$placeId.value = placeData[selectedPlaceItemNum-1].id;
+								$placeX.value = placeData[selectedPlaceItemNum-1].x;
+								$placeY.value = placeData[selectedPlaceItemNum-1].y;
+								$placeName.value = placeData[selectedPlaceItemNum-1].place_name;
+								$placeAddress.value = placeData[selectedPlaceItemNum-1].address_name;
 								document.querySelector(".modal").style.display = 'block';
 								document.getElementsByTagName("BODY")[0].style.overflow = 'hidden';
 								document.querySelector(".modal").classList.toggle('show');
+								
+								qs('.place_cancel_btn').addEventListener('click',()=>{
+									console.log(11);
+									document.getElementsByTagName("BODY")[0].style.overflow = 'visible';
+									document.querySelector(".modal").style.display = 'none';
+									document.querySelector(".modal").classList.toggle('show');
+								});
 
             });
         }
@@ -294,15 +295,13 @@
               // 이동할 위도 경도 위치를 생성합니다 
               let moveLatLon = new kakao.maps.LatLng(placeData[selectedPlaceItemNum-1].y, placeData[selectedPlaceItemNum-1].x);
               selectedPlaceInfo = placeData[selectedPlaceItemNum-1];
+							
               // 지도 중심을 부드럽게 이동시킵니다
               // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
               map.panTo(moveLatLon);
           });
         }
 				
-				function placeAddBtnEvent(){
-					$placeAddBtn.addEventListener('click', sendPlaceItemToServer);
-				}
 				
         init();
     }

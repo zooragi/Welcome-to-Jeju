@@ -16,9 +16,9 @@
             </div>
             <ul class="hot-curators-list">
                 <c:forEach items="${userList}" var="user">
-                        <a href='delete?no=${user.no}'>🧡</a>
+                        <a href='delete?userNo=${user.no}'>⛔</a>
                     <li>
-                        <a href="theme/userlist?no=${user.no}" class="content">
+                        <a href="theme/userlist?userNo=${user.no}" class="content">
                             <div class="icon">🧙</div>
                             <div class="curator-name">${user.nickname}</div>
                             <div class="theme-count">${user.registeredDate}</div>

@@ -7,9 +7,25 @@
 <html>
 <title>제주 옵서예</title>
 <jsp:include page="../template_head.jsp"/>
-<link rel="stylesheet" href="${contextRoot}/css/home.css">
+<link rel="stylesheet" href="${contextRoot}/css/home.css?ver=2">
 <script defer src="${contextRoot}/javascript/home.js"></script>
-
+<style>
+.owl-dots{display:none;}
+.owl-item{
+}
+.customPrevBtn, .customNextBtn{
+    background : none;
+    border: none;
+    color: #999999;
+    font-size: 20px;
+    font-weight: bold;
+}
+@media(max-width:768px){
+    .pbPrevBtn, .pbNextBtn{
+        display: none;
+    }
+}
+</style>	
 <body>
 <main>
 
@@ -66,9 +82,7 @@
                 <span>테마 순위</span>
                 <div class="sub">인기 있는 테마</div>
             </div>
-            <div class="owl-carousel owl-theme">
-            <div class = "item">
-            <ul class="hot-theme-list">
+            <ul class="hot-theme-list owl-carousel">
                 <c:forEach items="${Top10Themes}" var="theme">
                     <li>
                         <a href="place/list?no=${theme.no}" class="content">
@@ -82,17 +96,13 @@
                 </c:forEach>
             </ul>
         </div>
-        </div>
-        </div>
         
         <div class="hot-theme">
             <div class="title">
                 <span>최신 테마</span>
                 <div class="sub">최근 등록된 테마</div>
             </div>
-            <div class="owl-carousel owl-theme">
-            <div class = "item">
-                <ul class="hot-theme-list">
+                <ul class="hot-theme-list owl-carousel">
                 <c:forEach items="${latest10Theme}" var="theme">
                     <li>
                         <a href="place/list?no=${theme.no}" class="content">
@@ -106,17 +116,13 @@
                 </c:forEach>
                 </ul>
              </div>
-             </div>
-             </div>
         
             <div class="hot-theme">
             <div class="title">
                 <span>전체 테마</span>
                 <div class="sub">전체 테마 목록</div>
             </div>
-            <div class="owl-carousel owl-theme">
-            <div class = "item">
-                <ul class="hot-theme-list">
+                <ul class="hot-theme-list owl-carousel">
                 <c:forEach items="${allTheme}" var="theme">
                     <li>
                         <a href="place/list?no=${theme.no}" class="content">
@@ -131,15 +137,13 @@
                 </ul>
              </div>
              </div>
-             </div>
-             </div>
 
    <div class="hot-place">
         <div class="title">
             <span>지도 순위</span>
             <div class="sub">인기있는 지도</div>
         </div>
-        <ul class="hot-place-list">
+        <ul class="hot-place-list owl-carousel">
             <c:forEach items="${Top10Places}" var="place">
                 <li>
                     <a href="#" class="content">
@@ -157,31 +161,7 @@
             </c:forEach>
         </ul>
     </div>
-   
-  
-    
-<script type="text/javascript">
-  $(document).ready(function(){
-	  $(".owl-carousel").owlCarousel({
-		    stagePadding: 50,
-		    loop:true,
-		    margin:10,
-		    nav:true,
-		    responsive:{
-		        0:{
-		            items:1
-		        },
-		        600:{
-		            items:3
-		        },
-		        1000:{
-		            items:5
-		        }
-		    }
-	});
-</script>
-    
-    
+
 </main>
 <footer>
     <div class="footer-link">
@@ -196,6 +176,28 @@
 </footer>
 
 
+    <script>
+    $(document).ready(function(){
+        var owl = $('.owl-carousel');
+        
+        owl.owlCarousel({
+            items:3,                 // 한번에 보여줄 아이템 수
+            loop:true,               // 반복여부
+            margin:35,               // 오른쪽 간격
+            autoplay:false,           // 자동재생 여부
+            autoplayTimeout:1800,    // 재생간격
+            autoplayHoverPause:true  //마우스오버시 멈출지 여부
+        });    
+        
+        $('.customNextBtn').click(function() {
+            owl.trigger('next.owl.carousel');
+        })
+        
+        $('.customPrevBtn').click(function() {
+            owl.trigger('prev.owl.carousel', [300]);
+        })
+    });
+    </script>
 
 </body>
 </html>

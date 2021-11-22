@@ -300,5 +300,54 @@ body {
 	z-index: 10;
 }
 
+.place_info_box{
+	padding: var(--font-small);
+	margin: var(--font-more-small) 0;
+	width : 100%;
+}
+
+.place_info_box input[type=text] {
+  width: 100%;
+  font-size: var(--font-small);
+  font-family: 'ImcreSoojin';
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+}
+
+#place_name{
+	font-size: var(--font-medium);
+}
+
+.place_add_btn{
+	font-size: var(--font-medium);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  text-decoration: none;
+  background-color: #0d6efd;
+  padding: var(--font-small);
+  margin: var(--font-medium);
+  cursor: pointer;
+}
+
+.place_cancel_btn{
+	font-size: var(--font-medium);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  text-decoration: none;
+  background-color: #dc3545;
+  padding: var(--font-small);
+  margin: var(--font-medium);
+  cursor: pointer;
+}
+
+#place_comment{
+	width: 284px;
+}
+
 
 
