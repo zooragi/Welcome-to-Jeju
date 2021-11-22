@@ -54,7 +54,7 @@ public class LikedThemeController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("redirect:../theme/detail?no=" + themeNo);
+    mv.setViewName("redirect:../likedtheme/list");
     return mv;
   }
 

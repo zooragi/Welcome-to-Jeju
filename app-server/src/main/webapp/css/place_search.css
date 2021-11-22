@@ -345,7 +345,9 @@ body {
   cursor: pointer;
 }
 
-
+#place_comment{
+	width: 284px;
+}
 
 
 

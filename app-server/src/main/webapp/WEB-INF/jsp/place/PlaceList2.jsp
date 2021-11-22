@@ -15,8 +15,10 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="${contextRoot}/css/place_list.css?ver=1">
+	<link rel="stylesheet" href="${contextRoot}/css/place_list.css?ver=2">
 </head>
+
+
 
 <body>
 	<div class="modal">
@@ -33,16 +35,10 @@
 	    
 			<div class="place_info_box">
 			  <label for='f-comment'>후기</label>
-		    <textarea id='place_comment' name='comment' class="form-control" rows="5" cols="30" readonly></textarea>
+		    <div id='place_comment' rows="5" cols="30"></div>
 			</div>
 			
-	    <div class="place_info_box">
-		  	<label for='f-photo'>사진</label> 
-   	  	<input id='place_photo' type='file' name='photoFile' class="form-control" multiple>
-			</div>
-			
-			<button class="place_add_btn" type="submit">저장</button>
-			<button class="place_cancel_btn" type="button">취소</button>
+			<button class="place_cancel_btn" type="button">닫기</button>
 		</div>
 	</div>
   	
