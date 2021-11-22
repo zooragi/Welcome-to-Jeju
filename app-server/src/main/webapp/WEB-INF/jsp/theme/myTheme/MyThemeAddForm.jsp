@@ -55,7 +55,7 @@
 </div>
 
 <div>
-<h5>공개 여부</h5>
+<h5>공개 / 비공개</h5>
 <select class="form-select" aria-label="f-isPublic" id="f-isPublic" name ="isPublic" >
   <option selected value="1">공개</option>
   <option value="0">비공개</option>
