@@ -65,9 +65,9 @@ public class AuthController {
       return mv;
 
     } else {
-      mv.addObject("refresh", "2;url=loginform");
+      //mv.addObject("refresh", "2;url=loginform");
       mv.addObject("pageTitle", "로그인 실패!");
-      mv.addObject("contentUrl", "user/LoginFail.jsp");
+      mv.addObject("contentUrl", "Error.jsp");
       mv.setViewName("template_main");
       return mv;
     }

@@ -5,6 +5,8 @@
     const qs = x => document.querySelector(x);
     
     const $placesList = qs("#placesList");
+		const $placeName = qs("#place_name");
+		const $placeAddress = qs("#address_name");
 		let placeData = [];
     // 마커를 담을 배열입니다
     let markers = [];
@@ -153,7 +155,7 @@
 
                 let selectedPlaceItemNum = parseInt(liTag.childNodes[0].className.replace(regex, ""));
                 
-                console.log(placeData[selectedPlaceItemNum-1].x);
+                
             });
         }
 
