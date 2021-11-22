@@ -11,7 +11,7 @@
 	<title>장소 리스트</title>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=667ac3a1fc68d5afe81179dea5f4ff16&libraries=services"></script>
 	<script defer src="https://kit.fontawesome.com/a340a3bb10.js" crossorigin="anonymous"></script>
-	<script defer type="text/javascript" src="${contextRoot}/javascript/place_search.js?ver=1"></script>
+	<script defer type="text/javascript" src="${contextRoot}/javascript/place_search.js?ver=3"></script>
 	<script src = "${contextRoot}/node_modules/@popperjs/core/dist/umd/popper.js"> </script>
   <script src = "${contextRoot}/node_modules/bootstrap/dist/js/bootstrap.js"> </script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,21 +23,33 @@
 	<div class="modal">
    <div class="modal_body">
  		<form action='add' method='post' enctype="multipart/form-data">
-   		<div class="mb-3 row">
-		  	<label for='f-photo' class="col-sm-2 col-form-label">사진</label> 
-		  	<div class="col-sm-10">
-		   	 <input id='f-photo' type='file' name='photoFile' class="form-control">
-		 	 </div>
-			</div>
-			
-			<div class="mb-3 row">
-			  <label for='f-name' class="col-sm-2 col-form-label">후기</label>
-			  <div class="col-sm-6">
-			    <input id='f-name' type='text' name='comment' class="form-control">
-			  </div>
-			</div>
-			
-			<button class="place_add_btn" type="submit">저장</button>
+ 		
+		    <input id='place_id' value="" type='hidden' name='id' >
+		    <input id='place_x' value="" type='hidden' name='x' >
+		    <input id='place_y' value="" type='hidden' name='y' >
+		    
+		    <div class="place_info_box">
+			    <label for='f-place-name'>장소 이름</label>
+			    <input id='place_name' type='text' name='place_name' readonly>
+		    </div>
+			  
+		    <div class="place_info_box">
+	 			  <label for='f-address-name'>주소</label>
+			    <input id='address_name' type='text' name='address_name' readonly>
+		    </div>
+		    
+				<div class="place_info_box">
+				  <label for='f-comment'>후기</label>
+			    <textarea id='place_comment' name='comment' class="form-control" rows="5" cols="30"></textarea>
+				</div>
+				
+		    <div class="place_info_box">
+			  	<label for='f-photo'>사진</label> 
+	   	  	<input id='place_photo' type='file' name='photoFile' class="form-control" multiple>
+				</div>
+				
+				<button class="place_add_btn" type="submit">저장</button>
+				<button class="place_cancel_btn" type="button">취소</button>
    	</form>
    </div>
   </div>
