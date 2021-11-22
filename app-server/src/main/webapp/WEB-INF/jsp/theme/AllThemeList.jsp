@@ -26,9 +26,8 @@
 </ul>
 
 <ul class="theme-list">
-<c:forEach items="${themeList}" var="theme"
-begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
-  <a class="list-container" href="./place/list?no=${theme.no}">
+<c:forEach items="${themeList}" var="theme">
+  <a class="list-container" href="../place/list?no=${theme.no}">
     <li>
     <div class="content">
       <div class="icon">🌴</div>
@@ -38,6 +37,17 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
     </li>
   </a>
 </c:forEach>	
+<c:forEach begin="0" end="${3-(fn:length(themeList)%3)-1}">
+		<a class="list-container" style=visibility:hidden;>
+      <li>
+		    <div class="content">
+					<div class="icon">✈️</div>
+					<div class="theme-title">${theme.title}</div>
+					<div class="theme-count">#${theme.hashtags}</div>
+				</div>  <!-- .content -->
+			</li>
+	  </a>
+</c:forEach>
 </ul>
 
 </div>  <!-- .main-container -->

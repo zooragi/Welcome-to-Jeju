@@ -9,7 +9,14 @@
     const $sideMenuCloseBtn = qs(".close-button");
   
     //EventListener
-    $sideMenu.addEventListener('click', ()=>$sideMenuBar.style.display = 'flex' ); 
-    $sideMenuCloseBtn.addEventListener('click', ()=>$sideMenuBar.style.display = 'none');
+    $sideMenu.addEventListener('click', ()=>{
+			$sideMenuBar.style.display = 'flex';
+			document.getElementsByTagName("BODY")[0].style.overflow = 'hidden';
+		});
+		 
+    $sideMenuCloseBtn.addEventListener('click', ()=>{
+			$sideMenuBar.style.display = 'none';
+			document.getElementsByTagName("BODY")[0].style.overflow = 'visible';
+		});
 
 })();

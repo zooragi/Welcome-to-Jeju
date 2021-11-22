@@ -27,22 +27,33 @@
 
 <h4>공개 테마</h4>
 <ul class="theme-list">
-<c:forEach items="${themeList}" var="theme"
-begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
+<c:forEach items="${themeList}" var="theme">
 	<c:choose>
 	<c:when test="${theme.isPublic eq '1'}">
 		<a class="list-container" href="../place/list?no=${theme.no}">
       <li>
-	    <div class="content">
-			<div class="icon">✈️</div>
-			<div class="theme-title">${theme.title}</div>
-			<div class="theme-count">#${theme.hashtags}</div>
+		    <div class="content">
+				<div class="icon">✈️</div>
+				<div class="theme-title">${theme.title}</div>
+				<div class="theme-count">#${theme.hashtags}</div>
 			</div>  <!-- .content -->
 			</li>
 	  </a>
 	</c:when>
 	</c:choose>
 </c:forEach>
+<c:forEach begin="0" end="${3-(fn:length(themeList)%3)-1}">
+		<a class="list-container" style=visibility:hidden;>
+      <li>
+		    <div class="content">
+					<div class="icon">✈️</div>
+					<div class="theme-title">${theme.title}</div>
+					<div class="theme-count">#${theme.hashtags}</div>
+				</div>  <!-- .content -->
+			</li>
+	  </a>
+</c:forEach>
+
 </ul>
 
 <h4>비공개 테마</h4>
@@ -62,6 +73,17 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
     </a>
   </c:when>
   </c:choose>
+</c:forEach>
+<c:forEach begin="0" end="${3-(fn:length(themeList)%3)-1}">
+		<a class="list-container" style=visibility:hidden;>
+      <li>
+		    <div class="content">
+					<div class="icon">✈️</div>
+					<div class="theme-title">${theme.title}</div>
+					<div class="theme-count">#${theme.hashtags}</div>
+				</div>  <!-- .content -->
+			</li>
+	  </a>
 </c:forEach>
 </ul>
 

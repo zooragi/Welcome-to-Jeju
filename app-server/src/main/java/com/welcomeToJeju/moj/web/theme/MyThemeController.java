@@ -31,23 +31,27 @@ public class MyThemeController {
   }
 
   @PostMapping("/mytheme/add")
-  public ModelAndView add(HttpSession session, Theme theme, int category) throws Exception {
-    User user = (User) session.getAttribute("loginUser");
+  public String add(HttpSession session, 
+  		String title, 
+  		String category,
+  		String isPublic,
+  		String hashtags) throws Exception {
+  	User user = (User) session.getAttribute("loginUser");
+  	Theme theme = new Theme();
+  	theme.setTitle(title);
+  	theme.setIsPublic(Integer.parseInt(isPublic));
     theme.setOwner(user);
+    String[] hashtagArr = hashtags.split("#");
 
-    Category c = themeDao.findCategoryByNo(category);
+    Category c = themeDao.findCategoryByNo(Integer.parseInt(category));
     theme.setCategory(c);
-
     themeDao.insert(theme);
+    for (String hashtag : hashtagArr) {
+    	if(hashtag.length()==0) continue;
+      themeDao.insertHashtag(theme.getNo(), hashtag);
+    }
     sqlSessionFactory.openSession().commit();
-
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("theme", theme);
-    mv.addObject("refresh", "2;url=list?no=" + user.getNo());
-    mv.addObject("pageTitle", "나의 테마 만들기");
-    mv.addObject("contentUrl", "theme/myTheme/MyThemeAdd.jsp");
-    mv.setViewName("template_main");
-    return mv;
+    return "redirect:list?no=" + user.getNo();
   }
 
   @GetMapping("/mytheme/list")
@@ -65,20 +69,20 @@ public class MyThemeController {
   // 테스트!!
   @PostMapping("/mytheme/update")
   public ModelAndView update(Theme theme, int category) throws Exception {
-    Theme oldTheme = themeDao.findByNo(theme.getNo());
-
-    if (oldTheme == null) {
-      throw new Exception("..");
-    }
-
-    Category c = themeDao.findCategoryByNo(category);
-    theme.setCategory(c);
-
-    themeDao.update(theme);
-    sqlSessionFactory.openSession().commit();
-
+//    Theme oldTheme = themeDao.findByNo(theme.getNo());
+//
+//    if (oldTheme == null) {
+//      throw new Exception("..");
+//    }
+//
+//    Category c = themeDao.findCategoryByNo(category);
+//    theme.setCategory(c);
+//
+//    themeDao.update(theme);
+//    sqlSessionFactory.openSession().commit();
+//
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:detail?no=" + theme.getNo());
+//    mv.setViewName("redirect:detail?no=" + theme.getNo());
     return mv;
   }
 

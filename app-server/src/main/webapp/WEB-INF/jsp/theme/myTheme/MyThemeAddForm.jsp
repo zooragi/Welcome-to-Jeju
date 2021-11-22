@@ -47,10 +47,10 @@
 <h5>카테고리</h5>
 <select class="form-select" aria-label="f-category" id="f-category" name="category">
   <option selected value="">👇</option>
-  <option value="1" name="category">식당</option>
-  <option value="2" name="category">카페</option>
-  <option value="3" name="category">관광명소</option>
-  <option value="4" name="category">기타</option>
+  <option value="1">식당</option>
+  <option value="2">카페</option>
+  <option value="3">관광명소</option>
+  <option value="4">기타</option>
 </select>
 </div>
 
