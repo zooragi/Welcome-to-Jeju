@@ -58,8 +58,7 @@
 
 <h4>비공개 테마</h4>
 <ul class="theme-list">
-<c:forEach items="${themeList}" var="theme"
-begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
+<c:forEach items="${themeList}" var="theme">
   <c:choose>
   <c:when test="${theme.isPublic eq '0'}">
     <a class="list-container" href="../place/list?no=${theme.no}">
