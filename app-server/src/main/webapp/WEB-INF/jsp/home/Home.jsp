@@ -162,33 +162,6 @@
         </ul>
     </div>
 
-<div class="owl-carousel owl-theme owl-loaded">
- <div class="owl-stage-outer">
-  <div class="owl-stage">
-   <div class="owl-item" style="background-color: blue">
-	<a href="#" class=""><img src=" "></a>
-   </div>
-   <div class="owl-item">
-	<a href="#" class=""><img src=" "></a>
-   </div>
-   <div class="owl-item">
-	<a href="#" class=""><img src=" "></a>
-   </div>
-   <div class="owl-item">
- 	<a href="#" class=""><img src=" "></a>
-   </div>
-   <div class="owl-item">
-	<a href="#" class=""><img src=" "></a>
-   </div>
-   <div class="owl-item">
-	<a href="#" class=""><img src=" "></a>
-   </div>
-  </div>
- </div>
-</div>
-
-
-
 </main>
 <footer>
     <div class="footer-link">
