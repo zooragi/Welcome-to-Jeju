@@ -1,6 +1,5 @@
 package com.welcomeToJeju.moj.web.user;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,8 +13,8 @@ import com.welcomeToJeju.moj.domain.User;
 
 @Controller
 public class AuthController {
+
   @Autowired UserDao userDao;
-  @Autowired ServletContext sc;
 
   @GetMapping("/auth/loginform")
   public ModelAndView loginform() {
@@ -27,7 +26,9 @@ public class AuthController {
   }
 
   @PostMapping("/auth/login")
-  public ModelAndView login(String email, String password, String saveEmail, HttpServletResponse response, HttpSession session) throws Exception {
+  public ModelAndView login(String email, String password, String saveEmail,
+      HttpServletResponse response, HttpSession session) throws Exception {
+
     Cookie cookie = null;
     if (saveEmail != null) {
       cookie = new Cookie("email", email);
@@ -39,6 +40,7 @@ public class AuthController {
     }
     response.addCookie(cookie);
 
+    // 관리자
     if(email.equals("root@test.com") && password.equals("0000")) {
       User user = new User();
       user.setEmail(email);
@@ -52,6 +54,7 @@ public class AuthController {
       return mv;
     } 
 
+    // 유저
     User user = userDao.findByEmailAndPassword(email, password);
 
     ModelAndView mv = new ModelAndView();
@@ -66,7 +69,6 @@ public class AuthController {
       mv.addObject("pageTitle", "로그인 실패!");
       mv.addObject("contentUrl", "user/LoginFail.jsp");
       mv.setViewName("template_main");
-
       return mv;
     }
   }
@@ -81,11 +83,9 @@ public class AuthController {
     return mv;
   }
 
-
   @GetMapping("/auth/userinfo")
   public ModelAndView userinfo() {
     ModelAndView mv = new ModelAndView();
-
     mv.addObject("pageTitle", "회원 상세 보기");
     mv.addObject("contentUrl", "user/AuthUserInfo2.jsp");
     mv.setViewName("template_main");
