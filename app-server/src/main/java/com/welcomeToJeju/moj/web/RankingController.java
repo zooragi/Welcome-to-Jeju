@@ -26,7 +26,7 @@ public class RankingController {
     mv.addObject("themeList", themeList);
     mv.addObject("userList", userList);
     mv.addObject("pageTitle", "순위 보기");
-    mv.addObject("contentUrl", "ranking/Ranking2.jsp");
+    mv.addObject("contentUrl", "ranking/Ranking.jsp");
     mv.setViewName("template_main");
     return mv;
   }
