@@ -16,7 +16,7 @@
 
 <ul class="theme-list">
 <c:forEach items="${themeList}" var="theme">
-<a href='./delete?themeNo=${theme.no}&userNo=${loginUser.no}'>🧡</a>
+<a href='delete?themeNo=${theme.no}'>⛔</a>
   <a class="list-container" href="../place/list?no=${theme.no}">
     <li>
     <div class="content">

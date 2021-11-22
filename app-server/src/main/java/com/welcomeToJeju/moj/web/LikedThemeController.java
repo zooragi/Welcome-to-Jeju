@@ -48,14 +48,11 @@ public class LikedThemeController {
   }
 
   @GetMapping("/likedtheme/delete")
-  public ModelAndView delete(int themeNo, int userNo) throws Exception {
+  public String delete(int themeNo, HttpSession session) throws Exception {
 
-    themeDao.deleteLikedTheme(themeNo, userNo);
+    themeDao.deleteLikedTheme(themeNo, ((User)session.getAttribute("loginUser")).getNo());
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../likedtheme/list");
-    return mv;
+    return "redirect:list";
   }
-
 }

@@ -15,7 +15,7 @@
 <br>
 
 <ul class="theme-list">
-<a class="list-container" href="addform">
+<a class="list-container" href="../mytheme/addform">
     <li>
     <div class="content">
     <div class="icon">➕</div>
