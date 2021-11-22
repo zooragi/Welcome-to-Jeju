@@ -104,9 +104,9 @@ main {
     margin: 0 auto;
     padding: 0 var(--font-large);
 }
-.hot-place .hot-place-list{
-    height: 200px;
-    overflow: hidden;
+
+.hot-place{
+	height: 250px;
 }
 
 .dash-board .hot-curators,
@@ -141,8 +141,12 @@ main {
 .dash-board .hot-theme .hot-theme-list,
 .hot-place .hot-place-list{
     display:flex;
-    height : 130px;
+    height : 138px;
     margin: var(--font-micro);
+}
+.hot-place .hot-place-list{
+    height: 200px;
+    overflow: hidden;
 }
 .dash-board .hot-curators .hot-curators-list li,
 .dash-board .hot-theme .hot-theme-list li,
