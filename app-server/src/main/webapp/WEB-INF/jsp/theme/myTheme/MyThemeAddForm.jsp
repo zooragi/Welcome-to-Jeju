@@ -90,7 +90,9 @@
 
 <br>
 
+<div class="text-center">
 <button type="submit" class="btn btn-outline-dark">만들기</button>
+</div>
 
 </form>
 </div>
