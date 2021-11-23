@@ -5,8 +5,7 @@
 <header>
     <a class="logo" href="${contextRoot}/app/home">
         <button type="submit" class="login">
-            <i class="fas fa-atlas"></i>
-            <span class="title">제주옵서예</span>
+            <span class="title">🌊 제주옵서예</span>
         </button>
     </a>
 
