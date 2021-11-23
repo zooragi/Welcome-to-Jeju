@@ -61,7 +61,7 @@
     <div class="dash-board">
         <div class="hot-curators">
             <div class="title">
-                <span>유저 순위</span>
+                <span>유저 순위&#128640;</span>
                 <div class="sub">인기 있는 유저</div>
             </div>
             <ul class="hot-curators-list .owl-carousel2">

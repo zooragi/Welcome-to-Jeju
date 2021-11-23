@@ -18,8 +18,6 @@
 	<link rel="stylesheet" href="${contextRoot}/css/place_list.css?ver=2">
 </head>
 
-
-
 <body>
 	<div class="modal">
   	<div class="modal_body">
@@ -42,9 +40,13 @@
 		</div>
 	</div>
   	
-  	
-				
-<div class="themedetail" style = "margin-left: 100px;">
+<div class="map_container full-height">
+  <div class="map_wrap">
+    <div id="map"></div>
+      <div id="menu_wrap" class="bg_white">
+
+<!-- 테마 상세 보기 여기부터 -->      
+      <div class="themedetail">
   <p>
     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       ${theme.title} 상세 보기 🔍
@@ -77,26 +79,20 @@
     </div>
   </div>
 </div>  <!-- .themedetail -->
-  	
-			<div class="map_container full-height">
-				<div class="map_wrap">
-					<div id="map"></div>
-						<div id="menu_wrap" class="bg_white">
-							<ul id="placesList"></ul>
-						</div>
-					</div>
-				</div>
-				
-				<form id="place_search_box" action="${contextRoot}/app/place/search">
-					<div class="place_search_container">
-						  <input class="place_search" name="keyword" type="text" placeholder="장소를 검색하세요.">		
-					    <button class="search-icon">
-			           <i class="fas fa-search"></i>
-			        </button>
-					</div>
-		    </form>
+<!-- 여기까지 -->
 
-	
+        <ul id="placesList"></ul>
+      </div>
+    </div>
+  </div>
+  <form id="place_search_box" action="${contextRoot}/app/place/search">
+    <div class="place_search_container">
+      <input class="place_search" name="keyword" type="text" placeholder="장소를 검색하세요.">		
+        <button class="search-icon">
+          <i class="fas fa-search"></i>
+        </button>
+    </div>
+  </form>
 </body>
 
 </html>
