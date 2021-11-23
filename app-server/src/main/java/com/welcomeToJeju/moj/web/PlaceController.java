@@ -41,7 +41,7 @@ public class PlaceController {
     themeNo = Integer.parseInt(no);
     Theme theme = themeDao.findByNo(themeNo);
     mv.addObject(theme);
-    mv.setViewName("place/PlaceList3");
+    mv.setViewName("place/PlaceList2");
     return mv;
   }
 
