@@ -37,6 +37,9 @@ DROP TABLE IF EXISTS jeju_theme_category RESTRICT;
 -- 장소_유저_테마
 DROP TABLE IF EXISTS jeju_place_user_theme RESTRICT;
 
+-- 이모지
+DROP TABLE IF EXISTS emoji RESTRICT;
+
 -- 유저
 CREATE TABLE jeju_user (
   user_no      INTEGER      NOT NULL COMMENT '유저번호', -- 유저번호
@@ -47,7 +50,8 @@ CREATE TABLE jeju_user (
   view_cnt     INTEGER      NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
   reported_cnt INTEGER      NULL     DEFAULT 0 COMMENT '신고수', -- 신고수
   warned_cnt   INTEGER      NULL     DEFAULT 0 COMMENT '경고수', -- 경고수
-  active       INTEGER      NULL     DEFAULT 1 COMMENT '탈퇴' -- 탈퇴
+  active       INTEGER      NULL     DEFAULT 1 COMMENT '탈퇴', -- 탈퇴
+  emoji        VARCHAR(255) NULL     COMMENT '이모지' -- 이모지
 )
 COMMENT '유저';
 
@@ -78,7 +82,8 @@ CREATE TABLE jeju_theme (
   share        INTEGER      NOT NULL COMMENT '공유여부', -- 공유여부
   view_cnt     INTEGER      NULL     DEFAULT 0 COMMENT '조회수', -- 조회수
   reported_cnt INTEGER      NULL     DEFAULT 0 COMMENT '신고수', -- 신고수
-  created_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
+  created_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
+  emoji        VARCHAR(255) NULL     COMMENT '이모지' -- 이모지
 )
 COMMENT '테마';
 
@@ -309,6 +314,30 @@ ALTER TABLE jeju_place_user_theme
       theme_no  -- 테마번호
     );
 
+-- 이모지
+CREATE TABLE emoji (
+  emoji    VARCHAR(255) NOT NULL COMMENT '이모지', -- 이모지
+  emoji_no INTEGER      NOT NULL COMMENT '이모지번호' -- 이모지번호
+)
+COMMENT '이모지';
+
+-- 이모지
+ALTER TABLE emoji
+  ADD CONSTRAINT PK_emoji -- 이모지 기본키
+    PRIMARY KEY (
+      emoji -- 이모지
+    );
+
+-- 유저
+ALTER TABLE jeju_user
+  ADD CONSTRAINT FK_emoji_TO_jeju_user -- 이모지 -> 유저
+    FOREIGN KEY (
+      emoji -- 이모지
+    )
+    REFERENCES emoji ( -- 이모지
+      emoji -- 이모지
+    );
+
 -- 테마
 ALTER TABLE jeju_theme
   ADD CONSTRAINT FK_jeju_user_TO_jeju_theme -- 유저 -> 테마
@@ -327,6 +356,16 @@ ALTER TABLE jeju_theme
     )
     REFERENCES jeju_theme_category ( -- 카테고리
       category_no -- 카테고리번호
+    );
+
+-- 테마
+ALTER TABLE jeju_theme
+  ADD CONSTRAINT FK_emoji_TO_jeju_theme -- 이모지 -> 테마
+    FOREIGN KEY (
+      emoji -- 이모지
+    )
+    REFERENCES emoji ( -- 이모지
+      emoji -- 이모지
     );
 
 -- 좋아하는유저

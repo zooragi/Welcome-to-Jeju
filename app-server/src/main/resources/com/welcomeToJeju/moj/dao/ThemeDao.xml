@@ -13,6 +13,8 @@
     <result column="view_cnt" property="viewCount"/>
     <result column="reported_cnt" property="reportedCount"/>
     
+    <result column="emoji" property="emoji"/>
+    
     <association property="owner" javaType="User">
       <id column="owner_no" property="no"/>
       <result column="owner_email" property="email"/>
@@ -85,7 +87,8 @@
       u.nickname owner_nickname,
       t.category_no,
       c.name category_name,
-      h.name hashtag_name
+      h.name hashtag_name,
+      t.emoji
     from
       jeju_theme t
       left join jeju_theme_category c on t.category_no=c.category_no
@@ -104,7 +107,8 @@
 	    t.category_no,
 	    c.name category_name,
 	    t.user_no owner_no,
-	    u.nickname owner_nickname
+	    u.nickname owner_nickname,
+	    t.emoji
 	  from jeju_theme t
 	    left join jeju_theme_hashtag h on t.theme_no = h.theme_no
 	    left join jeju_theme_category c on t.category_no = c.category_no
@@ -126,7 +130,8 @@
       t.category_no,
       c.name category_name,
       t.user_no owner_no,
-      u.nickname owner_nickname
+      u.nickname owner_nickname,
+      t.emoji
     from jeju_theme t
       left join jeju_theme_hashtag h on t.theme_no = h.theme_no
       left join jeju_theme_category c on t.category_no = c.category_no
@@ -155,7 +160,8 @@
 		  c.name,
 		  u.user_no owner_no,
 		  u.nickName owner_name,
-		  h.name hashtag_name
+		  h.name hashtag_name,
+		  t.emoji
 	  from jeju_theme t
 	    inner join jeju_user u on u.user_no = t.user_no
 	    inner join jeju_theme_category c on t.category_no = c.category_no
@@ -177,7 +183,8 @@
 		  u.nickname owner_nickname,
 		  t.category_no,
 		  c.name category_name,
-		  h.name hashtag_name
+		  h.name hashtag_name,
+		  t.emoji
 		from 
 		  jeju_theme t
 		  left join jeju_theme_category c on t.category_no=c.category_no
@@ -196,7 +203,8 @@
 	    view_cnt,
 	    reported_cnt,
 	    c.name category_name,
-	    h.name hashtag_name
+	    h.name hashtag_name,
+	    t.emoji
 	  from jeju_theme t
 	    left outer join jeju_theme_hashtag h on t.theme_no=h.theme_no
 	    join jeju_theme_category c on c.category_no=t.category_no
@@ -226,7 +234,8 @@
     u.user_no owner_no,
     u.nickname owner_name,
     u.email owner_email,
-    h.name hashtag_name
+    h.name hashtag_name,
+    t.emoji
     from        
         jeju_theme t 
     inner join
@@ -247,7 +256,8 @@
 	    view_cnt,
 	    reported_cnt,
 	    c.name category_name,
-	    h.name hashtag_name
+	    h.name hashtag_name,
+	    t.emoji
 	  from jeju_theme t
 	    left outer join jeju_theme_hashtag h on t.theme_no=h.theme_no
 	    join jeju_theme_category c on c.category_no=t.category_no
@@ -278,7 +288,8 @@
       c.name category_name,
       t.user_no owner_no,
       u.nickname owner_nickname,
-      jput.place_id
+      jput.place_id,
+      t.emoji
     from jeju_theme t
       left join jeju_theme_hashtag h on t.theme_no = h.theme_no
       left join jeju_theme_category c on t.category_no = c.category_no
@@ -318,7 +329,8 @@
 		  u.nickname owner_nickname,
 		  t.category_no,
 		  c.name category_name,
-		  h.name hashtag_name
+		  h.name hashtag_name,
+		  t.emoji
 		from 
 		  jeju_theme t
 		  left join jeju_theme_category c on t.category_no=c.category_no
@@ -334,7 +346,8 @@
       t.title,
       user_no owner_no,
       t.reported_cnt,
-      h.name hashtag_name
+      h.name hashtag_name,
+      t.emoji
     from jeju_theme t
       left outer join jeju_theme_hashtag h on t.theme_no=h.theme_no
     where
@@ -378,7 +391,8 @@
 		  t.category_no,
 		  c.name category_name,
 		  h.name hashtag_name,
-		  lt.user_no
+		  lt.user_no,
+		  t.emoji
 		from 
 		  jeju_theme t
 		  left join jeju_theme_category c on t.category_no=c.category_no
@@ -400,7 +414,8 @@
             t.category_no,
             c.name category_name,
             t.user_no owner_no,
-            u.nickname owner_nickname
+            u.nickname owner_nickname,
+            t.emoji
         from jeju_theme t
                  left join jeju_theme_hashtag h on t.theme_no = h.theme_no
                  left join jeju_theme_category c on t.category_no = c.category_no
@@ -423,7 +438,8 @@
             t.category_no,
             t.created_dt,
             t.user_no owner_no,
-            u.nickname owner_nickname
+            u.nickname owner_nickname,
+            t.emoji
         from jeju_theme t
                  left join jeju_theme_hashtag h on t.theme_no = h.theme_no
                  left join jeju_theme_category c on t.category_no = c.category_no

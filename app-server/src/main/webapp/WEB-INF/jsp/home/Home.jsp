@@ -39,7 +39,7 @@
             <c:forEach items="${Top10Themes}" var="theme">
                 <li>
                     <a href="place/list?no=${theme.no}" class="slide-theme-content-item">
-                        <div class="icon">${emoji2}</div>
+                        <div class="icon">${theme.emoji}</div>
                         <div class="theme-title">${theme.title}</div>
                         <div class="curators">${theme.hashtags}</div>
                     </a>
@@ -68,7 +68,7 @@
                 <c:forEach items="${Top10User}" var="user">
                     <li>
                         <a href="theme/userlist?no=${user.no}" class="content">
-                            <div class="icon">${emoji3}</div>
+                            <div class="icon">${user.emoji}</div>
                             <div class="curator-name">${user.nickname}</div>
                             <div class="theme-count">${user.registeredDate}</div>
                         </a>
@@ -86,7 +86,7 @@
                 <c:forEach items="${Top10Themes}" var="theme">
                     <li>
                         <a href="place/list?no=${theme.no}" class="content">
-                            <div class="icon">🧚</div>
+                            <div class="icon">${theme.emoji}</div>
                             <div class="theme-content">
                                 <div class="theme-title">${theme.title}</div>
                                 <div class="curators">${theme.hashtags}</div>
@@ -106,7 +106,7 @@
                 <c:forEach items="${latest10Theme}" var="theme">
                     <li>
                         <a href="place/list?no=${theme.no}" class="content">
-                            <div class="icon">${emoji4}</div>
+                            <div class="icon">${theme.emoji}</div>
                             <div class="theme-content">
                                 <div class="theme-title">${theme.title}</div>
                                 <div class="curators">${theme.hashtags}</div>
@@ -126,7 +126,7 @@
                 <c:forEach items="${allTheme}" var="theme">
                     <li>
                         <a href="place/list?no=${theme.no}" class="content">
-                            <div class="icon">${emoji5}</div>
+                            <div class="icon">${theme.emoji}</div>
                             <div class="theme-content">
                                 <div class="theme-title">${theme.title}</div>
                                 <div class="curators">${theme.hashtags}</div>

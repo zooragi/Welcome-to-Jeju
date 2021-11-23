@@ -10,6 +10,8 @@ public class User implements Comparable<User> {
   private String nickname;
   private Date registeredDate;
 
+  private String emoji;
+
   private int viewCount;
   private int reportedCount;
   private int warningCount;
@@ -21,6 +23,14 @@ public class User implements Comparable<User> {
         + nickname + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
         + ", reportedCount=" + reportedCount + ", warningCount=" + warningCount + ", active="
         + active + "]";
+  }
+
+  public String getEmoji() {
+    return emoji;
+  }
+
+  public void setEmoji(String emoji) {
+    this.emoji = emoji;
   }
 
   public int getNo() {
