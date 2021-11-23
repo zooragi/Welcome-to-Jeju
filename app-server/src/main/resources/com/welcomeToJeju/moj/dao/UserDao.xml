@@ -217,7 +217,8 @@
     select
       user_no,
       nickname,
-      view_cnt
+      view_cnt,
+      emoji
     from
       jeju_user
     where

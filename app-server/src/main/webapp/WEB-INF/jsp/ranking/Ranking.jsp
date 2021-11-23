@@ -24,7 +24,7 @@
   <td> 🏅 ${i}등 </td>
     <li>
     <div class="content">
-      <div class="icon">🧚</div>
+      <div class="icon">${theme.emoji}</div>
       <div class="theme-title">${theme.title}</div>
       <div class="theme-count">${theme.hashtags}</div>
     </div>  <!-- .content -->
@@ -35,7 +35,7 @@
     <a class="list-container" style=visibility:hidden;>
       <li>
         <div class="content">
-          <div class="icon">✈️</div>
+          <div class="icon">${theme.emoji}</div>
           <div class="theme-title">${theme.title}</div>
           <div class="theme-count">#${theme.hashtags}</div>
         </div>  <!-- .content -->
@@ -60,7 +60,7 @@
                 <td> 🏅 ${z}등 </td>
                     <li>
                         <a href="theme/userlist?no=${user.no}" class="content">
-                            <div class="icon">🧙</div>
+                            <div class="icon">${user.emoji}</div>
                             <div class="curator-name">${user.nickname}</div>
                             <div class="theme-count">${user.registeredDate}</div>
                         </a>
