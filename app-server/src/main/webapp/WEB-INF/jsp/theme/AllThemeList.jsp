@@ -30,7 +30,7 @@
   <a class="list-container" href="../place/list?no=${theme.no}">
     <li>
     <div class="content">
-      <div class="icon">🌴</div>
+      <div class="icon">${theme.emoji}</div>
       <div class="theme-title">${theme.title}</div>
       <div class="theme-count">${theme.hashtags}</div>
     </div>  <!-- .content -->
@@ -41,7 +41,7 @@
 		<a class="list-container" style=visibility:hidden;>
       <li>
 		    <div class="content">
-					<div class="icon">✈️</div>
+					<div class="icon">${theme.no}</div>
 					<div class="theme-title">${theme.title}</div>
 					<div class="theme-count">#${theme.hashtags}</div>
 				</div>  <!-- .content -->

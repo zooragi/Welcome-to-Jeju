@@ -20,7 +20,7 @@ begin="0" end="${fn:length(themeList)-((fn:length(themeList))%3)-1}">
   <a class="list-container" href="../place/list?no=${theme.no}">
     <li>
     <div class="content">
-      <div class="icon">🌊</div>
+      <div class="icon">${theme.emoji}</div>
       <div class="theme-title">${theme.title}</div>
       <div class="theme-count">${theme.hashtags}</div>
     </div>  <!-- .content -->
