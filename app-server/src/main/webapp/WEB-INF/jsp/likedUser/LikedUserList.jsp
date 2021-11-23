@@ -19,7 +19,7 @@
                         <a href='delete?userNo=${user.no}'>⛔</a>
                     <li>
                         <a href="theme/userlist?userNo=${user.no}" class="content">
-                            <div class="icon">🧙</div>
+                            <div class="icon">${user.emoji}</div>
                             <div class="curator-name">${user.nickname}</div>
                             <div class="theme-count">${user.registeredDate}</div>
                         </a>
