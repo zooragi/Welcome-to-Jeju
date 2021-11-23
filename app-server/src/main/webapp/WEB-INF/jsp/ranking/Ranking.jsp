@@ -20,7 +20,7 @@
 <ul class="theme-list">
 <c:forEach items="${themeList}" var="theme" varStatus="status">
 <c:set var="i" value="${i+1}"/>
-  <a class="list-container" href="../place/list?no=${theme.no}">
+  <a class="list-container" href="place/list?no=${theme.no}">
   <td> 🏅 ${i}등 </td>
     <li>
     <div class="content">
@@ -59,7 +59,7 @@
                 <c:set var="z" value="${z+1}"/>
                 <td> 🏅 ${z}등 </td>
                     <li>
-                        <a href="theme/userlist?userNo=${user.no}" class="content">
+                        <a href="theme/userlist?no=${user.no}" class="content">
                             <div class="icon">🧙</div>
                             <div class="curator-name">${user.nickname}</div>
                             <div class="theme-count">${user.registeredDate}</div>
