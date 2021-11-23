@@ -22,25 +22,25 @@ CREATE TABLE emoji (
 COMMENT '이모지';
 
 insert into emoji(no, emoji)
-valuse(1, '✈️');
+valuse(1, '✈️'); // &#9992;
 insert into emoji(no, emoji)
-valuse(2, '🌴');
+valuse(2, '🌴'); // &#127796;
 insert into emoji(no, emoji)
-valuse(3, '🍊');
+valuse(3, '🍊'); // &#127818;
 insert into emoji(no, emoji)
-valuse(4, '🚢');
+valuse(4, '🚢'); // &#128674;
 insert into emoji(no, emoji)
-valuse(5, '🌊');
+valuse(5, '🌊'); // &#127754;
 insert into emoji(no, emoji)
-valuse(6, '🥜');
+valuse(6, '🥜'); // &#129372;
 insert into emoji(no, emoji)
-valuse(7, '🛵');
+valuse(7, '🛵'); // &#128757;
 insert into emoji(no, emoji)
-valuse(8, '🐟');
+valuse(8, '🐟'); // &#128031;
 insert into emoji(no, emoji)
-valuse(9, '🗿');
+valuse(9, '🗿');  // &#128511;
 insert into emoji(no, emoji)
-valuse(10, '🌠');
+valuse(10, '🌠'); // &#127776;
 
 -- 회원
 insert into jeju_user(user_no, email, password, nickname )
