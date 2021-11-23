@@ -30,7 +30,13 @@
   <a class="list-container" href="../place/list?no=${theme.no}">
     <li>
     <div class="content">
+    
+    <c:if test="${!empty theme.emoji}">
       <div class="icon">${theme.emoji}</div>
+    </c:if>
+    <c:if test="${empty theme.emoji}">
+      <div class="icon">🏄</div>
+    </c:if>
       <div class="theme-title">${theme.title}</div>
       <div class="theme-count">${theme.hashtags}</div>
     </div>  <!-- .content -->
