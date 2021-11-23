@@ -22,15 +22,12 @@ public class LikedThemeController {
   @Autowired ThemeDao themeDao;
 
   @GetMapping("/likedtheme/add")
-  public ModelAndView add(int themeNo, int userNo) throws Exception {
+  public String add(int themeNo, int userNo) throws Exception {
 
     themeDao.insertLikedTheme(themeNo, userNo);
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("redirect:../theme/detail?no=" + themeNo);
-    return mv;
-
+    return "redirect:../place/list?no=" + themeNo;
   }
 
   @GetMapping("/likedtheme/list")

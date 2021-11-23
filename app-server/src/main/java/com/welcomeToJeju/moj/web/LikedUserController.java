@@ -21,16 +21,14 @@ public class LikedUserController {
   @Autowired ThemeDao themeDao;
 
   @GetMapping("/likeduser/add")
-  public ModelAndView add(int themeNo, int userNo, HttpSession session) throws Exception {
+  public String add(int userNo, int themeNo, HttpSession session) throws Exception {
 
     userDao.insertLikedUser(
         userNo, ((User) session.getAttribute("loginUser")).getNo());
 
     sqlSessionFactory.openSession().commit();
 
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("contentUrl", "redirect:../theme/detail?no=" + themeNo);
-    return mv;
+    return "redirect:../place/list?no=" + themeNo;
   }
 
   @GetMapping("/likeduser/list")
